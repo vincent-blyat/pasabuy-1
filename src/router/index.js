@@ -5,6 +5,7 @@ import signup from '../views/signup.vue'
 import address from '../views/address.vue'
 import uploadid from '../views/uploadid.vue'
 import verifymessage from '../views/verifymessage.vue'
+import ProfileEdit from '../views/ProfileEdit.vue'
 
 
 const routes = [
@@ -42,6 +43,12 @@ const routes = [
     path: '/verification-message',
     name: 'verifymessage',
     component: verifymessage
+  },
+
+  {
+    path: '/edit-profile',
+    name: 'ProfileEdit',
+    component: ProfileEdit
   },
 
   
