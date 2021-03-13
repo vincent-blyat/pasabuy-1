@@ -1,5 +1,4 @@
 <template class="bg-gray-00 font-nunito">
-
     <div id="login" class="login items-center justify-center bg-gray-100 md:min-h-screen sm:max-h-screen sm:flex md:flex">
       <div class="w-4/12 my-12 overflow-hidden font-bold text-center bg-white shadow-md flex-grow-1 md:w-4/12 rounded-xl">
             <div class="px-10 py-16">

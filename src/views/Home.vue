@@ -1,42 +1,43 @@
 
 <template class="font-nunito w-full h-full mx-auto bg-local bg-no-repeat bg-cover sm:bg-cover font-pasabuyfont md:bg-fixed md:bg-center" style="background-image: url('img/main-back.jpg')"> 
-<div id="navbar" class="font-nunito px-4 py-4 sm:py-6 flex justify sm:bg-transparent w-full z-10 ">
+
+<div id="navbar" class="font-nunito px-4 py-4 sm:py-6 flex justify sm:bg-transparent w-full z-10 fixed">
         <img src="#" alt="logo">
             <div class="flex items-center mt-4 sm:mt-2 w-full sm:space-x-4 sm:text-right sm:block">
                 <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border border-red-700 rounded-3xl focus:shadow-outline hover:bg-red-50">
                     <router-link :to="{name: 'login'}" >Log in</router-link>
                 </button>
                 <button  class="h-10 px-4 m-1 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-800">
-                     <router-link :to="{name: 'signup'}" >Sign up</router-link>
+                    <router-link :to="{name: 'signup'}" >Sign Up</router-link>
                 </button>
             </div>      
 </div>
-<div id="landing" class=" w-full h-screen font-nunito mx-auto bg-no-repeat">
+<div id="landing" class=" w-full h-screen font-nunito mx-auto w-full h-full mx-auto bg-local bg-no-repeat bg-cover sm:bg-cover md:bg-fixed md:bg-center" style="background-image: url('img/main-back.jpg')">
   <div class="flex items-center h-full px-10 lg:px-32 ml-36 vs:ml-10  ">
             <section class=" md:w-9/12 xl:w-8/12 sm:text-left pl-26 vs:pl-2 vs:text-left vs:w-56">
             <p class="mb-4 text-3xl font-bold w-80 2xl:text-7xl md:text-5xl vs:text-4xl vs:text-1sm sm:text-left md:text-left lg:text-lelft">
                 Need someone to do your grocery?</p>
             <p class="text-2xl text-right vs:mr-3 ssm:mb-5 vs:text-left vs:pb-12 ssm:text-left md:text-left lg:text-left">
-               Lorem ipsum dolor sit amet consectetur adipisicing elit.  </p>
+               Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
                 <button class="items-center h-16 px-4 m-1 mb-4 font-semibold tracking-wide text-white uppercase transition-colors duration-150 bg-red-700 md:w-1/3 vs:ml-0 vs:w-56 vs:h-12 rounded-3xl focus:shadow-outline hover:bg-red-800">
                    <router-link :to="{name: 'login'}" >Pasabuy now</router-link>
                 </button>
             </section>
         </div>
  <!--SECOND-->
- <div class="flex flex-wrap items-center justify-center bg-white md:pt-40 font-nunito vs:justify-center vs:px-2 md:flex vs:items-center">
-        <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/7"> 
-            <img class="mx-auto mb-5" src="img/bike.svg">
+ <div class="flex flex-wrap justify-center bg-white md:pt-40 font-nunito vs:justify-center vs:px-2 md:flex vs:items-center">
+        <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/7">
+            <img class="mx-auto mb-5" src="img/package.svg"> <!----bike.svg-->
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
             <p class="mb-4 text-left sm:text-justify md:text-justify lg:text-justify xl:text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
-                     Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
-        </div>
-        <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/7"> 
-            <img class="mx-auto mb-5" src="img/cart.svg">
+                 Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
+        </div> 
+        <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/7">
+            <img class="mx-auto mb-5" src="img/package.svg"> <!----cart.svg-->
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
             <p class="mb-4 text-left sm:text-justify md:text-justify lg:text-justify xl:text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
-                     Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
-        </div>
+                 Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
+        </div> 
         <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/7">
             <img class="mx-auto mb-5" src="img/package.svg">
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
@@ -52,7 +53,7 @@
                 <p class="mb-4 leading-loose text-left leading">Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
                      Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
                      <button class="w-40 h-10 px-5 py-2 font-bold tracking-wider text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700">
-                        <a href="#">GORA</a>
+                        <a href="#">GORA</a> <!--change to router link-->
                     </button>
             </div>
             <div class="w-full bg-gray-200 h-50 rounded-xl sm:w-1/2 md:w-2/3 lg:w-1/4 xl:w-2/5">
@@ -68,7 +69,7 @@
                 <p class="mb-4 leading-loose text-left leading">Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
                      Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
                      <button class="w-40 h-10 px-5 py-2 font-bold tracking-wider text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700">
-                        <a href="#">GORA</a>
+                        <a href="#">GORA</a> <!--change to router link-->
                     </button>
             </div>
         </div>

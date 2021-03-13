@@ -1,6 +1,7 @@
 <template class="font-nunito">
-    <div class="min-h-screen sm:flex md:flex lg:flex xl:flex 2xl:flex items-center justify-center bg-gray-200 ">
-        <div class="md:max-w-md mx-auto bg-white p-8 rounded shadow-2xl ">
+    <div id="verifymsg" class="login items-center justify-center bg-gray-100 md:min-h-screen sm:max-h-screen sm:flex md:flex">
+      <div class="w-4/12 my-12 overflow-hidden text-center bg-white shadow-md flex-grow-1 md:w-4/12 rounded-xl">
+            <div class="px-10 py-16">
             <img class= "sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto 2xl:mx-auto h-50 w-50 mb-5" src="img/id-review.svg">
             <h2 class="text-2xl font-bold mb-5 md:flex items-center justify-center font-raleways ">
                 We're still reviewing your ID</h2>
@@ -10,13 +11,11 @@
                 In the meantime, you can continue setting up your profile</p>
             <div class="md:flex justify-end">
                 <button class=" h-10 px-5 m-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-800 ">
-                    <a href="#">
-                    NEXT
-                    </a>
-                </button>
+                    <router-link :to="{name: 'ProfileEdit'}" >NEXT</router-link></button>
             </div>
         </div>    
     </div>
+</div>
 </template>
 <script>
 
