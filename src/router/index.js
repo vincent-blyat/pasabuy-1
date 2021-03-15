@@ -6,6 +6,11 @@ import address from '../views/address.vue'
 import uploadid from '../views/uploadid.vue'
 import verifymessage from '../views/verifymessage.vue'
 import ProfileEdit from '../views/ProfileEdit.vue'
+import dashboard from '../views/dashboard.vue'
+import accountsettings from '../views/accountset.vue'
+import deliver from '../views/deliver.vue'
+import orders from '../views/orders.vue'
+import messages from '../views/messaging.vue'
 
 
 const routes = [
@@ -49,6 +54,36 @@ const routes = [
     path: '/edit-profile',
     name: 'ProfileEdit',
     component: ProfileEdit
+  },
+
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: dashboard
+  },
+
+  {
+    path: '/account-settings',
+    name: 'accountsettings',
+    component: accountsettings
+  },
+
+  {
+    path: '/deliver',
+    name: 'deliver',
+    component: deliver
+  },
+
+  {
+    path: '/orders',
+    name: 'orders',
+    component: orders
+  },
+
+  {
+    path: '/messages',
+    name: 'messages',
+    component: messages
   },
 
   
