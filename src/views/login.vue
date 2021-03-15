@@ -20,9 +20,7 @@
                 </div>
                 <div class="flex justify-center py-5">
                     <button class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700">
-                        <a href="#">
-                        Log in
-                        </a></button>
+                        <router-link :to="{name: 'dashboard'}" >Log in</router-link></button>
                     </div>
                     <div class="mt-4 font-normal text-left text-gray-500 text-md text-grey-dark">
                         Need and account? 
@@ -54,9 +52,7 @@
                 </div>
                 <div class="flex justify-center py-5">
                     <button class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700">
-                        <a href="#">
-                        Log in
-                        </a></button>
+                        <router-link :to="{name: 'dashboard'}" >Log in</router-link></button>
                     </div>
                     <div class="mt-4 font-normal text-left text-gray-500 text-md text-grey-dark">
                         Need and account? 

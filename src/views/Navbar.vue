@@ -1,17 +1,26 @@
 <template>
 <!--Start of Navbar code-->
     <!--profile menu icon-->
-    <nav class="bg-white lg:h-16 xl:h-16 sm:h-16">
+    <nav class="w-full fixed font-nunito bg-white lg:h-16 xl:h-16 sm:h-16">
       <div class="ml-3 relative">
-        <button class="absolute inset-y-3.5 right-8 h-10 w-10 border-2 rounded-full border-red-700">
-        <img class="h-9.5 w-9.5 rounded-full" src="img/yami.jpg" alt="yamimaho yamimatoy">
+        <button @click="isOpen=!isOpen" class="absolute inset-y-3.5 right-8 h-10 w-10 border-2 rounded-full border-red-700">
+        <img class="h-9.7 w-10 rounded-full" src="/img/yami.jpg">
         </button>
       </div>
+    <div class="w-full ">  
+    <div v-if="isOpen" class="shadow-xl fixed bg-white h-min w-30 ring-2 ring-gray-200 right-0 rounded-lg py-2 pl-2 pr-4 pt-2 mr-16 mt-16">
+    <router-link to="/orders"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">account_circle</span>Profile</router-link>
+    <router-link to="/orders" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">shopping_bag</span>Orders</router-link>
+    <router-link to="/delivery" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">delivery_dining</span>Deliveries</router-link>
+    <router-link to="/account-settings" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">manage_accounts</span>Account Setting</router-link>
+    <router-link to="/" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500 ">logout</span>Log out</router-link>
+    </div>
+    </div>
       <!--end-->
      
       <!--search bar-->
       <div class="absolute inset-y-3.5 right-24 ">
-        <div class="absolute relative mx-auto">
+        <div class="relative mx-auto">
           <input
             class="hidden lg:flex border-2 border-gray-300 bg-white h-10 px-3 pr-4 rounded-2xl text-sm outline-none"
             type="search"
@@ -19,7 +28,9 @@
             placeholder="Search"
           />
           <button type="submit" class="absolute right-0 top-0 mt-2 mr-4 md:">
-             <img class="h-6 w-6 rounded-full" src="img/search.svg" alt="yamimaho yamimatoy">
+         <span class="material-icons">
+            search
+          </span>
           </button>
         </div>
       </div>
@@ -27,19 +38,25 @@
       <!--middle navbar buttons-->
       <div class="flex space-x-10 justify-center items-center hidden md:flex">
         <div class="inline-flex space-x-2  p-5">
-          <img class="w-6 h-full rounded-lg" src="img/home.svg"/>
+          <span class="material-icons text-red-600">
+            home  
+            </span>
             <a href="#">
           <button class="text-base font-bold tracking-wide leading-none text-gray-500">Home</button>
             </a>
         </div>
         <div class="inline-flex space-x-2  p-5">
-          <img class="w-6 h-full rounded-lg pt-0.5" src="img/message.svg"/>
+          <span class="material-icons text-red-600 cursor-pointer">
+              chat_bubble
+                </span>
           <a href="#">
           <button class="text-base font-bold tracking-wide leading-none text-gray-500">Messages</button>
           </a>
         </div>
         <div class="inline-flex space-x-2  p-5">
-          <img class="w-6 h-full rounded-lg" src="img/notification.svg"/>
+          <span class="material-icons text-red-600">
+            notifications
+          </span>
           <a href="#">
           <button class="text-base font-bold tracking-wide leading-none text-gray-500">Notifications</button>
           </a>
@@ -89,9 +106,12 @@
     <!--End of Navbar code-->
 </template>
 
-
 <script>
 export default {
-    
+    data(){
+        return{
+            isOpen:false
+        }
+    }
 }
 </script>

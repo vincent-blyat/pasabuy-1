@@ -165,21 +165,21 @@
  <!--SECOND-->
  <div class="flex flex-wrap justify-center bg-white md:pt-40 font-nunito vs:justify-center vs:px-2 vs:items-center">
         <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl w-1/2 ">
-            <img class="mx-auto mb-5 w-1/2" src="img/package.svg"> <!----bike.svg-->
+            <img class="mx-auto mb-5 w-1/2" src="img/bike.png"> <!----bike.svg-->
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
             <p class="mb-4 text-left text-justify">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
                  Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
         </div> 
         <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sw-1/2 ">
-            <img class="mx-auto mb-5 w-1/2" src="img/package.svg"> <!----cart.svg-->
+            <img class="mx-auto mb-5 w-1/2" src="img/cart.png"> <!----cart.svg-->
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
             <p class="mb-4 text-left text-justify ">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
                 Laboriosam porro autem numquam, sit nisi dolorem nemo deserunt.</p>
         </div> 
         <div class="w-full p-8 m-4 mt-8 mb-4 mr-2 bg-gray-200 h-50 rounded-xl sw-1/2 ">
-            <img class="mx-auto mb-5 w-1/2" src="img/package.svg"> <!----cart.svg-->
+            <img class="mx-auto mb-5 w-1/2" src="img/package.png"> <!----cart.svg-->
             <h2 class="text-2xl font-bold leading-loose tracking-wide text-center">Order and Chill</h2>
             <p class="mb-4 text-left text-justify ">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br />
@@ -260,7 +260,6 @@
 </div>
 </div>
 
- 
 </template>
 
 <style>
