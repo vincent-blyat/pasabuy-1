@@ -93,7 +93,8 @@
           </div>
           <div class="flex block px-5 py-2">
             <img class="w-6 h-full rounded-lg" src="img/message.svg"/>
-            <button class="text-base font-bold tracking-wide leading-none text-gray-500 px-2">Messages</button>
+            <button class="text-base font-bold tracking-wide leading-none text-gray-500 px-2">
+            <router-link :to="{name: 'messages'}">Messages</router-link>Messages</button>
           </div>
           <div class="flex block px-5 py-2">
             <img class="w-6 h-full rounded-lg" src="img/notification.svg"/>
