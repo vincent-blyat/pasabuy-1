@@ -49,9 +49,8 @@
           <span class="material-icons text-red-600 cursor-pointer">
               chat_bubble
                 </span>
-          <a href="#">
-          <button class="text-base font-bold tracking-wide leading-none text-gray-500">Messages</button>
-          </a>
+          <button class="text-base font-bold tracking-wide leading-none text-gray-500">
+             <router-link :to="{name: 'messages'}" >Messages</router-link></button>
         </div>
         <div class="inline-flex space-x-2  p-5">
           <span class="material-icons text-red-600">
@@ -107,11 +106,18 @@
 </template>
 
 <script>
+
+
 export default {
+
     data(){
         return{
             isOpen:false
         }
-    }
+    },
+
+     components:{
+    
+  }
 }
 </script>
