@@ -5,7 +5,7 @@
       <div class="flex space-x-8 items-center justify-center pr-48" >
         <!--profile picture-->
         <div class="flex ">
-          <img class="w-40 h-40 border rounded-full border-gray-500" src="img/yami.jpg"/>
+          <img class="w-40 h-40 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
         </div>
       <!--end-->
 

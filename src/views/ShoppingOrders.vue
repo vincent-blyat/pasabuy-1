@@ -1,12 +1,14 @@
 <template>
    <!--post comment-->
    <div class="h-screen">
+   <!--Modal-->
+   <PostModal v-if="postModalVisible" @closeModal="listener"/>
+   <!--end--> 
    <div class="flex items-center justify-center mt-10">
     <div class="inline-flex space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-25" style="width: 608px;">
         <img class="w-14 h-14 rounded-full" src="img/yami.jpg"/>
-        <input class="flex items-center justify-start text-base outline-none leading-none text-gray-500 py-5 pl-6 bg-gray-100 rounded-full h-14" style="width: 488px;"
-        placeholder="Post an order request"            
-    />
+        <button @click="togglePostModal" class="flex items-center justify-start text-base outline-none leading-none text-gray-500 py-5 pl-6 bg-gray-100 rounded-full h-14" style="width: 488px;">
+        Post an order request</button>
     </div>
   </div>
   <!--end-->
@@ -114,7 +116,25 @@
 </template>
 
 <script>
+import PostModal from "./PostModal"
 export default {
-    
+    data() {
+    return {
+      postModalVisible: false
+    }
+  },
+
+  components: {
+    PostModal
+  },
+
+  methods:{
+    togglePostModal(){
+      this.postModalVisible = !this.postModalVisible
+    },
+    listener(){
+      this.postModalVisible = false;
+    }
+  }
 }
 </script>
