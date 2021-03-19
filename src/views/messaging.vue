@@ -349,3 +349,11 @@ img{
   font-feature-settings: 'liga';
 }
     </style>
+<script>
+import Navbar from './Navbar'
+ export default {
+  components:{
+     Navbar
+  }
+}
+</script>

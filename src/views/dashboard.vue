@@ -3,7 +3,7 @@
 <!--Desktop Version--->
 <div class="desktopVersion">
     
-    <!--START OF 'POST OFFER OR REQUEST' CODE-->
+   <!--START OF 'POST OFFER OR REQUEST' CODE-->
       <div class="flex flex-wrap overflow-hidden mmd:pt-12  ">
         <div class="overflow-hidden mmd:w-3/5">
           <div class="flex flex-wrap mmd:w-3/4 mmd:px-0 mmd:float-right rounded-lg sm:w-full mt-10 ">
@@ -1487,8 +1487,6 @@
        display:none;
     }
     }
-
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);
@@ -1502,18 +1500,13 @@ img{
   width:11%;
  
 }
-
 </style>
 
 <script>
-
 import Navbar from './Navbar'
-
  export default {
   components:{
      Navbar
   }
-
 }
-
 </script>

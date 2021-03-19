@@ -9,9 +9,9 @@
       </div>
     <div class="w-full ">  
     <div v-if="isOpen" class="shadow-xl fixed bg-white h-min w-30 ring-2 ring-gray-200 right-0 rounded-lg py-2 pl-2 pr-4 pt-2 mr-16 mt-16">
-    <router-link to="/orders"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">account_circle</span>Profile</router-link>
+    <router-link to="/edit-profile"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">account_circle</span>Profile</router-link>
     <router-link to="/orders" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">shopping_bag</span>Orders</router-link>
-    <router-link to="/delivery" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">delivery_dining</span>Deliveries</router-link>
+    <router-link to="/deliver" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">delivery_dining</span>Deliveries</router-link>
     <router-link to="/account-settings" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">manage_accounts</span>Account Setting</router-link>
     <router-link to="/" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500 ">logout</span>Log out</router-link>
     </div>
@@ -41,9 +41,8 @@
           <span class="material-icons text-red-600">
             home  
             </span>
-            <a href="#">
-          <button class="text-base font-bold tracking-wide leading-none text-gray-500">Home</button>
-            </a>
+          <button class="text-base font-bold tracking-wide leading-none text-gray-500">
+             <router-link :to="{name: 'dashboard'}" >Home</router-link></button>
         </div>
         <div class="inline-flex space-x-2  p-5">
           <span class="material-icons text-red-600 cursor-pointer">
@@ -94,7 +93,7 @@
           <div class="flex block px-5 py-2">
             <img class="w-6 h-full rounded-lg" src="img/message.svg"/>
             <button class="text-base font-bold tracking-wide leading-none text-gray-500 px-2">
-            <router-link :to="{name: 'messages'}">Messages</router-link>Messages</button>
+              <router-link :to="{name: 'messages'}" >Messages</router-link></button>
           </div>
           <div class="flex block px-5 py-2">
             <img class="w-6 h-full rounded-lg" src="img/notification.svg"/>
