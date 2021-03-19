@@ -12,7 +12,11 @@
                 <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="justify-center mmd:pl-3 "> 
-                <button class="float-right px-3 my-5 text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full appearance-none lg:text-base mmd:text-base sm:w-96.5 md:w-97 ssm:h-12 mmd:h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 ssm:text-xs">Post a shopping offer or an order request
+                <!--modal-->
+                <PostModal v-if="postModalVisible" @closeModal="listener"/>
+                <button  @click="togglePostModal" class="float-right px-3 my-5 text-left text-gray-500 placeholder-gray-500 bg-gray-200 border 
+                rounded-full appearance-none lg:text-base mmd:text-base sm:w-96.5 md:w-97 ssm:h-12 mmd:h-14 focus:outline-none 
+                focus:shadow-outline-blue focus:border-blue-300 ssm:text-xs">Post a shopping offer or an order request
                 </button>
               </div>
             </div>
@@ -1504,9 +1508,25 @@ img{
 
 <script>
 import Navbar from './Navbar'
+import PostModal from "./PostModal"
+
  export default {
-  components:{
-     Navbar
+    data() {
+    return {
+      postModalVisible: false
+    }
+  },
+  components: {
+    Navbar,
+    PostModal
+  },
+  methods:{
+    togglePostModal(){
+      this.postModalVisible = !this.postModalVisible
+    },
+    listener(){
+      this.postModalVisible = false;
+    }
   }
 }
 </script>
