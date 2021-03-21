@@ -11,9 +11,17 @@
             <div class="inline-flex space-x-2 items-center justify-start px-2 py-1 border rounded-full border-gray-500">
                 <img class="w-6 h-full rounded-full" src="img/checkcircle.svg"/>
                 <p class="text-sm font-bold leading-none text-indigo-900">Accepting Offers</p>
-                <button>
+                <button @click="isOpen=!isOpen" >
                     <img class="w-6 h-full rounded-full" src="img/arrowdown (1).svg"/>
                 </button>
+                <!---
+                <div class="w-full">
+                      <div v-if="isOpen" class="shadow-xl fixed bg-white rounded-lg py-2 pl-2 pr-4 pt-2 ">
+                        <router-link to="#"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">mode</span>Accepting Request</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">delete</span>Accepting Offers</router-link>
+                    </div>
+                    </div>
+                    --->
             </div>
         </div>
         <!--end-->
@@ -71,3 +79,13 @@
            </div>
            <!--end-->
 </template>
+
+<script>
+export default {
+    data (){
+        return{
+            isOpen:false
+        }
+    }
+}
+</script>

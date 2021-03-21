@@ -1,7 +1,7 @@
 <template>
 <Navbar/>
     <!--Profile code-->
-    <div class="flex items-start w-full justify-center px-64 pt-8 pb-60 mt-1 bg-white shadow h-16">
+    <div class="flex items-start w-full justify-center px-64 pt-8 pb-60 mt-1  bg-white shadow h-16">
       <div class="flex space-x-8 items-center justify-center pr-48" >
         <!--profile picture-->
         <div class="flex ">
@@ -18,7 +18,8 @@
             </div>
             <div class="inline-flex mt-2 items-center justify-end w-34 h-8">
               <div class="flex items-center justify-center h-full pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-lg border-gray-900">
-                  <button class="flex-1 text-base font-bold tracking-wider leading-loose text-center text-gray-900">Edit Profile</button>
+                  <button class="flex-1 text-base font-bold tracking-wider leading-loose text-center text-gray-900">
+                    <router-link to="/account-settings" > Edit Profile </router-link></button>
               </div>
           </div>
         </div>
@@ -101,7 +102,6 @@ export default {
    ShoppingReviews,
    ShoppingAbout
   },
-
   methods: {
     toggle(){
       if(this.component != ShoppingOffers)

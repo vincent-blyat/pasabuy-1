@@ -123,11 +123,9 @@ export default {
       postModalVisible: false
     }
   },
-
   components: {
     PostModal
   },
-
   methods:{
     togglePostModal(){
       this.postModalVisible = !this.postModalVisible

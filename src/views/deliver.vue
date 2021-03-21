@@ -43,9 +43,9 @@
 
 </template>
 <script>
-import Navbar from '../views/Navbar.vue'
+import Navbar from './Navbar.vue'
 export default {
-  name: 'Deliver',
+  name: 'deliver',
   components: {
     Navbar
   },

@@ -48,18 +48,15 @@ export default {
         isVisible: true
         }
     },
-
     methods: {
         toggleShopOfferbtn(){
             if(this.component != shopOfferPost)
             this.component = shopOfferPost;
         },
-
         toggleOrderRequestbtn(){
             if(this.component != orderRequestPost)
             this.component = orderRequestPost;
         },
-
         close(){
             this.$emit('closeModal')
         },

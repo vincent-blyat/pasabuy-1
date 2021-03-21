@@ -4,12 +4,12 @@
 <div class="desktopVersion">
     
    <!--START OF 'POST OFFER OR REQUEST' CODE-->
-      <div class="flex flex-wrap overflow-hidden mmd:pt-12  ">
+      <div class="flex flex-wrap overflow-hidden bg-gray-bgcolor mmd:pt-12">
         <div class="overflow-hidden mmd:w-3/5">
-          <div class="flex flex-wrap mmd:w-3/4 mmd:px-0 mmd:float-right rounded-lg sm:w-full mt-10 ">
+          <div class="flex flex-wrap mt-10 rounded-lg mmd:w-3/4 mmd:px-0 mmd:float-right sm:w-full ">
             <div class="flex items-center w-full px-8 bg-white rounded-lg">
               <button class="w-12 h-12 rounded-full border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="justify-center mmd:pl-3 "> 
                 <!--modal-->
@@ -22,7 +22,7 @@
             </div>
           </div>
           <!--START OF 'FILTER' CODE-->
-          <div class="flex flex-wrap mmd:float-right lg:float-right md:block hidden mmd:w-3/4 mmd:px-0 ">
+          <div class="flex flex-wrap hidden mmd:float-right lg:float-right md:block mmd:w-3/4 mmd:px-0 ">
             <div class="w-full px-5 text-sm font-normal rounded-lg">
               <div class="flex px-2">
                 <div class="flex items-center p-4 mb-2 mr-2"><label class="font-semibold">Filter:</label>
@@ -51,7 +51,7 @@
           <div class="flex flex-wrap mmd:float-right lg:float-right md:w-3/4 lg:w-3/4 w:3/4 mmd:w-3/4 mmd:px-0 ">
             <div class="flex items-center w-full py-5 pl-5 bg-white rounded-t-lg pr-7">
               <button class="top-0 left-0 rounded-full mmd:w-12 mmd:h-12 border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
                 <h5 class="font-semibold mmd:text-base">
@@ -59,15 +59,24 @@
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
-                  <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
-                </h5>
-                <p class="text-sm font-normal text-gray-400">
-                  <span>
-                    13 hours ago
-                  </span>
-                </p>
-              </div>  
-            </div>
+                  <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                  <button @click="edit1=!edit1" class="absolute right-99">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#" class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
+                 </h5>
+                    <p class="text-sm font-normal text-gray-400">
+                      <span>13 hours ago</span>
+                    </p>
+                  </div>
+              </div>
 
             <!--NO LONGER ACCEPTING REQUESTS TEXT-->
             <div class="flex items-center w-full bg-white px-7">
@@ -144,7 +153,7 @@
               
               <!--SEND A REQUEST/OFFER-->
               <a href="#" class="font-bold focus:text-gray-600">
-                <span class="mmd:pr-2  material-icons mmd:md-24 ">
+                <span class="mmd:pr-2 material-icons mmd:md-24 ">
                 send
                 </span>
                 <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Send Offer</label>
@@ -160,7 +169,7 @@
 
               <!--SHARE-->
               <a href="#" class="font-bold focus:text-gray-600">
-                <span class="pr-2 mmd:pl-20  material-icons md-24">
+                <span class="pr-2 mmd:pl-20 material-icons md-24">
                     share
                 </span>
                 <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block ">Share</label>
@@ -170,10 +179,10 @@
           <!--END OF NO LONGER ACCPETING REQUEST CODE-->
 
           <!--START OF ACCEPTING OFFERS CODE-->
-          <div class="flex flex-wrap mmd:float-right pt-8 mmd:w-3/4 mmd:px-0">
+          <div class="flex flex-wrap pt-8 mmd:float-right mmd:w-3/4 mmd:px-0">
             <div class="flex items-center w-full px-5 py-5 bg-white rounded-t-lg">
               <button class="rounded-full mmd:w-12 mmd:h-12 border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
                 <h5 class="font-bold mmd:text-base">
@@ -181,7 +190,18 @@
                    <span class="inline-block text-blue-900 align-middle material-icons md-18">
                      verified
                    </span>
-                   <label class="font-normal text-gray-400 align-middle">posted an order request</label>
+                   <label class="pl-1 font-normal text-gray-400 align-middle">posted an order request</label>
+                    <button @click="edit2=!edit2" class="absolute right-99">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
                  </h5>
                  <p class="text-sm font-normal text-gray-400">
                    <span>
@@ -241,7 +261,7 @@
             
            <!--SHOPPING LIST-->
             <div class="flex items-center w-full gap-y-4">
-              <div class="w-full px-5 py-2 font-medium bg-white mt-10">
+              <div class="w-full px-5 py-2 font-medium bg-white">
               <div class="flex flex-wrap w-full p-2 overflow-hidden bg-gray-200 rounded-lg">
               
                 <div class="w-full overflow-hidden mmd:w-2/4 ">
@@ -294,10 +314,10 @@
               <!--SHARE-->
               <a href="#" class="focus:text-gray-600">
                 <span class="pl-20 pr-2 material-icons md-24">
-                    share
+                share
                 </span>
-                <label class="align-top cursor-pointer mmd:text-base mmd:inline-block">Share</label>
-              </a>
+                <label class="align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</label>
+              </a> 
             </div>
           </div>
           <!--END-->
@@ -306,7 +326,7 @@
           <div class="flex flex-wrap float-right w-3/4 pt-8 mmd:float-right mmd:w-3/4 mmd:px-0 ">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
               <button class="rounded-full left-2 mmd:w-12 mmd:h-12border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
                 <h5 class="font-bold mmd:text-base">
@@ -314,7 +334,18 @@
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
-                  <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                  <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                   <button @click="edit3=!edit3" class="absolute right-99">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
                 </h5>
                 <p class="text-sm font-normal text-gray-400">
                   <span>
@@ -425,7 +456,7 @@
          <div class="flex flex-wrap float-right w-3/4 pt-8 mmd:float-right lg:float-right md:w-3/4 lg:w-3/4 w:3/4 mmd:w-3/4 mmd:px-0">
           <div class="flex items-center w-full p-5 px-6 bg-white rounded-t-lg">
             <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
-              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
             <div class="ml-2">
               <h5 class="font-bold mmd:text-base">
@@ -433,7 +464,18 @@
                 <span class="inline-block text-blue-900 align-middle material-icons md-18">
                   verified
                 </span>
-                <label class="font-normal text-gray-400 align-middle">posted an order request</label>
+                <label class="pl-1 font-normal text-gray-400 align-middle">posted an order request</label>
+                <button @click="edit4=!edit4" class="absolute right-99">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
               </h5>
               <p class="text-sm font-normal text-gray-400">
                 <span>
@@ -559,10 +601,10 @@
         <!--END-->
 
         <!--START OF 'CANCELLED' CODE -->
-        <div class="flex flex-wrap float-right w-3/4 pt-8 mmd:float-right  mmd:w-3/4 mmd:px-0">
+        <div class="flex flex-wrap float-right w-3/4 pt-8 mmd:float-right mmd:w-3/4 mmd:px-0">
           <div class="flex w-full p-5 bg-white rounded-t-lg px-7">
             <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
-              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
             <div class="ml-2">
               <h5 class="font-bold mmd:text-base">
@@ -570,7 +612,18 @@
                 <span class="inline-block text-blue-900 align-middle material-icons md-18">
                   verified
                 </span>
-                <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                <button @click="edit5=!edit5" class="absolute right-99">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit5" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
               </h5>
               <p class="text-sm font-normal text-gray-400">
                 <span>
@@ -650,7 +703,7 @@
           </div>
 
           <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full px-5 py-4 tracking-wide bg-white rounded-b-lg">
+          <div class="flex justify-center w-full px-5 py-4 mb-10 tracking-wide bg-white rounded-b-lg">
             
             <!--SEND A REQUEST/OFFER-->
             <a href="#" class="font-extrabold focus:text-gray-600">
@@ -681,7 +734,7 @@
       </div>
         
         <!--START OF SHOPPING LISTS-->
-        <div class="w-2/5 overflow-hidden pl-7">
+        <div class="w-2/5 pt-10 overflow-hidden pl-7">
           <div class="flex flex-wrap visible hidden float-left font-nunito md:block">
             <div class="pt-5 pb-3 bg-white shadow-xl w-72 px-7 rounded-xl">
                <h3 class="font-bold text-center uppercase text-1xl">Your shopping lists</h3><br>
@@ -719,8 +772,7 @@
                     
                     <!--CREATE NEW SHOPPING LIST BUTTON-->
                     <div class="flex justify-center py-5">
-                      <button class="w-full px-5 py-2 text-sm text-red-700 uppercase transition-colors duration-150 border-2
-                       border-red-700 text-bold h-11 rounded-3xl focus:outline-none">
+                      <button class="w-full px-5 py-2 text-sm text-red-700 uppercase transition-colors duration-150 border-2 border-red-700 text-bold h-11 rounded-3xl focus:outline-none">
                         <a href="#">
                           Create new
                         </a>
@@ -734,19 +786,18 @@
           </div>
 
 <!-----------------------------------------------Mobile Version------------------------------------------------------------------------>
-<div class="mobileVersion">
+<div class="justify-center mobileVersion">
   
     <!--START OF 'POST OFFER OR REQUEST' CODE-->
-      <div class="flex flex-wrap overflow-hidden pt-8">
+      <div class="flex flex-wrap pt-24 overflow-hidden">
         <div class="overflow-hidden ">
-          <div class="flex flex-wrap rounded-lg w-full w-96.5 px-5 float-left">
-            <div class="flex items-center w-full px-8 bg-white rounded-lg">
+          <div class="flex flex-wrap rounded-lg w-96.5 px-5 xs:w-full">
+            <div class="flex items-center w-full px-8 bg-white rounded-lg ">
               <button class="w-12 h-12 rounded-full border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="justify-center pl-2"> 
-                <button class="float-right px-3 my-5 text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full
-                 appearance-nonew-96.5 h-12 focus:outline-none focus:shadow-outline-blue 
+                <button class="float-right px-3 my-5 text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full appearance-none xs:w-97.5 w-96.5 h-12 focus:outline-none focus:shadow-outline-blue 
                  focus:border-blue-300 text-xs">Post a shopping offer or an order request
                 </button>
               </div>
@@ -754,7 +805,7 @@
           </div>
 
           <!--START OF 'FILTER' MOBILE VIEW CODE-->
-          <div class="flex flex-wrap py-3 visible w-96.5 px-7">
+          <div class="flex flex-wrap py-3 visible w-96.5 px-7 pt-7 xs:w-full">
             <div class="flex w-full pl-6">
               <label class="pt-2 pr-6 font-semibold">Filter:</label>
               <select class="block w-full px-4 py-3 pr-8 text-sm leading-tight bg-white border-none rounded appearance-none focus:border-none">
@@ -768,18 +819,29 @@
           <!--END-->
 
           <!--START OF 'NO LONGER ACCEPTING OFFERS' POST-->
-          <div class="flex flex-wrap w-96.5 px-5">
+          <div class="flex flex-wrap w-96.5 px-5 pt-7 xs:w-full">
             <div class="flex items-center w-full py-5 pl-5 bg-white rounded-t-lg pr-7">
-              <button class="top-0 left-0 rounded-full w-10 h-10 border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <button class="top-0 left-0 w-10 h-10 rounded-full border-1">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="font-semibold text-sm ">
+                <h5 class="text-sm font-semibold ">
                  Wanda
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
                   <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                  <button @click="edit1=!edit1" class="absolute right-11">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-11 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
                 </h5>
                 <p class="text-sm font-normal text-gray-400">
                   <span>
@@ -812,7 +874,7 @@
                 
                 <!--SHOPPING LOCATION-->
                 <div class="w-full overflow-hidden ">
-                  <span class="text-red-700 material-icons pl-0">
+                  <span class="pl-0 text-red-700 material-icons">
                     shopping_cart
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Shopping at downtown Legazpi</label>
@@ -828,7 +890,7 @@
               
                 <!--TRANSPO-->
                 <div class="w-full overflow-hidden ">
-                  <span class="text-red-700 material-icons pl-0">
+                  <span class="pl-0 text-red-700 material-icons">
                     directions_car_filled
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Car</label>
@@ -844,7 +906,7 @@
               
                 <!--MODE OF PAYMENT-->
                 <div class="w-full overflow-hiddenw-1/2">
-                  <span class="text-red-700 material-icons pl-0">
+                  <span class="pl-0 text-red-700 material-icons">
                     payments
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
@@ -860,48 +922,59 @@
             </div>
 
             <!--SEND, CHAT, SHARE-->
-            <div class="flex items-center justify-center w-full py-4 tracking-wide bg-white rounded-b-lg px-10">
-              
+            <div class="flex items-center justify-center w-full px-5 py-4 pb-5 font-bold tracking-wide bg-white rounded-b-lg">
+              <hr>
               <!--SEND A REQUEST/OFFER-->
-              <a href="#" class="font-bold focus:text-gray-600">
-                <span class="pr-2 pl-16 material-icons md-24">
+              <a href="#" class="focus:text-gray-600">
+                <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
-                <label class="font-bold align-top cursor-pointer text-sm hidden">Send Offer</label>
+                <label class="hidden text-sm align-top cursor-pointer">Send Offer</label>
               </a>
 
               <!--CHAT-->
-              <a href="#" class="font-bold focus:text-gray-600">
-                <span class="pr-2 pl-16 material-icons md-24 ">
+              <a href="#" class="focus:text-gray-600">
+                <span class="pl-20 pr-2 material-icons md-24">
                 forum
                 </span>
-                <label class="font-bold align-top cursor-pointer text-sm hidden">Chat</label>
+                <label class="hidden align-top cursor-pointertext-sm">Chat</label>
               </a>
 
               <!--SHARE-->
-              <a href="#" class="font-bold focus:text-gray-600">
-                <span class="pr-2 pl-16 material-icons md-24">
+              <a href="#" class="focus:text-gray-600">
+                <span class="pl-20 pr-2 material-icons md-24">
                     share
                 </span>
-                <label class="font-bold align-top cursor-pointer text-sm hidden">Share</label>
+                <label class="hidden text-sm align-top cursor-pointer">Share</label>
               </a>
             </div>
           </div>
           <!--END OF NO LONGER ACCPETING REQUEST CODE-->
 
           <!--START OF ACCEPTING OFFERS CODE-->
-          <div class="flex flex-wrap w-96.5 px-5">
+          <div class="flex flex-wrap w-96.5 px-5 pt-7 xs:w-full">
             <div class="flex items-center w-full px-5 py-5 bg-white rounded-t-lg">
-              <button class="rounded-full w-10 h-10 border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <button class="w-10 h-10 rounded-full border-1">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="font-bold text-sm">
+                <h5 class="text-sm font-bold">
                   Monica
                    <span class="inline-block text-blue-900 align-middle material-icons md-18">
                      verified
                    </span>
                    <label class="font-normal text-gray-400 align-middle">posted an order request</label>
+                   <button @click="edit2=!edit2" class="absolute right-11">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-11 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
                  </h5>
                  <p class="text-sm font-normal text-gray-400">
                    <span>
@@ -950,7 +1023,7 @@
               
                 <!--MODE OF PAYMENT-->
                 <div class="w-full overflow-hidden ">
-                  <span class="text-red-700 material-icons pl-0">
+                  <span class="pl-0 text-red-700 material-icons">
                     payments
                     </span>
                     <label class="items-center inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
@@ -977,7 +1050,7 @@
                   </ul>
                 </div>
                 <div class="w-full overflow-hidden ">
-                  <ul class="text-sm leading-loose list-disc list-inside pt-0 pl-3">
+                  <ul class="pt-0 pl-3 text-sm leading-loose list-disc list-inside">
                     <li>baking soda</li>
                     <li>chocolate syrup</li>
                     <li>Powdered sugar</li>
@@ -1000,7 +1073,7 @@
                 <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
-                <label class="align-top cursor-pointer text-sm hidden">Send Offer</label>
+                <label class="hidden text-sm align-top cursor-pointer">Send Offer</label>
               </a>
 
               <!--CHAT-->
@@ -1008,7 +1081,7 @@
                 <span class="pl-20 pr-2 material-icons md-24">
                 forum
                 </span>
-                <label class="align-top cursor-pointertext-sm hidden">Chat</label>
+                <label class="hidden align-top cursor-pointertext-sm">Chat</label>
               </a>
 
               <!--SHARE-->
@@ -1016,25 +1089,36 @@
                 <span class="pl-20 pr-2 material-icons md-24">
                     share
                 </span>
-                <label class="align-top cursor-pointer text-sm hidden">Share</label>
+                <label class="hidden text-sm align-top cursor-pointer">Share</label>
               </a>
             </div>
           </div>
           <!--END-->
 
           <!--START OF ACCEPTING REQUESTS-->
-          <div class="flex flex-wrap float-right w-96.5 px-5">
+          <div class="flex flex-wrap justify-center w-96.5 px-5 pt-7 xs:w-full">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
-              <button class="rounded-full left-2 w-10 h-10 border-1">
-                <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <button class="w-10 h-10 rounded-full left-2 border-1">
+                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="font-bold text-sm ">
+                <h5 class="text-sm font-bold ">
                  Mark Aral
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
                   <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                  <button @click="edit3=!edit3" class="absolute right-11">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-11 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
                 </h5>
                 <p class="text-sm font-normal text-gray-400">
                   <span>
@@ -1064,7 +1148,7 @@
                 
                 <!--AREA-->
                 <div class="w-full overflow-hidden">
-                  <span class="text-red-700 material-icons pl-0">
+                  <span class="pl-0 text-red-700 material-icons">
                     shopping_cart
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
@@ -1080,7 +1164,7 @@
               
                 <!--TRANSPO-->
                 <div class="w-full overflow-hidden ">
-                  <span class="text-red-700 material-icons pl-0 ">
+                  <span class="pl-0 text-red-700 material-icons ">
                     directions_car_filled
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
@@ -1096,7 +1180,7 @@
               
                 <!--MODE OF PAYMENT-->
                 <div class="w-full overflow-hidden ">
-                  <span class="text-red-700 material-icons pl-0 ">
+                  <span class="pl-0 text-red-700 material-icons ">
                     payments
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
@@ -1119,7 +1203,7 @@
                 <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
-                <label class=" font-bold align-top cursor-pointer text-sm hidden">Send Offer</label>
+                <label class="hidden text-sm font-bold align-top cursor-pointer ">Send Offer</label>
               </a>
 
               <!--CHAT-->
@@ -1127,7 +1211,7 @@
                 <span class="pl-20 pr-2 material-icons md-24">
                 forum
                 </span>
-                <label class="align-top cursor-pointer text-sm hidden">Chat</label>
+                <label class="hidden text-sm align-top cursor-pointer">Chat</label>
               </a>
 
               <!--SHARE-->
@@ -1135,25 +1219,36 @@
                 <span class="pl-20 pr-2 material-icons md-24">
                     share
                 </span>
-                <label class="align-top cursor-pointer text-sm hidden">Share</label>
+                <label class="hidden text-sm align-top cursor-pointer">Share</label>
               </a>
             </div>
           </div>
           <!--END OF ACCPETING REQUEST CODE-->
 
          <!--START OF 'ORDER TAKEN' CODE-->
-         <div class="flex flex-wrap float-right w-96.5 px-5">
+         <div class="flex flex-wrap justify-center w-96.5 px-5 pt-7 xs:w-full">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
-            <button class="rounded-full left-2 w-10 h-10 border-1">
-              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            <button class="w-10 h-10 rounded-full left-2 border-1">
+              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
             <div class="ml-2">
-              <h5 class="font-bold text-sm">
+              <h5 class="text-sm font-bold">
               Sarah
                 <span class="inline-block text-blue-900 align-middle material-icons md-18">
                   verified
                 </span>
                 <label class="font-normal text-gray-400 align-middle">posted an order request</label>
+                <button @click="edit4=!edit4" class="absolute right-11">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-11 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
               </h5>
               <p class="text-sm font-normal text-gray-400">
                 <span>
@@ -1188,7 +1283,7 @@
               
               <!--SHOPPING LOCATION-->
               <div class="w-full overflow-hidden ">
-                <span class="text-red-700 material-icons pl-0">
+                <span class="pl-0 text-red-700 material-icons">
                   shopping_cart
                   </span>
                   <label class="pt-1 pl-1 text-sm text-gray-800 align-top">SM City Legazpi</label>
@@ -1204,7 +1299,7 @@
             
               <!--MODE OF PAYMENT-->
               <div class="w-full overflow-hidden ">
-                <span class="text-red-700 material-icons pl-0 ">
+                <span class="pl-0 text-red-700 material-icons ">
                   payments
                   </span>
                   <label class="pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
@@ -1233,7 +1328,7 @@
               </div>
 
               <div class="w-full overflow-hidden">
-                <ul class=" text-sm leading-loose list-disc list-inside pt-0 pl-3">
+                <ul class="pt-0 pl-3 text-sm leading-loose list-disc list-inside ">
                   <li>baking soda</li>
                   <li>chocolate syrup</li>
                   <li>Powdered sugar</li>
@@ -1256,7 +1351,7 @@
               <span class="pr-2 material-icons md-24 ">
               send
               </span>
-              <label class="align-top cursor-pointer text-sm hidden ">Send Offer</label>
+              <label class="hidden text-sm align-top cursor-pointer ">Send Offer</label>
             </a>
 
             <!--CHAT-->
@@ -1264,7 +1359,7 @@
               <span class="pl-20 pr-2 material-icons md-24">
               forum
               </span>
-              <label class="align-top cursor-pointer text-sm hidden">Chat</label>
+              <label class="hidden text-sm align-top cursor-pointer">Chat</label>
             </a>
 
             <!--SHARE-->
@@ -1272,25 +1367,36 @@
               <span class="pl-20 pr-2 material-icons md-24">
                   share
               </span>
-              <label class="align-top cursor-pointer text-sm hidden">Share</label>
+              <label class="hidden text-sm align-top cursor-pointer">Share</label>
             </a>
           </div>
         </div>
         <!--END-->
 
         <!--START OF 'CANCELLED' CODE -->
-        <div class="flex flex-wrap float-right w-96.5 px-5">
+        <div class="flex flex-wrap float-right w-96.5 px-5 pt-7 xs:w-full">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
-            <button class="rounded-full left-2 w-10 border-1">
-              <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            <button class="w-10 rounded-full left-2 border-1">
+              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
             <div class="ml-2">
-              <h5 class="font-bold text-sm">
+              <h5 class="text-sm font-bold">
                Gwen Lopez
                 <span class="inline-block text-blue-900 align-middle material-icons md-18">
                   verified
                 </span>
                 <label class="font-normal text-gray-400 align-middle">posted a shopping offer</label>
+                <button @click="edit5=!edit5" class="absolute right-11">
+                    <img class="w-6 h-auto" src="img/3dot.svg"/>
+                  </button>
+                  <div class="w-full">
+                    <div v-if="edit5" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-11 h-min w-30 ring-2 ring-gray-200">
+                      <router-link to="#"  class="flex flex-row gap-x-2 ">
+                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div>
               </h5>
               <p class="text-sm font-normal text-gray-400">
                 <span>
@@ -1322,7 +1428,7 @@
               
               <!--SHOPPING LOCATION-->
               <div class="w-full overflow-hidden">
-                <span class="text-red-700 material-icons pl-0">
+                <span class="pl-0 text-red-700 material-icons">
                   shopping_cart
                   </span>
                   <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
@@ -1338,7 +1444,7 @@
             
               <!--TRANSPO-->
               <div class="w-full overflow-hidden">
-                <span class=" text-red-700 material-icons pl-0">
+                <span class="pl-0 text-red-700 material-icons">
                   directions_car_filled
                   </span>
                   <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
@@ -1354,7 +1460,7 @@
             
               <!--MODE OF PAYMENT-->
               <div class="w-full overflow-hidden mmd:w-1/2">
-                <span class=" text-red-700 material-icons pl-0 ">
+                <span class="pl-0 text-red-700 material-icons">
                   payments
                   </span>
                   <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
@@ -1377,7 +1483,7 @@
               <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
-              <label class="font-bold align-top cursor-pointer text-sm hidden">Send Offer</label>
+              <label class="hidden text-sm font-bold align-top cursor-pointer">Send Offer</label>
             </a>
 
             <!--CHAT-->
@@ -1385,7 +1491,7 @@
               <span class="pl-20 pr-2 material-icons md-24">
               forum
               </span>
-              <label class="font-bold align-top cursor-pointer text-sm hidden">Chat</label>
+              <label class="hidden text-sm font-bold align-top cursor-pointer">Chat</label>
             </a>
 
             <!--SHARE-->
@@ -1393,7 +1499,7 @@
               <span class="pl-20 pr-2 material-icons md-24">
                   share
               </span>
-              <label class="font-bold align-top cursor-pointer text-sm hidden">Share</label>
+              <label class="hidden text-sm font-bold align-top cursor-pointer">Share</label>
             </a>
           </div>
         </div>
@@ -1513,7 +1619,14 @@ import PostModal from "./PostModal"
  export default {
     data() {
     return {
-      postModalVisible: false
+      postModalVisible: false,
+      edit1:false,
+      edit2:false,
+      edit3:false,
+      edit4:false,
+      edit5:false,
+      show:false,
+      share1:false,
     }
   },
   components: {

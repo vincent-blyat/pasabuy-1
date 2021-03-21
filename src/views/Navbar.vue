@@ -20,18 +20,15 @@
      
       <!--search bar-->
       <div class="absolute inset-y-3.5 right-24 ">
-        <div class="relative mx-auto">
-          <input
-            class="hidden lg:flex border-2 border-gray-300 bg-white h-10 px-3 pr-4 rounded-2xl text-sm outline-none"
-            type="search"
-            name="search"
-            placeholder="Search"
-          />
-          <button type="submit" class="absolute right-0 top-0 mt-2 mr-4 md:">
+        <div class="relative">
+          <button class="flex float-right h-10 px-3 mt-4 mr-20 bg-white border-2 border-gray-500 w-36 rounded-2xl focus:outline-none focus:border-red-danger">
+            <router-link to="/search" class="text-align-left">Search</router-link>
+          </button>
+          <div class="absolute right-0 top-0 mr-4 md:">
          <span class="material-icons">
             search
           </span>
-          </button>
+          </div>
         </div>
       </div>
       <!--ends-->
@@ -55,9 +52,43 @@
           <span class="material-icons text-red-600">
             notifications
           </span>
-          <a href="#">
-          <button class="text-base font-bold tracking-wide leading-none text-gray-500">Notifications</button>
-          </a>
+          <button @click="show=!show" class="text-base font-bold tracking-wide leading-none text-gray-500">Notifications</button>
+          <div class="w-full">
+             <div v-if="show" class="shadow-lg z-10 overflow-hidden fixed left--1 rounded-lg pt-2 mr-10 mt-8 bg-white h-auto" style="min-width:370px;">
+               <h1 class="align-text-leftCorner font-bold ml-4 mt-4 mb-4 border-b ">Notifications</h1>
+               <!--notification 1-->
+                <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
+                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
+                <p class="pl-1 mx-2 text-sm text-gray-800">
+                <span class="font-bold" href="#">Mark Aral </span> 
+                <span class ="font-semibold"> successfully delivered your order. </span><br> 
+                <span class ="font-semibold"> Would you like to write a review? </span><br>
+                <router-link to="#" class="text-blue-500 font-bold">Review</router-link>
+                <span class="text-xs text-gray-500"> 2 hours ago</span>
+                </p>
+                </div>
+              <!--notification 2-->
+              <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
+                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
+                <p class="pl-1 mx-2 text-sm text-gray-800">
+                <span class="font-bold" href="#">Mark Aral </span> 
+                <span class ="font-semibold"> is on their way to deliver your order </span><br>
+                <router-link to="/orders" class="text-blue-500 font-bold">View Order</router-link>
+                <span class="text-xs text-gray-500"> 2 hours ago</span>
+                </p>
+                </div>
+                <!--notification 3-->
+              <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
+                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
+                <p class="pl-1 mx-2 text-sm text-gray-800">
+                <span class="font-bold" href="#">Mark Aral </span> 
+                <span class ="font-semibold"> is on their way to deliver your order </span><br>
+                <router-link to="/orders" class="text-blue-500 font-bold">View Order</router-link>
+                <span class="text-xs text-gray-500"> 2 hours ago</span>
+                </p>
+                </div>
+             </div>
+          </div>
         </div>
       </div>
       <!--end-->
@@ -112,7 +143,8 @@ export default {
 
     data(){
         return{
-            isOpen:false
+            isOpen:false,
+            show:false
         }
     },
 

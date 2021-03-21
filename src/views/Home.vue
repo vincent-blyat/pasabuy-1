@@ -133,7 +133,7 @@
 </div>
 </div>
 
-<!--MOBILE VIEW-->
+<!---------------------------------MOBILE VIEW--------------------------------------------------------------------------------------->
 <div class="mobileVersion">
     <div id="navbar" class="font-nunito px-4 py-4 py-6 flex justify bg-transparent w-full z-10 fixed">
         <img src="#" alt="logo">
@@ -151,7 +151,7 @@
 <div id="landing" class=" w-full h-screen font-nunito mx-auto bg-local bg-no-repeat bg-cover " style="background-image: url('img/main-back.jpg')">
   <div class="flex items-center h-full px-10 ml-36 vs:ml-10 ">
             <section class=" text-left pl-26  w-56">
-            <p class="mb-4 text-3xl font-bold w-70 text-left">
+            <p class="mt-10 mb-4 text-3xl font-bold w-70 text-left">
                 Need someone to do your grocery?</p>
             <p class="text-2xl vs:mr-3 ssm:mb-5 vs:text-left vs:pb-12 ssm:text-left">
                Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>

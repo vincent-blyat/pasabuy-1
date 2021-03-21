@@ -109,17 +109,16 @@
 
 <script>
 import PostModal from "./PostModal"
+
 export default {
   data() {
     return {
       postModalVisible: false
     }
   },
-
   components: {
     PostModal
   },
-
   methods:{
     togglePostModal(){
       this.postModalVisible = !this.postModalVisible
