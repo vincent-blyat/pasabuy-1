@@ -9,7 +9,7 @@
     </div>
       <div class="sticky flex flex-wrap justify-center overflow-hidden top-20">
         <div class="relative flex items-center justify-center w-2/5 px-8 bg-transparent rounded-lg">
-        <span class="absolute left-5 inset-y-7 material-icons">
+        <span class="absolute left-10 inset-y-7 material-icons">
           search
         </span>
           <div class="justify-center mmd:pl-3">
@@ -248,12 +248,11 @@
         </div>
       </div>
           <!----------------------END--------------->
-    </div>
+</div>
 
 
 <!----------------------------MOBILE VERSION---------------------->
-    <div class="mobileVersion">
-
+<div class="mobileVersion">
       <!---------------START OF SEARCH MOBILE------------->
       <div class="sticky w-full h-14 top-16 bg-red-search"></div>
 
@@ -500,7 +499,7 @@
               </a>
             </div>
           </div>
-        </div>
+</div>
 </template>
 
 <style>

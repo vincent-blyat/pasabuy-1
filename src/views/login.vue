@@ -3,7 +3,9 @@
     <div id="login" class="login items-center justify-center bg-gray-100 md:min-h-screen md:flex">
       <div class="w-4/12 my-12 overflow-hidden font-bold text-center bg-white shadow-md flex-grow-1 md:w-4/12 rounded-xl">
             <div class="px-10 py-16">
-              <h1 class="space-x-1 space-y-1 text-2xl">Welcome back!</h1>
+               <img src="img/logo.png" class="w-20 h-20 justify-center items-center flex" alt="logo">
+              <h1 class="space-x-1 space-y-1 text-2xl">
+                Welcome back!</h1>
               <p class="mb-5 space-y-1 font-light text-gray-500">
                 Log in with your email and password</p>
                 <div class=""> 

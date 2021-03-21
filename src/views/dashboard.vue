@@ -45,8 +45,6 @@
             </div>
           </div>
           <!--END-->
-
-
           <!--START OF 'NO LONGER ACCEPTING OFFERS' POST-->
           <div class="flex flex-wrap mmd:float-right lg:float-right md:w-3/4 lg:w-3/4 w:3/4 mmd:w-3/4 mmd:px-0 ">
             <div class="flex items-center w-full py-5 pl-5 bg-white rounded-t-lg pr-7">

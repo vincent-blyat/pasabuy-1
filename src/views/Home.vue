@@ -4,7 +4,7 @@
 <!---Web View-->
 <div class="desktopVersion">
     <div id="navbar" class="font-nunito px-4 py-4 sm:py-6 flex justify sm:bg-transparent w-full z-10 fixed">
-        <img src="#" alt="logo">
+        <img src="img/logo.png" class="w-20 h-20" alt="logo">
             <div class="flex items-center mt-4 sm:mt-2 w-full sm:space-x-4 sm:text-right sm:block">
                 <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border border-red-700 
                                 rounded-3xl focus:shadow-outline hover:bg-red-50">

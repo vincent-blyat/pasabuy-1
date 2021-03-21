@@ -17,18 +17,14 @@
     </div>
     </div>
       <!--end-->
-     
       <!--search bar-->
-      <div class="absolute inset-y-3.5 right-24 ">
+      <div class="absolute  right-24 ">
         <div class="relative">
-          <button class="flex float-right h-10 px-3 mt-4 mr-20 bg-white border-2 border-gray-500 w-36 rounded-2xl focus:outline-none focus:border-red-danger">
-            <router-link to="/search" class="text-align-left">Search</router-link>
-          </button>
-          <div class="absolute right-0 top-0 mr-4 md:">
-         <span class="material-icons">
-            search
-          </span>
-          </div>
+          <button class="flex float-right h-10 px-3 mt-4 mr-10 bg-white border-2 border-gray-500 w-36 rounded-2xl 
+          focus:outline-none focus:border-red-danger">
+            <router-link to="/search" class="mt-1 text-align-left text-gray-500" >Search</router-link>
+            <span class="right-0 pl-10 mt-2 material-icons ">search</span>
+            </button>
         </div>
       </div>
       <!--ends-->
@@ -53,7 +49,7 @@
             notifications
           </span>
           <button @click="show=!show" class="text-base font-bold tracking-wide leading-none text-gray-500">Notifications</button>
-          <div class="w-full">
+         
              <div v-if="show" class="shadow-lg z-10 overflow-hidden fixed left--1 rounded-lg pt-2 mr-10 mt-8 bg-white h-auto" style="min-width:370px;">
                <h1 class="align-text-leftCorner font-bold ml-4 mt-4 mb-4 border-b ">Notifications</h1>
                <!--notification 1-->
@@ -88,7 +84,7 @@
                 </p>
                 </div>
              </div>
-          </div>
+          
         </div>
       </div>
       <!--end-->
