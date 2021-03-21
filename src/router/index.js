@@ -11,6 +11,7 @@ import accountsettings from '../views/accountset.vue'
 import deliver from '../views/deliver.vue'
 import orders from '../views/orders.vue'
 import messages from '../views/messaging.vue'
+import search from '../views/Search.vue'
 
 
 const routes = [
@@ -85,6 +86,13 @@ const routes = [
     name: 'messages',
     component: messages
   },
+
+  {
+    path: '/search',
+    name: 'search',
+    component: search
+  },
+
 
   
 
