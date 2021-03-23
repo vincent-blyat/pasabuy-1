@@ -14,7 +14,7 @@
         <p v-if="show">{{address_info.house_number}}</p>
         <input type="text" v-if="edit2"
         id="input_name" v-model="address_info.house_number" 
-        class="ring-2 ring-gray-400 font-bold">
+        class="ring-2 ring-gray-400 font-bold w-full">
         </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -23,7 +23,7 @@
         <p v-if="show">{{address_info.province}}</p>
         <input type="text" v-if="edit2"
         id="input_name" v-model="address_info.province" 
-        class="ring-2 ring-gray-400 font-bold">
+        class="ring-2 ring-gray-400 font-bold w-full">
         </span>
         </span> 
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -32,7 +32,7 @@
             <p v-if="show">{{address_info.city}}</p>
             <input type="text" v-if="edit2"
             id="input_name" v-model="address_info.city" 
-            class="ring-2 ring-gray-400 font-bold">
+            class="ring-2 ring-gray-400 font-bold w-full">
         </span>
         </span>
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -41,7 +41,7 @@
             <p v-if="show">{{address_info.barangay}}</p>
             <input type="text" v-if="edit2"
             id="input_name" v-model="address_info.barangay" 
-            class="ring-2 ring-gray-400 font-bold">
+            class="ring-2 ring-gray-400 font-bold w-full" >
         </span>
         </span>
         </div>
