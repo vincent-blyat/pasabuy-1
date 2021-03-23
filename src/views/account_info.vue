@@ -14,16 +14,16 @@
            <p v-if="show">{{account_info.email}}</p>
            <input type="email" v-if="edit3"
         id="input_email" v-model="account_info.email"
-        class="ring-2 ring-gray-400 font-bold">
+        class="ring-2 ring-gray-400 font-bold w-full">
        </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p  class="text-gray-500">Password</p>
         <span>
-            <p v-if="show">{{account_info.password}}</p>
+            <p v-if="show" >{{account_info.password}}</p>
             <input type="password" v-if="edit3"
-        id="input_password" v-model="account_info.password_int"
-        class="ring-2 ring-gray-400 font-bold">
+        id="input_password"  v-model="account_info.password" 
+        class="ring-2 ring-gray-400 font-bold w-full">
         </span>
         </span>
         </div>
@@ -43,7 +43,7 @@ data(){
     edit3:false,
     account_info:{
         email:'sanJuan@gmail.com',
-        password:'********',
+        password:'password',
         password_int:'',
         type:'password',
     },
