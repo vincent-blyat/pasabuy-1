@@ -17,7 +17,6 @@
             </div>
           </div>
         </div>
-
           <!--START OF 'FILTER' CODE-->
           <div class="flex flex-wrap hidden w-3/4 px-0 pt-3 xl:float-right xl:block">
             <div class="w-full text-sm font-normal rounded-lg ">
@@ -35,10 +34,7 @@
               <div class="absolute w-56 mt-2 font-bold origin-top-right bg-white rounded-md shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
                 <div class="py-1" role="none" v-if="filter">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Shopping Offer</a>
-
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Order Requests</a>
-                  
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Nearby</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
@@ -61,8 +57,6 @@
               </div>
               <!---------END OF OPTIONS---------->
 
-              
-                
                 <label for="" class="inline-flex pt-2.5 ml-10 text-red-700 align-top md-18 text-base">
                   <span class="material-icons">
                   place
@@ -178,28 +172,36 @@
           <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg">
             
             <!--SEND A REQUEST/OFFER-->
-            <a href="#" class="font-extrabold focus:text-gray-600">
+            <div class="font-extrabold focus:text-gray-600">
               <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
               <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </a>
+            </div>
 
             <!--CHAT-->
-            <a href="#" class="font-bold focus:text-gray-600 text-balticsea">
+            <div class="font-bold focus:text-gray-600 text-balticsea">
               <span class="pl-24 pr-2 material-icons md-24">
               forum
               </span>
-              <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</label>
-            </a>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+            </div>
 
             <!--SHARE-->
-            <a href="#" class="font-bold focus:text-gray-600">
+            <div class="font-bold focus:text-gray-600">
               <span class="pl-24 pr-2 material-icons md-24">
                   share
               </span>
-              <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</label>
-            </a>
+              <button @click="isOpen=!isOpen" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
+                <div class="w-full">
+                    <div v-if="isOpen" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
+                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
+                    </div>
+                    </div>
+            </div>
           </div>
           </div>
           <!--END OF NO LONGER ACCPETING REQUEST CODE-->
@@ -322,28 +324,37 @@
             <div class="flex items-center justify-center w-full px-5 py-4 pb-5 font-bold tracking-wide bg-white rounded-b-lg">
               <hr>
               <!--SEND A REQUEST/OFFER-->
-              <a href="#" class="focus:text-gray-600">
+              <div href="#" class="focus:text-gray-600">
                 <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
                 <label class="align-top cursor-pointer mmd:text-base mmd:inline-block ">Send Offer</label>
-              </a>
+              </div>
 
               <!--CHAT-->
-              <a href="#" class="focus:text-gray-600">
-                <span class="pl-24 pr-2 material-icons md-24">
-                forum
-                </span>
-                <label class="align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</label>
-              </a>
+              <div class="font-bold focus:text-gray-600 text-balticsea">
+              <span class="pl-24 pr-2 material-icons md-24">
+              forum
+              </span>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+            </div>
+
 
               <!--SHARE-->
-              <a href="#" class="focus:text-gray-600">
+              <div class="font-bold focus:text-gray-600">
                 <span class="pl-24 pr-2 material-icons md-24">
-                share
+                    share
                 </span>
-                <label class="inline-block text-base align-top cursor-pointer">Share</label>
-              </a> 
+                <button @click="isOpen1=!isOpen1" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
+                  <div class="w-full">
+                      <div v-if="isOpen1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                          <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                          <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
+                      </div>
+                      </div>
+              </div>
             </div>
           </div>
           <!--END-->
@@ -452,29 +463,38 @@
             <div class="flex justify-center w-full px-5 py-4 font-bold tracking-wide bg-white rounded-b-lg">
               
               <!--SEND A REQUEST/OFFER-->
-              <a href="#" class="font-bold focus:text-gray-600">
+              <div class="font-bold focus:text-gray-600">
                 <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
                 <label class="inline-block align-top cursor-pointer">Send Offer</label>
-              </a>
+              </div>
 
               <!--CHAT-->
-              <a href="#" class="focus:text-gray-600">
-                <span class="pl-24 pr-2 material-icons md-24">
-                forum
-                </span>
-                <label class="inline-block text-base align-top cursor-pointer">Chat</label>
-              </a>
+              <div class="font-bold focus:text-gray-600 text-balticsea">
+              <span class="pl-24 pr-2 material-icons md-24">
+              forum
+              </span>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+              </div>
+
 
               <!--SHARE-->
-              <a href="#" class="focus:text-gray-600">
+              <div class="font-bold focus:text-gray-600">
                 <span class="pl-24 pr-2 material-icons md-24">
                     share
                 </span>
-                <label class="inline-block text-base align-top cursor-pointer ">Share</label>
-              </a>
-            </div>
+                <button @click="isOpen2=!isOpen2" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
+                  <div class="w-full">
+                      <div v-if="isOpen2" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                          <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                          <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
+                      </div>
+                      </div>
+              </div>
+          </div>
           </div>
           <!--END OF ACCPETING REQUEST CODE-->
 
@@ -600,28 +620,37 @@
           <div class="flex justify-center w-full px-5 py-4 pb-5 font-bold tracking-wide bg-white rounded-b-lg">
             <hr>
             <!--SEND A REQUEST/OFFER-->
-            <a href="#" class="font-bold focus:text-gray-600">
+            <div class="font-bold focus:text-gray-600">
               <span class="pr-2 material-icons md-24 ">
               send
               </span>
               <label class="inline-block text-base align-top cursor-pointer ">Send Offer</label>
-            </a>
+            </div>
 
             <!--CHAT-->
-            <a href="#" class="focus:text-gray-600">
+            <div class="font-bold focus:text-gray-600 text-balticsea">
               <span class="pl-24 pr-2 material-icons md-24">
               forum
               </span>
-              <label class="align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</label>
-            </a>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+            </div>
+
 
             <!--SHARE-->
-            <a href="#" class="focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <label class="align-top cursor-pointer mmd:text-base mmd:inline-block">Share</label>
-            </a>
+           <div class="font-bold focus:text-gray-600">
+                <span class="pl-24 pr-2 material-icons md-24">
+                    share
+                </span>
+                <button @click="isOpen3=!isOpen3" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
+                  <div class="w-full">
+                      <div v-if="isOpen3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                          <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                          <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
+                      </div>
+                      </div>
+              </div>
           </div>
         </div>
         <!--END-->
@@ -732,28 +761,37 @@
           <div class="flex justify-center w-full px-5 py-4 mb-10 font-bold tracking-wide bg-white rounded-b-lg">
             
             <!--SEND A REQUEST/OFFER-->
-            <a href="#" class=" focus:text-gray-600">
+            <div class=" focus:text-gray-600">
               <span class="pr-2 material-icons md-24 ">
                 send
                 </span>
               <label class="inline-block text-base font-bold align-top cursor-pointer">Send Offer</label>
-            </a>
+            </div>
 
             <!--CHAT-->
-            <a href="#" class="font-bold focus:text-gray-600 text-balticsea">
+            <div class="font-bold focus:text-gray-600 text-balticsea">
               <span class="pl-24 pr-2 material-icons md-24">
               forum
               </span>
-              <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</label>
-            </a>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+            </div>
+
 
             <!--SHARE-->
-            <a href="#" class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <label class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</label>
-            </a>
+            <div class="font-bold focus:text-gray-600">
+                <span class="pl-24 pr-2 material-icons md-24">
+                    share
+                </span>
+                <button @click="isOpen4=!isOpen4" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
+                  <div class="w-full">
+                      <div v-if="isOpen4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                          <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                          <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
+                      </div>
+                      </div>
+              </div>
           </div>
         </div>
         <!--END OF 'CANCELLED' CODE-->
@@ -1014,6 +1052,7 @@ import Navbar from './Navbar'
 import PostModal from "./PostModal"
 import editShopListModal from "./editShopListModal"
 
+
  export default {
     data() {
     return {
@@ -1029,7 +1068,12 @@ import editShopListModal from "./editShopListModal"
       editVisible: false,
       editVisible1: false,
       filter: false,
-      filter2: false
+      filter2: false,
+      isOpen:false,
+      isOpen1:false,
+      isOpen2:false,
+      isOpen3:false,
+      isOpen4:false
     }
   },
   components: {
