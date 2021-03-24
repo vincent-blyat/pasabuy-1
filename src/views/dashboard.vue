@@ -1,26 +1,27 @@
 <template class="font-nunito">
 <Navbar/>
-    
    <!--START OF 'POST OFFER OR REQUEST' CODE-->
-      <div class="flex flex-wrap pt-12 overflow-hidden ssm:pt-8">
-    <div class="w-3/5 overflow-hidden">
-      <div class="flex flex-wrap float-right w-3/4 px-0 pt-12 rounded-lg">
-         <div class="flex items-center w-full px-8 py-2 pl-3 bg-white rounded-xl">
+      <div class="flex flex-row vs:flex-col pt-12 overflow-hidden ssm:pt-8">
+      <div class="w-4/5 space-y-5 vs:w-full">
+      <div class="flex flex-col  vs:px-2  float-right mt-2 ">
+            <div class="flex shadow-md px-10 ml-44 mr-56 items-center shadow-mds vs:ml-0 vs:mr-0 mt-5 vs:px-6 vs:w-full">
             <button class="w-12 h-12 rounded-full border-1">
-              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <img class="w-12 h-12 vs:w-16 vs:16 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
             <div class="justify-center pl-3 "> 
               <!--modal-->
-              <PostModal v-if="postModalVisible" @closeModal="listener"/>
-                <button  @click="togglePostModal" class="float-right px-3 py-2 my-5 text-base text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full appearance-none h-14 w-98 focus:outline-none focus:shadow-outline-blue focus:border-blue-300">Post a shopping offer or an order request
-              </button>
+              <PostModal v-if="postModalVisible" @closeModal="listener" />
+              <input type="button"  @click="togglePostModal" value="Post a shopping offer or an order request" class=" cursor-pointer  px-3 py-2 my-5 text-base text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full appearance-none h-14 w-96  focus:outline-none focus:shadow-outline-blue focus:border-blue-300"/>
+              
             </div>
-          </div>
+            </div>
         </div>
+
           <!--START OF 'FILTER' CODE-->
-          <div class="flex flex-wrap hidden w-3/4 px-0 pt-3 xl:float-right xl:block">
-            <div class="w-full text-sm font-normal rounded-lg ">
-              <button type="button" class="inline-flex justify-around px-3 py-2 text-sm font-extrabold text-black bg-white border border-gray-300 rounded-full shadow-sm w-44 align-botto hover:bg-gray-50 focus:outline-none" id="options-menu"  @click="filter =! filter">
+          <div class="flex flex-col vs:px-2  justify-center float-right mt-2 w-full rounded-lg vs:w-full">
+            <div class="">
+            <div class="flex ml-44 mr-56 items-center vs:ml-0 vs:mr-0  ">
+              <button type="button" class="inline-flex justify-around    py-2 text-sm  text-black bg-white border border-gray-300 rounded-full shadow-sm w-44 align-botto hover:bg-gray-50 focus:outline-none" id="options-menu"  @click="filter =! filter">
                <span class="pr-1 align-bottom material-icons">
                   view_stream
                 </span>
@@ -31,10 +32,12 @@
               </button>
 
               <!---------OPTIONS----------->
-              <div class="absolute w-56 mt-2 font-bold origin-top-right bg-white rounded-md shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
+              <div class="absolute mt-44   w-56 origin-top-right bg-white rounded-md shadow-lg focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
                 <div class="py-1" role="none" v-if="filter">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Shopping Offer</a>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Order Requests</a>
+                  
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Nearby</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
@@ -50,26 +53,25 @@
               </button>
 
                <!---------OPTIONS----------->
-              <div class="absolute w-56 mt-2 font-bold origin-top-right bg-white rounded-md shadow-lg left-96.7 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
+              <div class="absolute w-60 ml-52 mt-24 font-bold origin-top-right bg-white rounded-md shadow-lg left-96.7 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Nearby</a>
                 </div>
               </div>
+              </div>
               <!---------END OF OPTIONS---------->
-
-                <label for="" class="inline-flex pt-2.5 ml-10 text-red-700 align-top md-18 text-base">
+                <label for="" class="flex justify-start vs:ml-0 ml-48 pt-2.5 text-red-700 align-top md-18 text-base">
                   <span class="material-icons">
                   place
                 </span> Banquerohan, Legazpi</label>
-              
             </div>
           </div>
           
           <!--END-->
 
           <!--START OF 'NO LONGER ACCEPTING OFFERS' POST-->
-          <div class="flex flex-wrap float-right w-3/4 pt-3 ">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
+          <div class="flex flex-wrap float-right shadow-lg py-5 w-4/5 pt-3 justify-center vs:w-full">
+            <div class="flex items-center w-full  bg-white shadow-md py-4 rounded-t-lg px-7 vs:px-2">
               <button class="top-0 left-0 rounded-full mmd:w-12 mmd:h-12 border-1">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
@@ -99,9 +101,9 @@
               </div>
 
             <!--NO LONGER ACCEPTING REQUESTS TEXT-->
-            <div class="flex items-center w-full bg-white px-7">
+            <div class="flex items-center w-full bg-white px-7 vs:px-2">
               <div class="p-1 px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
-                <span class="inline-block align-middle material-icons">
+                <span class=" material-icons">
                   remove_circle_outline
                   </span>
                   <label class="pl-1 align-bottom">No longer Accepting Requests</label> 
@@ -109,18 +111,18 @@
             </div>
 
             <!--DETAILS-->
-            <div class="flex w-full p-3 bg-white px-7 gap-y-4">
-              <div class="flex flex-wrap w-full overflow-hidden">
+            <div class="flex w-full py-3 bg-white px-7 vs:px-2  gap-y-4">
+              <div class="px-2 grid grid-cols-2 vs:block vs:space-y-2 w-full overflow-hidden">
                 <!--AREA-->
-                <div class="w-2/4 overflow-hidden">
+                <div class="w-full items-center  ">
                   <span class="items-center text-red-700 material-icons">
                     delivery_dining
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
+                  <label class="  text-sm vs:w-full font-normal text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
                 </div>
                 
                 <!--SHOPPING LOCATION-->
-                <div class="w-1/2 pl-3 overflow-hidden">
+                <div class="w-full  overflow-hidden">
                   <span class="text-red-700 material-icons ssm:pl-0">
                     shopping_cart
                     </span>
@@ -128,7 +130,7 @@
                 </div>
               
                 <!--TIME-->
-                <div class="w-1/2 overflow-hidden">
+                <div class="w-full overflow-hidden">
                   <span class="text-red-700 material-icons ">
                     watch_later  
                   </span>
@@ -136,15 +138,15 @@
                 </div>
               
                 <!--TRANSPO-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons">
+                <div class="w-full overflow-hidden">
+                  <span class=" text-red-700 material-icons">
                     directions_car_filled
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Car</label>
                 </div>
               
                 <!--SIZES OF BAGS-->
-                <div class="w-1/2 overflow-hidden">
+                <div class="w-full overflow-hidden">
                   <span class="text-red-700 material-icons">
                     shopping_bag
                     </span>
@@ -152,8 +154,8 @@
                 </div>
               
                 <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons">
+                <div class="w-full overflow-hidden">
+                  <span class=" text-red-700 material-icons">
                     payments
                     </span>
                     <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
@@ -168,7 +170,7 @@
               </div>
             </div>
 
-             <!--SEND, CHAT, SHARE-->
+              <!--SEND, CHAT, SHARE-->
           <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg">
             
             <!--SEND A REQUEST/OFFER-->
@@ -207,8 +209,8 @@
           <!--END OF NO LONGER ACCPETING REQUEST CODE-->
 
           <!--START OF ACCEPTING OFFERS CODE-->
-         <div class="flex flex-wrap float-right w-3/4 pt-3">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
+         <div class="flex flex-wrap float-right shadow-lg py-5 w-4/5 pt-3 justify-center vs:w-full">
+            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:px-2">
               <button class="rounded-full mmd:w-12 mmd:h-12 border-1">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
@@ -237,10 +239,10 @@
                    </span>
                  </p>
               </div>  
-            </div>
+             </div>
 
             <!--OFFER STATUS-->
-            <div class="flex items-center w-full pb-1 bg-white px-7">
+            <div class="flex items-center w-full pb-1 bg-white px-7 vs:px-2">
               <div class="p-1 px-2 text-sm font-bold bg-gray-200 rounded-full text-waterloo">
                 <span class="inline-block align-middle material-icons">
                   check_circle_outline
@@ -250,38 +252,38 @@
             </div>
 
             <!--DETAILS-->
-            <div class="flex items-center w-full p-3 bg-white px-7 gap-y-4">
-              <div class="flex flex-wrap w-full overflow-hidden">
+            <div class="flex items-center w-full  bg-white px-7 gap-y-4 vs:px-3">
+              <div class=" vs:px-2 grid grid-cols-2 gap-4 space-y-2 w-full vs:block  overflow-hidden">
                 <!--AREA-->
-                <div class="w-2/4 overflow-hidden">
+                <div class=" overflow-hidden">
                   <span class="text-red-700 material-icons">
                     place
                     </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
+                  <label class=" text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
                 </div>
                 
                 <!--SHOPPING LOCATION-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+                <div class=" overflow-hidden">
+                  <span class=" text-red-700 material-icons mmd:pl-3">
                     shopping_cart
                     </span>
-                    <label class="items-center inline-block pt-1 pl-1 text-sm text-gray-800 align-top">SM City Legazpi</label>
+                    <label class="text-sm text-gray-800 align-top">SM City Legazpi</label>
                 </div>
               
                 <!--TIME-->
-                <div class="w-1/2 overflow-hidden">
+                <div class=" overflow-hidden">
                   <span class="text-red-700 material-icons">
                     watch_later  
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
+                  <label class=" text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
                 </div>
               
                 <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+                <div class=" overflow-hidden">
+                  <span class=" text-red-700 material-icons mmd:pl-3">
                     payments
                     </span>
-                    <label class="items-center inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
+                    <label class=" text-sm text-gray-800 align-top">Payment First</label>
                 </div>
               </div>
             </div>
@@ -360,8 +362,8 @@
           <!--END-->
 
           <!--START OF ACCEPTING REQUESTS-->
-          <div class="flex flex-wrap float-right w-3/4 pt-3">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7">
+          <div class="flex flex-wrap float-right shadow-lg py-5 w-4/5 pt-3 justify-center vs:w-full">
+            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:px-3">
               <button class="rounded-full left-2 mmd:w-12 mmd:h-12border-1">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
@@ -375,14 +377,14 @@
                    <button @click="edit3=!edit3" class="absolute right-100">
                     <img class="w-6 h-auto" src="img/3dot.svg"/>
                   </button>
-                  <div class="w-full">
+                  <div class="w-full right-0">
                     <div v-if="edit3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
                       <router-link to="#"  class="flex flex-row gap-x-2 ">
                         <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
                       <router-link to="#" class="flex flex-row gap-x-2"> 
                         <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
                     </div>
-                    </div>
+                   </div>
                 </h5>
                 <p class="text-sm font-normal text-gray-400">
                   <span>
@@ -392,7 +394,7 @@
               </div>  
             </div>
             <!--OFFER STATUS-->
-            <div class="flex items-center w-full bg-white px-7">
+            <div class="flex items-center w-full bg-white px-7 vs:px-3">
               <div class="p-1 px-2 text-sm font-bold bg-gray-200 rounded-full text-waterloo">
                 <span class="inline-block align-middle material-icons">
                   check_circle_outline
@@ -401,53 +403,53 @@
               </div>
             </div>
             <!--DETAILS-->
-            <div class="flex w-full p-3 bg-white px-7 gap-y-4">
-              <div class="flex flex-wrap w-full overflow-hidden">
-                <div class="w-2/4 overflow-hidden">
+            <div class="flex w-full  bg-white  mt-4 px-7 gap-y-4">
+              <div class="grid grid-cols-2 vs:px-2 vs:space-y-4 vs:block w-full overflow-hidden">
+                <div class="flex items-center space-x-2">
                   <span class="text-red-700 material-icons">
                     delivery_dining
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
+                  <label class=" text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
                 </div>
                 
                 <!--AREA-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons">
+                <div class="overflow-hidden">
+                  <span class=" text-red-700 material-icons">
                     shopping_cart
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
+                    <label class=" text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
                 </div>
               
                 <!--TIME-->
-                <div class="w-1/2 overflow-hidden">
+                <div class=" overflow-hidden">
                   <span class="text-red-700 material-icons">
                     watch_later  
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
+                  <label class=" text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
                 </div>
               
                 <!--TRANSPO-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons ssm:pl-0 mmd:pl-3">
+                <div class=" overflow-hidden">
+                  <span class=" text-red-700 material-icons">
                     directions_car_filled
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
+                    <label class="text-sm text-gray-800 align-top">Car</label>
                 </div>
               
                 <!--SIZES OF BAGS-->
-                <div class="w-1/2 overflow-hidden">
+                <div class="overflow-hidden">
                   <span class="text-red-700 material-icons">
                     shopping_bag
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 5 large bags</label>
+                    <label class=" text-sm text-gray-800 align-top">Up to 5 large bags</label>
                 </div>
               
                 <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden">
-                  <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+                <div class="overflow-hidden">
+                  <span class=" text-red-700 material-icons ">
                     payments
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
+                    <label class=" text-sm text-gray-800 align-top">Pay upon delivery</label>
                 </div>
               </div>
             </div>
@@ -459,7 +461,7 @@
               </div>
             </div>
 
-            <!--SEND, CHAT, SHARE-->
+             <!--SEND, CHAT, SHARE-->
             <div class="flex justify-center w-full px-5 py-4 font-bold tracking-wide bg-white rounded-b-lg">
               
               <!--SEND A REQUEST/OFFER-->
@@ -498,9 +500,10 @@
           </div>
           <!--END OF ACCPETING REQUEST CODE-->
 
+
          <!--START OF 'ORDER TAKEN' CODE-->
-         <div class="flex flex-wrap float-right w-3/4 pt-3">
-          <div class="flex items-center w-full p-5 px-6 bg-white rounded-t-lg">
+         <div class="flex flex-wrap float-right shadow-lg py-5 w-4/5 pt-3 justify-center vs:w-full">
+          <div class="flex items-center w-full px-7 vs:px-3 bg-white rounded-t-lg">
             <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
               <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
@@ -531,7 +534,7 @@
             </div>  
           </div>
           <!--OFFER STATUS-->
-          <div class="flex w-full pb-1 bg-white px-7">
+          <div class="flex w-full pb-1 bg-white px-7 vs:px-3 vs:mt-2">
             <div class="p-1 px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
               <span class="inline-block align-middle material-icons">
                 remove_circle_outline
@@ -543,39 +546,39 @@
             </div>
           </div>
           <!--DETAILS-->
-          <div class="flex w-full p-3 bg-white px-7 gap-y-4">
-            <div class="flex flex-wrap w-full overflow-hidden">
+          <div class="flex w-full p-3   bg-white px-7 gap-y-4">
+            <div class="grid grid-cols-2 vs:px-2 vs:space-y-4 vs:block w-full overflow-hidden">
 
               <!--AREA-->
-              <div class="w-2/4 overflow-hidden">
+              <div class="w">
                 <span class="text-red-700 material-icons">
                   place
                   </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
+                <label class=" text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
               </div>
               
               <!--SHOPPING LOCATION-->
-              <div class="w-1/2 overflow-hidden">
-                <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+              <div class="">
+                <span class=" text-red-700 material-icons ">
                   shopping_cart
                   </span>
-                  <label class="pt-1 pl-1 text-sm text-gray-800 align-top">SM City Legazpi</label>
+                  <label class="text-sm text-gray-800 align-top">SM City Legazpi</label>
               </div>
             
               <!--TIME-->
-              <div class="w-1/2 overflow-hidden">
+              <div class="">
                 <span class="text-red-700 material-icons">
                   watch_later  
                 </span>
-                <label class="pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
+                <label class=" text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
               </div>
             
               <!--MODE OF PAYMENT-->
-              <div class="w-1/2 overflow-hidden">
-                <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+              <div class=" overflow-hidden">
+                <span class=" text-red-700 material-icons ">
                   payments
                   </span>
-                  <label class="pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
+                  <label class=" text-sm text-gray-800 align-top">Payment First</label>
               </div>
             </div>
           </div>
@@ -656,8 +659,8 @@
         <!--END-->
 
         <!--START OF 'CANCELLED' CODE -->
-        <div class="flex flex-wrap float-right w-3/4 pt-3">
-          <div class="flex w-full p-5 bg-white rounded-t-lg px-7">
+        <div class="flex flex-wrap float-right shadow-lg py-5 w-4/5 pt-3 justify-center vs:w-full">
+          <div class="flex w-full p-5 bg-white rounded-t-lg px-7 vs:px-2">
             <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
               <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </button>
@@ -688,7 +691,7 @@
             </div>  
           </div>
           <!--OFFER STATUS-->
-          <div class="flex w-full bg-white px-7">
+          <div class="flex w-full bg-white px-7 vs:px-3">
             <div class="px-3 py-1 text-sm font-bold bg-gray-200 rounded-full text-warning ">
               <span class="inline-block align-top material-icons md-24">
                 radio_button_unchecked
@@ -697,55 +700,55 @@
             </div>
           </div>
           <!--DETAILS-->
-          <div class="flex w-full p-3 bg-white px-7 gap-y-4">
-            <div class="flex flex-wrap w-full overflow-hidden">
+          <div class="flex w-full mt-4   bg-white px-7 gap-y-4">
+            <div class="grid grid-cols-2 vs:px-2 space-y-4 vs:block w-full overflow-hidden">
 
               <!--AREA-->
-              <div class="w-2/4 overflow-hidden">
+              <div class="">
                 <span class="text-red-700 material-icons">
                   delivery_dining
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
+                <label class="text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
               </div>
               
               <!--SHOPPING LOCATION-->
-              <div class="w-1/2 overflow-hidden">
-                <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+              <div class="">
+                <span class=" text-red-700 material-icons ">
                   shopping_cart
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
+                  <label class=" text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
               </div>
             
               <!--TIME-->
-              <div class="w-1/2 overflow-hidden">
+              <div class="overflow-hidden">
                 <span class="text-red-700 material-icons">
                   watch_later  
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
+                <label class=" text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
               </div>
             
               <!--TRANSPO-->
-              <div class="w-1/2 overflow-hidden">
-                <span class="pl-3 text-red-700 material-icons mmd:pl-3">
+              <div class="">
+                <span class=" text-red-700 material-icons">
                   directions_car_filled
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
+                  <label class=" text-sm text-gray-800 align-top">Car</label>
               </div>
             
               <!--SIZES OF BAGS-->
-              <div class="w-1/2 overflow-hidden">
+              <div class="">
                 <span class="text-red-700 material-icons">
                   shopping_bag
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 5 large bags</label>
+                  <label class="text-sm text-gray-800 align-top">Up to 5 large bags</label>
               </div>
             
               <!--MODE OF PAYMENT-->
-              <div class="w-1/2 overflow-hidden ">
-                <span class="pl-3 text-red-700 material-icons">
+              <div class=" ">
+                <span class=" text-red-700 material-icons">
                   payments
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
+                  <label class="text-sm text-gray-800 align-top">Pay upon delivery</label>
               </div>
             </div>
           </div>
@@ -758,47 +761,39 @@
           </div>
 
           <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full px-5 py-4 mb-10 font-bold tracking-wide bg-white rounded-b-lg">
+         <div class="  flex justify-center gap-x-28 vs:justify-between vs:px-10 vs:gap-x-0 w-full">
             
             <!--SEND A REQUEST/OFFER-->
-            <div class=" focus:text-gray-600">
-              <span class="pr-2 material-icons md-24 ">
+            <span class=" flex items-center gap-x-2">
+              <span class=" material-icons  ">
                 send
                 </span>
-              <label class="inline-block text-base font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
+              <label class="font-bold  cursor-pointer">Send Offer</label>
+            </span>
 
             <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 material-icons md-24">
+            <span class=" flex items-center gap-x-2">
+              <span class=" material-icons">
               forum
               </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
-            </div>
-
+              <label class="font-bold">Chat</label>
+            </span>
 
             <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-                <span class="pl-24 pr-2 material-icons md-24">
-                    share
-                </span>
-                <button @click="isOpen4=!isOpen4" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
-                  <div class="w-full">
-                      <div v-if="isOpen4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
-                          <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                        <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
-                          <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                      </div>
-                      </div>
-              </div>
+            <span class=" flex items-center gap-x-2">
+              <span class=" material-icons ">
+                  share
+              </span>
+              <label class="font-bold">Share</label>
+            </span>
+            
           </div>
         </div>
         <!--END OF 'CANCELLED' CODE-->
       </div>
         
         <!--START OF SHOPPING LISTS-->
-        <div class="w-2/5 pt-12 overflow-hidden pl-7">
+        <div class="w-2/5 pt-12 overflow-hidden pl-7 vs:hidden">
           
           <!-----------ACTIVE ORDERS---------------------->
             <div class="mb-3 bg-white w-72 rounded-xl">
@@ -1103,3 +1098,8 @@ import editShopListModal from "./editShopListModal"
   }
 }
 </script>
+<style  scoped>
+body{
+  
+}
+</style>
