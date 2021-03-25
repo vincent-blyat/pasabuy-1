@@ -35,7 +35,10 @@ module.exports = {
 
       },
         spacing: {
+          355: '8.9rem',
+
           90: '24rem',
+          96: '24.9rem',
           96.5: '26rem',
           96.7: '28rem',
           97: '30rem',
@@ -45,6 +48,9 @@ module.exports = {
           99: '35rem',
           100:'40rem',
           500: '500rem',
+          500: '500rem',
+          17: '4.3rem',
+          50: '12.5rem'
           
       },
       fontFamily: {
