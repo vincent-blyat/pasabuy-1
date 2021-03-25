@@ -1,6 +1,5 @@
 <template>
     <!-- Post Modal-->
-    <div v-if = "isVisible">
     <div v-on:click.self="close" class="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center">
      <div class="inline-flex flex-col space-y-2 bg-white shadow rounded-xl h-auto" style="width: 550px;">
         <div class="flex flex-col  mt-4">
@@ -28,7 +27,6 @@
             <component :is="component"/>   
       </div>
      </div>
-    </div>
     </div>
     <!--end of Post Modal-->
 </template>

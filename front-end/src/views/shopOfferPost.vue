@@ -7,7 +7,7 @@
          </div>
          <!--end-->
 
-         <!--Accepting Request Button-->
+         <!--Accepting Request Button
          <div class="inline-flex flex-col items-start justify-start pl-5 mt-2">
             <div class="inline-flex space-x-2 items-center justify-start px-2 py-1 border rounded-full border-gray-500">
                 <img class="w-6 h-full rounded-full" src="img/checkcircle.svg"/>
@@ -15,53 +15,65 @@
                 <button @click="isOpen=!isOpen" >
                     <img class="w-6 h-full rounded-full" src="img/arrowdown (1).svg"/>
                 </button>
-                <!---
+                
                 <div class="w-full">
                       <div v-if="isOpen" class="shadow-xl fixed bg-white rounded-lg py-2 pl-2 pr-4 pt-2 ">
                         <router-link to="#"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">mode</span>Accepting Request</router-link>
                         <router-link to="#" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">delete</span>Accepting Offers</router-link>
                     </div>
                     </div>
-                    --->
+                    
             </div>
-        </div>
+        </div>-->
         <!--end-->
 
         <!--Delivery information list-->
          <div class="flex flex-col mt-4 justify-center items-center">
              <div class="flex flex-row space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/delivery.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Delivery Area">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              delivery_dining  
+              </span>
+                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500 w-44" placeholder="Delivery Area">
                 </div>
                  
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/shopping_cart.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 pl-4 items-center py-2.5 pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Shopping Place">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              shopping_cart  
+              </span>
+                    <input class="w-44 focus:outline-none flex w-52 h-11 pl-4 items-center py-2.5 pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Shopping Place">
                  </div>
              </div>
 
              <div class="flex flex-row pt-3 space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/alarm.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              alarm  
+              </span>
+                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule">
                 </div>
                  
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/car.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Transport Mode">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              directions_car 
+              </span>
+                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Transport Mode">
                  </div>
              </div>
 
              <div class="flex flex-row pt-3 space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/shopping_bag.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Capacity">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              shopping_bag  
+              </span>
+                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Capacity">
                 </div>
                  
                 <div class="flex space-x-2">
-                    <img class="w-8 h-8 rounded-lg mt-1.5" src="img/payments.svg"/>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Payment Method">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              payments
+              </span>
+                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Payment Method">
                  </div>
              </div>
             </div>

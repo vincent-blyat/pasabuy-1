@@ -1,14 +1,15 @@
 <template>
+<div class="bg-gray-100 pt-6">
   <!--profile review-->
  <div class="h-screen">
   <div class="flex items-center justify-center space-x-10">
 
   <!--Rating-->
     <div class="flex flex-col h-screen">
-    <div class="flex mt-10">
+    <div class="flex ">
       <div class="flex flex-col space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-auto" style="width: 304px;">     
         <div class="inline-flex mb-3">
-          <p class="font-bold leading-10 text-gray-900 text-4xl">4.9 / 5</p>
+          <p class="font-bold leading-10 text-gray-900 text-4xl">{{rating}} / {{max_rate}}</p>
         </div>
         <div class="inline-flex items-start space-x-1 justify-start px-4 py-2 bg-gray-100 rounded-full">
           <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
@@ -18,7 +19,7 @@
           <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
         </div>
         <div class="flex py-3">
-          <p class="text-xs leading-none text-gray-900">based on 20 Pasabuyers</p>
+          <p class="text-xs leading-none text-gray-900">based on {{pasabuyers}} Pasabuyers</p>
         </div>
         <div class="flex flex-col ">
           <div class="inline-flex flex-row space-x-2">
@@ -81,7 +82,7 @@
   <div class="flex flex-col h-screen">
 
     <!--post 1-->
-    <div class="flex py-10">
+    <div class="flex ">
       <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
         <div class="flex flex-col">
           <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
@@ -89,7 +90,7 @@
               <img class="w-14 h-14 rounded-full" src="img/asta.jpeg"/>
               <div class="flex flex-col items-start px-4">
                 <div class="space-x-8">
-                  <span class="text-base font-bold leading-none text-gray-900">Asta Staria</span>
+                  <span class="text-base font-bold leading-none text-gray-900">{{users.user1}}</span>
                   <!--check icon here-->
                 </div>
                 <div class="flex-row flex py-2 space-x-4">
@@ -101,14 +102,14 @@
                     <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
                    </div>
                    <div class="inline-flex">
-                    <span class="text-sm mt-0.5leading-none text-gray-500">4 hours ago</span>
+                    <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date1}}</span>
                    </div>
                 </div>
               </div>
             </div>
         </div>
         <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
-          <p class="text-sm leading-normal text-gray-900">My items arrived complete and in safe condition. The delivery is also fast, got all the things I needed just before our party starts. Definitely recommended!</p>
+          <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
       </div>
       </div>    
     </div>
@@ -116,7 +117,7 @@
   <!--end-->
 
   <!--post 2-->
-  <div class="flex">
+  <div class="flex py-6">
     <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
       <div class="flex flex-col">
         <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
@@ -124,7 +125,7 @@
             <img class="w-14 h-14 rounded-full" src="img/julius.png"/>
             <div class="flex flex-col items-start px-4">
               <div class="space-x-8">
-                <span class="text-base font-bold leading-none text-gray-900">Julius Novachrono</span>
+                <span class="text-base font-bold leading-none text-gray-900">{{users.user2}}</span>
                 <!--check icon here-->
               </div>
               <div class="flex-row flex py-2 space-x-4">
@@ -136,14 +137,14 @@
                     <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
                    </div>
                    <div class="inline-flex">
-                    <span class="text-sm mt-0.5leading-none text-gray-500">February 16, 2021</span>
+                    <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date2}}</span>
                    </div>
                 </div>
             </div>
           </div>
       </div>
       <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
-        <p class="text-sm leading-normal text-gray-900">My items arrived complete and in safe condition. The delivery is also fast, got all the things I needed just before our party starts. Definitely recommended!</p>
+        <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
     </div>
     </div>    
   </div>
@@ -151,7 +152,7 @@
 <!--end-->
 
 <!--post 3-->
-<div class="flex py-10">
+<div class="flex">
   <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
     <div class="flex flex-col">
       <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
@@ -159,7 +160,7 @@
           <img class="w-14 h-14 rounded-full" src="img/baha.jpg"/>
           <div class="flex flex-col items-start px-4">
             <div class="space-x-8">
-              <span class="text-base font-bold leading-none text-gray-900">Baha-haha-ha</span>
+              <span class="text-base font-bold leading-none text-gray-900">{{users.user3}}</span>
               <!--check icon here-->
             </div>
            <div class="flex-row flex py-2 space-x-4">
@@ -171,14 +172,14 @@
                 <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
               </div>
               <div class="inline-flex">
-                <span class="text-sm mt-0.5leading-none text-gray-500">Februray 12, 2021</span>
+                <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date3}}</span>
               </div>
             </div>
           </div>
         </div>
     </div>
     <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
-      <p class="text-sm leading-normal text-gray-900">My items arrived complete and in safe condition. The delivery is also fast, got all the things I needed just before our party starts. Definitely recommended!</p>
+      <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
   </div>
   </div>    
 </div>
@@ -190,10 +191,31 @@
 </div>
 </div>
 <!--end of reviews-->
+</div>
 </template>
 
 <script>
 export default {
-    
+  data(){
+    return{
+      pasabuyers: '20',
+      rating: '4.9',
+      max_rate: '5',
+      datePosted:{
+        date1: '4 hours ago',
+        date2: 'February 16,2021',
+        date3: 'February 12, 2021'
+      },
+      comments:{
+        comment1: 'My items arrived complete and in safe condition. The delivery is also fast, got all the things I needed just before our party starts. Definitely recommended!'
+      },
+      users:{
+        user1: 'Asta Staria',
+        user2: 'Julius Novachrono',
+        user3: 'Baha-haha-haha'
+      },
+
+    }
+  }
 }
 </script>
