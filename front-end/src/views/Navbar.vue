@@ -18,7 +18,7 @@
        <span class="material-icons">
         home  
       </span> 
-      <span class="text text-gray-500">Home</span>
+      <p class="text text-gray-500">Home</p>
       </div>
       </router-link>
      <router-link to="/messages"> <div class="flex gap-x-4 py-4">
@@ -121,8 +121,7 @@ export default {
   color:red;
   border-bottom: 5px solid red;
 }
-.router-link-active{
+.router-link-active p{
   color:red;
-  border-bottom: 5px solid red;
 }
 </style>
