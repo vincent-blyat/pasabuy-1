@@ -7,8 +7,8 @@
        <button class="material-icons hidden ml-4 text-white vs:block" @click="isOpen=!isOpen"> menu</button>
       <p class="uppercase font-bold hidden vs:block text-white h-full">{{currentRoute}}</p>
       <div class="flex items-center left-0">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 vs:hidden"/>
-        <h1 class="text-3xl font-bold  vs:text-white vs:hidden text-red-700 md:hidden">pasaBUY</h1>
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 vs:hidden">
+        <h1 class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway vs:text-white vs:hidden text-red-700 md:hidden">pasaBUY</h1>
       </div>
        </div>
        <img v-if="currentRoute=='' " src="/img/mobile_logo.png" class="w-16 h-16 hidden vs:block"/>
