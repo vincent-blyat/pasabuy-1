@@ -1,95 +1,53 @@
-<template class="bg-gray-00 font-nunito">
-<!--Dektop Version-->
-<div class="desktopVersion">
-  <div id="login" class="login items-center justify-center bg-gray-100 md:min-h-screen sm:max-h-screen sm:flex md:flex">
-      <div class="w-4/12 my-12 overflow-hidden font-bold text-center bg-white shadow-md flex-grow-1 md:w-4/12 rounded-xl">
-            <div class="px-10 py-16">
-              <h1 class="space-x-1 space-y-1 text-2xl">Add your shipping address</h1>
-              <form action="#" class="space-y-3">
-                <div class="w-full ">
-                    <input aria-label="House Number" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
-                </div>
-                <div class="w-full">
-                    <select aria-label="Province" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" value="" >
-                      <option>Province</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                  <div class="w-full">
-                    <select aria-label="Barangay" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Barangay" value="" >
-                      <option>Barangay</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                  <div class="w-full">
-                    <select aria-label="City" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="City/Municipality" value="" >
-                      <option>City/Municipality</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                <div class="lg:flex mb-2 -mx-1">
-                <div class="text-grey-dark mt-6 w-1/2 px-1 text-left">
-                        <router-link :to="{name: 'signup'}" class="no-underline border-b border-blue text-blue font-bold" >Back</router-link>
-                </div>
-                <div class="flex justify-end w-1/2 px-1">
-                <button class=" h-10 px-5 m-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-800 ">
-                    <router-link :to="{name: 'uploadid'}" >NEXT</router-link></button>
-                </div>
-                </div>
-            </form>
-          </div>
-        </div>
-      </div>
-</div>
-<!--Mobile Version-->
-    <div class="mobileVersion">
-      <div id="login" class="login items-center justify-center bg-gray-100  sm:max-h-screen sm:flex ">
-      <div class=" my-12 overflow-hidden font-bold text-center bg-white ">
-            <div class="px-10 py-16">
-              <h1 class="space-x-1 space-y-1 text-2xl">Add your shipping address</h1>
-              <form action="#" class="space-y-3">
-                <div class="w-full ">
-                    <input aria-label="House Number" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
-                </div>
-                <div class="w-full">
-                    <select aria-label="Province" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" value="" >
-                      <option>Province</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                  <div class="w-full">
-                    <select aria-label="Barangay" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Barangay" value="" >
-                      <option>Barangay</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                  <div class="w-full">
-                    <select aria-label="City" name="" type="text" required class="relative block w-full h-12 px-3 py-2 mt-4 mb-4 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="City/Municipality" value="" >
-                      <option>City/Municipality</option>
-                      <option>Albay</option>
-                      <option>Albay</option>
-                    </select>
-                  </div>
-                <div class="flex mb-2 -mx-1">
-                <div class="text-grey-dark mt-6 w-1/2 px-1 text-left">
-                        <router-link :to="{name: 'signup'}" class="no-underline border-b border-blue text-blue font-bold" >Back</router-link>
-                </div>
-                <div class="flex justify-end w-1/2 px-1">
-                <button class=" h-10 px-5 m-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-800 ">
-                    <router-link :to="{name: 'uploadid'}" >NEXT</router-link></button>
-                </div>
-                </div>
-            </form>
-          </div>
-        </div>
-      </div>
+<template class="bg-gray-bgcolor font-nunito">
 
+  <div class="absolute vs:left-5 left-12 top-3 bg-gray-bgcolor">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-16 h-16 "/>
+        <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
+            pasaBUY
+        </label>
     </div>
+    <div id="login" class="flex items-center justify-center pt-10 pb-10 bg-gray-bgcolor vs:pt-16">
+      <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
+        <div class="px-10 py-16">
+          <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
+            <form action="#" class="space-y-3">
+              <div class="w-full ">
+                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-8 mb-4 font-semibold placeholder-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:z-10 sm:text-sm" placeholder="House Number" value="" />
+              </div>
+              <div class="w-full">
+                <select aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" value="" >
+                  <option value="" disabled selected hidden>Province</option>
+                  <option class="text-black">Albay</option>
+                  <option class="text-black">Albay</option>
+                </select>
+              </div>
+              <div class="w-full">
+                <select aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Barangay" value="" >
+                  <option value="" disabled selected hidden>Barangay</option>
+                  <option class="text-black">Albay</option>
+                  <option class="text-black">Albay</option>
+                </select>
+              </div>
+              <div class="w-full">
+                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" placeholder="City/Municipality" value="" >
+                  <option value="" disabled selected hidden>City/Municipality</option>
+                  <option class="text-black">Albay</option>
+                  <option class="text-black">Albay</option>
+                </select>
+              </div>
+              <div class="flex mb-2 -mx-1">
+                <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
+                  <router-link to="/verifyemail" class="font-bold underline-none text-blue" >Back</router-link>
+                </div>
+                <div class="flex justify-end w-1/2 px-1 mt-3">
+                  <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
+                    <router-link to="/upload-id" >NEXT</router-link></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
 </template>
 
 
@@ -109,25 +67,6 @@
         background-color: rgba(185, 28, 28)
     
     }
-    /*minimized desktop version and mobile version
-    screen sizes lesser than 600px*/
-   
-    .desktopVersion{
-      display:none;
-      }
-    .mobileVersion{
-      display:inline;
-    }
-     
-    /*for screen sizes 600px++*/
-    @media only screen and (min-width: 700px) {
-      .desktopVersion{
-        display:inline;}
-      .mobileVersion{
-       display:none;
-    }
-    }
-
 
 #iCheck{
   font-size:16px;

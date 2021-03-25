@@ -1,7 +1,7 @@
 <template class=" bg-gray-bgcolor font-nunito">
 
     <div class="absolute vs:left-5 left-12 top-3 bg-gray-bgcolor">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-16 h-16 "/>
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
           <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
             pasaBUY
           </label>
@@ -25,7 +25,7 @@
                 </div>
                 <div class="flex justify-end w-1/2 px-1 mt-3">
                   <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
-                    <router-link to="/address" >NEXT</router-link></button>
+                    <router-link to="/address-book" >NEXT</router-link></button>
                 </div>
               </div>
             </form>

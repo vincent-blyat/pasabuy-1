@@ -48,7 +48,7 @@
                         </div>
                         <div class="flex justify-end w-1/2 px-1 mt-3 vs:absolute vs:pr-81 vs:mt-16 vs:w-full vs:pb-20">
                             <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none ">
-                            <router-link to="/verifymessage" >NEXT</router-link></button>
+                            <router-link to="/verification-message" >NEXT</router-link></button>
                     </div>
                 </div>
             </div>
