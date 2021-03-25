@@ -12,8 +12,11 @@ import deliver from '../views/deliver.vue'
 import orders from '../views/orders.vue'
 import messages from '../views/messaging.vue'
 import search from '../views/Search.vue'
-import forgotpassword from '../views/forgotpass.vue'
-import forgotPassVerify from '../views/forgotPassVerify.vue'
+
+// this is commented until missing vue file is added
+
+// import forgotpassword from '../views/forgotpass.vue'
+// import forgotPassVerify from '../views/forgotPassVerify.vue'
 
 
 const routes = [
@@ -95,18 +98,20 @@ const routes = [
     component: search
   },
 
-  {
-    path: '/forgot-password',
-    name: 'forgotpassword',
-    component: forgotpassword
-  },
+  // this is commented until missing vue file is added
+
+  // {
+  //   path: '/forgot-password',
+  //   name: 'forgotpassword',
+  //   component: forgotpassword
+  // },
 
   
-  {
-    path: '/forgot-password-verify',
-    name: 'forgotPassVerify',
-    component: forgotPassVerify
-  },
+  // {
+  //   path: '/forgot-password-verify',
+  //   name: 'forgotPassVerify',
+  //   component: forgotPassVerify
+  // },
 
 ]
 
