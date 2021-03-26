@@ -1,11 +1,10 @@
 <template>
 <div class="bg-gray-100 pt-6">
   <!--profile review-->
- <div class="h-screen">
-  <div class="flex items-center justify-center space-x-10">
+  <div class="flex items-center vs:flex-col justify-center space-x-10">
 
   <!--Rating-->
-    <div class="flex flex-col h-screen">
+    <div class="flex flex-col vs:h-auto h-screen">
     <div class="flex ">
       <div class="flex flex-col space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-auto" style="width: 304px;">     
         <div class="inline-flex mb-3">
@@ -79,11 +78,11 @@
 <!--end of rating code-->
 
 <!--user post comments about reviews-->
-  <div class="flex flex-col h-screen">
+  <div class="flex vs:justify-center vs:items-center flex-col vs:mt-6 h-screen vs:h-auto">
 
     <!--post 1-->
-    <div class="flex ">
-      <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
+    <div class="flex">
+      <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
         <div class="flex flex-col">
           <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
             <div class="flex">
@@ -108,7 +107,7 @@
               </div>
             </div>
         </div>
-        <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
+        <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
           <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
       </div>
       </div>    
@@ -118,7 +117,7 @@
 
   <!--post 2-->
   <div class="flex py-6">
-    <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
+    <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
       <div class="flex flex-col">
         <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
           <div class="flex">
@@ -143,7 +142,7 @@
             </div>
           </div>
       </div>
-      <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
+      <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
         <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
     </div>
     </div>    
@@ -152,8 +151,8 @@
 <!--end-->
 
 <!--post 3-->
-<div class="flex">
-  <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
+<div class="flex vs:pb-6">
+  <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
     <div class="flex flex-col">
       <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
         <div class="flex">
@@ -178,7 +177,7 @@
           </div>
         </div>
     </div>
-    <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3" style="width: 560px;">
+    <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
       <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
   </div>
   </div>    
@@ -191,7 +190,6 @@
 </div>
 </div>
 <!--end of reviews-->
-</div>
 </template>
 
 <script>

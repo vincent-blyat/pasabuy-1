@@ -1,8 +1,7 @@
 <template>
   <!--About-->
   <div class="bg-gray-100">
- <div class="h-screen">
-  <div class="flex items-center justify-center space-x-10">
+  <div class="flex items-center vs:flex-col justify-center space-x-10">
 
   <!--Section 2-->
     <div class="flex flex-col h-screen">
@@ -86,7 +85,7 @@
   <!--end-->
 
   <!--section 2.3-->
-  <div class="flex py-10">
+  <div class="flex py-6">
    <div class="flex flex-col space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-auto" style="width: 304px;">     
     <div class="flex-col">
       <div class="flex flex-col">
@@ -139,7 +138,7 @@
 <!--Section 1-->
 <div class="flex flex-col h-screen">
 <div class="flex py-6">
-  <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto" style="width: 608px;">     
+  <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
     <div class="flex flex-col">
 
       <!--Skills section-->
@@ -158,7 +157,12 @@
         <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
         <p class="text-sm leading-loose text-center text-gray-900">Painting</p>
         </div>
-        <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <div class="vs:hidden inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <p class="text-sm leading-loose text-center text-gray-900">Public speaking</p>
+        </div>
+        </div>
+        <div class=" hidden vs:inline-flex flex-row justify-start item-start pb-6 space-x-4">
+        <div class=" items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
         <p class="text-sm leading-loose text-center text-gray-900">Public speaking</p>
         </div>
         </div>
@@ -185,7 +189,7 @@
         <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
           <p class="text-sm leading-loose text-center text-gray-900">Coding</p>
         </div>
-        <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <div class="vs:hidden inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
           <p class="text-sm leading-loose text-center text-gray-900">Public speaking</p>
         </div>
         </div>
@@ -199,6 +203,11 @@
         </div>
         <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
         <p class="text-sm leading-loose text-center text-gray-900">Photography</p>
+        </div>
+        </div>
+        <div class=" hidden vs:inline-flex flex-row justify-start item-start pb-0 py-6 space-x-4">
+        <div class=" items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <p class="text-sm leading-loose text-center text-gray-900">Public speaking</p>
         </div>
         </div>
       </div>
@@ -221,7 +230,7 @@
         <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
           <p class="text-sm leading-loose text-center text-gray-900">Tiwi-Albay</p>
         </div>
-        <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <div class="vs:hidden inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
           <p class="text-sm leading-loose text-center text-gray-900">Joroan, Albay</p>
         </div>
         <div class="inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
@@ -240,6 +249,11 @@
         <p class="text-sm leading-loose text-center text-gray-900">Catanduanes</p>
         </div>
         </div>
+        <div class=" hidden vs:inline-flex flex-row justify-start item-start pb-0 py-6 space-x-4">
+        <div class=" items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
+        <p class="text-sm leading-loose text-center text-gray-900">Joroan, Albay</p>
+        </div>
+        </div>
       </div>
       <!--end-->
       </div>
@@ -247,7 +261,6 @@
 </div>
 </div>
 <!--Section 1 end-->
-</div>
 </div>
 </div>
 <!--About end-->
