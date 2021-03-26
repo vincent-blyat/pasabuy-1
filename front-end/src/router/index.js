@@ -62,7 +62,7 @@ const routes = [
 
   {
     path: '/dashboard',
-    name: '',
+    name: 'dashboard',
     component: dashboard
   },
 
