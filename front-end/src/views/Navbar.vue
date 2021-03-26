@@ -27,11 +27,11 @@
       </span>
       <p class=" text-gray-500">Messages</p>
       </div></router-link>
-      <div class="flex gap-x-4 py-4">
-       <span class="text-gray-500 material-icons \">
+      <div class="flex gap-x-4 py-4 cursor-pointer" @click="activeBtn=!activeBtn,show=!show" :class="{active_notif: activeBtn }">
+       <span id="notif" class="text-gray-500 material-icons \">
             notifications
           </span>
-          <button @click="show=!show" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</button>
+          <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</span>
              <div v-if="show" class="fixed float-left h-auto pt-2 mt-8 overflow-hidden bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
                <h1 class="mt-4 mb-4 ml-4 font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
                <!--notification 1-->
@@ -73,7 +73,7 @@
         <button type="button" name="search" class=" text-left vs:hidden ring-1 ring-gray-400 rounded-2xl w-60 pl-4 pr-12">
           <router-link to="/search">Search</router-link>
         </button>
-        <span class="material-icons fixed ml-52 self-center vs:relative vs:text-white vs:m-0">search</span>
+        <span class="material-icons fixed ml-52 self-center vs:block vs:text-white vs:m-0">search</span>
         </div>
         <div  class="vs:hidden">
              <Dropdown/>
@@ -103,7 +103,8 @@ export default {
     data(){
         return{
             isOpen:false,
-            show:false
+            show:false,
+            activeBtn:false,
         }
     },
     setup() {
@@ -123,5 +124,11 @@ export default {
 }
 .router-link-active p{
   color:red;
+}
+.active_notif #notif{
+ color:red;
+}
+.active_notif #btn_notif{
+ color:red;
 }
 </style>
