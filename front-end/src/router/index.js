@@ -25,13 +25,13 @@ const routes = [
   },
 
   {
-    path: '/login',
+    path: '/log-in',
     name: 'login',
     component: login
   },
 
   {
-    path: '/signup',
+    path: '/sign-up',
     name: 'signup',
     component: signup
   },
@@ -110,7 +110,7 @@ const routes = [
   },
 
   {
-    path: '/verifyemail',
+    path: '/verify-email',
     name: 'verifyemail',
     component: verifyemail
   },
