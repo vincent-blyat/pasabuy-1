@@ -16,7 +16,7 @@
 
   <!--user post-->
   <div class="flex items-center justify-center pt-6">
-    <div class="space-x-4 h-auto p-6 vs:w-96.7 bg-white shadow rounded-xl">
+    <div class="space-x-4 h-auto p-6 vs:w-96.7  bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
@@ -36,11 +36,11 @@
               <img class="w-6 h-auto" src="img/3dot.svg"/>
             </button>
             <div class="w-full">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-96 h-min w-30 ring-2 ring-gray-200">
-              <button @click="togglePostModal1" class="flex flex-row gap-x-2 ">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl left-222 h-min w-30 ring-2 ring-gray-200">
+              <button @click="togglePostModal2" class="flex flex-row gap-x-2 ">
                 <span class="text-gray-500 material-icons">mode</span>Edit Post</button>
                 <!--Modal-->
-                <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
+                <EditOrderRequest v-if="postModalVisible2" @closeModal2="listener2"/>
                 <!--end-->
               <button class="flex flex-row gap-x-2"> 
                 <span class="text-gray-500 material-icons">delete</span>Delete</button>
@@ -139,7 +139,7 @@
         </div>
         <!--section 4-->
 
-        <div class="inline-flex  items-start justify-start mt-3 rounded-xl h-auto w-528 vs:w-96">
+        <div class="inline-flex  items-start justify-start mt-3 rounded-xl h-auto bg-gray-100 w-538 vs:w-96">
             <p class="text-sm leading-loose w-auto text-gray-900">{{delivery_info.comment}}</p>
         </div>
 
