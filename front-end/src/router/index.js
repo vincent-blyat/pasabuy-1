@@ -56,13 +56,13 @@ const routes = [
 
   {
     path: '/edit-profile',
-    name: 'ProfileEdit',
+    name: 'Profile',
     component: ProfileEdit
   },
 
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: '',
     component: dashboard
   },
 
@@ -74,7 +74,7 @@ const routes = [
 
   {
     path: '/deliver',
-    name: 'deliver',
+    name: 'deliveries',
     component: deliver
   },
 
