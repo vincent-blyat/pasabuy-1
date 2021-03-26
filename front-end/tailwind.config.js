@@ -36,6 +36,8 @@ module.exports = {
       },
         spacing: {
           355: '8.9rem',
+          eh: '430px',
+          ew: '844px',
           448: '30.5rem',
           224: '20.5rem',
           528: '33rem',
@@ -60,18 +62,22 @@ module.exports = {
           500: '500rem',
           500: '500rem',
           17: '4.3rem',
-          50: '12.5rem'
+          50: '12.5rem',
+          
           
       },
       fontFamily: {
         nunito: ['Nunito'],
         raleway: ['Raleway']
       },
+      fontSize: {
+        md: ['0.910rem', { lineHeight: '1.28rem' }],  
+      },
     },
   },
   variants: {
     display: ['responsive', 'group-hover', 'group-focus'],
-    
+
     extend: {
       padding: ['hover'],
       textDecoration: ['focus-visible'],
