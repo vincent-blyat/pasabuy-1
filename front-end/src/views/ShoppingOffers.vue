@@ -1,4 +1,5 @@
-<template> 
+
++ <template> 
     <!--post comment-->
     <div class="bg-gray-100 pt-6">
    <div class="h-screen">
@@ -6,9 +7,9 @@
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center">
-    <div class="inline-flex space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-25" style="width: 608px;">
+    <div class="inline-flex space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl">
         <img class="w-14 h-14 rounded-full" src="img/yami.jpg"/>
-        <button @click="togglePostModal" class="flex items-center focus:outline-none justify-start text-base outline-none leading-none text-gray-500 py-5 pl-6 bg-gray-100 rounded-full h-14" style="width: 488px;">
+        <button @click="togglePostModal" class="flex items-center focus:outline-none justify-start text-base outline-none leading-none text-gray-500 py-5 pl-6 bg-gray-100 rounded-full h-14 w-448 vs:w-224">
         Post a shopping offer</button>
     </div>
   </div>
@@ -16,28 +17,44 @@
 
   <!--user post-->
   <div class="flex items-center justify-center pt-6">
-    <div class="space-x-4 h-auto p-6 bg-white shadow rounded-xl">
+    <div class="space-x-4 h-auto p-6 vs:w-96.7 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
         <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
           <div class="flex">
             <img class="w-14 h-14 rounded-full" src="img/yami.jpg"/>
-            <div class="flex flex-col items-start px-4">
+            <div class="flex flex-col items-start vs:px-2 xl:px-4">
               <div class="space-x-4 flex flex-row mt-1">
-                <p class="text-base font-bold leading-none text-gray-900">{{user_info.firstname}} {{user_info.lastname}}
+                <p class="vs:text-sm text-base font-bold leading-none text-gray-900">{{user_info.firstname}} {{user_info.lastname}}
                   <span class="text-blue-900 align-middle material-icons md-18">
                   verified
                 </span>
                 </p>
-                <p class="text-base leading-none text-gray-500">{{postStatus}} a shopping offer.</p>
+                <p class="vs:text-sm text-base leading-none text-gray-500 vs:pr-1.4">{{postStatus}} a shopping offer.</p>
+                <div class=" md:hidden lg:hidden xl:hidden 2xl:hidden">
+            <button @click="edit1=!edit1" class="focus:outline-none">
+              <img class="w-6 h-auto" src="img/3dot.svg"/>
+            </button>
+            <div class="w-full">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-96 h-min w-30 ring-2 ring-gray-200">
+              <button @click="togglePostModal1" class="flex flex-row gap-x-2 ">
+                <span class="text-gray-500 material-icons">mode</span>Edit Post</button>
+                <!--Modal-->
+                <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
+                <!--end-->
+              <button class="flex flex-row gap-x-2"> 
+                <span class="text-gray-500 material-icons">delete</span>Delete</button>
               </div>
-              <div class=" py-1">
+            </div>
+          </div>
+              </div>
+              <div class="">
                 <span class="text-sm leading-none text-gray-500">{{datePosted}}</span>
               </div>
             </div>
           </div>
-          <div>
+          <div class="vs:hidden">
             <button @click="edit1=!edit1" class="focus:outline-none">
               <img class="w-6 h-auto" src="img/3dot.svg"/>
             </button>
@@ -113,7 +130,7 @@
 
         <!--section 4-->
         <div class="flex flex-grow-0 mt-4 items-start justify-start p-4 bg-gray-100 rounded-xl">
-          <p class="text-sm leading-loose text-gray-900 h-auto " style="width: 528px;">{{delivery_info.comment}}</p>
+          <p class="text-sm leading-loose text-gray-900 h-auto w-528 vs:w-89">{{delivery_info.comment}}</p>
         </div>
         <!--section 4-->
 
