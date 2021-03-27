@@ -1,6 +1,6 @@
 <template>
   <!--About-->
-  <div class="bg-gray-100">
+  <div class="bg-gray-100 font-nunito">
   <div class="flex items-center vs:flex-col justify-center space-x-10">
 
   <!--Section 2-->

@@ -1,7 +1,7 @@
 <template>
 <Navbar/>
     <!--Profile code-->
-    <div class="pt-17 bg-gray-100">
+    <div class="pt-17 bg-gray-100 font-nunito">
    <div class="flex flex-col vs:justify-center vs:items-center vs:pl-4 vs:w-vs justify-center items-center bg-white w-lg h-auto pt-10 ">
    <div class="flex flex-row vs:space-x-4 space-x-16 pr-48">
     <div class="flex">
@@ -16,8 +16,8 @@
             </span>
            </p>
           </div>
-          <div class="inline-flex mt-2 vs:items-start vs:justify-start items-center justify-end">
-           <div class="flex items-center justify-center h-full vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
+          <div class="inline-flex vs:mt-1 vs:items-start vs:justify-start items-center justify-end">
+           <div class="flex items-center justify-center vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
             <button class="flex-1 text-base font-bold focus:outline-none tracking-wider leading-loose text-center text-gray-900">
             <router-link to="/account-settings" > Edit Profile </router-link></button>
            </div>
@@ -108,18 +108,18 @@
              <!--end--> 
             </div>
           </div>
-    <div class="flex flex-row vs:space-x-7 space-x-14 mt-6 pb-2">
-        <div>
-         <button @click="toggle" class="focus:outline-none text-sm font-bold tracking-wide leading-none text-center text-gray-900 uppercase">Shopping offers</button>
+    <div class="flex flex-row vs:space-x-6 space-x-14 mt-6 pb-2">
+        <div @click=" isActive_function('btn1')" :class="{active: activeBtn === 0 }" >
+         <button @click="toggle" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-black uppercase">Shopping offers</button>
         </div>
-        <div>
-         <button @click ="toggle2" class="focus:outline-none text-sm font-bold tracking-wide leading-none text-center text-gray-900 uppercase">Order requests</button>
+        <div @click=" isActive_function('btn2')" :class="{active: activeBtn === 'btn2' }">
+         <button @click ="toggle2" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-black uppercase">Order requests</button>
         </div>
-        <div>
-         <button @click="toggle3" class="focus:outline-none text-sm font-bold tracking-wide leading-none text-center text-gray-900 uppercase">reviews</button>
+        <div @click=" isActive_function('btn3')" :class="{active: activeBtn === 'btn3' }">
+         <button @click="toggle3" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-gray-900 uppercase">reviews</button>
         </div>
-        <div>
-         <button @click="toggle4" class="focus:outline-none text-sm font-bold tracking-wide leading-none text-center text-gray-900 uppercase">about</button>
+        <div @click=" isActive_function('btn4')" :class="{active: activeBtn === 'btn4' }" >
+         <button @click="toggle4" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-gray-900 uppercase">about</button>
         </div>
     </div>
    </div>
@@ -144,6 +144,7 @@ export default {
             postModalVisible3: false,
             hide: false,
             available: false,
+            activeBtn:0,
             personal:  {
               firstname:'Yami',
               lastname:'Sukehiro',
@@ -192,10 +193,24 @@ export default {
     },
     listener3(){
       this.postModalVisible3 = false;
-  },
+    },
+    isActive_function(el){
+     if(el=='btn1'){
+      this.activeBtn= 0;
+    }
+    else {
+        this.activeBtn= el;
+        }
+    },
 }
 }
 </script>
-
 <style scoped>
+.active {
+  color:red;  
+  border-bottom: solid red 5px;
+}
+.active button{
+  color:red;
+}
 </style>

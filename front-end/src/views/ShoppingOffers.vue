@@ -1,7 +1,7 @@
 
 + <template> 
     <!--post comment-->
-    <div class="bg-gray-100 pt-6">
+    <div class="bg-gray-100 pt-6 font-nunito">
    <div class="h-screen">
    <!--Modal-->
    <PostModal v-if="postModalVisible" @closeModal="listener"/>

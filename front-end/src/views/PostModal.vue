@@ -1,6 +1,6 @@
 <template>
     <!-- Post Modal-->
-    <div v-on:click.self="close" class="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center">
+    <div v-on:click.self="close" class="bg-black font-nunito bg-opacity-25 fixed inset-0 flex justify-center items-center">
      <div class="inline-flex flex-col space-y-2 bg-white shadow rounded-xl h-auto w-550 vs:w-96.7">
         <div class="flex flex-col  mt-4">
 
@@ -14,12 +14,12 @@
             <!--end-->
 
             <!--Shopping Offer and Order Request Button-->
-             <div class="flex flex-row items-center justify-around pb-4 space-x-2">
-                <div class="inline-flex">
-                    <button @click="toggleShopOfferbtn" class="text-base font-bold focus:outline-none leading-none text-center text-black uppercase">Shopping Offer</button>
+             <div class="flex flex-row items-center justify-around space-x-2">
+                <div @click=" isActive_function('btn1')" :class="{active: activeBtn === 0 }" class="inline-flex">
+                    <button @click="toggleShopOfferbtn" class="text-base font-nunito font-bold focus:outline-none leading-none text-center text-black uppercase">Shopping Offer</button>
                  </div>
-                 <div @click="toggleOrderRequestbtn" class="inline-flex">
-                    <button class="text-base font-bold focus:outline-none leading-none text-center text-black uppercase">Order Request</button>
+                 <div @click=" isActive_function('btn2')" :class="{active: activeBtn === 'btn2' }" class="inline-flex">
+                    <button @click="toggleOrderRequestbtn" class="text-base font-nunito font-bold focus:outline-none leading-none text-center text-black uppercase">Order Request</button>
                  </div>
              </div>
              <hr>
@@ -43,7 +43,8 @@ export default {
         return {
         component: "shopOfferPost",
         component2: "orderRequestPost",
-        isVisible: true
+        isVisible: true,
+        activeBtn:0,
         }
     },
     methods: {
@@ -58,6 +59,24 @@ export default {
         close(){
             this.$emit('closeModal')
         },
+         isActive_function(el){
+        if(el=='btn1'){
+        this.activeBtn= 0;
+        }
+        else {
+        this.activeBtn= el;
+        }
+        },
     },
 }
 </script>
+
+<style scoped>
+.active {
+  color:red;  
+  border-bottom: solid red 5px;
+}
+.active button{
+  color:red;
+}
+</style>

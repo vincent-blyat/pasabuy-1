@@ -1,5 +1,5 @@
 <template>
-<div class="bg-gray-100 pt-6">
+<div class="bg-gray-100 pt-6 font-nunito">
    <!--post comment-->
    <div class="h-screen">
    <!--Modal-->

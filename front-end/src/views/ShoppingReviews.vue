@@ -1,5 +1,5 @@
 <template>
-<div class="bg-gray-100 pt-6">
+<div class="bg-gray-100 pt-6 font-nunito">
   <!--profile review-->
   <div class="flex items-center vs:flex-col justify-center space-x-10">
 
