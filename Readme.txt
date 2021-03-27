@@ -27,7 +27,7 @@ If encountered this erros:
 
 	     ----For back end developers----
 	     Start your mysql server in xampp
-	     Change the DB_DATABASE to 6wcr5ync85
+	     Change the DB_DATABASE to 6wcr5ync85 or the DB name you used in your local xampp
 
 	     ----For front-end developers----
 	     Change the value of DB_HOST = remotemysql.com
