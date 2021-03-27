@@ -1091,7 +1091,7 @@ img{
 import Navbar from './Navbar'
 import PostModal from "./PostModal"
 import editShopListModal from "./editShopListModal"
-
+import api from '../api'
  export default {
     data() {
     return {
@@ -1112,7 +1112,8 @@ import editShopListModal from "./editShopListModal"
       isOpen1:false,
       isOpen2:false,
       isOpen3:false,
-      isOpen4:false
+      isOpen4:false,
+      user: null
     }
   },
   components: {
@@ -1139,6 +1140,14 @@ import editShopListModal from "./editShopListModal"
     editlistener1(){
       this.editVisible1 = false;
     }
+  },  
+  mounted(){
+    api.get('/api/user').then((res)=>{
+      console.log(res.data);
+      this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
   }
 }
 </script>

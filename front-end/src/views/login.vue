@@ -79,7 +79,7 @@ img{
 }
 </style>
 <script>
-import api from '../api';
+import api from '../api'
 export default {
   data(){
     return{
@@ -92,8 +92,9 @@ export default {
   },
   methods:{
     loginUser(){
-      api.get('/sanctum/csrf-cookie').then(() => {
+      api.get('/sanctum/csrf-cookie').then((response) => {
           // Login...
+          console.log(response)
            api.post('/api/login', this.dataForm).then(response=>{
              console.log('yay logged in');
               console.log(response.data);
