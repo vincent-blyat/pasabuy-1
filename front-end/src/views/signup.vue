@@ -36,11 +36,11 @@
                 </div>
                 <div class="flex mb-2 -mx-1 ">
                     <div class="w-1/2 px-1 mt-6 text-lg font-extrabold text-left text-grey-dark text-blue">
-                        <router-link to="/login" >Log instead</router-link>
+                        <router-link to="/log-in" >Log instead</router-link>
                     </div>
                     <div class="flex justify-end w-1/2 px-1 mt-3">
                         <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
-                            <router-link to="/verifyemail" >NEXT</router-link>
+                            <router-link to="/verify-email" >NEXT</router-link>
                         </button>
                     </div>
                 </div>
