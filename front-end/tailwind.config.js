@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-       'vs': {'min': '300px', 'max': '639px'},
-      'md': {'min': '640px', 'max': '1023px'},
-      'lg': {'min': '1024px', 'max': '1279px'},
-      'xl': {'min': '1280px', 'max': '1535px'},
-      '2xl': {'min': '1536px'},
+        'vs': {'min': '300px', 'max': '639px'},
+        'md': {'min': '640px', 'max': '1023px'},
+        'lg': {'min': '1024px', 'max': '1279px'},
+        'xl': {'min': '1280px', 'max': '1535px'},
+        '2xl': {'min': '1536px'},
       },
       colors:{
         bastille: '#1E1825',
@@ -18,6 +18,7 @@ module.exports = {
           500: '#EF4444',
           700: '#E50F0F',
           danger:'#FF0028',
+          buttons:'#CD0F0F',
           search:'#B72525'
         },
         gray:{
@@ -38,6 +39,8 @@ module.exports = {
           355: '8.9rem',
           eh: '430px',
           ew: '844px',
+          65: '267px',
+          74:'19rem',
           448: '30.5rem',
           224: '20.5rem',
           528: '33rem',
