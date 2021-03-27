@@ -145,7 +145,6 @@ function isLoggedIn(){
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)){
-    console.log('requiresauth')
     if(!isLoggedIn()){
       next({name: 'login'})
     }else{
@@ -153,7 +152,6 @@ router.beforeEach((to, from, next) => {
     }
   }
   else if(to.matched.some(record => record.meta.guest)){
-    console.log('guest')
     if(isLoggedIn()){
       next({name: 'dashboard'})
     }else{

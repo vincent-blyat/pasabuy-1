@@ -1143,7 +1143,6 @@ import api from '../api'
   },  
   mounted(){
     api.get('/api/user').then((res)=>{
-      console.log(res.data);
       this.user = res.data;
     }).catch((error) => {
       this.error=error.response.data.errors;

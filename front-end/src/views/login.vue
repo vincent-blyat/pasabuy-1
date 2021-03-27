@@ -92,13 +92,12 @@ export default {
   },
   methods:{
     loginUser(){
-      api.get('/sanctum/csrf-cookie').then((response) => {
+      api.get('/sanctum/csrf-cookie').then(() => {
           // Login...
-          console.log(response)
-           api.post('/api/login', this.dataForm).then(response=>{
-             localStorage.setItem('isLoggedIn', 'true');
-             console.log('yay logged in');
-              console.log(response.data);
+    
+           api.post('/api/login', this.dataForm).then(()=>{
+              localStorage.setItem('isLoggedIn', 'true');
+              console.log('yay logged in');
               this.$router.push({name:"dashboard"});
             }).catch((errors)=>{
               this.errors = errors.response.data.errors;
