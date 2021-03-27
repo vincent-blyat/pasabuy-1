@@ -38,7 +38,7 @@
                 </form>
                 <div class="mt-4 font-normal text-left text-gray-500 text-md text-grey-dark">
                   Need and account? 
-                    <router-link class="font-bold text-black border-b border-grey-dark" to="/signup" >Register</router-link>
+                    <router-link class="font-bold text-black border-b border-grey-dark" to="/sign-up" >Register</router-link>
                 </div>
               </div>
             </div>
