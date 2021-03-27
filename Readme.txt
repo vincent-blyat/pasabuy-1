@@ -25,6 +25,7 @@ If encountered this erros:
 	     run 'php artisan key:generate' on cmd
 
 	     ----For back end developers----
+	     Start your mysql server in xampp
 	     Change the DB_DATABASE to 6wcr5ync85
 
 	     ----For front-end developers----
