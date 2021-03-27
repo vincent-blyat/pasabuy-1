@@ -137,7 +137,7 @@
 
 <!--Section 1-->
 <div class="flex flex-col h-screen">
-<div class="flex py-6">
+<div class="flex py-6 vs:py-10">
   <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
     <div class="flex flex-col">
 

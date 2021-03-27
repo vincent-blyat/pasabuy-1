@@ -2,22 +2,22 @@
 <Navbar/>
     <!--Profile code-->
     <div class="pt-17 bg-gray-100">
-   <div class="flex flex-col vs:justify-start vs:items-start vs:pl-4 vs:w-vs justify-center items-center bg-white w-lg h-auto pt-10 ">
+   <div class="flex flex-col vs:justify-center vs:items-center vs:pl-4 vs:w-vs justify-center items-center bg-white w-lg h-auto pt-10 ">
    <div class="flex flex-row vs:space-x-4 space-x-16 pr-48">
     <div class="flex">
-        <img class="w-40 h-40 vs:w-16 vs:h-16 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
+        <img class="w-40 h-40 vs:w-20 vs:h-20 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
       </div>
         <div class="flex flex-col">
          <div class="flex flex-row vs:flex-col  xl:space-x-4">
           <div>
-           <p class="text-3xl vs:text-base font-bold  tracking-wide leading-normal text-gray-900">{{personal.firstname}} {{personal.lastname}}
+           <p class="text-3xl vs:text-xl font-bold  tracking-wide leading-normal text-gray-900">{{personal.firstname}} {{personal.lastname}}
             <span class="pb-1 text-blue-900 align-middle material-icons md-24">
              verified
             </span>
            </p>
           </div>
-          <div class="inline-flex mt-2 vs:items-start vs:justify-start items-center justify-end w-34 h-8">
-           <div class="flex items-center justify-center h-full pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
+          <div class="inline-flex mt-2 vs:items-start vs:justify-start items-center justify-end">
+           <div class="flex items-center justify-center h-full vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
             <button class="flex-1 text-base font-bold focus:outline-none tracking-wider leading-loose text-center text-gray-900">
             <router-link to="/account-settings" > Edit Profile </router-link></button>
            </div>
@@ -42,25 +42,25 @@
                  <span class=" rounded-full material-icons text-black">
               location_on  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{address_info.barangay}}, {{address_info.city}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               phone_enabled  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{personal.phone_number}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               alternate_email  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{account_info.email}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{account_info.email}}</p>
                 </div>
             </div>
             </div>
         </div>
     </div>
-    <div class="hidden vs:flex flex-col ">
+    <div class="hidden vs:flex flex-col pr-60 ">
           <div class="flex flex-row vs:hidden space-x-8 py-3">
             <div class="flex space-x-2 vs:justify-start vs:items-start items-center justify-center">
              <p class="text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
@@ -79,23 +79,23 @@
                  <span class=" rounded-full material-icons text-black">
               location_on  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{address_info.barangay}}, {{address_info.city}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               phone_enabled  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{personal.phone_number}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               alternate_email  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-900">{{account_info.email}}</p>
+                 <p class="text-sm leading-none pt-1 text-gray-700">{{account_info.email}}</p>
                 </div>
             </div>
             </div>
-             <div class="hidden vs:flex flex-row  space-x-8 ">
+             <div class="hidden vs:flex flex-row  space-x-8 pr-56 ">
             <div class="flex space-x-2 vs:justify-start vs:items-start items-center justify-center">
              <p class="text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
              <button class="focus:outline-none text-base leading-none text-gray-900">Following</button>

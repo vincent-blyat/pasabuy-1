@@ -34,14 +34,14 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               delivery_dining  
               </span>
-                    <input class="focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500 w-44" placeholder="Delivery Area">
+                    <input class="focus:outline-none flex vs:w-44 w-52  h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500 w-44" placeholder="Delivery Area">
                 </div>
                  
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               shopping_cart  
               </span>
-                    <input class="w-44 focus:outline-none flex w-52 h-11 pl-4 items-center py-2.5 pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Shopping Place">
+                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 pl-4 items-center py-2.5 pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Shopping Place">
                  </div>
              </div>
 
@@ -50,14 +50,14 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               alarm  
               </span>
-                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule">
+                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule">
                 </div>
                  
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               directions_car 
               </span>
-                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Transport Mode">
+                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Transport Mode">
                  </div>
              </div>
 
@@ -66,14 +66,14 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               shopping_bag  
               </span>
-                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Capacity">
+                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Capacity">
                 </div>
                  
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               payments
               </span>
-                    <input class="w-44 focus:outline-none flex w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Payment Method">
+                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Payment Method">
                  </div>
              </div>
             </div>
@@ -81,13 +81,13 @@
 
             <!--Comment section-->
            <div class="justify-center flex mt-6">
-            <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm sm:text-sm rounded-2xl rounded-md outline-none h-auto" placeholder = "Enter your post message here..." style="width: 508px;"></textarea>
+            <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm sm:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 vs:w-26.5" placeholder = "Enter your post message here..."></textarea>
            </div>
            <!--end-->
 
            <!--Post button-->
            <div class="justify-center flex mt-6 pb-6">
-            <button class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full" style="width: 508px; height: 40px;">
+            <button class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 vs:w-26.5 h-10">
                 <p class="text-base font-bold leading-normal text-center text-white">Post</p>
             </button>
            </div>

@@ -1,13 +1,13 @@
 <template>
     <!-- Post Modal-->
     <div v-on:click.self="close" class="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center">
-     <div class="inline-flex flex-col space-y-2 bg-white shadow rounded-xl h-auto" style="width: 550px;">
+     <div class="inline-flex flex-col space-y-2 bg-white shadow rounded-xl h-auto w-550 vs:w-96.7">
         <div class="flex flex-col  mt-4">
 
             <!--Create Post section-->
-            <h1 class="items-center justify-center ml-24 pb-6 text-gray-900 leading-normal pl-24 text-2xl font-bold text-center">
+            <h1 class="items-center justify-center ml-24 vs:ml-14 pb-6 text-gray-900 leading-normal pl-20 text-2xl font-bold text-center">
                 Create Post
-                <button @click.prevent="close" class="pl-14 ml-20 focus:outline-none text-sm mb-1 leading-none text-indigo-900">
+                <button @click.prevent="close" class="pl-14 ml-20 vs:ml-8 focus:outline-none text-sm mb-1 leading-none text-indigo-900">
                 Close
                 </button>
               </h1>

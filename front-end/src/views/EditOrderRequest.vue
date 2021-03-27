@@ -42,7 +42,7 @@
  <!--end-->
 
  <!--Delivery information list-->
-  <div class="flex flex-col mt-4 justify-center items-center">
+  <div class="flex flex-col mt-4 vs:mt-0 justify-center items-center">
       <div class="flex flex-row space-x-4 w-full justify-center">
          <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">

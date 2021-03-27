@@ -36,11 +36,16 @@
               <img class="w-6 h-auto" src="img/3dot.svg"/>
             </button>
             <div class="w-full">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl left-222 h-min w-30 ring-2 ring-gray-200">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl left-75 h-min w-30 ring-2 ring-gray-200">
               <button @click="togglePostModal2" class="flex flex-row gap-x-2 ">
                 <span class="text-gray-500 material-icons">mode</span>Edit Post</button>
                 <!--Modal-->
                 <EditOrderRequest v-if="postModalVisible2" @closeModal2="listener2"/>
+                <!--end-->
+                <button @click="togglePostModal3" class="flex flex-row gap-x-2"> 
+                <span class="text-gray-500 material-icons">autorenew</span>Update Status</button>
+                <!--Modal-->
+                <UpdateOrderStatus v-if="postModalVisible3" @closeModal3="listener3"/>
                 <!--end-->
               <button class="flex flex-row gap-x-2"> 
                 <span class="text-gray-500 material-icons">delete</span>Delete</button>
@@ -48,7 +53,7 @@
             </div>
           </div>
               </div>
-              <div class="">
+              <div class="vs:flex vs:w-full vs:pb-2">
                 <span class="text-sm leading-none text-gray-500">{{datePosted}}</span>
               </div>
             </div>
@@ -58,11 +63,16 @@
               <img class="w-6 h-auto" src="img/3dot.svg"/>
             </button>
             <div class="w-full">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-96 h-min w-30 ring-2 ring-gray-200">
+            <div v-if="edit1" class="absolute space-y-2 py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-91 h-min w-30 ring-2 ring-gray-200">
               <button @click="togglePostModal2" class="flex flex-row gap-x-2 ">
                 <span class="text-gray-500 material-icons">mode</span>Edit Post</button>
                 <!--Modal-->
                 <EditOrderRequest v-if="postModalVisible2" @closeModal2="listener2"/>
+                <!--end-->
+                <button @click="togglePostModal3" class="flex flex-row gap-x-2"> 
+                <span class="text-gray-500 material-icons">autorenew</span>Update Status</button>
+                <!--Modal-->
+                <UpdateOrderStatus v-if="postModalVisible3" @closeModal3="listener3"/>
                 <!--end-->
               <button class="flex flex-row gap-x-2"> 
                 <span class="text-gray-500 material-icons">delete</span>Delete</button>
@@ -170,12 +180,13 @@
 <script>
 import PostModal from "./PostModal"
 import EditOrderRequest from './EditOrderRequest'
-
+import UpdateOrderStatus from './updateOrderStatus'
 export default {
     data() {
     return {
       postModalVisible: false,
       postModalVisible2: false,
+      postModalVisible3: false,
       edit1: false,
       datePosted: '3 hours ago',
       postStatus: 'posted',
@@ -206,7 +217,8 @@ export default {
   },
   components: {
     PostModal,
-    EditOrderRequest
+    EditOrderRequest,
+    UpdateOrderStatus,
   },
   methods:{
      togglePostModal(){
@@ -217,11 +229,18 @@ export default {
       this.postModalVisible2 = !this.postModalVisible2
     },
 
+    togglePostModal3(){
+      this.postModalVisible3 = !this.postModalVisible3
+    },
+
     listener(){
       this.postModalVisible = false;
     },
     listener2(){
       this.postModalVisible2 = false;
+    },
+    listener3(){
+      this.postModalVisible3 = false;
     }
   }
 }
