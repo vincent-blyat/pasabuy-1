@@ -96,9 +96,9 @@ export default {
           // Login...
           console.log(response)
            api.post('/api/login', this.dataForm).then(response=>{
+             localStorage.setItem('isLoggedIn', 'true');
              console.log('yay logged in');
               console.log(response.data);
-              //localStorage.setItem('isLoggedIn', 'true');
               this.$router.push({name:"dashboard"});
             }).catch((errors)=>{
               this.errors = errors.response.data.errors;

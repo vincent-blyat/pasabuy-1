@@ -21,98 +21,114 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {guest:true}
   },
 
   {
     path: '/login',
     name: 'login',
-    component: login
+    component: login,
+    meta: {guest:true}
   },
 
   {
     path: '/signup',
     name: 'signup',
-    component: signup
+    component: signup,
+    meta: {guest:true}
   },
 
   {
     path: '/address-book',
     name: 'address',
-    component: address
+    component: address,
+    meta: {guest:true}
   },
 
   {
     path: '/upload-id',
     name: 'uploadid',
-    component: uploadid
+    component: uploadid,
+    meta: {guest:true}
   },
 
   {
     path: '/verification-message',
     name: 'verifymessage',
-    component: verifymessage
+    component: verifymessage,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/edit-profile',
     name: 'Profile',
-    component: ProfileEdit
+    component: ProfileEdit,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard
+    component: dashboard,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/account-settings',
     name: 'accountsettings',
-    component: accountsettings
+    component: accountsettings,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/deliver',
     name: 'deliveries',
-    component: deliver
+    component: deliver,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/orders',
     name: 'orders',
-    component: orders
+    component: orders,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/messages',
     name: 'messages',
-    component: messages
+    component: messages,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/search',
     name: 'search',
-    component: search
+    component: search,
+    meta: {requiresAuth:true}
   },
 
   {
     path: '/forgot-password',
     name: 'forgotpassword',
-    component: forgotpassword
+    component: forgotpassword,
+    meta: {guest:true}
   },
 
   
   {
     path: '/forgot-password-verify',
     name: 'forgotPassVerify',
-    component: forgotPassVerify
+    component: forgotPassVerify,
+    meta: {guest:true}
   },
 
   {
     path: '/verifyemail',
     name: 'verifyemail',
-    component: verifyemail
+    component: verifyemail,
+    meta: {guest:true}
   },
 
 
@@ -121,6 +137,31 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+function isLoggedIn(){
+  return localStorage.getItem('isLoggedIn');
+}
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)){
+    console.log('requiresauth')
+    if(!isLoggedIn()){
+      next({name: 'login'})
+    }else{
+      next()
+    }
+  }
+  else if(to.matched.some(record => record.meta.guest)){
+    console.log('guest')
+    if(isLoggedIn()){
+      next({name: 'dashboard'})
+    }else{
+      next()
+    }
+  }else{
+    next()
+  }
 })
 
 export default router
