@@ -21,6 +21,9 @@ module.exports = {
           buttons:'#CD0F0F',
           search:'#B72525'
         },
+         green:{
+            150:'#708d3a',
+          },
         gray:{
           50: '#F9FAFB',
           100: '#F3F4F6',
