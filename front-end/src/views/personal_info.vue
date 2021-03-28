@@ -103,13 +103,13 @@ data(){
     edit2:false,
     message:'yeah',
     personal:  {
-      name:'Juan',
-      lastname:'Delacruz',
-      phone_number:'09021050502',
-      work:'Krusty Crab',
-      gender:'Male',
-      language:'Bicol',
-      birdate:new Date().toISOString().slice(0,10)
+      name:' ',
+      lastname:' ',
+      phone_number:' ',
+      work:'   ',
+      gender:' ',
+      language:' ',
+      birdate: ''
     },
     }
   
@@ -137,12 +137,17 @@ mounted(){
     //get the user information from the laravel API
     api.get('/api/getPersonal').then((res)=>{
       console.log('personal info' ,res.data);
+      this.personal.name = res.data.firstName + ' '+  res.data.lastName  ;
+      this.personal.phone_number = res.data.phoneNumber;
+      this.personal.gender = res.data.gender;
+      this.personal.birdate = res.data.birthDate; 
       //this.user = res.data;
     }).catch((error) => {
       this.error=error.response.data.errors;
     })
-    api.get('/api/getAddress').then((res)=>{
-      console.log('address ' ,res.data);
+    api.get('/api/getLanguages').then((res)=>{
+      console.log('language ' ,res.data);
+      this.personal.language = res.data.languages;
       //this.user = res.data;
     }).catch((error) => {
       this.error=error.response.data.errors;

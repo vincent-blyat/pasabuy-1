@@ -61,10 +61,10 @@ data(){
     show2:true,
     edit2:false,
     address_info:{
-    house_number:'0210',
-    province:'Albay',
-    city:'Legaspi',
-    barangay:'Banquerohan'
+        house_number:'',
+        province:'',
+        city:'',
+        barangay:''
     },
     }
 
@@ -91,6 +91,10 @@ mounted(){
     //get the user information from the laravel API
     api.get('/api/getAddress').then((res)=>{
       console.log('address info ',res.data);
+      this.address_info.house_number = res.data.houseNumber;
+      this.address_info.province = res.data.province;
+      this.address_info.city = res.data.cityMunicipality;
+      this.address_info.barangay = res.data.barangay;
       //this.user = res.data;
     }).catch((error) => {
       this.error=error.response.data.errors;
