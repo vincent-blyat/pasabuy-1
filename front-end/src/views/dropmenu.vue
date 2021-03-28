@@ -12,7 +12,7 @@
     <router-link to="/deliver" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">delivery_dining</span>Deliveries</router-link>
     <router-link to="/shopping-list" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">list</span>Shopping Lists</router-link>
     <router-link to="/account-settings" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500">manage_accounts</span>Account Setting</router-link>
-     <button @click.prevent="logout" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500 ">Log out</span>Log out</button>
+    <button @click.prevent="logout" class="flex flex-row gap-x-2"><span class="material-icons text-gray-500 ">logout</span>Log out</button>
     </div>
     </div>
 </template>
