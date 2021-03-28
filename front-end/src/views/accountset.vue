@@ -30,6 +30,7 @@ import Nav from '../views/Navbar.vue'
 import Personal from '../views/personal_info.vue'
 import Address from '../views/address_info.vue'
 import InfoAccount from '../views/account_info.vue'
+
 export default {
   name: 'Account',
   components: {
@@ -63,7 +64,7 @@ methods:{
       }
     }
 
-}
+    }
 }
 </script>
 <style>

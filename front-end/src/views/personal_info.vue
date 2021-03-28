@@ -86,6 +86,7 @@
 </template>
 <script>
 import Profile from './ProfileEdit.vue'
+import api from '../api'
 export default {
   
   name:'personal',
@@ -131,6 +132,21 @@ methods:{
       }
     }
 
-}
+},
+mounted(){
+    //get the user information from the laravel API
+    api.get('/api/getPersonal').then((res)=>{
+      console.log('personal info' ,res.data);
+      //this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+    api.get('/api/getAddress').then((res)=>{
+      console.log('address ' ,res.data);
+      //this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+  }
 }
 </script>

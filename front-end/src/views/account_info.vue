@@ -30,6 +30,7 @@
     </div>
 </template>
 <script>
+import api from '../api'
 export default {
    beforeCreate:function () {
       document.body.className='account';
@@ -67,6 +68,15 @@ methods:{
       }
     }
 
-}
+},
+mounted(){
+    //get the user information from the laravel API
+    api.get('/api/user').then((res)=>{
+      console.log('account info ', res.data);
+      //this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+  }
 }
 </script>
