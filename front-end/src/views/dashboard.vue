@@ -492,7 +492,7 @@ el:'#shop-list',
       isOpen2:false,
       isOpen3:false,
       isOpen4:false,
-      user: null
+      user: null,
       list:false,
       editShoppingOffer:false,
       updateOrderStatus:false,
