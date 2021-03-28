@@ -17,6 +17,7 @@ import forgotPassVerify from '../views/forgotPassVerify.vue'
 import verifyemail from '../views/verifyemail.vue'
 import Shopping_List from '../views/shopping_list.vue'
 
+
 const routes = [
   {
     path: '/',
@@ -114,6 +115,7 @@ const routes = [
     name: 'verifyemail',
     component: verifyemail
   },
+
   {
     path: '/shopping-list',
     name: 'Shopping List',
