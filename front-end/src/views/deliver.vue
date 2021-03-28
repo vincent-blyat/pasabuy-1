@@ -114,7 +114,7 @@ export default {
 methods:{
 update_order(){
   if(this.selected!="Confirmed"){
-      alert(this.selected+'?');
+      alert(this.selected);
   }
   
 document.getElementById("select_option").style="hidden";
