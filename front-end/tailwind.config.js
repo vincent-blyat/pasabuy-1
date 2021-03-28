@@ -21,9 +21,6 @@ module.exports = {
           buttons:'#CD0F0F',
           search:'#B72525'
         },
-         green:{
-            150:'#708d3a',
-          },
         gray:{
           50: '#F9FAFB',
           100: '#F3F4F6',
@@ -32,6 +29,9 @@ module.exports = {
         },
         orange:{
           100:'#EE6D11',
+        },
+        green:{
+          150:'#708d3a',
         },
         waterloo:'#35397B',
         balticsea: '#1C1720',
@@ -73,6 +73,8 @@ module.exports = {
           500: '500rem',
           500: '500rem',
           17: '4.3rem',
+          22: '5.5rem',
+          success: '#708D3A',
           50: '12.5rem',
           
           

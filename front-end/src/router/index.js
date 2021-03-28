@@ -15,6 +15,7 @@ import search from '../views/Search.vue'
 import forgotpassword from '../views/forgotpass.vue'
 import forgotPassVerify from '../views/forgotPassVerify.vue'
 import verifyemail from '../views/verifyemail.vue'
+import Shopping_List from '../views/shopping_list.vue'
 
 
 const routes = [
@@ -129,6 +130,12 @@ const routes = [
     name: 'verifyemail',
     component: verifyemail,
     meta: {guest:true}
+  },
+
+  {
+    path: '/shopping-list',
+    name: 'Shopping List',
+    component: Shopping_List
   },
 
 
