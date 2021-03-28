@@ -10,9 +10,15 @@
            </div>
             
         </div>
-        <div id="personal_info" class="text-sm w-3/5 gap-x-10 pt-8 vs:text-sm vs:w-full">
-        <form id="myForm" class="space-y-8 ">
-        <span class="  font-raleways font-bold grid grid-cols-2 "> 
+        <div id="personal_info" class="text-sm w-full gap-x-10 pt-8 vs:text-sm vs:w-full">
+        <form id="myForm" class=" ">
+          <div class="flex flex-col items-center gap-y-3 justify-center">
+            <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
+            <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
+          </div>
+          <input id="profile_image" type="file" class="hidden">
+        <div  class="text-sm w-7/12 gap-x-10 pt-8 space-y-8 vs:text-sm vs:w-full">
+             <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
         <span>
         <p v-if="show" id="name">{{personal.name}}</p>
@@ -72,6 +78,8 @@
         class="ring-2 ring-gray-400 font-bold w-full">
         </span>
          </span>
+          </div>
+       
         </form>
         </div>
     </div>
@@ -84,11 +92,9 @@ export default {
   component:{
    Profile,
   },
-   beforeCreate:function () {
-      document.body.className='account';
-  },
 data(){
     return{
+      avatar:null,
     disabled: 0,
     hidden:false,
     show:true,
