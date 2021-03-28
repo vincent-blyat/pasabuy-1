@@ -17,7 +17,7 @@ Setting up Front-end folder:
 
 
 
-If encountered this erros:
+If encountered these erros:
 
 
 1. Error: 500 
@@ -27,12 +27,12 @@ If encountered this erros:
 
 	     ----For back end developers----
 	     Start your mysql server in xampp
-	     Change the DB_DATABASE to 6wcr5ync85 or the DB name you used in your local xampp
+	     Change the DB_DATABASE to eA8diNotAa or the DB name you used in your local xampp
 
 	     ----For front-end developers----
 	     Change the value of DB_HOST = remotemysql.com
 	     and the DB_USERNAME and DB_PASSWORD (Please refer to the file that was sent in the BLOCK B Announcements for the database password and username)
-	     Change the DB_DATABASE to 6wcr5ync85
+	     Change the DB_DATABASE to eA8diNotAa
 
 
 2. Error: 401 or 419 (Unauthorized or Unknown Status)
