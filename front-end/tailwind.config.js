@@ -71,7 +71,6 @@ module.exports = {
           99: '35rem',
           100:'40rem',
           500: '500rem',
-          500: '500rem',
           17: '4.3rem',
           22: '5.5rem',
           success: '#708D3A',
