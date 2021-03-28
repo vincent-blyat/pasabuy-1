@@ -1,119 +1,75 @@
 <template class="font-nunito">
-<Navbar/> 
-    <!--START OF 'POST OFFER OR REQUEST' CODE-->
-    <div class="sticky w-full h-14 top-16 bg-red-search">
+<Navbar/>
+<div class="min-h-screen vs:pt-20 pt-16 shadow-md  flex justify-center item-center bg-gray-100">
 
-    </div>
-      <div class="sticky flex flex-wrap justify-center overflow-hidden top-20">
-        <div class="relative flex items-center justify-center w-2/5 px-8 bg-transparent rounded-lg">
-        <span class="absolute left-10 inset-y-7 material-icons">
-          search
-        </span>
-          <div class="justify-center mmd:pl-3">
-           <input class="pl-12 px-3 my-5 text-left text-balticsea placeholder-balticsea bg-white border rounded-full appearance-none lg:text-base mmd:text-base sm:w-96.5 md:w-99 ssm:h-12 mmd:h-10 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 ssm:text-xs" placeholder="Search">
-          </div>
+<!---------------------------------------------------------->
+<div class="fixed h-26 vs:w-full xl:w-1/2 w-full bg-gray-100 rounded" style="max-width:608px">
+       
+    <div class="vs:px-3 vs:max-w-full px-4 mt-2 flex justify-between">
+       <div class="flex justify-center relative pt-1 pt-1 w-full">
+            <input type="text" class="bg-white h-10 w-full vs:w-11/12 pl-16 border focus:outline-none focus:ring-1 focus:ring-red-700 rounded-full" placeholder="Banquerohan, Legazpi City" />
+            <button class="pt-2 absolute left-7 vs:left-10 focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
+              search
+              </span></button>
+        </div>
+    </div><!---end of search bar-->
+
+    <div class="vs:pl-2 vs:max-w-full flex items-center">
+       <div class="flex justify-center relative pb-3 w-full ">
+            
+        <div class="flex justify-center text-sm bg-transparent rounded-lg xl:w-99 pt-3" style="font-size:13px">
+          
+            <button class="flex flex-row items-center h-6 rounded-full px-1 mr-5 vs:mr-2 hover:bg-gray-300 bg-red-700 border shadow-inner shadow-lg">
+              <span class="material-icons">drag_handle</span>
+              <span class="align-middle pl-1 pr-1 ">All</span>
+            </button>
+
+            <button class="flex flex-row items-center h-6 rounded-full px-1 mr-5 vs:mr-2 hover:bg-gray-300 bg-white border shadow-inner shadow-lg">
+              <span class="material-icons" style="font-size:18px">delivery_dining</span>
+              <span class="align-middle pl-1 pr-1 ">Shopping Offers</span>
+            </button>
+
+            <button class="flex flex-row items-center h-6 rounded-full px-1 mr-5 vs:mr-2 hover:bg-gray-300 bg-white border shadow-inner shadow-lg">
+              <span class="material-icons align-middle" style="font-size:18px">shopping_bag</span>
+              <span class="align-middle pl-1 pr-1 ">Order Requests</span>
+            </button>
+
+            <button class="flex flex-row items-center h-6 rounded-full px-1 hover:bg-gray-300 bg-white border shadow-inner shadow-lg">
+              <span class="material-icons align-middle" style="font-size:18px">people_alt</span>
+              <span class="align-middle pl-1 pr-1 ">People</span>
+            </button>
+
+
+
+
+
+         
+
+            
+
         </div>
       </div>
-      
-      <!-------------------------FILTER------------------------>
-      <div class="flex flex-wrap justify-center pt-2 overflow-hidden">
-        <div class="flex justify-center px-3 text-sm bg-transparent rounded-lg w-99">
-          <div class="flex ">
-            <div class="flex items-center p-4 mb-2 mr-2"><label class="font-semibold">Filter:  </label>
-              <input type="radio" id="all-post" name="radio" class="ml-4 text-red-700 border rounded-full form-radio">
-              <label for="all-post" class="pl-2">All Post</label>
-            </div>
-            <div class="flex items-center mb-2 mr-2">
-              <input type="radio" id="shopping-offer" name="radio" class="text-red-700 border rounded-full form-radio">
-              <label for="shopping-offers" class="pl-2">Shopping Offers</label>
-            </div>
-            <div class="flex items-center p-2 mb-2 mr-2">
-              <input type="radio" id="order-requests" name="radio" class="text-red-700 border rounded-full form-radio">
-              <label for="order-request" class="pl-2">Order Requests</label>
-            </div>
-            <div class="flex items-center mb-2 mr-2 ">
-              <input type="radio" id="nearby" name="radio" class="text-red-700 border rounded-full form-radio">
-              <label for="nearby" class="pl-2">Nearby</label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-------------------ENDS------------------->
+    </div><!---end of search bar-->
 
-      <!---------------RESULT (PEOPLE)------------->
-      <div class="flex flex-wrap justify-center pl-2 overflow-hidden">
-        <div class="flex px-5 py-4 text-sm bg-transparent bg-white rounded-lg w-99"> 
-          <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1 focus:outline-none">
-            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </button>
-          <div class="ml-2">
-            <h5 class="font-bold mmd:text-base">
-              Mark Aral
-              <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                  verified
+
+
+
+</div><!-------------------------->
+
+<!---------------------------------------------------------->
+  <div class="overflow-hidden flex flex-col items-center pt-2 mt-24 w-full vs:w-11/12" style="max-width:608px">
+
+    <div class="w-full h-min ">
+       <div class="vs:px-3 vs:max-w-full px-4 py-3 mb-3 bg-white rounded-lg flex justify-between items-center">
+          <div class="flex ml-1"> <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
+            <div class="flex flex-col justify-between items-start ml-2 pt-1 align-middle"> 
+              <span class="font-medium text-sm" id="mark">Mark Aral<span class="material-icons pl-2 vs:mr-28 md:mr-48 lg:mr-64 lg:pr-2 xl:mr-64" id="iCheck" >verified</span>
+                  <button><span class=" font-semibold rounded-full px-2 pb-1  border border-gray-600 hover:text-red-700" style="font-size:13px">Following</span></button>
+                  <button><span class="font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700" style="font-size:13px">Message</span></button>
               </span> 
-              <button class="absolute px-3 text-sm font-semibold border rounded-full right-97.2 text-waterloo border-waterloo focus:outline-none">
-                Following
-              </button>
-              <button class="focus:outline-none absolute px-3 text-sm font-semibold border rounded-full right-96.5 text-black border-black">
-                Message
-              </button>
-            </h5>
-              <p class="text-sm font-normal text-gray-400">
-                <span>
-                  Lives in Banquerohan, Legazpi City
-                </span>
-              </p>
-          </div> 
-        </div>
-      </div>
-      <!-------------------ENDS------------------------>
-
-      <!---------------RESULT (PEOPLE)------------->
-      <div class="flex flex-wrap justify-center pt-8 pl-2 overflow-hidden">
-        <div class="flex px-5 py-4 text-sm bg-transparent bg-white rounded-lg w-99"> 
-          <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1 focus:outline-none">
-            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </button>
-          <div class="ml-2">
-            <h5 class="font-bold mmd:text-base">
-              Mark Aral
-              <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                  verified
+              <span class="text-xs text-gray-600"> Lives in Banquerohan, Legazpi City
               </span> 
-              <button class="focus:outline-none absolute px-3 text-sm font-semibold border rounded-full right-97.2 text-black border-black">
-                Follow
-              </button>
-              <button class="focus:outline-none absolute px-3 text-sm font-semibold border rounded-full right-96.5 text-black border-black">
-                Message
-              </button>
-            </h5>
-            <p class="text-sm font-normal text-gray-400">
-              <span>
-                Lives in Banquerohan, Legazpi City
-              </span>
-            </p>
-          </div> 
-        </div>
-      </div>
-      <!---------------ENDS------------->
 
-       <!---------------RESULT (POST)------------->        
-      <div class="flex flex-wrap justify-center pt-8 pl-2 overflow-hidden">
-        <div class="flex px-5 py-4 text-sm bg-transparent bg-white rounded-t-lg w-99"> 
-          <button class="rounded-full focus:outline-none left-2 mmd:w-12 mmd:h-12 border-1">
-            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </button>
-          <div class="ml-2">
-            <h5 class="font-bold mmd:text-base">
-              Mark Aral
-              <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                verified
-              </span>
-              <label class="pl-1 font-normal text-gray-400 align-middle">posted an order request</label>
-              <button @click="edit1=!edit1" class="absolute right-96.5">
-                <img class="w-6 h-auto" src="img/3dot.svg"/>
-              </button>
               <div class="w-full">
                 <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-96.5 h-min w-30 ring-2 ring-gray-200">
                   <router-link to="#"  class="flex flex-row gap-x-2 ">
@@ -122,91 +78,136 @@
                     <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
                 </div>
               </div> 
-            </h5>
-            <p class="text-sm font-normal text-gray-400">
-              <span>
-                  13 hours ago
-              </span>
-            </p>
-          </div> 
-        </div>
-      </div>
 
-      <!---------------OFFER STATUS------------->
-      <div class="flex flex-wrap justify-center pl-2 overflow-hidden">
-        <div class="flex px-5 py-2 text-sm bg-transparent bg-white w-99"> 
-          <div class="p-1 px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
+              </div>
+            </div>
+        </div>
+    </div><!-------------------------->
+
+    <div class="w-full h-min">
+       <div class="vs:px-3 vs:max-w-full px-4 py-3 mb-3 bg-white rounded-lg flex justify-between items-center">
+          <div class="flex ml-1"> <img src="https://whatsondisneyplus.com/wp-content/uploads/2021/02/wanda-icon.png" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
+            <div class="flex flex-col justify-between items-start ml-2 pt-1 align-middle"> 
+              <span class="font-medium text-sm" id="mark">Wanda Maximoff<span class="material-icons pl-2 vs:mr-20 md:mr-44 lg:mr-60 xl:mr-56" id="iCheck" >verified</span>
+                  <button><span class="top-3 font-semibold rounded-full px-2 pb-1  border border-gray-600 hover:text-red-700" style="font-size:13px">Follow</span></button>
+                  <button><span class="top-3 font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700" style="font-size:13px">Message</span></button>
+             </span> 
+              <span class="text-xs text-gray-600"> Lives in Banquerohan, Legazpi City
+              </span> 
+              </div>
+          </div>
+        </div>
+    </div><!-------------------------->
+
+    <div class="w-full h-min bg-white rounded-lg">
+
+       <div class=" vs:max-w-full vs:px-0 px-3 mx-3 py-2 mb-3 pt-4 rounded-lg flex justify-between items-center">
+          <div class="flex"> <img src="https://whatsondisneyplus.com/wp-content/uploads/2021/02/wanda-icon.png" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
+            <div class="flex flex-col justify-between items-start ml-2 align-middle"> 
+              <span class="font-semibold text-base">Monica Rambeau<span class="material-icons align-middle pl-2" id="iCheck" >verified</span>
+                  <span class="text-base vs:text-sm text-gray-600 mr-36 vs:mr-4 "> posted a shopping offer</span>
+                  <span class="material-icons rig align-middle">more_horiz</span>
+             </span> 
+              <span class="text-sm text-gray-600"> 3 hours ago
+              </span> 
+              </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center overflow-hidden">
+        <div class="flex vs:pl-6 py-2 text-sm bg-transparent bg-white w-99"> 
+          <div class="px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
             <span class="inline-block align-middle material-icons">
               remove_circle_outline
             </span>
-            <label class="pl-1 align-bottom">No longer Accepting Requests</label> 
+            <label class="pl-1 align-middle">No longer Accepting Requests</label> 
           </div>
         </div>
-      </div>
-      <!----------ENDS--------------->
+      </div><!------------------------------------------>
+      
 
-      <div class="flex flex-wrap justify-center pl-2 overflow-hidden">
-        <div class="flex px-5 py-2 text-sm bg-transparent bg-white w-99"> 
-          <div class="flex bg-white gap-y-4 w-99">
-            <div class="flex flex-wrap w-full overflow-hidden">
+      <!---------------POST MESSAGE------------->
+      <div class="flex flex-wrap justify-center w-full">
+        <div class="flex pt-3 px-4 vs:px-0 vs:ml-1 text-sm bg-transparent bg-white w-full">
+        
+        <div class="flex flex-row vs:flex-col vs:ml-3 w-full">
+          <div class="flex flex-col pl-4">
 
-              <!--AREA-->
-              <div class="w-full overflow-hidden mmd:w-2/4">
+            <div><!--AREA-->
+             <div class="w-full overflow-hidden mmd:w-2/4 pb-2">
                 <span class="items-center text-red-700 material-icons">
                   delivery_dining
                 </span>
                 <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering at Banquerohan area only</label> 
               </div>
+            </div>
 
-                <!--SHOPPING LOCATION-->
-              <div class="w-full overflow-hidden mmd:w-1/2">
-                <span class="pl-3 text-red-700 sm:pl-0 md:pl-3 mmd:pl-3 material-icons ssm:pl-0">
-                    shopping_cart
-                </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Shopping at downtown Legazpi</label>
-              </div>
-              
-                <!--TIME-->
-              <div class="w-full overflow-hidden mmd:w-1/2">
+            <div>
+              <!--TIME-->
+              <div class="w-full overflow-hidden mmd:w-1/2 pb-2">
                 <span class="text-red-700 material-icons ">
                     watch_later  
                 </span>
                 <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
               </div>
-              
-                <!--TRANSPO-->
-              <div class="w-full overflow-hidden mmd:w-1/2">
-                <span class="pl-3 text-red-700 material-icons mmd:pl-3">
-                    directions_car_filled
-                </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Car</label>
-              </div>
-              
-                <!--SIZES OF BAGS-->
-              <div class="w-full overflow-hidden mmd:w-1/2">
+            </div>
+
+            <div>
+              <div class="w-full overflow-hidden mmd:w-1/2 pb-3">
                 <span class="text-red-700 material-icons">
                     shopping_bag
                 </span>
                 <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 3 medium or 2 large bags</label>
               </div>
-              
-                <!--MODE OF PAYMENT-->
-              <div class="w-full overflow-hidden mmd:w-1/2">
-                <span class="pl-4 text-red-700 material-icons mmd:pl-3">
-                    payments
-                </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
-              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!---------------POST MESSAGE------------->
-      <div class="flex flex-wrap justify-center pl-2 overflow-hidden">
-        <div class="flex py-3 text-sm bg-transparent bg-white w-99">
-          <div class="flex items-center px-5 py-2 bg-white w-99">
-            <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg">
+          <div class="flex flex-col vs:pl-4 pl-16">
+              
+            <div><!--AREA-->
+             <div class="w-full overflow-hidden mmd:w-2/4 pb-2">
+                <span class="items-center text-red-700 material-icons">
+                  shopping_cart
+                </span>
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Shopping at SM Legazpi City</label> 
+              </div>
+            </div>
+
+            <div><!--mode of transpo-->
+             <div class="w-full overflow-hidden mmd:w-2/4 pb-2">
+                <span class="items-center text-red-700 material-icons">
+                  directions_car_filled
+                </span>
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Public Transit</label> 
+              </div>
+            </div>
+
+            <div><!--mode of payment-->
+             <div class="w-full overflow-hidden mmd:w-2/4">
+                <span class="items-center text-red-700 material-icons">
+                  payments
+                </span>
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Payment First</label> 
+              </div>
+            </div>
+
+            
+
+
+                
+
+          </div>
+
+        </div>
+        </div>
+        </div><!---------end details-------------------->
+
+
+        <!---------------POST MESSAGE------------->
+      <div class="flex flex-wrap justify-center w-full">
+        <div class="flex py-3 px-2 text-sm bg-transparent bg-white w-full">
+          <div class="flex items-center py-2 bg-white mx-3">
+            <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg w-full">
                 Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request.
             </div>
           </div> 
@@ -214,8 +215,7 @@
       </div>
 
       <!---------------SEND, MESSAGE, SHARE------------->
-      <div class="flex flex-wrap justify-center pl-2 mb-8 overflow-hidden">
-        <div class="flex py-3 text-sm bg-transparent bg-white rounded-b-lg w-99">
+      <div class="flex pb-3 text-sm bg-transparent rounded-b-lg flex flex-cols justify-center items-between bg-white h-10">
           <div class="flex items-center justify-center py-4 tracking-wide bg-white rounded-b-lg w-99 mmd:px-5 ">
               
               <!--SEND A REQUEST/OFFER-->
@@ -247,13 +247,23 @@
                       <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
                         <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
-        </div>
-      </div>
-          <!----------------------END--------------->
+      </div> <!----------------------END--------------->
+
+
+    </div><!-------------------------->
+<!-------------------------------------------------------------------->
+<!--------------------------------------------------------------------->
+
+    
+
+  </div><!--------end of bottom elements---------->
+<!----------------------------------->
+</div>
 </template>
+
 
 <style>
  #journal-scroll::-webkit-scrollbar {
@@ -317,23 +327,18 @@ img{
 
 import Navbar from './Navbar'
 
-
  export default {
     data() {
     return {
       postModalVisible: false,
       edit1:false,
       isOpen:false
-            
-
+           
         }
     },
 
   components:{
      Navbar
-     
   }
-
 }
-
 </script>

@@ -11,7 +11,7 @@
         <h1 class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway vs:text-white vs:hidden text-red-700 md:hidden">pasaBUY</h1>
       </div>
        </div>
-       <img v-if="currentRoute=='' " src="/img/mobile_logo.png" class="w-16 h-16 hidden vs:block"/>
+       <img v-if="currentRoute=='' " src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 hidden vs:block"/>
       <div class=" vs:hidden flex  items-center font-bold gap-x-24 text-gray-500 ">
      <router-link to="/dashboard"> 
      <div class="flex gap-x-4 py-4">

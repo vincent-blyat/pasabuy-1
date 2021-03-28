@@ -87,22 +87,21 @@
                 <label for="" class="inline-flex pt-2.5 ml-4 hidden text-red-700 align-top md-18 text-sm">
                   <span class="material-icons">
                   place
-                </span> Banquerohan, Legazpi</label>
+                </span> {{ filterPost.filterAddress }}</label>
               
             </div>
           </div>
           
           <!--END-->
 
-          <!--START OF 'NO LONGER ACCEPTING OFFERS' POST-->
+<!---------------------------START OF 'NO LONGER ACCEPTING OFFERS' POST------------------------------------------------>
           <div class="flex flex-wrap float-right w-3/4 pt-3 vs:pt-2 vs:w-full">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:w-full vs:rounded-none">
               <button class="top-0 left-0 rounded-full mmd:w-12 mmd:h-12 border-1">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="font-semibold mmd:text-base">
-                 Wanda
+                <h5 class="font-semibold mmd:text-base"> {{ deliveryPost.firstname }} {{ deliveryPost.lastname }}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
@@ -111,16 +110,33 @@
                     <img class="w-6 h-auto" src="img/3dot.svg"/>
                   </button>
                   <div class="w-full">
-                    <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 ">
-                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
+                    <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                        <!--EDIT POST--->
+                      <EditShoppingOffer v-if="editShoppingOffer" @closeModal1="listener3"/>
+                        <button  @click="toggleEditShoppingOffer" class="flex flex-row gap-x-2 focus:outline-none">
+                          <span class="font-medium text-gray-500 material-icons">
+                            mode
+                          </span>
+                          Edit Post
+                        </button>
+
+                         <!-----UPDATE STATUS------>
+                      <UpdateOrderStatus v-if="updateOrderStatus" @closeModal3="listener4"/>
+                        <button  @click="toggleUpdateOrderStatus" class="flex flex-row font-normal focus:outline-none gap-x-2">
+                          <span class="font-normal text-gray-500 material-icons">
+                            autorenew
+                          </span>
+                          Update Status
+                        </button>
+                        <!---END-->
+
                       <router-link to="#" class="flex flex-row gap-x-2"> 
                         <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
                     </div>
                     </div>
                  </h5>
                     <p class="text-sm font-normal text-gray-400">
-                      <span>13 hours ago</span>
+                      <span>{{ deliveryPost.time }}</span>
                     </p>
                   </div>
               </div>
@@ -131,7 +147,7 @@
                 <span class="inline-block align-middle material-icons">
                   remove_circle_outline
                   </span>
-                  <label class="pl-1 align-bottom">No longer Accepting Requests</label> 
+                  <label class="pl-1 align-bottom">{{ deliveryPost.status }}</label> 
               </div>
             </div>
 
@@ -143,7 +159,7 @@
                   <span class="items-center text-red-700 material-icons">
                     delivery_dining
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
+                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top"> Delivering to {{ deliveryPost.deliveryPlace }}</label> 
                 </div>
                 
                 <!--SHOPPING LOCATION-->
@@ -151,7 +167,7 @@
                   <span class="text-red-700 material-icons vs:pl-0">
                     shopping_cart
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Shopping at downtown Legazpi</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">{{ deliveryPost.shoppingPlace }}</label>
                 </div>
               
                 <!--TIME-->
@@ -159,7 +175,7 @@
                   <span class="text-red-700 material-icons ">
                     watch_later  
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
+                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.schedule }}</label>
                 </div>
               
                 <!--TRANSPO-->
@@ -167,7 +183,7 @@
                   <span class="pl-3 text-red-700 material-icons vs:pl-0">
                     directions_car_filled
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Car</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">{{ deliveryPost.transportation }}</label>
                 </div>
               
                 <!--SIZES OF BAGS-->
@@ -175,7 +191,7 @@
                   <span class="text-red-700 material-icons">
                     shopping_bag
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 3 medium or 2 large bags</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.limitation }}</label>
                 </div>
               
                 <!--MODE OF PAYMENT-->
@@ -183,7 +199,7 @@
                   <span class="pl-3 text-red-700 vs:pl-0 material-icons">
                     payments
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.paymentMethod }}</label>
                 </div>
               </div>
             </div>
@@ -191,7 +207,7 @@
             <!--POST MESSAGE-->
             <div class="flex items-center w-full px-5 py-2 bg-white">
               <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg">
-                Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request.
+                {{ deliveryPost.comment }}
               </div>
             </div>
 
@@ -211,7 +227,7 @@
               <span class="pl-24 pr-2 material-icons md-24">
               forum
               </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
+              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</router-link>
             </div>
 
             <!--SHARE-->
@@ -222,608 +238,20 @@
               <button @click="isOpen=!isOpen" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
                 <div class="w-full">
                     <div v-if="isOpen" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
+                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2">
                         <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
+                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2"> 
                         <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
                     </div>
-                    </div>
-            </div>
-          </div>
-          </div>
-          <!--END OF NO LONGER ACCPETING REQUEST CODE-->
-
-          <!--START OF ACCEPTING OFFERS CODE-->
-         <div class="flex flex-wrap float-right w-3/4 pt-3 vs:w-full">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:w-full vs:rounded-none">
-              <button class="rounded-full mmd:w-12 mmd:h-12 border-1">
-                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </button>
-              <div class="ml-2">
-                <h5 class="font-bold mmd:text-base">
-                  Monica
-                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                     verified
-                   </span>
-                   <label class="pl-1 font-normal text-gray-400 align-middle">posted an order request</label>
-                    <button @click="edit2=!edit2" class="absolute right-99">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full">
-                    <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
-                      <router-link to="#"  class="flex flex-row gap-x-2 ">
-                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-                 </h5>
-                 <p class="text-sm font-normal text-gray-400">
-                   <span>
-                     13 hours ago
-                   </span>
-                 </p>
-              </div>  
-            </div>
-
-            <!--OFFER STATUS-->
-            <div class="flex items-center w-full pb-1 bg-white px-7">
-              <div class="p-1 px-2 text-sm font-bold bg-gray-200 rounded-full text-waterloo">
-                <span class="inline-block align-middle material-icons">
-                  check_circle_outline
-                  </span>
-                  <label class="pl-1 align-bottom">Accepting Offers</label>
-              </div>
-            </div>
-
-            <!--DETAILS-->
-            <div class="flex items-center w-full p-3 bg-white px-7 gap-y-4 vs:leading-relaxed">
-              <div class="flex flex-wrap w-full overflow-hidden">
-                <!--AREA-->
-                <div class="w-2/4 overflow-hidden vs:w-full">
-                  <span class="text-red-700 material-icons">
-                    place
-                    </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
                 </div>
-                
-                <!--SHOPPING LOCATION-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="pl-3 text-red-700 vs:pl-0 material-icons">
-                    shopping_cart
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">SM City Legazpi</label>
-                </div>
-              
-                <!--TIME-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="text-red-700 material-icons">
-                    watch_later  
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
-                </div>
-              
-                <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="pl-3 text-red-700 vs:pl-0 material-icons mmd:pl-3">
-                    payments
-                    </span>
-                    <label class="items-center inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
-                </div>
-              </div>
-            </div>
-            <!--END-->
-            
-           <!--SHOPPING LIST-->
-            <div class="flex items-center w-full gap-y-4">
-              <div class="w-full px-5 py-2 font-medium bg-white">
-              <div class="flex flex-wrap w-full p-2 overflow-hidden bg-gray-200 rounded-lg">
-              
-                <div class="w-2/4 overflow-hidden">
-                  <h2 class="pb-2 text-base">
-                    Shopping List
-                    <label class="pl-3 text-gray-500">8 items</label>
-                    </h2>
-                  <ul class="pl-3 text-sm leading-relaxed list-disc list-inside">
-                    <li>Flour (1kg)</li>
-                    <li>Vanilla extract (50ml)</li>
-                    <li>brown sugar</li>
-                    <li>cocoa powder</li>
-                  </ul>
-                </div>
-                <div class="w-2/4 overflow-hidden">
-                  <ul class="pl-5 text-sm leading-relaxed list-disc list-inside pt-7">
-                    <li>baking soda</li>
-                    <li>chocolate syrup</li>
-                    <li>Powdered sugar</li>
-                    <li>coconut oil</li>
-                  </ul>
-                </div>
-              </div>
-              <p class="px-5 py-5 text-sm font-medium leading-loose">
-                Hi! If there's anyone  who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!
-              </p>
-              <hr>
-            </div>
-          </div>
-            
-            <!--SEND, CHAT, SHARE-->
-            <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg vs:rounded-none vs:text-sm vs:px-5 vs:items-center">
-            
-            <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons md-24 ">
-                send
-                </span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 material-icons md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <button @click="isOpen1=!isOpen1" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
-                <div class="w-full">
-                    <div v-if="isOpen1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                    </div>
             </div>
           </div>
           </div>
-          <!--END-->
-          
-          <!--START OF ACCEPTING REQUESTS-->
-          <div class="flex flex-wrap float-right w-3/4 pt-3 vs:w-full">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:rounded-none">
-              <button class="rounded-full left-2 mmd:w-12 mmd:h-12border-1">
-                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </button>
-              <div class="ml-2">
-                <h5 class="font-bold mmd:text-base">
-                 Mark Aral
-                  <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                    verified
-                  </span>
-                  <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
-                   <button @click="edit3=!edit3" class="absolute right-99">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full">
-                    <div v-if="edit3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
-                      <router-link to="#"  class="flex flex-row gap-x-2 ">
-                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-                </h5>
-                <p class="text-sm font-normal text-gray-400">
-                  <span>
-                    13 hours ago
-                  </span>
-                </p>
-              </div>  
-            </div>
-            <!--OFFER STATUS-->
-            <div class="flex items-center w-full bg-white px-7">
-              <div class="p-1 px-2 text-sm font-bold bg-gray-200 rounded-full text-waterloo">
-                <span class="inline-block align-middle material-icons">
-                  check_circle_outline
-                  </span>
-                  <label class="pl-1 align-bottom">Accepting Request</label>
-              </div>
-            </div>
-            <!--DETAILS-->
-            <div class="flex w-full p-3 leading-relaxed bg-white px-7 gap-y-4">
-              <div class="flex flex-wrap w-full overflow-hidden">
-                <div class="w-2/4 overflow-hidden vs:w-full">
-                  <span class="text-red-700 material-icons">
-                    delivery_dining
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
-                </div>
-                
-                <!--AREA-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="pl-3 text-red-700 vs:pl-0 material-icons">
-                    shopping_cart
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
-                </div>
-              
-                <!--TIME-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="text-red-700 material-icons">
-                    watch_later  
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
-                </div>
-              
-                <!--TRANSPO-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="pl-3 text-red-700 material-icons vs:pl-0">
-                    directions_car_filled
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
-                </div>
-              
-                <!--SIZES OF BAGS-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="text-red-700 material-icons">
-                    shopping_bag
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 5 large bags</label>
-                </div>
-              
-                <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden vs:w-full">
-                  <span class="pl-3 text-red-700 material-icons vs:pl-0">
-                    payments
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
-                </div>
-              </div>
-            </div>
-            
-            <!--POST MESSAGE-->
-            <div class="flex w-full px-5 py-2 bg-white">
-              <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg">
-                Will be doing some grocery shopping tommorow at downtown Legazpi. Send me a request if you need some pasabuying
-              </div>
-            </div>
-
-            <!--SEND, CHAT, SHARE-->
-            <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg vs:rounded-none vs:text-sm vs:px-5 vs:items-center">
-            
-           <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons md-24 ">
-                send
-                </span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 material-icons md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <button @click="isOpen2=!isOpen2" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
-                <div class="w-full">
-                    <div v-if="isOpen2" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                    </div>
-            </div>
-          </div>
-          </div>
-          <!--END OF ACCPETING REQUEST CODE-->
-
-         <!--START OF 'ORDER TAKEN' CODE-->
-         <div class="flex flex-wrap float-right w-3/4 pt-3 vs:w-full ">
-          <div class="flex items-center w-full p-5 px-6 bg-white rounded-t-lg vs:rounded-none">
-            <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
-              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </button>
-            <div class="ml-2">
-              <h5 class="font-bold mmd:text-base">
-              Sarah
-                <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                  verified
-                </span>
-                <label class="pl-1 font-normal text-gray-400 align-middle">posted an order request</label>
-                <button @click="edit4=!edit4" class="absolute right-99">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full">
-                    <div v-if="edit4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
-                      <router-link to="#"  class="flex flex-row gap-x-2 ">
-                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-              </h5>
-              <p class="text-sm font-normal text-gray-400">
-                <span>
-                  13 hours ago
-                </span>
-              </p>
-            </div>  
-          </div>
-          <!--OFFER STATUS-->
-          <div class="flex w-full pb-1 bg-white px-7">
-            <div class="p-1 px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
-              <span class="inline-block align-middle material-icons">
-                remove_circle_outline
-                </span>
-                <label class="pl-1 align-bottom">Order Taken</label>
-                <span class="inline-block text-black align-middle md-18 material-icons">
-                  arrow_drop_down
-                  </span>
-            </div>
-          </div>
-          <!--DETAILS-->
-          <div class="flex w-full p-3 bg-white px-7 gap-y-4 vs:leading-relaxed">
-            <div class="flex flex-wrap w-full overflow-hidden">
-
-              <!--AREA-->
-              <div class="w-2/4 overflow-hidden vs:w-full">
-                <span class="text-red-700 material-icons">
-                  place
-                  </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Banquerohan,Legazpi City</label> 
-              </div>
-              
-              <!--SHOPPING LOCATION-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="pl-3 text-red-700 vs:pl-0 material-icons mmd:pl-3">
-                  shopping_cart
-                  </span>
-                  <label class="pt-1 pl-1 text-sm text-gray-800 align-top">SM City Legazpi</label>
-              </div>
-            
-              <!--TIME-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="text-red-700 material-icons">
-                  watch_later  
-                </span>
-                <label class="pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 8 am</label>
-              </div>
-            
-              <!--MODE OF PAYMENT-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="pl-3 text-red-700 vs:pl-0 material-icons mmd:pl-3">
-                  payments
-                  </span>
-                  <label class="pt-1 pl-1 text-sm text-gray-800 align-top">Payment First</label>
-              </div>
-            </div>
-          </div>
-          <!--END-->
-          
-          <!--POST MESSAGE-->
-          <div class="flex w-full gap-y-4">
-            <div class="w-full px-5 py-2 text-base font-normal bg-white">
-            <div class="flex flex-wrap w-full p-2 overflow-hidden bg-gray-200 rounded-lg">
-              
-              <!--SHOPPING LIST-->
-              <div class="w-2/4 overflow-hidden">
-                <h2 class="pb-2 text-base">
-                  Shopping List
-                  <label class="pl-3 text-gray-500">8 items</label>
-                  </h2>
-                <ul class="pl-3 text-sm leading-relaxed list-disc list-inside ">
-                  <li>Flour (1kg)</li>
-                  <li>Vanilla extract (50ml)</li>
-                  <li>brown sugar</li>
-                  <li>cocoa powder</li>
-                </ul>
-              </div>
-
-              <div class="w-1/2 overflow-hidden">
-                <ul class="pl-0 text-sm leading-relaxed list-disc list-inside pt-7">
-                  <li>baking soda</li>
-                  <li>chocolate syrup</li>
-                  <li>Powdered sugar</li>
-                  <li>coconut oil</li>
-                </ul>
-              </div>
-            </div>
-            <p class="px-5 py-5 text-sm leading-loose">
-              Hi! If there's anyone  who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!
-            </p>
-            <hr>
-            </div>
-          </div>
-          
-          <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg vs:rounded-none vs:text-sm vs:px-5 vs:items-center">
-            
-            <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons md-24 ">
-                send
-                </span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 material-icons md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <button @click="isOpen3=!isOpen3" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
-                <div class="w-full">
-                    <div v-if="isOpen3" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                    </div>
-            </div>
-          </div>
-          </div>
-        <!--END-->
-
-        <!--START OF 'CANCELLED' CODE -->
-        <div class="flex flex-wrap float-right w-3/4 pt-3 vs:w-full">
-          <div class="flex w-full p-5 bg-white rounded-t-lg px-7 vs:rounded-none">
-            <button class="rounded-full left-2 mmd:w-12 mmd:h-12 border-1">
-              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </button>
-            <div class="ml-2">
-              <h5 class="font-bold mmd:text-base">
-               Gwen Lopez
-                <span class="inline-block text-blue-900 align-middle material-icons md-18">
-                  verified
-                </span>
-                <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
-                <button @click="edit5=!edit5" class="absolute right-99">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full">
-                    <div v-if="edit5" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ring-2 ring-gray-200">
-                      <router-link to="#"  class="flex flex-row gap-x-2 ">
-                        <span class="text-gray-500 material-icons">mode</span>Edit Post</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-              </h5>
-              <p class="text-sm font-normal text-gray-400">
-                <span>
-                  13 hours ago
-                </span>
-              </p>
-            </div>  
-          </div>
-          <!--OFFER STATUS-->
-          <div class="flex w-full bg-white px-7">
-            <div class="px-3 py-1 text-sm font-bold bg-gray-200 rounded-full text-warning ">
-              <span class="inline-block align-top material-icons md-24">
-                radio_button_unchecked
-                </span>
-                <label class="pl-1 align-bottom">Cancelled</label>
-            </div>
-          </div>
-          <!--DETAILS-->
-          <div class="flex w-full p-3 bg-white px-7 gap-y-4">
-            <div class="flex flex-wrap w-full overflow-hidden">
-
-              <!--AREA-->
-              <div class="w-2/4 overflow-hidden vs:w-full">
-                <span class="text-red-700 material-icons">
-                  delivery_dining
-                </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
-              </div>
-              
-              <!--SHOPPING LOCATION-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="pl-3 text-red-700 vs:pl-0 material-icons ">
-                  shopping_cart
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Shopping at downtown Legazpi</label>
-              </div>
-            
-              <!--TIME-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="text-red-700 material-icons">
-                  watch_later  
-                </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
-              </div>
-            
-              <!--TRANSPO-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="pl-3 text-red-700 vs:pl-0 material-icons mmd:pl-3">
-                  directions_car_filled
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Car</label>
-              </div>
-            
-              <!--SIZES OF BAGS-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="text-red-700 material-icons">
-                  shopping_bag
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 5 large bags</label>
-              </div>
-            
-              <!--MODE OF PAYMENT-->
-              <div class="w-1/2 overflow-hidden vs:w-full">
-                <span class="pl-3 text-red-700 vs:pl-0 material-icons">
-                  payments
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
-              </div>
-            </div>
-          </div>
-          
-          <!--POST MESSAGE-->
-          <div class="flex w-full px-5 py-2 bg-white">
-            <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg">
-              Will be doing some grocery shopping tommorow at downtown Legazpi. Send me a request if you need some pasabuying!
-            </div>
-          </div>
-
-          <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg vs:rounded-none vs:text-sm vs:px-5 vs:items-center">
-            
-            <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons md-24 ">
-                send
-                </span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 material-icons md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> Chat </router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 material-icons md-24">
-                  share
-              </span>
-              <button @click="isOpen4=!isOpen4" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
-                <div class="w-full">
-                    <div v-if="isOpen4" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                    </div>
-            </div>
-          </div>
-          </div>
-        <!--END of canceled code-->
-      </div>
+          <!-----------------------END OF NO LONGER ACCPETING REQUEST CODE--------------------------------->
+</div>
         
-        <!--START OF SHOPPING LISTS-->
-        <div class="w-2/5 pt-12 overflow-hidden pl-7">
-          
-          <div class="hidden">
+        <!----------------------------START OF SHOPPING LISTS--------------------->
+        <div class="w-2/5 pt-12 overflow-hidden pl-7 vs:hidden">
           <!-----------ACTIVE ORDERS---------------------->
             <div class="mb-3 bg-white shadow-md w-72 rounded-2xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
@@ -839,7 +267,7 @@
               <hr>
               <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
                 <label for="" class="pt-2 pl-3 font-semibold">
-                  Transaction #130317
+                 Transaction #{{ activeOrders.transactNo }}
                 </label>
               </div>
 
@@ -849,17 +277,16 @@
                 </label>
 
                 <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
-                  Confirmed
+                  {{ activeOrders.status }}
                 </label>
               </div>
 
-              <div class="flex items-center w-65  p-1.5 rounded-xl ml-2 bg-green-100">
+              <div class="flex items-center w-65  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="text-sm font-semibold">
-                 Wanda
+                <h5 class="text-sm font-semibold">{{ activeOrders.first_name }} {{ activeOrders.last_name }}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
@@ -867,7 +294,7 @@
                  </h5>
                  
                     <p class="text-sm font-normal ">
-                      <span>4.9
+                      <span>{{ activeOrders.rating }}
                         <span class="text-red-700 material-icons md-16">
                           star_rate
                         </span>
@@ -875,10 +302,12 @@
                     </p>
                   </div>
                  
+
                    <div class="absolute h-10 p-2 mr-2 rounded-full bg-success right-60">
                     <span class="inline-flex text-white align-middle material-icons">
                        chat
                     </span>
+                    <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"></router-link>
                   </div>  
                   
               </div>
@@ -890,10 +319,10 @@
             <!-----------END OF ACTIVE ORDERS---------------->
           
             <!-----------ACTIVE DELIVERIES---------------------->
-            <div class="mb-3 bg-white w-72 rounded-xl">
+            <div class="mb-3 bg-white w-72 rounded-xl vs:hidden">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
-                ACTIVE ORDERS
-                  <span class="inline-flex pl-24 pr-3 align-bottom material-icons md-18">
+                ACTIVE DELIVERIES
+                  <span class="inline-flex pl-20 pr-3 align-bottom material-icons md-18">
                     navigate_before
                 </span>
                 <span class="inline-flex align-bottom material-icons md-18">
@@ -904,7 +333,7 @@
               <hr>
               <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
                 <label for="" class="pt-2 pl-3 font-semibold">
-                  Transaction #130317
+                  Transaction #{{ activeDeliveries.transNo }}
                 </label>
               </div>
 
@@ -914,17 +343,16 @@
                 </label>
 
                 <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
-                  Confirmed
+                  {{ activeDeliveries.stat }}
                 </label>
               </div>
 
-              <div class="flex items-center w-65  p-1.5 rounded-xl ml-2 bg-green-100">
+              <div class="flex items-center w-65  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="text-sm font-semibold">
-                 Wanda
+                <h5 class="text-sm font-semibold">{{ activeDeliveries.firstName }} {{ activeDeliveries.lastName }}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
@@ -932,7 +360,7 @@
                  </h5>
                  
                     <p class="text-sm font-normal ">
-                      <span>4.9
+                      <span>{{ activeDeliveries.rate }}
                         <span class="text-red-700 material-icons md-16">
                           star_rate
                         </span>
@@ -941,9 +369,8 @@
                   </div>
                  
                    <div class="absolute h-10 p-2 mr-2 rounded-full bg-success right-60">
-                    <span class="inline-flex text-white align-middle material-icons">
-                       chat
-                    </span>
+                    <span class="inline-flex text-white align-middle material-icons">chat</span>
+                    <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"></router-link>
                   </div>  
                   
               </div>
@@ -952,7 +379,7 @@
                       room
                     </span>
                     <label for="" class="text-xs tracking-wide">
-                      Purok 7 Banquerohan, Legazpi City 
+                      {{ activeDeliveries.address }}
                     </label>
                   </div>
                <div class="pt-2 pb-8 pr-3 text-sm tracking-wide bg-white rounded-b-xl">
@@ -963,7 +390,7 @@
             <!-----------END OF ACTIVE DELIVERIES---------------->
           
 
-          <div class="flex flex-wrap float-left font-nunito md:block">
+          <div class="flex flex-wrap float-left font-nunito md:block vs:hidden">
             <div class="mb-3 bg-white w-72 rounded-xl">
                <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 SHOPPING LIST
@@ -982,15 +409,13 @@
                  <editShopListModal v-if="editVisible" @closeModal="editlistener"/>
                 <button @click="toggleeditShopList" class="ml-16 text-sm font-bold text-blue-700 focus:outline-none">Edit</button>
                 </h3> 
-                    <ul class="text-sm leading-relaxed text-gray-500 list-disc list-inside pl-9">
-                      <li>Flour</li>
-                      <li>vanilla extract</li>
-                      <li>brown sugar</li>
-                      <li>cocoa powder</li>
+                    <ul id="shop-list" class="text-sm leading-relaxed text-gray-500 list-disc list-inside pl-9">
+                      <li v-for="shopList in shopList" :key="shopList.items" >{{ shopList.items }}</li>
                     </ul>
-                    <a href="#" class="text-sm leading-loose pl-9">
+                    <ShoppingList v-if="list" @closeListModal="listlistener"/>
+                      <button @click="toggleList" class="text-sm leading-loose pl-9 focus:outline-none">
                       4 more items...
-                    </a>
+                    </button>
                    <hr>
                   <div class="items-center justify-center p-3 pl-4">
                     <button class="w-64 h-8 px-5 text-sm font-bold text-red-600 transition-colors duration-150 border-2 border-red-600 rounded-3xl">
@@ -999,59 +424,12 @@
                         </a>
                     </button>
                   </div>
-                  
                   </div>
-                  
                 </div>
-          </div>
-              
+          
               <!--ends-->
 
-            <div class="pt-5 pb-3 bg-white shadow-xl vs:hidden w-72 px-7 rounded-xl">
-               <h3 class="font-bold text-center uppercase text-1xl">Your shopping lists</h3><br>
-               <hr>
-               
-               <!--SHOPPING LIST 1-->
-               <h3 class="pt-2 font-bold leading-loose tracking-wide">Shopping List 1
-                 <a href="" class="pl-16 text-sm font-bold text-blue-700">Edit</a>
-                </h3> 
-                    <ul class="pl-5 text-sm text-gray-500 list-disc list-inside ">
-                      <li>Flour</li>
-                      <li>vanilla extract</li>
-                      <li>brown sugar</li>
-                      <li>cocoa powder</li>
-                    </ul>
-                    <label class="text-sm leading-loose">
-                      4 more items...
-                    </label>
-                    <hr>
-                    
-                    <!--SHOPPING LIST 2-->
-                    <h3 class="pt-2 font-semibold leading-loose tracking-wide">Shopping List 2
-                      <a href="" class="pl-16 text-sm font-bold text-blue-700">Edit</a>
-                    </h3>
-                    <ul class="pl-5 text-sm text-gray-500 list-disc list-inside ">
-                      <li>Flour</li>
-                      <li>vanilla extract</li>
-                      <li>brown sugar</li>
-                      <li>cocoa powder</li>
-                    </ul>
-                    <label class="pb-3 text-sm leading-loose">
-                      4 more items...
-                    </label>
-                    <hr>
-                    
-                    <!--CREATE NEW SHOPPING LIST BUTTON-->
-                    <div class="flex justify-center py-5">
-                      <button class="w-full px-5 py-2 text-sm text-red-700 uppercase transition-colors duration-150 border-2 border-red-700 text-bold h-11 rounded-3xl focus:outline-none">
-                        <a href="#">
-                          Create new
-                        </a>
-                      </button>
-                    </div>
-                  </div>
-                
-              <!--ends-->
+            
             </div>
             </div>
 </template>
@@ -1091,16 +469,16 @@ img{
 import Navbar from './Navbar'
 import PostModal from "./PostModal"
 import editShopListModal from "./editShopListModal"
+import ShoppingList from "./ShoppingList"
+import EditShoppingOffer from "./EditShoppingOffer"
+import UpdateOrderStatus from "./updateOrderStatus"
 
  export default {
+el:'#shop-list',
     data() {
     return {
       postModalVisible: false,
       edit1:false,
-      edit2:false,
-      edit3:false,
-      edit4:false,
-      edit5:false,
       show:false,
       share1:false,
       NewList:false,
@@ -1109,16 +487,68 @@ import editShopListModal from "./editShopListModal"
       filter: false,
       filter2: false,
       isOpen:false,
-      isOpen1:false,
-      isOpen2:false,
-      isOpen3:false,
-      isOpen4:false
+      list:false,
+      editShoppingOffer:false,
+      updateOrderStatus:false,
+
+      filterPost:{
+        filterAddress: "Bonot, Legazpi City"
+      },
+
+      deliveryPost:{
+              firstname:'Wheein',
+              lastname:'Jung',
+              time: '14 hours ago',
+              address: 'Banquerohan, Legazpi',
+              comment: "Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request. PS. WHOLO ON APRIL",
+              status: "No longer Accepting Requests",
+              deliveryPlace: "Legazpi City Only",
+              shoppingPlace: "SM Legazpi",
+              paymentMethod: "Cash",
+              schedule: "Tomorrow at 10 AM",
+              transportation: "Car",
+              limitation: "Up to 3 medium or 2 large bags",
+              
+
+          },
+
+      activeDeliveries:{
+        transNo: '61913174',
+        address: 'Ligao',
+        firstName: 'Hanbin',
+        lastName: 'Kim',
+        rate: '131',
+        stats: "Confirmed"
+      },
+
+      activeOrders:{
+        transactNo: '1267643764',
+        address: 'Legazpi',
+        first_name:'Go Eun',
+        last_name: 'Na',
+        rating: '4.17',
+        stat:"Confirmed"
+        
+      },
+      
+      shopList: [
+      { items: 'Pork' },
+      { items: 'Beef' },
+      { items: 'Pork' },
+      { items: 'Beef' },
+      { items: 'Pork' },
+      { items: 'Beef' },
+    ],
+
     }
   },
   components: {
     Navbar,
     PostModal,
-    editShopListModal
+    editShopListModal,
+    ShoppingList,
+    EditShoppingOffer,
+    UpdateOrderStatus,
   },
   methods:{
     togglePostModal(){
@@ -1138,6 +568,24 @@ import editShopListModal from "./editShopListModal"
     },
     editlistener1(){
       this.editVisible1 = false;
+    },
+    toggleList(){
+      this.list = !this.list
+    },
+    listlistener(){
+      this.list = false;
+  },
+    toggleEditShoppingOffer(){
+      this.editShoppingOffer = !this.editShoppingOffer 
+    },
+    listener3(){
+      this.editShoppingOffer = false;
+    },
+    toggleUpdateOrderStatus(){
+      this.updateOrderStatus = !this.updateOrderStatus
+    },
+    listener4(){
+      this.updateOrderStatus = false;
     }
   }
 }

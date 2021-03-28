@@ -14,7 +14,8 @@
             </span>
             </div>
                 <div class="vs:flex-col"> 
-      <span class="text-blue-600 font-bold cursor-pointer" >Edit</span>
+                    <editShopListModal v-if="editVisible" @closeModal="editlistener"/>
+                <button @click="toggleeditShopList" class="ml-16 text-sm font-bold text-blue-700 focus:outline-none">Edit</button>
            </div>
          </div>
 
@@ -32,37 +33,50 @@
 </template>
 <script>
 import Nav from '../views/Navbar.vue'
+import editShopListModal from "./editShopListModal"
+
 export default {
   name: 'Deliver',
   components: {
-    Nav
+    Nav,
+    editShopListModal
+    
   },
   data(){
     return{
+        editVisible: false,
         list_number:0,
        items: [
         { list: 'Pork' },
         { list: 'flour(1kg)' },
         { list: 'Brown Sugar' },
     ],
-
 }
 },
 methods:{
-update_order(){
+    update_order(){
   if(this.selected!="Confirmed"){
       alert(this.selected+'?');
   }
   
-document.getElementById("select_option").style="hidden";
-},
-isActive_function(el){
+    document.getElementById("select_option").style="hidden";
+
+    },
+    
+    isActive_function(el){
      if(el=='btn1'){
       this.  activeBtn= 0;
     }
     else {
         this.  activeBtn= el;
         }
+    },
+
+    toggleeditShopList(){
+      this.editVisible = !this.editVisible 
+    },
+    editlistener(){
+      this.editVisible = false;
     },
 }
 }
