@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+         'ssm':{'min':'0px','max':'299px'},
         'vs': {'min': '300px', 'max': '639px'},
         'md': {'min': '640px', 'max': '1023px'},
         'lg': {'min': '1024px', 'max': '1279px'},
