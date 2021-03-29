@@ -30,6 +30,6 @@ class emailConfirmation extends Mailable
      */
     public function build()
     {   
-        return $this->from('pasabuyEmailConfirmation@pasaBUY.com')->subject(subject: 'Welcome to pasabUY')->view('mail.emailConfirmation', ['email_data' => $this->email_data]);
+        return $this->from('pasaBUY.com@gmail.com')->subject(subject: 'Welcome to pasabUY')->view('mail.emailConfirmation', ['email_data' => $this->email_data]);
     }
 }

@@ -2,7 +2,7 @@ Hello, {{$email_data['name']}}
 <br><br>
 Welcome to pasaBUY!
 
-This message is to verify your email. Please enter the 6-digit code below to our website.
+This message is to verify your email. <br>Please enter the 6-digit code below to our website.<br>
 
 code: {{$email_data['verification_code']}}
 
@@ -11,8 +11,5 @@ code: {{$email_data['verification_code']}}
 Thank you
 <br>
 PasaBUY
-
-
-
-<br><br><br>
+<br>
 Please disregard if you didn't sign up for pasaBUY.

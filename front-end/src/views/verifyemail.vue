@@ -12,7 +12,7 @@
         <div class="px-10 py-16 ">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold pb-7">Verify your email</h1>
             <p class="pb-10 text-base font-bold text-gray-700 ">
-                For your security, Pasabuy wants to make sure  it's really you. Pasabuy will send an email with a 6-digit verification code
+                For your security, Pasabuy wants to make sure  it's really you. Kindly check the inbox of your email. We sent a 6-digit verification code
             </p>
 
             <div action="#" class="space-y-3">
@@ -83,7 +83,7 @@ export default {
             if(this.textCode == this.code){
               console.log("code matched")
               localStorage.removeItem("code")
-              //this.$router.push({name:"address"});
+              this.$router.push({name:"address"});
             }
             else{
                 console.log("error, code doesnt match")
