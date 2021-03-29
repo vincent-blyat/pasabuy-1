@@ -40,11 +40,12 @@ class RegisterController extends Controller
 
         //return response()->json(trim($request->email));
         $email = trim($request->email);   
+        $code = $request->verificationCode;
         if($request != null){
             Mail::to($email)->send(new emailConfirmation($data));
-            return true;
+            return $code;
         }
-        return false;
+        return $code;
      }
 
 

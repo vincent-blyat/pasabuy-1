@@ -111,9 +111,11 @@ export default {
     methods:{
         nextPage(){
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
-                console.log(res.data);
-                if(res){
+               
+                if(res!=null){
                     console.log('sucess, email sent');
+                    console.log(res.data);
+                    localStorage.setItem("code", res.data);
                     this.$router.push({name:"verifyemail"});
                 }
                 else{
