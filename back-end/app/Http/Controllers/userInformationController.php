@@ -64,7 +64,7 @@ class userInformationController extends Controller
             //updating user languages
             $userLang = userLanguages::find(Auth::User()->email);
             $userLang = userLanguages::where('email',Auth::User()->email)->first();
-            $userLang->language = $request->birthDate;
+            $userLang->languages = $request->language;
             $userLang->save();
             return response()->json('success, information saved');
         }
