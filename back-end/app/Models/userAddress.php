@@ -9,6 +9,8 @@ class userAddress extends Model
 {
     use HasFactory;
     protected $table = 'tbl_userAddress';
+    protected $primaryKey = 'email';
+    public $timestamps = false;
     // protected $fillable = [
     //     'email',
     //     'course',

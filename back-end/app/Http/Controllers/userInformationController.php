@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
 use Illuminate\Http\Request;
@@ -72,6 +73,33 @@ class userInformationController extends Controller
             return response()->json('error, information not saved');
         }
 
+    }
+
+    public function editAddress(Request $request)
+    {
+        # code...
+      
+        $request->validate([
+             'house_number' => ['required'],
+             'province' => ['required'],
+             'city' => ['required'],
+             'barangay' => ['required']
+        ]);
+        
+        //updating userinfo table
+        $userEmail = Auth::User()->email;
+        $user = userAddress::where('email',$userEmail)->first();
+        $user->houseNumber = $request->house_number;
+        $user->province = $request->province;
+        $user->cityMunicipality = $request->city;
+        $user->barangay = $request->barangay;
+       
+        if($user->save()){
+            return response()->json('success, information saved');
+        }
+        else{
+            return response()->json('error, information not saved');
+        }
     }
 
 

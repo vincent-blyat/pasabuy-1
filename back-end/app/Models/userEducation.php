@@ -9,4 +9,6 @@ class userEducation extends Model
 {
     use HasFactory;
     protected $table = 'tbl_userEducation';
+    protected $primaryKey = 'email';
+    public $timestamps = false;
 }

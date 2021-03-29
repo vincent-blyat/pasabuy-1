@@ -72,7 +72,13 @@ data(){
 methods:{
 
     submit () {
-       
+        api.post('/api/editAddress', this.address_info).then((res)=>{
+        console.log(res.data);
+
+      //this.user = res.data;
+        }).catch(() => {
+            location.reload();
+        })
     },
      Edit(pars) {
       let x=document.getElementById(pars).innerHTML;
@@ -82,7 +88,7 @@ methods:{
       }
       else{
          document.getElementById(pars).innerHTML="Edit"; 
-         
+         this.submit();
       }
     }
 
