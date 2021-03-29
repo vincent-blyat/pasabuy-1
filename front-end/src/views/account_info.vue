@@ -20,7 +20,7 @@
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p  class="text-gray-500">Password</p>
         <span>
-            <p v-if="show" >{{account_info.password}}</p>
+            <input v-if="show" type="password" v-model="account_info.password" disabled/>
             <input type="password" v-if="edit3"
         id="input_password"  v-model="account_info.password" 
         class="ring-2 ring-gray-400 font-bold w-full">
@@ -30,6 +30,7 @@
     </div>
 </template>
 <script>
+import api from '../api'
 export default {
    beforeCreate:function () {
       document.body.className='account';
@@ -42,8 +43,8 @@ data(){
     show2:true,
     edit3:false,
     account_info:{
-        email:'sanJuan@gmail.com',
-        password:'password',
+        email:'',
+        password:'',
         password_int:'',
         type:'password',
     },
@@ -67,6 +68,17 @@ methods:{
       }
     }
 
-}
+},
+mounted(){
+    //get the user information from the laravel API
+    api.get('/api/user').then((res)=>{
+      console.log('account info ', res.data);
+      this.account_info.email = res.data.email;
+      this.account_info.password = 'password';
+      //this.user = res.data;
+    }).catch(() => {
+      //this.error=error.response.data.errors;
+    })
+  }
 }
 </script>
