@@ -16,9 +16,11 @@ class emailConfirmation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+ 
+    public function __construct($data)
     {
         //
+        $this->email_data = $data;
     }
 
     /**
@@ -27,7 +29,7 @@ class emailConfirmation extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->view('view.name');
+    {   
+        return $this->from(env(key:'MAIL_USERNAME'), name:'pasaBUY.com')->subject(subject: 'Welcome to pasabUY')->view('view.emailConfirmation', ['email_data' => $this->email_data]);
     }
 }

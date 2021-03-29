@@ -7,6 +7,7 @@
         </label>
     </div>
 
+
     <div id="signup" class="flex items-center justify-center pt-10 pb-10 bg-gray-bgcolor vs:pt-16">
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16 ">
@@ -109,8 +110,14 @@ export default {
     }, 
     methods:{
         nextPage(){
-            api.post('/api/postPersonal').then((res)=>{
-                console.log(res.data)
+            api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
+                console.log(res.data);
+                // if(res){
+                //     this.$router.push({name:"address"});
+                // }
+                // else{
+                //     console.log('error, email not sent');
+                // }
             })
         }
     }
