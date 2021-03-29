@@ -41,6 +41,7 @@ class userInformationController extends Controller
     public function editPersonal(Request $request)
     {
         # code...
+      
         $request->validate([
              'firstname' => ['required'],
              'lastname' => ['required'],
@@ -49,15 +50,16 @@ class userInformationController extends Controller
              'birdate' => ['required'],
              'language' => ['required']
         ]);
-
+        
         //updating userinfo table
-        $user = userInformation::find(Auth::User()->email);
-        $user = userInformation::where('email',Auth::User()->email)->first();
+        $userEmail = Auth::User()->email;
+        $user = userInformation::where('email',$userEmail)->first();
         $user->firstName = $request->firstname;
         $user->lastName = $request->lastname;
         $user->phoneNumber = $request->phone_number;
         $user->gender = $request->gender;
         $user->birthDate = $request->birdate;
+       
         if($user->save()){
             //updating user languages
             $userLang = userLanguages::find(Auth::User()->email);

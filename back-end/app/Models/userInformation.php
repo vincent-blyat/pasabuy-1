@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class userInformation extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_userInformation';
+    protected $table = 'tbl_usernformation';
     protected $primaryKey = 'email';
-    protected $timestamps = false;
+    public $timestamps = false;
 }
