@@ -32,7 +32,7 @@ class RegisterController extends Controller
         // $user->email = $request->email;
         // $user->password = $request->password;
         // $user->verification_code = sha1(time());
-        $request->verificationCode = sha1(time());
+        $request->verificationCode = mt_rand(100000, 999999);
         $data =[
             'name' => $request->firstName,
             'verification_code' => $request->verificationCode
@@ -42,9 +42,9 @@ class RegisterController extends Controller
         $email = trim($request->email);   
         if($request != null){
             Mail::to($email)->send(new emailConfirmation($data));
-            return redirect()->back()->with(session()->flash('alert-success', 'Please check your email for verification link'));
+            return true;
         }
-        return redirect()->back()->with(session()->flash('alert-danger', 'Error, Something went wrong'));
+        return false;
      }
 
 

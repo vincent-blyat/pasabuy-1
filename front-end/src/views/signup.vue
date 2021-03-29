@@ -112,12 +112,13 @@ export default {
         nextPage(){
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
                 console.log(res.data);
-                // if(res){
-                //     this.$router.push({name:"address"});
-                // }
-                // else{
-                //     console.log('error, email not sent');
-                // }
+                if(res){
+                    console.log('sucess, email sent');
+                    this.$router.push({name:"verifyemail"});
+                }
+                else{
+                    console.log('error, email not sent');
+                }
             })
         }
     }
