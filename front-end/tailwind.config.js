@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       screens: {
          'ssm':{'min':'0px','max':'329px'},
-        'vs': {'min': '330px', 'max': '440px'},
-        'sm': {'min': '441px', 'max': '639px'},
+        'vs': {'min': '330px', 'max': '460px'},
+        'sm': {'min': '461px', 'max': '639px'},
         'md': {'min': '640px', 'max': '1023px'},
         'lg': {'min': '1024px', 'max': '1279px'},
         'xl': {'min': '1280px', 'max': '1535px'},
