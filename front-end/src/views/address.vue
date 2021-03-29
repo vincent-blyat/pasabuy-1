@@ -10,7 +10,7 @@
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
-            <form action="#" class="space-y-3">
+            <div action="#" class="space-y-3">
               <div class="w-full ">
                 <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-8 mb-4 font-semibold placeholder-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:z-10 sm:text-sm" placeholder="House Number" value="" />
               </div>
@@ -40,11 +40,11 @@
                   <router-link to="/verify-email" class="font-bold underline-none text-blue" >Back</router-link>
                 </div>
                 <div class="flex justify-end w-1/2 px-1 mt-3">
-                  <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
-                    <router-link to="/upload-id" >NEXT</router-link></button>
+                  <button @click="nextPage" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
+                    NEXT</button> <!-- upload id next -->
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -83,3 +83,30 @@ img{
 }
 </style>
 
+<script>
+import api from '../api'
+export default {
+    data(){
+        return{
+            PersonalInfo:{
+               firstName : null,
+               lastName : null,
+               email :  null,
+               phoneNumber : null,
+               password : null,
+               confirmPassword : null
+            }
+        }
+    }, 
+    methods:{
+        nextPage(){
+            api.post('/api/postAddress').then((res)=>{
+                console.log(res.data)
+            })
+        }
+    }
+}
+
+
+
+</script>

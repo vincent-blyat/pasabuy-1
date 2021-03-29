@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\userInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,8 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
 });
 
 Route::post('login',[loginController::class, 'login'] )->name('login');
+Route::post('postPersonal',[RegisterController::class, 'postPersonal'] );
+Route::post('postID',[RegisterController::class, 'postID'] );
+Route::post('postAddress',[RegisterController::class, 'postAddress'] );
+Route::post('register',[RegisterController::class, 'register'] );
 Route::post('logout',[loginController::class, 'logout'] );
