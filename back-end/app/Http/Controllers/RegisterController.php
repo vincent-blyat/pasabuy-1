@@ -38,8 +38,8 @@ class RegisterController extends Controller
             'verification_code' => $request->verificationCode
         ];
 
-
-        $email = $request->email;     
+        //return response()->json(trim($request->email));
+        $email = trim($request->email);   
         if($request != null){
             Mail::to($email)->send(new emailConfirmation($data));
             return redirect()->back()->with(session()->flash('alert-success', 'Please check your email for verification link'));
