@@ -9,4 +9,6 @@ class userInformation extends Model
 {
     use HasFactory;
     protected $table = 'tbl_userInformation';
+    protected $primaryKey = 'email';
+    protected $timestamps = false;
 }

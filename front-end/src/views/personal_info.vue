@@ -20,10 +20,13 @@
         <div  class="text-sm w-7/12 gap-x-10 pt-8 space-y-8 vs:text-sm vs:w-full">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
-        <span>
+        <span class="flex justify-between">
         <p v-if="show" id="name">{{personal.name}}</p>
         <input type="text" v-if="hidden" 
-        id="input_name" v-model="personal.name" 
+        id="input_fname" v-model="personal.firstname" 
+        class="ring-2 ring-gray-400 font-bold w-full">
+        <input type="text" v-if="hidden" 
+        id="input_lname" v-model="personal.lastname" 
         class="ring-2 ring-gray-400 font-bold w-full">
         </span>
         </span>
@@ -103,12 +106,13 @@ data(){
     edit2:false,
     message:'yeah',
     personal:  {
-      name:' ',
-      lastname:' ',
-      phone_number:' ',
-      work:'   ',
-      gender:' ',
-      language:' ',
+      name:'',
+      firstname:'',
+      lastname:'',
+      phone_number:'',
+      work:'',
+      gender:'',
+      language:'',
       birdate: ''
     },
     }
@@ -117,8 +121,10 @@ data(){
 methods:{
 
     submit () {
-       document.getElementById("myForm").submit();
-       
+      api.post('/api/editPersonal', this.personal).then((res)=>{
+        console.log(res);
+      //this.user = res.data;
+      })
     },
      Edit(pars) {
       let x=document.getElementById(pars).innerHTML;
@@ -137,20 +143,18 @@ mounted(){
     //get the user information from the laravel API
     api.get('/api/getPersonal').then((res)=>{
       console.log('personal info' ,res.data);
-      this.personal.name = res.data.firstName + ' '+  res.data.lastName  ;
+      this.personal.firstname = res.data.firstName;
+      this.personal.lastname = res.data.lastName;
+      this.personal.name = res.data.firstName + ' '+ res.data.lastName;
       this.personal.phone_number = res.data.phoneNumber;
       this.personal.gender = res.data.gender;
       this.personal.birdate = res.data.birthDate; 
       //this.user = res.data;
-    }).catch((error) => {
-      this.error=error.response.data.errors;
     })
     api.get('/api/getLanguages').then((res)=>{
       console.log('language ' ,res.data);
       this.personal.language = res.data.languages;
       //this.user = res.data;
-    }).catch((error) => {
-      this.error=error.response.data.errors;
     })
   }
 }
