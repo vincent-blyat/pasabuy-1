@@ -48,6 +48,7 @@
     </div>
 </template>
 <script>
+import api from '../api'
 export default {
    beforeCreate:function () {
       document.body.className='account';
@@ -60,10 +61,10 @@ data(){
     show2:true,
     edit2:false,
     address_info:{
-    house_number:'0210',
-    province:'Albay',
-    city:'Legaspi',
-    barangay:'Banquerohan'
+        house_number:'',
+        province:'',
+        city:'',
+        barangay:''
     },
     }
 
@@ -71,7 +72,13 @@ data(){
 methods:{
 
     submit () {
-       
+        api.post('/api/editAddress', this.address_info).then((res)=>{
+        console.log(res.data);
+
+      //this.user = res.data;
+        }).catch(() => {
+            location.reload();
+        })
     },
      Edit(pars) {
       let x=document.getElementById(pars).innerHTML;
@@ -81,10 +88,23 @@ methods:{
       }
       else{
          document.getElementById(pars).innerHTML="Edit"; 
-         
+         this.submit();
       }
     }
 
-}
+},
+mounted(){
+    //get the user information from the laravel API
+    api.get('/api/getAddress').then((res)=>{
+      console.log('address info ',res.data);
+      this.address_info.house_number = res.data.houseNumber;
+      this.address_info.province = res.data.province;
+      this.address_info.city = res.data.cityMunicipality;
+      this.address_info.barangay = res.data.barangay;
+      //this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+  }
 }
 </script>

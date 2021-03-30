@@ -18,7 +18,7 @@
           </div>
         <div class="text-sm w-5/12 gap-x-10 space-y-8 pt-8 ">
         <span class="  font-raleways font-bold grid grid-cols-1 "> 
-        <p class="text-gray-500"> {{verification_status.msg}}</p>
+        <p   :class="{red : unverified }">{{verification_status.msg}}</p>
         </span>
         </div>
     </div>
@@ -30,6 +30,7 @@ import Nav from '../views/Navbar.vue'
 import Personal from '../views/personal_info.vue'
 import Address from '../views/address_info.vue'
 import InfoAccount from '../views/account_info.vue'
+import api from '../api'
 export default {
   name: 'Account',
   components: {
@@ -40,10 +41,10 @@ export default {
   },
 data(){
     return{
-   
     verification_status:{
-        msg:'Your Account is fully verified'
-    }
+        msg:''
+    },
+    unverified: true
     }
   
 },
@@ -63,7 +64,23 @@ methods:{
       }
     }
 
-}
+    },
+mounted(){
+    //get the user information from the laravel API
+    api.get('/api/getPersonal').then((res)=>{
+      console.log(res.data);
+      if (!res.data.verifyStatus.localeCompare('unverified')){
+        this.verification_status.msg = 'Your account is not fully verified.';
+        this.unverified = true;
+      }else{
+        this.verification_status.msg = 'Your account is fully verified.';
+        this.unverified = false;
+      }
+      //this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+  }
 }
 </script>
 <style>
@@ -72,5 +89,8 @@ body.account{
 }
 body.home{
     background-color:white;
+}
+.red {
+  color: red;
 }
 </style>

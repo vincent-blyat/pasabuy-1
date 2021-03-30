@@ -1,18 +1,29 @@
 <template>
 <!--Start of Navbar code-->
     <!--profile menu icon-->
-  <nav class="shadow-md vs:h-20 vs:bg-red-700 vs:w-full w-full fixed flex items-center justify-between font-nunito p-0 bg-white mt-0  h-min">
+  <nav class=" h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
+  2xl:bg-white 2xl:shadow-md
+  xl:bg-white  xl:shadow-md
+  lg:bg-white  lg:shadow-md
+   mt-0  h-min">
       <!--Logo-->
        <div class="flex  items-center ">
-       <button class="material-icons hidden ml-4 text-white vs:block" @click="isOpen=!isOpen"> menu</button>
-      <p class="uppercase font-bold hidden vs:block text-white h-full">{{currentRoute}}</p>
-      <div class="flex items-center left-0">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 vs:hidden">
-        <h1 class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway vs:text-white vs:hidden text-red-700 md:hidden">pasaBUY</h1>
+       <button class="material-icons 2xl:hidden xl:hidden lg:hidden ml-4 text-white block" @click="isOpen=!isOpen"> menu</button>
+      <p class="uppercase font-bold 2xl:hidden xl:hidden lg:hidden block text-white h-full">{{currentRoute}}</p>
+      <div class="flex items-center">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 hidden 2xl:block xl:block lg:block">
+        <h1 class="absolute text-xl font-black tracking-widest top-6 left-16 font-raleway
+          2xl:text-red-700 xl:text-red-700 lg:text-red-700
+         hidden 2xl:block xl:block lg:block ">pasaBUY</h1>
       </div>
        </div>
-       <img v-if="currentRoute=='' " src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 hidden vs:block"/>
-      <div class=" vs:hidden flex  items-center font-bold gap-x-24 text-gray-500 ">
+       <img v-if="currentRoute=='' " src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 2xl:hidden xl:hidden lg:hidden block"/>
+      <div class=" hidden 
+      2xl:flex 2xl:ml-60 
+      xl:flex xl:ml-72 xl:mr-10
+      lg:flex lg:justify-between lg:gap-x-0
+      w-5/12 
+      justify-center items-center font-bold gap-x-24 text-gray-500 ">
      <router-link to="/dashboard"> 
      <div class="flex gap-x-4 py-4">
        <span class="material-icons">
@@ -27,12 +38,12 @@
       </span>
       <p class=" text-gray-500">Messages</p>
       </div></router-link>
-      <div class="flex gap-x-4 py-4 cursor-pointer" @click="activeBtn=!activeBtn,show=!show" :class="{active_notif: activeBtn }">
+      <div class="flex gap-x-4 py-4 cursor-pointer  items-center" @click="activeBtn=!activeBtn,show=!show" :class="{active_notif: activeBtn }">
        <span id="notif" class="text-gray-500 material-icons \">
             notifications
           </span>
           <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</span>
-             <div v-if="show" class="fixed float-left h-auto pt-2 mt-8 overflow-hidden bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
+             <div v-if="show" class="fixed float-left h-auto pt-2 mt-80 overflow-hidden bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
                <h1 class="mt-4 mb-4 ml-4 font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
                <!--notification 1-->
                 <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
@@ -70,12 +81,16 @@
       </div>
       <div class=" flex  mr-8 gap-x-4 ">
         <div class="flex ">
-        <button type="button" name="search" class=" text-left vs:hidden ring-1 ring-gray-400 rounded-2xl w-60 pl-4 pr-12">
+        <button type="button" name="search" class=" text-left hidden 2xl:block lg:block xl:block
+          
+         ring-1 ring-gray-400 rounded-2xl w-60 lg:w-auto pl-4 pr-12">
           <router-link to="/search">Search</router-link>
         </button>
-        <span class="material-icons fixed ml-52 self-center vs:block vs:text-white vs:m-0">search</span>
+        <span class="material-icons fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center block text-white 
+        2xl:text-black lg:text-black xl:text-black
+          m-0 ">search</span>
         </div>
-        <div  class="vs:hidden">
+        <div  class="hidden 2xl:block lg:block xl:block">
              <Dropdown/>
         </div>
 

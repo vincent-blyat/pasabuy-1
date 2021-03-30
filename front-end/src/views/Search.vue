@@ -63,11 +63,11 @@
        <div class="vs:px-3 vs:max-w-full px-4 py-3 mb-3 bg-white rounded-lg flex justify-between items-center">
           <div class="flex ml-1"> <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
             <div class="flex flex-col justify-between items-start ml-2 pt-1 align-middle"> 
-              <span class="font-medium text-sm" id="mark">Mark Aral<span class="material-icons pl-2 vs:mr-28 md:mr-48 lg:mr-64 lg:pr-2 xl:mr-64" id="iCheck" >verified</span>
+              <span class="font-medium text-sm" id="mark">{{ searchProfileResult.firstname }} {{ searchProfileResult.lastname }} <span class="material-icons pl-2 vs:mr-28 md:mr-48 lg:mr-64 lg:pr-2 xl:mr-64" id="iCheck" >verified</span>
                   <button><span class=" font-semibold rounded-full px-2 pb-1  border border-gray-600 hover:text-red-700" style="font-size:13px">Following</span></button>
                   <button><span class="font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700" style="font-size:13px">Message</span></button>
               </span> 
-              <span class="text-xs text-gray-600"> Lives in Banquerohan, Legazpi City
+              <span class="text-xs text-gray-600"> {{ searchProfileResult.address }}
               </span> 
 
               <div class="w-full">
@@ -92,7 +92,7 @@
                   <button><span class="top-3 font-semibold rounded-full px-2 pb-1  border border-gray-600 hover:text-red-700" style="font-size:13px">Follow</span></button>
                   <button><span class="top-3 font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700" style="font-size:13px">Message</span></button>
              </span> 
-              <span class="text-xs text-gray-600"> Lives in Banquerohan, Legazpi City
+              <span class="text-xs text-gray-600"> {{ searchProfileResult.address }}
               </span> 
               </div>
           </div>
@@ -104,11 +104,39 @@
        <div class=" vs:max-w-full vs:px-0 px-3 mx-3 py-2 mb-3 pt-4 rounded-lg flex justify-between items-center">
           <div class="flex"> <img src="https://whatsondisneyplus.com/wp-content/uploads/2021/02/wanda-icon.png" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
             <div class="flex flex-col justify-between items-start ml-2 align-middle"> 
-              <span class="font-semibold text-base">Monica Rambeau<span class="material-icons align-middle pl-2" id="iCheck" >verified</span>
-                  <span class="text-base vs:text-sm text-gray-600 mr-36 vs:mr-4 "> posted a shopping offer</span>
+              <span class="font-semibold text-base">{{ searchPostResult.firstName }} {{ searchPostResult.lastName }} <span class="material-icons align-middle pl-2" id="iCheck" >verified</span>
+                  <span class="text-base vs:text-sm text-gray-600 mr-36 vs:mr-4 "> posted a {{ searchPostResult.offerPosted }}</span>
+                  <button @click="edit=!edit">
                   <span class="material-icons rig align-middle">more_horiz</span>
+                 </button>
+                 <div class="w-full">
+                    <div v-if="edit" class="absolute space-y-2 py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-91 h-min w-30 ring-2 ring-gray-200">
+                        <!--EDIT POST--->
+                      <EditShoppingOffer v-if="editShoppingOffer" @closeModal1="listener1"/>
+                        <button  @click="toggleEditShoppingOffer" class="flex flex-row gap-x-2 focus:outline-none">
+                          <span class="font-medium text-gray-500 material-icons">
+                            mode
+                          </span>
+                          Edit Post
+                        </button>
+
+                         <!-----UPDATE STATUS------>
+                      <UpdateOrderStatus v-if="updateOrderStatus" @closeModal3="listener2"/>
+                        <button  @click="toggleUpdateOrderStatus" class="flex flex-row font-normal focus:outline-none gap-x-2">
+                          <span class="font-normal text-gray-500 material-icons">
+                            autorenew
+                          </span>
+                          Update Status
+                        </button>
+                        <!---END-->
+
+                      <router-link to="#" class="flex flex-row gap-x-2"> 
+                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
+                    </div>
+                    </div> 
+                    <!------------3 DOT MENU END------------------>
              </span> 
-              <span class="text-sm text-gray-600"> 3 hours ago
+              <span class="text-sm text-gray-600"> {{ searchPostResult.datePosted }}
               </span> 
               </div>
           </div>
@@ -120,7 +148,7 @@
             <span class="inline-block align-middle material-icons">
               remove_circle_outline
             </span>
-            <label class="pl-1 align-middle">No longer Accepting Requests</label> 
+            <label class="pl-1 align-middle">{{ searchPostResult.status }}</label> 
           </div>
         </div>
       </div><!------------------------------------------>
@@ -138,7 +166,7 @@
                 <span class="items-center text-red-700 material-icons">
                   delivery_dining
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering at Banquerohan area only</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering at {{ searchPostResult.deliveryAddress }}</label> 
               </div>
             </div>
 
@@ -148,7 +176,7 @@
                 <span class="text-red-700 material-icons ">
                     watch_later  
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
+                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ searchPostResult.schedule }}</label>
               </div>
             </div>
 
@@ -169,7 +197,7 @@
                 <span class="items-center text-red-700 material-icons">
                   shopping_cart
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Shopping at SM Legazpi City</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Shopping at {{ searchPostResult.shoppingAddress }}</label> 
               </div>
             </div>
 
@@ -178,7 +206,7 @@
                 <span class="items-center text-red-700 material-icons">
                   directions_car_filled
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Public Transit</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">{{ searchPostResult.transportation }}</label> 
               </div>
             </div>
 
@@ -187,7 +215,7 @@
                 <span class="items-center text-red-700 material-icons">
                   payments
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Payment First</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">{{ searchPostResult.paymentMethod }}</label> 
               </div>
             </div>
 
@@ -208,7 +236,7 @@
         <div class="flex py-3 px-2 text-sm bg-transparent bg-white w-full">
           <div class="flex items-center py-2 bg-white mx-3">
             <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg w-full">
-                Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request.
+               {{ searchPostResult.comment }}
             </div>
           </div> 
         </div>
@@ -241,7 +269,7 @@
               </span>
               <button @click="isOpen=!isOpen" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Share</button>
                 <div class="w-full">
-                    <div v-if="isOpen1" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30 ">
+                    <div v-if="isOpen" class="absolute py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl right-99 h-min w-30">
                       <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1">
                         <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
                       <router-link to="#" class="flex flex-row gap-x-2 mb-1 mt-1 mr-1 ml-1"> 
@@ -326,19 +354,63 @@ img{
 <script>
 
 import Navbar from './Navbar'
+import EditShoppingOffer from "./EditShoppingOffer"
+import UpdateOrderStatus from "./updateOrderStatus"
 
  export default {
     data() {
     return {
       postModalVisible: false,
       edit1:false,
-      isOpen:false
+      isOpen:false,
+      edit:false,
+      editShoppingOffer:false,
+      updateOrderStatus:false,
+
+      searchProfileResult:{
+        firstname: "Tony",
+        lastname: "Stark",
+        address: "Los Angeles, California",
+        dateposted: "13 hours ago",
+
+      },
+      searchPostResult:{
+        firstName:"Monica",
+        lastName: "Rambaeu",
+        status: "No longer Accepting Request",
+        offerPosted: "shopping offer",
+        datePosted: "3 hours ago",
+        deliveryAddress: "Manhattan",
+        shoppingAddress: "7-eleven",
+        schedule: "Tomorrow 10AM",
+        transportation: "Public Transit",
+        paymentMethod: "Payment First",
+        comment:" Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request."
+      }
            
         }
     },
 
   components:{
-     Navbar
+     Navbar,
+     EditShoppingOffer,
+    UpdateOrderStatus,
+  },
+
+  methods:{
+    toggleEditShoppingOffer(){
+      this.editShoppingOffer = !this.editShoppingOffer 
+    },
+    listener1(){
+      this.editShoppingOffer = false;
+    },
+    toggleUpdateOrderStatus(){
+      this.updateOrderStatus = !this.updateOrderStatus
+    },
+    listener2(){
+      this.updateOrderStatus = false;
+    }
+
   }
 }
 </script>

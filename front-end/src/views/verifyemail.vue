@@ -21,7 +21,7 @@
               </div>
               <div class="flex -mx-1 ">
                 <div class="w-1/2 px-1 mt-4 text-lg font-bold text-left text-grey-dark text-blue">
-                    <router-link to="/signup" >Back</router-link>
+                    <router-link to="/sign-up" >Back</router-link>
                 </div>
                 <div class="flex justify-end w-1/2 px-1 mt-3">
                   <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
