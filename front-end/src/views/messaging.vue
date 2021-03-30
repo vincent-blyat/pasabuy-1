@@ -310,9 +310,26 @@
 
 <script>
   import Navbar from './Navbar'
+  import api from '../api'
   export default {
     components:{
       Navbar
+    },
+    data(){
+      return{
+        users: null,
+        messages: null
+      }
+    },
+    methods:{
+      fetchMessage(){
+
+      }
+    },
+    mounted(){
+      api.get('/api/users').then((response)=>{     
+        console.log(response.data);
+      })
     }
   }
 
