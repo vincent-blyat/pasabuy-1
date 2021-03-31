@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Messages;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class userInformationController extends Controller
 {
@@ -100,6 +102,17 @@ class userInformationController extends Controller
         else{
             return response()->json('error, information not saved');
         }
+    }
+    public function getEmailChatUsers()
+    {
+        # code...
+        return response()->json(Messages::where('email1', '=', Auth::user()->email)->get());
+    }
+
+    public function getUsersName()
+    {
+        # code...
+        return response()->json(userInformation::all()); 
     }
 
 
