@@ -1,14 +1,18 @@
 <template>
-<!--Start of Navbar code-->
-    <!--profile menu icon-->
-  <nav class=" h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
+    <div class="flex">
+
+  <!-- mobile menu bar -->
+  <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+    <!-- logo -->
+    <!-- mobile menu button -->
+    <nav class=" h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
   2xl:bg-white 2xl:shadow-md
   xl:bg-white  xl:shadow-md
   lg:bg-white  lg:shadow-md
-   mt-0  h-min">
+   mt-0  ">
       <!--Logo-->
        <div class="flex  items-center ">
-       <button class="material-icons 2xl:hidden xl:hidden lg:hidden ml-4 text-white block" @click="isOpen=!isOpen"> menu</button>
+       <button class="material-icons 2xl:hidden xl:hidden lg:hidden ml-4 text-white block" @click="toggle_event()"> menu</button>
       <p class="uppercase font-bold 2xl:hidden xl:hidden lg:hidden block text-white h-full">{{currentRoute}}</p>
       <div class="flex items-center">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 hidden 2xl:block xl:block lg:block">
@@ -86,31 +90,111 @@
          ring-1 ring-gray-400 rounded-2xl w-60 lg:w-auto pl-4 pr-12">
           <router-link to="/search">Search</router-link>
         </button>
-        <span class="material-icons fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center block text-white 
+        <span v-if="currentRoute==''" class="material-icons fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center block text-white 
         2xl:text-black lg:text-black xl:text-black
           m-0 ">search</span>
+          
         </div>
-        <div  class="hidden 2xl:block lg:block xl:block">
+        <div  class="hidden  2xl:block lg:block xl:block">
              <Dropdown/>
         </div>
 
       </div>
       
     </nav>
-    <!--mobile menu-->
-     <Mobilemenu v-if="isOpen" class=""/>
-    <!--End of Navbar code-->
-</template>
+  </div>
 
+  <!-- sidebar -->
+  <div class="sidebar lg:hidden 2xl:hidden border-r-2 h-full xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+
+    <!-- logo -->
+    <div class="flex mt-0">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-12  h-10">
+        <p class="text-2xl text-red-700 font-extrabold">pasaBUY</p>
+    </div>
+    <!-- nav -->
+    <nav class=" space-y-8">
+       <router-link to="/dashboard" class="rounded-2xl   ">  
+     <div class="mobile rounded-2xl items-center flex pl-2 h-10 space-x-2 ">
+       <span class="material-icons">
+        home  
+      </span> 
+      <p class="text text-gray-500">Home</p>
+      </div>
+      </router-link>
+      
+     <router-link to="/messages"  class="rounded-2xl   "> 
+     <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+      <span class="material-icons cursor-pointer">
+        chat
+      </span>
+      <p class=" text-gray-500">Messages</p>
+      </div></router-link>
+      <router-link to="/ss"  class="rounded-2xl   "> 
+      <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+       <span class="material-icons ">
+            notifications
+          </span>
+      <p class="text-gray-500">Notifications</p>   
+      </div></router-link>
+     <router-link to="/edit-profile" class="rounded-2xl">
+      <div class="mobile rounded-2xl items-center flex h-10 pl-2 space-x-2 ">
+       <span class="material-icons ">
+            account_circle
+          </span>
+      <p class="text-gray-500">Profile</p>   
+      </div>
+      </router-link>
+       <hr>
+        <router-link to="/orders"  class="rounded-2xl  ">
+       <div class="mobile rounded-2xl items-center flex h-10 mt-4 pl-2 space-2-x-4 ">
+       <span class="material-icons ">
+          shopping_bag
+          </span>
+      <p class="text-gray-500">Orders</p>   
+      </div></router-link>
+      <router-link to="/deliver"  class="rounded-2xl  ">
+       <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+       <span class="material-icons ">
+          delivery_dining
+          </span>
+      <p class="text-gray-500">Deliveries</p>   
+      </div></router-link>
+      <router-link to="/shopping-list" class="rounded-2xl">
+       <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+       <span class="material-icons ">
+          list
+          </span>
+      <p class="text-gray-500">Shopping Lists</p>   
+      </div></router-link>
+        <router-link to="/account-settings" class="rounded-2xl  ">
+       <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+       <span class="material-icons ">
+         manage_accounts
+          </span>
+      <p class="text-gray-500">Account Settings</p>   
+      </div></router-link>
+       <router-link to="/"  class="rounded-2xl ">
+       <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
+       <span class="material-icons ">
+         logout
+          </span>
+      <p class="text-gray-500">Log Out</p>   
+      </div></router-link>
+    </nav>
+  </div>
+
+
+</div>
+</template>
 <script>
 import { computed } from 'vue';
 import {useRoute} from 'vue-router';
 import Dropdown from './dropmenu.vue';
-import Mobilemenu from './mobile_menu.vue';
 export default {
   name:'navBar',
  components:{
-    Dropdown,Mobilemenu
+    Dropdown
   },
   beforeCreate:function () {
       document.body.className='account';
@@ -122,6 +206,14 @@ export default {
             activeBtn:false,
         }
     },
+      methods:{
+            toggle_event(){
+                const sidebar = document.querySelector(".sidebar");
+// add our event listener for the click
+             sidebar.classList.toggle("-translate-x-full");
+        
+            }
+        },
     setup() {
     const currentRoute=computed(()=>{
       return useRoute().name
@@ -129,10 +221,20 @@ export default {
     return{currentRoute}
     
   },
+
     
 }
 </script>
 <style scoped>
+.router-link-active .mobile{
+ background-color: rgba(236, 233, 233, 0.705);
+}
+.router-link-active .mobile p{
+  color:red;
+}
+.router-link-active{
+  color:red;
+}
 .router-link-active{
   color:red;
   border-bottom: 5px solid red;
