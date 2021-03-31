@@ -85,7 +85,7 @@
       <div class=" flex  mr-8 gap-x-4 ">
         <div class="flex ">
         <button type="button" name="search" class=" text-left hidden 2xl:block lg:block xl:block
-          
+          text-black
          ring-1 ring-gray-400 rounded-2xl w-60 lg:w-auto pl-4 pr-12">
           <router-link to="/search">Search</router-link>
         </button>
