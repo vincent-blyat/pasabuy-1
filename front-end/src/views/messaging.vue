@@ -785,8 +785,8 @@ export default {
       var copiedtext = copytext.value;
       if (copiedtext !== "") {
         var printnow =
-          '<div class="p-2 flex justify-end ">' +
-          '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">' +
+          '<div class="flex justify-end pr-10 mt-1">' +
+          '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
           copiedtext +
           '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
           "<br>" +
@@ -800,18 +800,9 @@ export default {
         document.getElementById("typemsg").value = "";
         var box = document.getElementById("journal-scroll");
         box.scrollIntoView();
+        
       }
     }, //end sendbtn
-
-    messagebtn() {
-      this.toggleInbox = !this.toggleInbox;
-      this.toggleChat = !this.toggleChat;
-      var b = document.getElementById("gwen");
-      var bText = b.textContent;
-      var bLen = bText.length;
-      var res = bText.substring(0, bLen - 13);
-      document.getElementById("active").innerHTML = res;
-    },
 
     navMark(name) {
       this.chatIncoming = [];

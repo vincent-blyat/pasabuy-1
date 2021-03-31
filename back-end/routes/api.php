@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
     Route::get('/getChatroom', [userInformationController::class, 'getChatroom']);
     Route::get('/getUser', [userInformationController::class, 'getUsersName']);
-    Route::get('/getMessages', [userInformationController::class, 'getMessages']);
+    Route::get('/getMessages', [messageController::class, 'getMessages']);
+    Route::get('/sendMessage', [messageController::class, 'sendMessage']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
