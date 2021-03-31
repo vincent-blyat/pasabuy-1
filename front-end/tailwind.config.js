@@ -39,6 +39,7 @@ module.exports = {
         waterloo:'#35397B',
         balticsea: '#1C1720',
         warning:' #FE6B00',
+        success: '#708D3A',
 
       },
         spacing: {
@@ -78,8 +79,7 @@ module.exports = {
         eh: '430px',
         ew: '844px',
         65: '267px',
-        //color?
-        success: '#708D3A',
+        
           
       },
       fontFamily: {
