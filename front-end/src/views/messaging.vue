@@ -37,7 +37,7 @@
         <!---end of search bar-->
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
           <button
-            v-for="user in users"
+            v-for="user in uniqUsers"
             :key="user.firstName"
             @click="navMark(user.firstName)"
             type="button"
@@ -112,7 +112,45 @@
               </div>
             </span> -->
           </div>
-       <div class="p-2 flex justify-end"  
+
+      <div class="p-1 pl-2"
+            v-for="(msg, index) in chat"
+            :key="msg.message">
+             <div v-bind:class="{ 'flex justify-end pr-10 mt-1' : out[index], 'flex items-end pr-10 mt-1': incoming[index] }">
+              <div v-bind:class="{'ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg': out[index], 'ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ': incoming[index] }">
+                <p>{{ msg.message }}</p>
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ msg.dateCreated }}
+                </span>
+              </div>
+            </div>
+        </div>
+<!-- ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg -->
+
+
+<!--  ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg -->   
+       <!--  
+          <div class="p-1 pl-2" 
+            v-for="msg in chat"
+            :key="msg.message">
+            <div class="flex items-end pr-10 mt-1">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-8"
+              />
+              <div class="rounded-lg">
+                <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+                  <p>{{ msg.message }}</p>
+                  <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
+                    msg.dateCreated
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+         <div class="p-2 flex justify-end"  
             v-for="msg in chatOutgoing"
             :key="msg.message">
               <div
@@ -126,9 +164,11 @@
                   {{ msg.dateCreated }}
                 </span>
               </div>
-          </div>
+        </div>
 
-          <div class="flex justify-end mt-2">
+        -->
+
+          <!-- <div class="flex justify-end mt-2">
             <div class="ml-32 bg-gray-100 text-sm rounded-lg">
               <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
                 <div class="mx-4 mb-2 text-sm font-semibold">
@@ -200,9 +240,9 @@
               </div>
             </div>
           </div>
-          <!----------------------------------------->
+          --------------------------------------->
 
-          <div class="p-1 ml-12">
+          <!-- <div class="p-1 ml-12">
             <div class="flex items-end pr-10 mt-1">
               <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
                 <div>
@@ -275,27 +315,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --> 
 
-          <div class="p-1 pl-2" 
-            v-for="msg in chatIncoming"
-            :key="msg.message">
-            <div class="flex items-end pr-10 mt-1">
-              <img
-                src="https://ptetutorials.com/images/user-profile.png"
-                alt="sunil"
-                class="rounded-lg h-8 w-8"
-              />
-              <div class="rounded-lg">
-                <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                  <p>{{ msg.message }}</p>
-                  <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
-                    msg.dateCreated
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          
 
           <div id="chatmsg"></div>
         </div>
@@ -708,6 +730,7 @@
 <script>
 import Navbar from "./Navbar";
 import api from "../api";
+import uniq from 'lodash/uniq'
 export default {
   components: {
     Navbar,
@@ -729,6 +752,9 @@ export default {
       activeName: null,
       chatIncoming: [],
       chatOutgoing: [],
+      out :[],
+      incoming:[],
+      chat: [],
       //sent a request
       activity: "You sent a request to to",
       recipient: null,
@@ -790,6 +816,7 @@ export default {
     navMark(name) {
       this.chatIncoming = [];
       this.chatOutgoing = [];
+      this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
@@ -802,20 +829,20 @@ export default {
       if(chatRoomEmail.length>0){
         console.log(chatRoomEmail[0].email);
         api.get("/api/getMessages", {params: {email:chatRoomEmail[0].email}}).then((response)=>{
-          console.log(response.data)
+          console.log('asdfsafsafafaf',response.data)
           var i;
-          var x=0;
-          var y=0;
+      
           for(i=0;i<response.data.length;i++){
             if(response.data[i].email2 == chatRoomEmail[0].email){
-              this.chatOutgoing[x] = response.data[i];
-              console.log('outgoing = ' , this.chatOutgoing)
-              x++;
+              this.chat[i] = response.data[i];
+              this.out[i]= true;
+              this.incoming[i]= false;
             }
             else{
-              this.chatIncoming[y] = response.data[i];
-              console.log('incoming = ' , this.chatIncoming)
-              y++;
+              this.chat[i] = response.data[i];
+              this.out[i]= false;
+              this.incoming[i]= true;
+           
             }
           }
         })
@@ -858,6 +885,11 @@ export default {
   created() {
     this.getChatRoomMessages();
   },
+  computed: {
+   uniqUsers () {
+      return uniq(this.users, 'email')
+   }
+}
 }; //end export default
 
 const add = document.querySelector("#add");

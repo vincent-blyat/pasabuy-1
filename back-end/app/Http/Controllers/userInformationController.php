@@ -115,7 +115,8 @@ class userInformationController extends Controller
         return response()->json(Messages::where('email1', '=', Auth::user()->email)
                                         ->Where('email2', '=', $request->email)
                                         ->orWhere('email1', '=', $request->email)
-                                        ->Where('email2', '=',Auth::user()->email)->get());
+                                        ->Where('email2', '=',Auth::user()->email)
+                                        ->orderBy('dateCreated', 'ASC')->get());
     }
 
     public function getUsersName()
