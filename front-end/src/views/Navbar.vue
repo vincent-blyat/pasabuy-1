@@ -1,8 +1,7 @@
 <template>
     <div class="flex">
-
   <!-- mobile menu bar -->
-  <div class="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+  <div class="bg-gray-800 text-gray-100 flex justify-between ">
     <!-- logo -->
     <!-- mobile menu button -->
     <nav class=" h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
@@ -92,8 +91,16 @@
         </button>
         <span v-if="currentRoute==''" class="material-icons fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center block text-white 
         2xl:text-black lg:text-black xl:text-black
+        2xl:hidden
+        xl:hidden
+        lg:hidden
           m-0 ">search</span>
-          
+          <span class="material-icons hidden fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center text-white 
+        2xl:text-black lg:text-black xl:text-black
+        2xl:block
+        xl:block
+        lg:block
+          m-0 ">search</span>
         </div>
         <div  class="hidden  2xl:block lg:block xl:block">
              <Dropdown/>
@@ -105,7 +112,7 @@
   </div>
 
   <!-- sidebar -->
-  <div class="sidebar lg:hidden 2xl:hidden border-r-2 h-full xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+  <div class="sidebar lg:hidden 2xl:hidden border-r-2 h-full xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full  transition duration-200 ease-in-out">
 
     <!-- logo -->
     <div class="flex mt-0">
