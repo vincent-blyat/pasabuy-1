@@ -103,10 +103,19 @@ class userInformationController extends Controller
             return response()->json('error, information not saved');
         }
     }
-    public function getEmailChatUsers()
+    public function getChatroom()
     {
         # code...
         return response()->json(Messages::where('email1', '=', Auth::user()->email)->get());
+    }
+
+    public function getMessages(Request $request)
+    {
+        # code...
+        return response()->json(Messages::where('email1', '=', Auth::user()->email)
+                                        ->Where('email2', '=', $request->email)
+                                        ->orWhere('email1', '=', $request->email)
+                                        ->Where('email2', '=',Auth::user()->email)->get());
     }
 
     public function getUsersName()

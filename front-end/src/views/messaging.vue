@@ -39,7 +39,7 @@
           <button
             v-for="user in users"
             :key="user.firstName"
-            @click="navMark"
+            @click="navMark(user.firstName)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
           >
@@ -54,17 +54,17 @@
                   {{ user.firstName }}
                   <span class="material-icons pl-2" id="iCheck">
                     check_circle
-                  </span></span
-                >
+                  </span>
+                </span>
                 <span class="text-xs text-gray-400 truncate w-36">
-                  {{ inbox[0].message }}
+                  {{  }}
                 </span>
               </div>
             </div>
             <div class="flex flex-col items-start">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·</span
-                >{{ inbox[0].time }}</span
+                >{{ }}</span
               >
             </div>
           </button>
@@ -92,7 +92,7 @@
           <div
             class="sticky top-0 flex justify items-center shadow-lg bg-white border"
           >
-            <span class="text-sm p-3 w-full">
+            <!-- <span class="text-sm p-3 w-full">
               <span>You sent a request to</span>
               <span class="font-semibold ml-2">{{ recipient }}</span>
               <span class="ml-2">for</span>
@@ -110,21 +110,22 @@
                   <span>View Post</span>
                 </button>
               </div>
-            </span>
+            </span> -->
           </div>
-
-          <div class="p-2 flex justify-end">
-            <div
-              class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg"
-            >
-              <p>{{ chatOutgoing[0].sent }}</p>
-              <span
-                class="time_date text-gray-500 pl-1"
-                style="font-size: 10.5px"
+       <div class="p-2 flex justify-end"  
+            v-for="msg in chatOutgoing"
+            :key="msg.message">
+              <div
+                class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg"
               >
-                {{ chatOutgoing[0].timeSent }}
-              </span>
-            </div>
+                <p>{{ msg.message }}</p>
+                <span
+                  class="time_date text-gray-500 pl-1"
+                  style="font-size: 10.5px"
+                >
+                  {{ msg.dateCreated }}
+                </span>
+              </div>
           </div>
 
           <div class="flex justify-end mt-2">
@@ -276,7 +277,9 @@
             </div>
           </div>
 
-          <div class="p-1 pl-2">
+          <div class="p-1 pl-2" 
+            v-for="msg in chatIncoming"
+            :key="msg.message">
             <div class="flex items-end pr-10 mt-1">
               <img
                 src="https://ptetutorials.com/images/user-profile.png"
@@ -285,104 +288,9 @@
               />
               <div class="rounded-lg">
                 <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                  <p>{{ chatIncoming[0].received }}</p>
+                  <p>{{ msg.message }}</p>
                   <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
-                    chatIncoming[0].timeReceived
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-2 flex justify-end">
-            <div
-              class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-            >
-              <p>{{ chatOutgoing[1].sent }}</p>
-              <span
-                class="time_date text-gray-500 pl-1"
-                style="font-size: 10.5px"
-                >{{ chatOutgoing[1].timeSent }}</span
-              >
-            </div>
-          </div>
-
-          <div class="p-1 pl-2">
-            <div class="flex items-end pr-10 mt-1">
-              <img
-                src="https://ptetutorials.com/images/user-profile.png"
-                alt="sunil"
-                class="rounded-lg h-8 w-8"
-              />
-              <div class="rounded-lg">
-                <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                  <p>{{ chatIncoming[1].received }}</p>
-                  <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
-                    chatIncoming[1].timeReceived
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-2 flex justify-end">
-            <div
-              class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-            >
-              <p>{{ chatOutgoing[2].sent }}</p>
-              <span
-                class="time_date text-gray-500 pl-1"
-                style="font-size: 10.5px"
-              >
-                {{ chatOutgoing[2].timeSent }}
-              </span>
-            </div>
-          </div>
-
-          <div class="p-1 pl-2">
-            <div class="flex items-end pr-10 mt-1">
-              <img
-                src="https://ptetutorials.com/images/user-profile.png"
-                alt="sunil"
-                class="rounded-lg h-8 w-8"
-              />
-              <div class="rounded-lg">
-                <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                  <p>{{ chatIncoming[2].received }}</p>
-                  <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
-                    chatIncoming[2].timeReceived
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="p-2 flex justify-end">
-            <div
-              class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-            >
-              <p>{{ chatOutgoing[3].sent }}</p>
-              <span
-                class="time_date text-gray-500 pl-1"
-                style="font-size: 10.5px"
-              >
-                {{ chatOutgoing[3].timeSent }}</span
-              >
-            </div>
-          </div>
-
-          <div class="p-1 pl-2">
-            <div class="flex items-end pr-10 mt-1">
-              <img
-                src="https://ptetutorials.com/images/user-profile.png"
-                alt="sunil"
-                class="rounded-lg h-8 w-8"
-              />
-              <div class="rounded-lg">
-                <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                  <p>{{ chatIncoming[3].received }}</p>
-                  <span class="text-gray-500 pl-1" style="font-size: 10.5px">{{
-                    chatIncoming[3].received
+                    msg.dateCreated
                   }}</span>
                 </div>
               </div>
@@ -514,21 +422,6 @@
                 </div>
               </span>
             </div>
-
-            <div class="p-2 flex justify-end">
-              <div
-                class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg"
-              >
-                <p>{{ chatOutgoing[0].sent }}</p>
-                <span
-                  class="time_date text-gray-500 pl-1"
-                  style="font-size: 10.5px"
-                >
-                  {{ chatOutgoing[0].timeSent }}
-                </span>
-              </div>
-            </div>
-
             <div class="flex justify-end mt-2">
               <div class="ml-32 bg-gray-100 text-sm rounded-lg">
                 <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
@@ -678,126 +571,6 @@
               </div>
             </div>
 
-            <div class="p-1 pl-2">
-              <div class="flex items-end pr-10 mt-1">
-                <img
-                  src="https://ptetutorials.com/images/user-profile.png"
-                  alt="sunil"
-                  class="rounded-lg h-8 w-8"
-                />
-                <div class="rounded-lg">
-                  <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                    <p>{{ chatIncoming[0].received }}</p>
-                    <span
-                      class="text-gray-500 pl-1"
-                      style="font-size: 10.5px"
-                      >{{ chatIncoming[0].timeReceived }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-2 flex justify-end">
-              <div
-                class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-              >
-                <p>{{ chatOutgoing[1].sent }}</p>
-                <span
-                  class="time_date text-gray-500 pl-1"
-                  style="font-size: 10.5px"
-                  >{{ chatOutgoing[1].timeSent }}</span
-                >
-              </div>
-            </div>
-
-            <div class="p-1 pl-2">
-              <div class="flex items-end pr-10 mt-1">
-                <img
-                  src="https://ptetutorials.com/images/user-profile.png"
-                  alt="sunil"
-                  class="rounded-lg h-8 w-8"
-                />
-                <div class="rounded-lg">
-                  <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                    <p>{{ chatIncoming[1].received }}</p>
-                    <span
-                      class="text-gray-500 pl-1"
-                      style="font-size: 10.5px"
-                      >{{ chatIncoming[1].timeReceived }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-2 flex justify-end">
-              <div
-                class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-              >
-                <p>{{ chatOutgoing[2].sent }}</p>
-                <span
-                  class="time_date text-gray-500 pl-1"
-                  style="font-size: 10.5px"
-                >
-                  {{ chatOutgoing[2].timeSent }}
-                </span>
-              </div>
-            </div>
-
-            <div class="p-1 pl-2">
-              <div class="flex items-end pr-10 mt-1">
-                <img
-                  src="https://ptetutorials.com/images/user-profile.png"
-                  alt="sunil"
-                  class="rounded-lg h-8 w-8"
-                />
-                <div class="rounded-lg">
-                  <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                    <p>{{ chatIncoming[2].received }}</p>
-                    <span
-                      class="text-gray-500 pl-1"
-                      style="font-size: 10.5px"
-                      >{{ chatIncoming[2].timeReceived }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="p-2 flex justify-end">
-              <div
-                class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg"
-              >
-                <p>{{ chatOutgoing[3].sent }}</p>
-                <span
-                  class="time_date text-gray-500 pl-1"
-                  style="font-size: 10.5px"
-                >
-                  {{ chatOutgoing[3].timeSent }}</span
-                >
-              </div>
-            </div>
-
-            <div class="p-1 pl-2">
-              <div class="flex items-end pr-10 mt-1">
-                <img
-                  src="https://ptetutorials.com/images/user-profile.png"
-                  alt="sunil"
-                  class="rounded-lg h-8 w-8"
-                />
-                <div class="rounded-lg">
-                  <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-                    <p>{{ chatIncoming[3].received }}</p>
-                    <span
-                      class="text-gray-500 pl-1"
-                      style="font-size: 10.5px"
-                      >{{ chatIncoming[3].received }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div id="chatmsg"></div>
           </div>
@@ -905,7 +678,7 @@
                 />
                 <div class="flex flex-col justify-between items-start ml-2">
                   <span class="font-medium text-sm" id="mark"
-                    >{{ inbox[0].name
+                    >{{ 
                     }}<span class="material-icons pl-2" id="iCheck">
                       check_circle
                     </span></span
@@ -913,14 +686,14 @@
                   <span
                     class="text-xs text-gray-400 truncate w-50 s:w-32 md:w-28 xl:w-36 lg:w-36 2xl:w-36"
                   >
-                    {{ inbox[0].message }}
+                    {{  }}
                   </span>
                 </div>
               </div>
               <div class="flex flex-col items-start">
                 <span class="text-gray-700 text-xs">
                   <span class="font-bold pl-1 pr-1">·</span
-                  >{{ inbox[0].time }}</span
+                  >{{  }}</span
                 >
               </div>
             </button>
@@ -951,74 +724,14 @@ export default {
       toggleChat: false,
       users: [],
       //inbox
-      inbox: [
-        {
-          name: null,
-          message: "No problem. Thanks as well for the handsome pay!",
-          time: "21 mins ago",
-        },
-        {
-          name: "Gwen Lopez",
-          message: "No problem. Thanks as well for the handsome pay!",
-          time: "21 mins ago",
-        },
-        {
-          name: "Monica Rambeau",
-          message: "No problem. Thanks as well for the handsome pay!",
-          time: "21 mins ago",
-        },
-        {
-          name: "Wanda Maximoff",
-          message: "No problem. Thanks as well for the handsome pay!",
-          time: "21 mins ago",
-        },
-        {
-          name: "Wanda Maximoff",
-          message: "No problem. Thanks as well for the handsome pay!",
-          time: "21 mins ago",
-        },
-      ],
+      inbox: [],
       //chat
-      activeName: "Mark Aral",
-      chatIncoming: [
-        {
-          received:
-            "Yeah, sure! No problem. I am already on my way to SM City Legazpi.",
-          timeReceived: "1:26 PM    |    Today",
-        },
-        {
-          received:
-            "Sorry, it took me a while. I had to shop for three orders. Anyway, I am already in my car. I will deliver these two orders first here in Legazpi.",
-          timeReceived: "2:40 PM    |    Today",
-        },
-        {
-          received: "I am two mins away from your house. ",
-          timeReceived: "3:12 PM    |    Today",
-        },
-        {
-          received: "No problem. Thanks as well for the handsome pay!",
-          timeReceived: "3:39 PM    |    Today",
-        },
-      ],
-      chatOutgoing: [
-        {
-          sent:
-            "Do you think you can do it in time? I need it before 4 pm so I hope you can deliver it in time.",
-          timeSent: "1:24 PM    |    Today",
-        },
-        {
-          sent: "Thank you so much! Let me know when you are on your way.",
-          timeSent: "1:31 PM    |    Today",
-        },
-        {
-          sent: "No problem, chat me when you are near my house already",
-          timeSent: "2:45 PM    |    Today",
-        },
-        { sent: "Thanks for help", timeSent: "3:36  | Today" },
-      ],
+      activeName: null,
+      chatIncoming: [],
+      chatOutgoing: [],
       //sent a request
       activity: "You sent a request to to",
-      recipient: "Mark Aral",
+      recipient: null,
       postNum: "#2021352",
       placeFrom: "Banquerohan, Legazpi City",
       destination: "SM City ",
@@ -1074,14 +787,42 @@ export default {
       document.getElementById("active").innerHTML = res;
     },
 
-    navMark() {
+    navMark(name) {
+      this.chatIncoming = [];
+      this.chatOutgoing = [];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
-      var b = document.getElementById("mark");
-      var bText = b.textContent;
-      var bLen = bText.length;
-      var res = bText.substring(0, bLen - 13);
-      document.getElementById("active").innerHTML = res;
+      this.activeName = name;
+      this.recipient = name;
+          
+      var chatRoomEmail = this.users.filter(function(elem){
+        if(elem.firstName == name) 
+          return elem.email
+      });
+      if(chatRoomEmail.length>0){
+        console.log(chatRoomEmail[0].email);
+        api.get("/api/getMessages", {params: {email:chatRoomEmail[0].email}}).then((response)=>{
+          console.log(response.data)
+          var i;
+          var x=0;
+          var y=0;
+          for(i=0;i<response.data.length;i++){
+            if(response.data[i].email2 == chatRoomEmail[0].email){
+              this.chatOutgoing[x] = response.data[i];
+              console.log('outgoing = ' , this.chatOutgoing)
+              x++;
+            }
+            else{
+              this.chatIncoming[y] = response.data[i];
+              console.log('incoming = ' , this.chatIncoming)
+              y++;
+            }
+          }
+        })
+      }else{
+        console.log('not found')
+      }
+     
     },
 
     backChat() {
@@ -1095,28 +836,27 @@ export default {
     attachbtn() {
       this.attachtoggle = !this.attachtoggle;
     },
-    getUsers() {
-      api.get("/api/getEmail").then((res) => {
-        console.log(res.data);
+    getChatRoomMessages() {
+      api.get("/api/getChatroom").then((res) => {
+        console.log(res.data)
         api.get("/api/getUser").then((response) => {
-          console.log(response.data);
           var i;
           var j;
           for (i = 0; i < res.data.length; i++) {
-            for (j = 0; j < response.data.length; j++) {
-              console.log(res.data[i].email2, '---',  response.data[j].email)
+            for (j = 0; j < response.data.length; j++) {    
               if (res.data[i].email2.localeCompare(response.data[j].email) == 0) {
-                console.log(response.data[j])
                  this.users[i] = response.data[j];
               }
             }
           }
         });
+        console.log(this.users)
       });
     },
+
   }, //end methods
   created() {
-    this.getUsers();
+    this.getChatRoomMessages();
   },
 }; //end export default
 
