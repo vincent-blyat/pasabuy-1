@@ -13,7 +13,7 @@ xsm:w-max
       <p class="text-2xl  font-nunito font-bold uppercase">Orders</p>
 </div>
 <!--buttons-->
-<div class="mt-20  px-3 flex flex-col pb-4 
+<div class="mt-20  px-0 flex flex-col pb-4 
             2xl:flex-row  2xl:w-5/12 2xl:mt-0 2xl:self-center 2xl:justify-items-center  2xl:items-center
             lg:flex-row   lg:w-6/12  lg:self-center lg:justify-items-center lg:mt-0
             xl:flex-row  xl:w-5/12    xl:self-center xl:justify-items-center xl:mt-0 
