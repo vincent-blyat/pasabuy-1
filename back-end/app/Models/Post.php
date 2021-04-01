@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PasabuyUser;
 use App\Models\OfferPost;
+use App\Models\RequestPost;
 use Webpatser\Uuid\Uuid;
 
 class Post extends Model
@@ -32,5 +33,9 @@ class Post extends Model
 
     public function offer_post() {
     	return $this->hasOne(OfferPost::class, 'postNumber', 'postNumber');
+    }
+
+    public function request_post() {
+        return $this->hasOne(RequestPost::class, 'postNumber', 'postNumber');
     }
 }
