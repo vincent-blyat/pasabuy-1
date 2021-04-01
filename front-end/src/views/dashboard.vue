@@ -469,6 +469,7 @@ img{
 import Navbar from './Navbar'
 import PostModal from "./PostModal"
 import editShopListModal from "./editShopListModal"
+import api from '../api'
 import ShoppingList from "./ShoppingList"
 import EditShoppingOffer from "./EditShoppingOffer"
 import UpdateOrderStatus from "./updateOrderStatus"
@@ -487,6 +488,11 @@ el:'#shop-list',
       filter: false,
       filter2: false,
       isOpen:false,
+      isOpen1:false,
+      isOpen2:false,
+      isOpen3:false,
+      isOpen4:false,
+      user: null,
       list:false,
       editShoppingOffer:false,
       updateOrderStatus:false,
@@ -587,6 +593,13 @@ el:'#shop-list',
     listener4(){
       this.updateOrderStatus = false;
     }
+  },  
+  mounted(){
+    api.get('/api/user').then((res)=>{
+      this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
   }
 }
 </script>

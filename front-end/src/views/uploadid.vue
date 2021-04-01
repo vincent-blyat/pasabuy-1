@@ -40,7 +40,7 @@
                 <!--Buttons-->
                 <div class="flex mb-2 -mx-1">
                     <div class="w-1/2 px-1 mt-6 text-left text-grey-dark focus:outline-none ">
-                        <router-link to="/uploadid" class="font-bold" >Back</router-link>
+                        <router-link to="/address-book" class="font-bold" >Back</router-link>
                     </div>
                     <div class="flex mb-2 -mx-1 vs:m-1 vs:w-full vs:pl-16 vs:mb-7">
                         <div class="w-1/2 px-1 mt-6 ml-12 vs:w-full text-grey-dark">
