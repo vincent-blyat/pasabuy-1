@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,9 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
 
 Route::post('login',[loginController::class, 'login'] )->name('login');
 Route::post('logout',[loginController::class, 'logout'] );
+
+Route::post('post/offer', [PostController::class, 'create_offer_post'])->name('create_offer_post');
+
+Route::get('test', function (Request $request) {
+	dd($request);
+});
