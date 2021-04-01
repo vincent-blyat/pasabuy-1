@@ -30,8 +30,6 @@ class messageController extends Controller
         $newMessage->message =$request->message;
         $newMessage->messageNumber = $messageCount.'-Message';
         $newMessage->save();
-
-        broadcast(new NewChatMessage($newMessage))->toOthers();
         
     }
 }

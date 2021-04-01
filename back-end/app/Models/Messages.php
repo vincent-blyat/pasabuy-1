@@ -9,4 +9,6 @@ class Messages extends Model
 {
     use HasFactory;
     protected $table = "tbl_message";
+    protected $primarKey = "indexMessage";
+    public $timestamps = false;
 }

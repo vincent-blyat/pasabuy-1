@@ -39,7 +39,7 @@
           <button
             v-for="user in uniqUsers"
             :key="user.firstName"
-            @click="navMark(user.firstName)"
+            @click="navMark(user.firstName, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
           >
@@ -751,6 +751,7 @@ export default {
       inbox: [],
       //chat
       activeName: null,
+      activeEmail: null,
       chatIncoming: [],
       chatOutgoing: [],
       out :[],
@@ -777,53 +778,33 @@ export default {
       shoppingListSize: 8,
     };
   },
-  watch:{
-    users(email, oldEmail){
-      if(oldEmail!=null){
-        this.disconnect(oldEmail)
-      }
-      this.connect();
-    }
-  },
 
   methods: {
-    connect(){
-      if(this.activeEmail){
-        let vm =this;
-        this.getMessages();
-        window.Echo.private("chat."+this.activeEmail)
-        .listen('.message.new', () =>{
-          vm.getMessages();
-        })
-      }
-    },
 
-    disconnect(email){
-      window.Echo.leave("chat."+email)
-    },
     sendbtn() {
-      var printtext = document.getElementById("chatmsg");
+      // var printtext = document.getElementById("chatmsg");
       var copytext = document.getElementById("typemsg");
-
       var copiedtext = copytext.value;
+      var dataMessage = {email:this.activeEmail, message: copiedtext}
+
       if (copiedtext !== "") {
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
             console.log('success, message sent.  ', res.data)
-           // this.navMark(this.activeName, this.activeEmail);
-            var printnow =
-            '<div class="flex justify-end pr-10 mt-1">' +
-            '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
-            copiedtext +
-            '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
-            "<br>" +
-            this.timestamp +
-            "</span>" +
-            "</div> ";
+           this.navMark(this.activeName, this.activeEmail);
+            // var printnow =
+            // '<div class="flex justify-end pr-10 mt-1">' +
+            // '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
+            // copiedtext +
+            // '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
+            // "<br>" +
+            // this.timestamp +
+            // "</span>" +
+            // "</div> ";
 
           console.log('send')
-          printtext.insertAdjacentHTML("beforeend", printnow);
-          document.getElementById("typemsg").value = "";
+          // printtext.insertAdjacentHTML("beforeend", printnow);
+           document.getElementById("typemsg").value = "";
           var box = document.getElementById("journal-scroll");
           box.scrollIntoView();
           })
@@ -833,14 +814,16 @@ export default {
       }
     }, //end sendbtn
 
-    navMark(name) {
+    navMark(name,email) {
       this.chatIncoming = [];
       this.chatOutgoing = [];
       this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
+      this.activeEmail = email;
       this.recipient = name;
+      this.getMessages();
     },
     getMessages(){
       if(this.activeEmail!=null){
