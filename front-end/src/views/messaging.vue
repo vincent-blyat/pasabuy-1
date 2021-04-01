@@ -115,7 +115,8 @@
 
       <div class="p-1 pl-2"
             v-for="(msg, index) in chat"
-            :key="msg.message">
+            :key="msg.message"
+            >
              <div v-bind:class="{ 'flex justify-end pr-10 mt-1' : out[index], 'flex items-end pr-10 mt-1': incoming[index] }">
               <div v-bind:class="{'ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg': out[index], 'ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ': incoming[index] }">
                 <p>{{ msg.message }}</p>
@@ -778,8 +779,30 @@ export default {
       shoppingListSize: 8,
     };
   },
+  watch:{
+    users(email, oldEmail){
+      if(oldEmail!=null){
+        this.disconnect(oldEmail)
+      }
+      this.connect();
+    }
+  },
 
   methods: {
+    connect(){
+      if(this.activeEmail){
+        let vm =this;
+        this.getMessages();
+        window.Echo.private("chat."+this.activeEmail)
+        .listen('.message.new', () =>{
+          vm.getMessages();
+        })
+      }
+    },
+
+    disconnect(email){
+      window.Echo.leave("chat."+email)
+    },
     sendbtn() {
       var printtext = document.getElementById("chatmsg");
       var copytext = document.getElementById("typemsg");
@@ -788,24 +811,26 @@ export default {
 
       var dataMessage = {email: this.activeEmail, message:copiedtext}
       if (copiedtext !== "") {
-        api.post('/api/sendMessage', dataMessage).then((res)=>{
-          console.log('success, message sent.  ', res.data)
+        api.get('/sanctum/csrf-cookie').then(() => {
+          api.post('/api/sendMessage', dataMessage).then((res)=>{
+            console.log('success, message sent.  ', res.data)
+           // this.navMark(this.activeName, this.activeEmail);
+            var printnow =
+            '<div class="flex justify-end pr-10 mt-1">' +
+            '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
+            copiedtext +
+            '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
+            "<br>" +
+            this.timestamp +
+            "</span>" +
+            "</div> ";
 
-          var printnow =
-          '<div class="flex justify-end pr-10 mt-1">' +
-          '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
-          copiedtext +
-          '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
-          "<br>" +
-          this.timestamp +
-          "</span>" +
-          "</div> ";
-
-        printtext.insertAdjacentHTML("beforeend", printnow);
-        document.getElementById("typemsg").value = "";
-        var box = document.getElementById("journal-scroll");
-        box.scrollIntoView();
-
+          console.log('send')
+          printtext.insertAdjacentHTML("beforeend", printnow);
+          document.getElementById("typemsg").value = "";
+          var box = document.getElementById("journal-scroll");
+          box.scrollIntoView();
+          })
         })
       }else{
         console.log('error, message not sent.')
@@ -823,19 +848,14 @@ export default {
       this.activeName = name;
       this.activeEmail = email;
       this.recipient = name;
-          
-      var chatRoomEmail = this.users.filter(function(elem){
-        if(elem.firstName == name) 
-          return elem.email
-      });
-      if(chatRoomEmail.length>0){
-        console.log(chatRoomEmail[0].email);
-        api.get("/api/getMessages", {params: {email:chatRoomEmail[0].email}}).then((response)=>{
-          console.log('asdfsafsafafaf',response.data)
+    },
+    getMessages(){
+      if(this.activeEmail!=null){
+        console.log(this.activeEmail);
+        api.get("/api/getMessages", {params: {email:this.activeEmail}}).then((response)=>{
           var i;
-      
           for(i=0;i<response.data.length;i++){
-            if(response.data[i].email2 == chatRoomEmail[0].email){
+            if(response.data[i].email2 == this.activeEmail){
               this.chat[i] = response.data[i];
               this.out[i]= true;
               this.incoming[i]= false;
@@ -851,7 +871,6 @@ export default {
       }else{
         console.log('not found')
       }
-     
     },
 
     backChat() {

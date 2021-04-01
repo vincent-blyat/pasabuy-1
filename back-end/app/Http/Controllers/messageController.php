@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Messages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Events\NewChatMessage;
 class messageController extends Controller
 {
+    
     //
     public function getMessages(Request $request)
     {
@@ -29,6 +30,8 @@ class messageController extends Controller
         $newMessage->message =$request->message;
         $newMessage->messageNumber = $messageCount.'-Message';
         $newMessage->save();
+
+        broadcast(new NewChatMessage($newMessage))->toOthers();
         
         //return $newMessage;
     }
