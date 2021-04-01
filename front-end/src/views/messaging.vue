@@ -39,7 +39,7 @@
           <button
             v-for="user in uniqUsers"
             :key="user.firstName"
-            @click="navMark(user.firstName, user.email)"
+            @click="navMark(user.firstName)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
           >
@@ -751,13 +751,11 @@ export default {
       inbox: [],
       //chat
       activeName: null,
-      activeEmail: null,
       chatIncoming: [],
       chatOutgoing: [],
       out :[],
       incoming:[],
       chat: [],
-      timestamp: null,
       //sent a request
       activity: "You sent a request to to",
       recipient: null,
@@ -808,8 +806,6 @@ export default {
       var copytext = document.getElementById("typemsg");
 
       var copiedtext = copytext.value;
-
-      var dataMessage = {email: this.activeEmail, message:copiedtext}
       if (copiedtext !== "") {
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
@@ -835,18 +831,15 @@ export default {
       }else{
         console.log('error, message not sent.')
       }
-
-      
     }, //end sendbtn
 
-    navMark(name, email) {
+    navMark(name) {
       this.chatIncoming = [];
       this.chatOutgoing = [];
       this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
-      this.activeEmail = email;
       this.recipient = name;
     },
     getMessages(){
@@ -901,19 +894,10 @@ export default {
         console.log(this.users)
       });
     },
-    getNow(){
-      const today = new Date();
-      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      const time = today.getHours()+ ":" + today.getMinutes()+ ':'+ today.getSeconds();
-      const dateTime = date + ' '+time;
-      this.timestamp =dateTime;
-
-    }
 
   }, //end methods
   created() {
     this.getChatRoomMessages();
-    setInterval(this.getNow, 1000);
   },
   computed: {
    uniqUsers () {

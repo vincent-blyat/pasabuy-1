@@ -33,6 +33,5 @@ class messageController extends Controller
 
         broadcast(new NewChatMessage($newMessage))->toOthers();
         
-        //return $newMessage;
     }
 }
