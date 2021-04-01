@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getChatroom', [userInformationController::class, 'getChatroom']);
     Route::get('/getUser', [userInformationController::class, 'getUsersName']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
-    Route::get('/sendMessage', [messageController::class, 'sendMessage']);
+    Route::post('/sendMessage', [messageController::class, 'sendMessage']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

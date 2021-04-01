@@ -39,7 +39,7 @@
           <button
             v-for="user in uniqUsers"
             :key="user.firstName"
-            @click="navMark(user.firstName)"
+            @click="navMark(user.firstName, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
           >
@@ -750,11 +750,13 @@ export default {
       inbox: [],
       //chat
       activeName: null,
+      activeEmail: null,
       chatIncoming: [],
       chatOutgoing: [],
       out :[],
       incoming:[],
       chat: [],
+      timestamp: null,
       //sent a request
       activity: "You sent a request to to",
       recipient: null,
@@ -783,16 +785,19 @@ export default {
       var copytext = document.getElementById("typemsg");
 
       var copiedtext = copytext.value;
+
+      var dataMessage = {email: this.activeEmail, message:copiedtext}
       if (copiedtext !== "") {
-        var printnow =
+        api.post('/api/sendMessage', dataMessage).then((res)=>{
+          console.log('success, message sent.  ', res.data)
+
+          var printnow =
           '<div class="flex justify-end pr-10 mt-1">' +
           '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
           copiedtext +
           '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
           "<br>" +
-          "3:45 PM" +
-          " | " +
-          "Today" +
+          this.timestamp +
           "</span>" +
           "</div> ";
 
@@ -800,17 +805,23 @@ export default {
         document.getElementById("typemsg").value = "";
         var box = document.getElementById("journal-scroll");
         box.scrollIntoView();
-        
+
+        })
+      }else{
+        console.log('error, message not sent.')
       }
+
+      
     }, //end sendbtn
 
-    navMark(name) {
+    navMark(name, email) {
       this.chatIncoming = [];
       this.chatOutgoing = [];
       this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
+      this.activeEmail = email;
       this.recipient = name;
           
       var chatRoomEmail = this.users.filter(function(elem){
@@ -871,10 +882,19 @@ export default {
         console.log(this.users)
       });
     },
+    getNow(){
+      const today = new Date();
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours()+ ":" + today.getMinutes()+ ':'+ today.getSeconds();
+      const dateTime = date + ' '+time;
+      this.timestamp =dateTime;
+
+    }
 
   }, //end methods
   created() {
     this.getChatRoomMessages();
+    setInterval(this.getNow, 1000);
   },
   computed: {
    uniqUsers () {

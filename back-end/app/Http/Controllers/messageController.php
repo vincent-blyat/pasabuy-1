@@ -22,6 +22,14 @@ class messageController extends Controller
     public function sendMessage(Request $request)
     {
         # code...   
+        $messageCount = Messages::count();
+        $newMessage = new Messages;
+        $newMessage->email1 = Auth::user()->email;
+        $newMessage->email2 = $request->email;
+        $newMessage->message =$request->message;
+        $newMessage->messageNumber = $messageCount.'-Message';
+        $newMessage->save();
         
+        //return $newMessage;
     }
 }
