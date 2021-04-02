@@ -37,8 +37,8 @@
         <!---end of search bar-->
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
           <button
-            v-for="user in uniqUsers"
-            :key="user.firstName"
+            v-for="(user,index) in uniqUser"
+            :key="index"
             @click="setRoom(user.firstName, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
@@ -733,7 +733,7 @@
 <script>
 import Navbar from "./Navbar";
 import api from "../api";
-import uniq from 'lodash/uniq'
+import uniq from "lodash/uniqBy"
 export default {
   components: {
     Navbar,
@@ -752,6 +752,7 @@ export default {
       //chat
       activeName: null,
       activeEmail: null,
+      authUser:null,
       chatIncoming: [],
       chatOutgoing: [],
       message:null,
@@ -861,36 +862,43 @@ export default {
       this.attachtoggle = !this.attachtoggle;
     },
     getChatRooms() {
-      api.get("/api/getChatroom").then((res) => {
-        console.log(res.data)
-        api.get("/api/getUser").then((response) => {
-          var i;
-          var j;
-          for (i = 0; i < res.data.length; i++) {
-            for (j = 0; j < response.data.length; j++) {    
-              if (res.data[i].email2.localeCompare(response.data[j].email) == 0) {
-                 this.users[i] = response.data[j];
+        api.get('/api/getChatroom').then((res) => {
+          //this.users = res.data;
+            var i;
+            var j;
+            console.log(res.data)
+            for (i = 0,j=0; i < res.data.length; i++) {   
+              if (res.data[i].email.localeCompare(this.authUser)) {
+                  this.users[j] = res.data[i];
+                  j++;
               }
             }
-          }
-          if(this.activeEmail==null){
-            this.setRoom(this.users[0].firstName, res.data[0].email2)
-          }
+            console.log('sasasa', this.users[0].firstName, this.users[0].email)
+            if(this.activeEmail==null){
+              this.setRoom(this.users[0].firstName, this.users[0].email)
+            }
+          // console.log(this.users)
         });
-        console.log(this.users)
-      });
     },
+    getAuthUser(){
+      api.get('api/user').then((res)=>{
+        console.log('auth',res.data.email)
+        this.authUser = res.data.email;
+      })
+    }
 
 
   }, //end methods
   created() {
+    this.getAuthUser();
     this.getChatRooms();
   },
   computed: {
-   uniqUsers () {
+    uniqUser() {
       return uniq(this.users, 'email')
-   }
+    }
 }
+
 }; //end export default
 
 const add = document.querySelector("#add");

@@ -26,8 +26,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
     Route::post('/editPersonal', [userInformationController::class, 'editPersonal']);
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
-    Route::get('/getChatroom', [userInformationController::class, 'getChatroom']);
-    Route::get('/getUser', [userInformationController::class, 'getUsersName']);
+    Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
 });
