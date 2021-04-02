@@ -90,6 +90,9 @@ module.exports = {
       fontSize: {
         md: ['0.910rem', { lineHeight: '1.28rem' }],  
       },
+      zIndex: {
+        '100':'100',
+      },
     },
   },
   variants: {
