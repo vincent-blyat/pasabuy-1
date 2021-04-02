@@ -106,7 +106,8 @@ class userInformationController extends Controller
     public function getChatroom()
     {
         # code...
-        return response()->json(Messages::where('email1', '=', Auth::user()->email)->get());
+        return response()->json(Messages::where('email1', '=', Auth::user()->email)
+                                          ->orderBy('dateCreated', 'DESC')->get());
     }
 
     public function getUsersName()

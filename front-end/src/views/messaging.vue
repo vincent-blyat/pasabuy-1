@@ -39,7 +39,7 @@
           <button
             v-for="user in uniqUsers"
             :key="user.firstName"
-            @click="navMark(user.firstName, user.email)"
+            @click="setRoom(user.firstName, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
           >
@@ -362,6 +362,7 @@
             placeholder="Type a message"
             id="typemsg"
             @keyup.enter="sendbtn"
+            v-model="message"
           />
           <button
             @click="sendbtn"
@@ -690,7 +691,7 @@
           <!---end of search bar-->
           <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
             <button
-              @click="navMark"
+              @click="setRoom"
               type="button"
               class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -737,9 +738,7 @@ export default {
   components: {
     Navbar,
   },
-  props: {
     //message: String
-  },
   data() {
     return {
       //buttons
@@ -755,6 +754,7 @@ export default {
       activeEmail: null,
       chatIncoming: [],
       chatOutgoing: [],
+      message:null,
       out :[],
       incoming:[],
       chat: [],
@@ -784,15 +784,15 @@ export default {
 
     sendbtn() {
       // var printtext = document.getElementById("chatmsg");
-      var copytext = document.getElementById("typemsg");
-      var copiedtext = copytext.value;
-      var dataMessage = {email:this.activeEmail, message: copiedtext}
+      
 
-      if (copiedtext !== "") {
+      if (this.message != "") {
+        var dataMessage = {email:this.activeEmail, message: this.message}
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
             console.log('success, message sent.  ', res.data)
-           this.navMark(this.activeName, this.activeEmail);
+            this.getMessages();
+            this.getChatRooms();
             // var printnow =
             // '<div class="flex justify-end pr-10 mt-1">' +
             // '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
@@ -802,20 +802,19 @@ export default {
             // this.timestamp +
             // "</span>" +
             // "</div> ";
-
-          console.log('send')
-          // printtext.insertAdjacentHTML("beforeend", printnow);
-           document.getElementById("typemsg").value = "";
-          var box = document.getElementById("journal-scroll");
-          box.scrollIntoView();
+            console.log('send')
+            // printtext.insertAdjacentHTML("beforeend", printnow);
+            this.message = "";
+            var box = document.getElementById("journal-scroll");
+            box.scrollIntoView();
           })
         })
       }else{
-        console.log('error, message not sent.')
+        return;
       }
     }, //end sendbtn
 
-    navMark(name,email) {
+    setRoom(name,email) {
       this.chatIncoming = [];
       this.chatOutgoing = [];
       this.chat=[];
@@ -874,10 +873,14 @@ export default {
               }
             }
           }
+          if(this.activeEmail==null){
+            this.setRoom(this.users[0].firstName, res.data[0].email2)
+          }
         });
         console.log(this.users)
       });
     },
+
 
   }, //end methods
   created() {
