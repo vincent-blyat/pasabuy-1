@@ -361,6 +361,7 @@
             class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full"
             placeholder="Type a message"
             id="typemsg"
+            @keyup.enter="sendbtn"
           />
           <button
             @click="sendbtn"
@@ -860,7 +861,7 @@ export default {
     attachbtn() {
       this.attachtoggle = !this.attachtoggle;
     },
-    getChatRoomMessages() {
+    getChatRooms() {
       api.get("/api/getChatroom").then((res) => {
         console.log(res.data)
         api.get("/api/getUser").then((response) => {
@@ -880,7 +881,7 @@ export default {
 
   }, //end methods
   created() {
-    this.getChatRoomMessages();
+    this.getChatRooms();
   },
   computed: {
    uniqUsers () {
