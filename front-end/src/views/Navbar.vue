@@ -85,7 +85,7 @@
       <div class=" flex  mr-2 gap-x-5 ">
         <div  class="
          items-center flex ring-2 ring-gray-400 rounded-2xl bg-white">
-        <input type="search" class="w-auto text-black  pl-3 rounded-2xl h-10" placeholder="Search">
+        <input type="search" class="w-auto vs:w-40 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
         <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
         </div>
         <div  class="hidden  2xl:block lg:block xl:block">
