@@ -42,7 +42,7 @@
             @click="setRoom(user.firstName, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
-          >
+            >
             <div class="flex ml-2">
               <img
                 src="https://ptetutorials.com/images/user-profile.png"
@@ -781,12 +781,34 @@ export default {
     };
   },
 
+  watch:{
+    activeEmail(val,oldval){
+      if(oldval){
+        console.log(oldval,'<-oldval val->', val)
+        this.disconnect(oldval)
+      }
+      this.connect()
+    }
+  },
+
   methods: {
 
-    sendbtn() {
-      // var printtext = document.getElementById("chatmsg");
-      
+    connect(){
+      console.log('this will connect to',this.activeEmail)
+      if(this.activeEmail !=null){
+        let vm =this;
+        vm.getMessages();
+        window.Echo.private("chat."+this.activeEmail).listen('.message.new',()=>{
+          vm.getMessages();
+        })
+      }
+    },
+    disconnect(oldval){
+      console.log('this will discconeccet to', oldval)
+      window.Echo.leave('chat.'+oldval)
+    },
 
+    sendbtn() {
       if (this.message != "") {
         var dataMessage = {email:this.activeEmail, message: this.message}
         api.get('/sanctum/csrf-cookie').then(() => {
@@ -824,7 +846,6 @@ export default {
       this.activeName = name;
       this.activeEmail = email;
       this.recipient = name;
-      this.getMessages();
     },
     getMessages(){
       if(this.activeEmail!=null){

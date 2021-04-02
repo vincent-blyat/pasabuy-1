@@ -4,6 +4,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getPersonal', [userInformationController::class, 'getPersonal']);
@@ -29,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
+    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -38,6 +41,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/authenticated', function () {
     return true;
 });
+
+
 
 Route::post('login',[loginController::class, 'login'] )->name('login');
 Route::post('logout',[loginController::class, 'logout'] );
