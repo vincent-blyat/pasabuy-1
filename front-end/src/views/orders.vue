@@ -13,15 +13,15 @@ xsm:w-max
       <p class="text-2xl  font-nunito font-bold uppercase">Orders</p>
 </div>
 <!--buttons-->
-<div class="mt-20  px-0 flex flex-col pb-4 
-            2xl:flex-row  2xl:w-5/12 2xl:mt-0 2xl:self-center 2xl:justify-items-center  2xl:items-center
-            lg:flex-row   lg:w-6/12  lg:self-center lg:justify-items-center lg:mt-0
-            xl:flex-row  xl:w-5/12    xl:self-center xl:justify-items-center xl:mt-0 
+<div class="mt-20  px-3 w-full flex flex-col pb-4 
+            2xl:flex-row 2xl:px-0 2xl:w-5/12 2xl:mt-0 2xl:self-center 2xl:justify-items-center  2xl:items-center
+            lg:flex-row lg:px-0   lg:w-6/12  lg:self-center lg:justify-items-center lg:mt-0
+            xl:flex-row xl:px-0  xl:w-5/12    xl:self-center xl:justify-items-center xl:mt-0 
             md:flex-row md:mt-24 md:pl-4 md:items-center md:w-max
             sm:flex-row
             space-y-3
              ">
-    <div class="mt-3 mr-3 ">
+    <div class="mt-3">
     <button @click=" isActive_function('btn1')" :class="{active: activeBtn === 0 }" type="button"  class=" text-red-700 px-3 py-1 shadow  rounded-2xl bg-white w-full h-full"><a> All Orders</a></button>
   </div>
   <div class="flex  items-center gap-x-2">
