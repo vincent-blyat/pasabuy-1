@@ -82,13 +82,9 @@
             </div>   
       </div>
       </div>
-      <div class=" flex  mr-8 gap-x-5">
-        <div class="
-        2xl:flex
-        xl:flex
-        lg:flex
-        md:flex 
-         items-center hidden ring-2 ring-gray-400 rounded-2xl">
+      <div class=" flex  mr-2 gap-x-5 ">
+        <div  class="
+         items-center flex ring-2 ring-gray-400 rounded-2xl bg-white">
         <input type="search" class="text-black  pl-3 rounded-2xl h-10" placeholder="Search">
         <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
         </div>
