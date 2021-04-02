@@ -803,6 +803,7 @@ export default {
         window.Echo.private("chat."+this.activeRoom).listen('.message.new',()=>{
           console.log('listening...')
           vm.getMessages();
+          vm.getChatRooms();
         })
       }
     },
@@ -865,7 +866,6 @@ export default {
               this.chat[i] = response.data[i];
               this.out[i]= false;
               this.incoming[i]= true;
-           
             }
           }
         })
