@@ -39,7 +39,7 @@
           <button
             v-for="(user,index) in uniqUser"
             :key="index"
-            @click="setRoom(user.firstName, user.email)"
+            @click="setRoom(user.firstName, user.roomID, user.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -752,6 +752,7 @@ export default {
       //chat
       activeName: null,
       activeEmail: null,
+      activeRoom: null,
       authUser:null,
       chatIncoming: [],
       chatOutgoing: [],
@@ -782,11 +783,12 @@ export default {
   },
 
   watch:{
-    activeEmail(val,oldval){
+    activeRoom(val,oldval){
       if(oldval){
         console.log(oldval,'<-oldval val->', val)
         this.disconnect(oldval)
       }
+      console.log('watching...')
       this.connect()
     }
   },
@@ -794,11 +796,12 @@ export default {
   methods: {
 
     connect(){
-      console.log('this will connect to',this.activeEmail)
-      if(this.activeEmail !=null){
+      console.log('this will connect to roomID ',this.activeRoom)
+      if(this.activeRoom !=null){
         let vm =this;
         vm.getMessages();
-        window.Echo.private("chat."+this.activeEmail).listen('.message.new',()=>{
+        window.Echo.private("chat."+this.activeRoom).listen('.message.new',()=>{
+          console.log('listening...')
           vm.getMessages();
         })
       }
@@ -810,7 +813,8 @@ export default {
 
     sendbtn() {
       if (this.message != "") {
-        var dataMessage = {email:this.activeEmail, message: this.message}
+        var dataMessage = {roomID:this.activeRoom, message: this.message, receiver: this.activeEmail}
+        console.log(dataMessage)
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
             console.log('success, message sent.  ', res.data)
@@ -837,23 +841,22 @@ export default {
       }
     }, //end sendbtn
 
-    setRoom(name,email) {
-      this.chatIncoming = [];
-      this.chatOutgoing = [];
+    setRoom(name,room_ID,email) {
       this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
+      this.activeRoom = room_ID;
       this.activeEmail = email;
       this.recipient = name;
     },
     getMessages(){
-      if(this.activeEmail!=null){
-        console.log(this.activeEmail);
-        api.get("/api/getMessages", {params: {email:this.activeEmail}}).then((response)=>{
+      if(this.activeRoom!=null){
+        console.log('active room number: ',this.activeRoom);
+        api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
           var i;
           for(i=0;i<response.data.length;i++){
-            if(response.data[i].email2 == this.activeEmail){
+            if(response.data[i].email2 != this.authUser){
               this.chat[i] = response.data[i];
               this.out[i]= true;
               this.incoming[i]= false;
@@ -887,16 +890,14 @@ export default {
           //this.users = res.data;
             var i;
             var j;
-            console.log(res.data)
             for (i = 0,j=0; i < res.data.length; i++) {   
               if (res.data[i].email.localeCompare(this.authUser)) {
                   this.users[j] = res.data[i];
                   j++;
               }
             }
-            console.log('sasasa', this.users[0].firstName, this.users[0].email)
-            if(this.activeEmail==null){
-              this.setRoom(this.users[0].firstName, this.users[0].email)
+            if(this.activeRoom==null){
+              this.setRoom(this.users[0].firstName, this.users[0].roomID,this.users[0].email)
             }
           // console.log(this.users)
         });
