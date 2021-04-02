@@ -87,26 +87,26 @@
                 <label for="" class="inline-flex pt-2.5 ml-4 hidden text-red-700 align-top md-18 text-sm">
                   <span class="material-icons">
                   place
-                </span> {{ filterPost.filterAddress }}</label>
+                </span> Banquerohan, Legazpi</label>
               
             </div>
           </div>
           
           <!--END-->
 
-<!---------------------------START OF 'NO LONGER ACCEPTING OFFERS' POST------------------------------------------------>
+          <!--START OF 'NO LONGER ACCEPTING OFFERS' POST-->
           <div class="flex flex-wrap float-right w-3/4 pt-3 vs:pt-2 vs:w-full">
             <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:w-full vs:rounded-none">
               <button class="top-0 left-0 rounded-full mmd:w-12 mmd:h-12 border-1">
                 <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="font-semibold mmd:text-base"> {{ deliveryPost.firstname }} {{ deliveryPost.lastname }}
+                <h5 class="font-semibold mmd:text-base"> {{profile.firstname}} {{profile.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
                   <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
-                  <button @click="edit1=!edit1" class="absolute right-99">
+                  <button @click="edit1=!edit1" class="absolute right-99 focus:outline-none">
                     <img class="w-6 h-auto" src="img/3dot.svg"/>
                   </button>
                   <div class="w-full">
@@ -120,7 +120,7 @@
                           Edit Post
                         </button>
 
-                         <!-----UPDATE STATUS------>
+                      <!-----UPDATE STATUS------>
                       <UpdateOrderStatus v-if="updateOrderStatus" @closeModal3="listener4"/>
                         <button  @click="toggleUpdateOrderStatus" class="flex flex-row font-normal focus:outline-none gap-x-2">
                           <span class="font-normal text-gray-500 material-icons">
@@ -136,7 +136,7 @@
                     </div>
                  </h5>
                     <p class="text-sm font-normal text-gray-400">
-                      <span>{{ deliveryPost.time }}</span>
+                      <span>13 hours ago</span>
                     </p>
                   </div>
               </div>
@@ -147,7 +147,7 @@
                 <span class="inline-block align-middle material-icons">
                   remove_circle_outline
                   </span>
-                  <label class="pl-1 align-bottom">{{ deliveryPost.status }}</label> 
+                  <label class="pl-1 align-bottom">No longer Accepting Requests</label> 
               </div>
             </div>
 
@@ -159,7 +159,7 @@
                   <span class="items-center text-red-700 material-icons">
                     delivery_dining
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top"> Delivering to {{ deliveryPost.deliveryPlace }}</label> 
+                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering anywhere in Legazpi City</label> 
                 </div>
                 
                 <!--SHOPPING LOCATION-->
@@ -167,7 +167,7 @@
                   <span class="text-red-700 material-icons vs:pl-0">
                     shopping_cart
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">{{ deliveryPost.shoppingPlace }}</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Shopping at downtown Legazpi</label>
                 </div>
               
                 <!--TIME-->
@@ -175,7 +175,7 @@
                   <span class="text-red-700 material-icons ">
                     watch_later  
                   </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.schedule }}</label>
+                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Tomorrow at 10 AM</label>
                 </div>
               
                 <!--TRANSPO-->
@@ -183,7 +183,7 @@
                   <span class="pl-3 text-red-700 material-icons vs:pl-0">
                     directions_car_filled
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">{{ deliveryPost.transportation }}</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top ">Car</label>
                 </div>
               
                 <!--SIZES OF BAGS-->
@@ -191,7 +191,7 @@
                   <span class="text-red-700 material-icons">
                     shopping_bag
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.limitation }}</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 3 medium or 2 large bags</label>
                 </div>
               
                 <!--MODE OF PAYMENT-->
@@ -199,7 +199,7 @@
                   <span class="pl-3 text-red-700 vs:pl-0 material-icons">
                     payments
                     </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ deliveryPost.paymentMethod }}</label>
+                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Pay upon delivery</label>
                 </div>
               </div>
             </div>
@@ -207,7 +207,7 @@
             <!--POST MESSAGE-->
             <div class="flex items-center w-full px-5 py-2 bg-white">
               <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg">
-                {{ deliveryPost.comment }}
+                Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request.
               </div>
             </div>
 
@@ -247,11 +247,11 @@
             </div>
           </div>
           </div>
-          <!-----------------------END OF NO LONGER ACCPETING REQUEST CODE--------------------------------->
+          <!--END OF NO LONGER ACCPETING REQUEST CODE-->
 </div>
         
-        <!----------------------------START OF SHOPPING LISTS--------------------->
-        <div class="w-2/5 pt-12 overflow-hidden pl-7 vs:hidden">
+        <!--START OF SHOPPING LISTS-->
+        <div class="w-2/5 pt-12 overflow-hidden pl-7">
           <!-----------ACTIVE ORDERS---------------------->
             <div class="mb-3 bg-white shadow-md w-72 rounded-2xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
@@ -267,7 +267,7 @@
               <hr>
               <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
                 <label for="" class="pt-2 pl-3 font-semibold">
-                 Transaction #{{ activeOrders.transactNo }}
+                 Transaction #{{activeOrders.transactNo}}
                 </label>
               </div>
 
@@ -277,7 +277,7 @@
                 </label>
 
                 <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
-                  {{ activeOrders.status }}
+                  Confirmed
                 </label>
               </div>
 
@@ -286,7 +286,7 @@
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="text-sm font-semibold">{{ activeOrders.first_name }} {{ activeOrders.last_name }}
+                <h5 class="text-sm font-semibold">{{profile.firstname}} {{profile.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
@@ -294,7 +294,7 @@
                  </h5>
                  
                     <p class="text-sm font-normal ">
-                      <span>{{ activeOrders.rating }}
+                      <span>4.9
                         <span class="text-red-700 material-icons md-16">
                           star_rate
                         </span>
@@ -319,7 +319,7 @@
             <!-----------END OF ACTIVE ORDERS---------------->
           
             <!-----------ACTIVE DELIVERIES---------------------->
-            <div class="mb-3 bg-white w-72 rounded-xl vs:hidden">
+            <div class="mb-3 bg-white w-72 rounded-xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE DELIVERIES
                   <span class="inline-flex pl-20 pr-3 align-bottom material-icons md-18">
@@ -333,7 +333,7 @@
               <hr>
               <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
                 <label for="" class="pt-2 pl-3 font-semibold">
-                  Transaction #{{ activeDeliveries.transNo }}
+                  Transaction #{{activeDeliveries.transNo}}
                 </label>
               </div>
 
@@ -343,7 +343,7 @@
                 </label>
 
                 <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
-                  {{ activeDeliveries.stat }}
+                  Confirmed
                 </label>
               </div>
 
@@ -352,7 +352,7 @@
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
               <div class="ml-2">
-                <h5 class="text-sm font-semibold">{{ activeDeliveries.firstName }} {{ activeDeliveries.lastName }}
+                <h5 class="text-sm font-semibold">{{profile.firstname}} {{profile.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons md-18">
                     verified
                   </span>
@@ -360,7 +360,7 @@
                  </h5>
                  
                     <p class="text-sm font-normal ">
-                      <span>{{ activeDeliveries.rate }}
+                      <span>4.9
                         <span class="text-red-700 material-icons md-16">
                           star_rate
                         </span>
@@ -379,7 +379,7 @@
                       room
                     </span>
                     <label for="" class="text-xs tracking-wide">
-                      {{ activeDeliveries.address }}
+                      Purok 7 Banquerohan, Legazpi City 
                     </label>
                   </div>
                <div class="pt-2 pb-8 pr-3 text-sm tracking-wide bg-white rounded-b-xl">
@@ -390,7 +390,7 @@
             <!-----------END OF ACTIVE DELIVERIES---------------->
           
 
-          <div class="flex flex-wrap float-left font-nunito md:block vs:hidden">
+          <div class="flex flex-wrap float-left font-nunito md:block">
             <div class="mb-3 bg-white w-72 rounded-xl">
                <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 SHOPPING LIST
@@ -409,11 +409,11 @@
                  <editShopListModal v-if="editVisible" @closeModal="editlistener"/>
                 <button @click="toggleeditShopList" class="ml-16 text-sm font-bold text-blue-700 focus:outline-none">Edit</button>
                 </h3> 
-                    <ul id="shop-list" class="text-sm leading-relaxed text-gray-500 list-disc list-inside pl-9">
-                      <li v-for="shopList in shopList" :key="shopList.items" >{{ shopList.items }}</li>
+                     <ul id="shop-list" class="overflow-hidden text-sm leading-relaxed text-gray-500 list-disc list-inside h-22 pl-9">
+                      <li v-for="item in items" :key="item.list" >{{item.list}}</li>
                     </ul>
                     <ShoppingList v-if="list" @closeListModal="listlistener"/>
-                      <button @click="toggleList" class="text-sm leading-loose pl-9 focus:outline-none">
+                <button @click="toggleList" class="text-sm leading-loose pl-9 focus:outline-none">
                       4 more items...
                     </button>
                    <hr>
@@ -491,53 +491,26 @@ el:'#shop-list',
       editShoppingOffer:false,
       updateOrderStatus:false,
 
-      filterPost:{
-        filterAddress: "Bonot, Legazpi City"
-      },
-
-      deliveryPost:{
+      profile:{
               firstname:'Wheein',
               lastname:'Jung',
-              time: '14 hours ago',
-              address: 'Banquerohan, Legazpi',
-              comment: "Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request. PS. WHOLO ON APRIL",
-              status: "No longer Accepting Requests",
-              deliveryPlace: "Legazpi City Only",
-              shoppingPlace: "SM Legazpi",
-              paymentMethod: "Cash",
-              schedule: "Tomorrow at 10 AM",
-              transportation: "Car",
-              limitation: "Up to 3 medium or 2 large bags",
-              
-
           },
 
       activeDeliveries:{
-        transNo: '61913174',
-        address: 'Ligao',
-        firstName: 'Hanbin',
-        lastName: 'Kim',
-        rate: '131',
-        stats: "Confirmed"
+        transNo: '61913174'
       },
 
       activeOrders:{
-        transactNo: '1267643764',
-        address: 'Legazpi',
-        first_name:'Go Eun',
-        last_name: 'Na',
-        rating: '4.17',
-        stat:"Confirmed"
-        
+        transactNo: '1267643764'
       },
       
-      shopList: [
-      { items: 'Pork' },
-      { items: 'Beef' },
-      { items: 'Pork' },
-      { items: 'Beef' },
-      { items: 'Pork' },
-      { items: 'Beef' },
+      items: [
+      { list: 'Pork' },
+      { list: 'Beef' },
+      { list: 'Pork' },
+      { list: 'Beef' },
+      { list: 'Pork' },
+      { list: 'Beef' },
     ],
 
     }
@@ -575,7 +548,7 @@ el:'#shop-list',
     listlistener(){
       this.list = false;
   },
-    toggleEditShoppingOffer(){
+  toggleEditShoppingOffer(){
       this.editShoppingOffer = !this.editShoppingOffer 
     },
     listener3(){
@@ -590,3 +563,9 @@ el:'#shop-list',
   }
 }
 </script>
+
+<!---------
+22: '5.5rem',
+success: '#708D3A',
+
+----------->
