@@ -7,8 +7,8 @@
           </label>
     </div>
 
-    <div id="verifyemail" class="flex items-center justify-center pt-32 pb-36 bg-gray-bgcolor vs:pt-16">
-      <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
+    <div id="verifyemail" class="flex items-center justify-center w-full h-screen pt-20 bg-gray-bgcolor">
+      <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 flex-grow-1 rounded-xl ssm:w-11/12">
         <div class="px-10 py-16 ">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold pb-7">Verify your email</h1>
             <p class="pb-10 text-base font-bold text-gray-700 ">
@@ -17,7 +17,7 @@
 
             <form action="#" class="space-y-3">
               <div class="">
-                    <input name="" type="text" required class="relative block w-full px-3 py-2 mb-6 text-base font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" placeholder="Code" value="" />
+                    <input name="" type="text" required class="relative block w-full px-3 py-2 mb-6 text-base font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-red-600 focus:z-10" placeholder="Code" value="" />
               </div>
               <div class="flex -mx-1 ">
                 <div class="w-1/2 px-1 mt-4 text-lg font-bold text-left text-grey-dark text-blue">

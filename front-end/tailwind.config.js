@@ -8,8 +8,9 @@ module.exports = {
       screens: {
        'xsm':{'min':'0px','max':'259px'}, 
        'ssm':{'min':'260px','max':'319px'},
-       'vs': {'min': '320px', 'max': '503px'},
-       'sm': {'min': '504px', 'max': '639px'},
+       'vs': {'min': '320px', 'max': '499px'},
+        'lvs': {'min': '401px', 'max': '499px'},
+       'sm': {'min': '500px', 'max': '639px'},
        'md': {'min': '640px', 'max': '1023px'},
         'lg': {'min': '1024px', 'max': '1279px'},
         'xl': {'min': '1280px', 'max': '1535px'},
@@ -39,6 +40,7 @@ module.exports = {
         waterloo:'#35397B',
         balticsea: '#1C1720',
         warning:' #FE6B00',
+        success: '#708D3A',
 
       },
         spacing: {
@@ -78,8 +80,7 @@ module.exports = {
         eh: '430px',
         ew: '844px',
         65: '267px',
-        //color?
-        success: '#708D3A',
+        
           
       },
       fontFamily: {
@@ -88,6 +89,9 @@ module.exports = {
       },
       fontSize: {
         md: ['0.910rem', { lineHeight: '1.28rem' }],  
+      },
+      zIndex: {
+        '100':'100',
       },
     },
   },
