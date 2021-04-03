@@ -1,8 +1,9 @@
 <template>
-<div v-on:click.self="close3" class="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center">
-       <div class="inline-flex flex-col bg-white shadow rounded-xl h-56 " style="width: 400px;" >
-       <div class="flex flex-row w-full justify-around py-2">
-        <h1 class="text-gray-900 pl-32 pr-8 leading-normal text-2xl font-bold">
+<div> 
+<div v-on:click.self="close3" class="bg-black font-nunito bg-opacity-25 fixed flex w-full vs:px-2 inset-0 justify-center items-center">
+       <div class="inline-flex flex-col bg-white shadow rounded-xl h-56 w-95 vs:w-full" >
+       <div class="flex flex-row justify-around py-2">
+        <h1 class="text-gray-900 pl-32 vs:pl-6.5 lvs:pl-32 pr-8 leading-normal text-2xl font-bold">
           Followers
         </h1>
         <button @click.prevent="close3" class=" mt-2 focus:outline-none text-sm mb-1 leading-none text-indigo-900">
@@ -81,10 +82,8 @@
           <!-- Your content -->
         </div>
       </div>
+      </div>
 </template>
-<style>
-
-</style>
 
 <script>
 export default {
