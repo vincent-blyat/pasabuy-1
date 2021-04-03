@@ -83,9 +83,22 @@
       </div>
       </div>
       <div class=" flex  mr-2 gap-x-5 ">
-        <div  class="
-         items-center flex ring-2 ring-gray-400 rounded-2xl bg-white">
-        <input type="search" class="w-auto vs:w-40 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
+        <div v-if="currentRoute=='' " class=" 
+         items-center flex ring-2 ring-gray-400 rounded-2xl bg-white
+         2xl:hidden
+         xl:hidden
+         lg:hidden
+         ">
+        <input type="search" class="w-auto vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
+        <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
+        </div>
+        <div class=" 
+         items-center hidden ring-2 ring-gray-400 rounded-2xl bg-white
+          2xl:flex
+          xl:flex
+          lg:flex
+         ">
+        <input type="search" class="w-auto vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
         <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
         </div>
         <div  class="hidden  2xl:block lg:block xl:block">
