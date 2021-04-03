@@ -24,7 +24,7 @@ class PostController extends Controller
 		$request->validate([
             'email' => ['required', 'email', 'max:50'],
             'postIdentity' => ['required', 'max:100'],
-            'postStatus' => ['required', 'max:50'],
+            'postStatus' => ['required', 'string', 'max:50'],
             'deliveryArea' => ['required', 'max:500'],
             'shoppingPlace' => ['required', 'max:2000'],
             'deliverySchedule' => ['required', 'date'],
