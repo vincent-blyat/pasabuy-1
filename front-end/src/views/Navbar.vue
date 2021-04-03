@@ -1,10 +1,10 @@
 <template>
     <div class="flex">
   <!-- mobile menu bar -->
-  <div class="bg-gray-800 text-gray-100 flex justify-between ">
+  <div class="z-30 bg-gray-800 text-gray-100 flex justify-between ">
     <!-- logo -->
     <!-- mobile menu button -->
-    <nav class=" h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
+    <nav class="z-30 h-20 bg-red-700 w-full  fixed flex items-center justify-between font-nunito p-0 
   2xl:bg-white 2xl:shadow-md
   xl:bg-white  xl:shadow-md
   lg:bg-white  lg:shadow-md
@@ -24,9 +24,9 @@
       <div class=" hidden 
       2xl:flex 2xl:ml-60 
       xl:flex xl:ml-72 xl:mr-10
-      lg:flex lg:justify-between lg:gap-x-0
+      lg:flex lg:justify-between lg:gap-x-0 lg:ml-28 lg:px-3   lg:w-6/12
       w-5/12 
-      justify-center items-center font-bold gap-x-24 text-gray-500 ">
+      justify-center items-center font-bold gap-x-16 text-gray-500 ">
      <router-link to="/dashboard"> 
      <div class="flex gap-x-4 py-4">
        <span class="material-icons">
@@ -82,25 +82,11 @@
             </div>   
       </div>
       </div>
-      <div class=" flex  mr-8 gap-x-4 ">
-        <div class="flex ">
-        <button type="button" name="search" class=" text-left hidden 2xl:block lg:block xl:block
-          text-black
-         ring-1 ring-gray-400 rounded-2xl w-60 lg:w-auto pl-4 pr-12">
-          <router-link to="/search">Search</router-link>
-        </button>
-        <span v-if="currentRoute==''" class="material-icons fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center block text-white 
-        2xl:text-black lg:text-black xl:text-black
-        2xl:hidden
-        xl:hidden
-        lg:hidden
-          m-0 ">search</span>
-          <span class="material-icons hidden fixed 2xl:ml-52 xl:ml-52 lg:ml-52 self-center text-white 
-        2xl:text-black lg:text-black xl:text-black
-        2xl:block
-        xl:block
-        lg:block
-          m-0 ">search</span>
+      <div class=" flex  mr-2 gap-x-5 ">
+        <div  class="
+         items-center flex ring-2 ring-gray-400 rounded-2xl bg-white">
+        <input type="search" class="w-auto vs:w-40 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
+        <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
         </div>
         <div  class="hidden  2xl:block lg:block xl:block">
              <Dropdown/>
@@ -112,7 +98,7 @@
   </div>
 
   <!-- sidebar -->
-  <div class="sidebar lg:hidden 2xl:hidden border-r-2 h-full xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full  transition duration-200 ease-in-out">
+  <div class="sidebar overscroll-y-contain overflow-auto lg:hidden 2xl:hidden border-r-2 h-max ssm:h-auto xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full  transition duration-200 ease-in-out">
 
     <!-- logo -->
     <div class="flex mt-0">
