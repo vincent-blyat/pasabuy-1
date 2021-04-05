@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'cityMunicipality' => ['required'],
        ]);
 
-       $this->addressInfo = ['houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipaity];
+       $this->addressInfo = ['houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
        
         
         return response()->json( $this->addressInfo);
@@ -97,10 +97,11 @@ class RegisterController extends Controller
             
             if($userAuth->save()){
                 $userAddress = new userAddress();
+                $userAddress->email = $request->email;
                 $userAddress->houseNumber = $request->houseNumber;
                 $userAddress->province = $request->province;
                 $userAddress->barangay = $request->barangay;
-                $userAddress->cityMuncipality = $request->cityMuncipality;
+                $userAddress->cityMunicipality = $request->cityMunicipality;
                 
                 $userAddress->save();
 
