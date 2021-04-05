@@ -4,9 +4,9 @@
           <div class="flex flex-col  mt-4">
   
               <!--Create Post section-->
-              <h1 class="items-center justify-center ssm:pl-11 ssm:ml-0 ssm:text-lg vs:ml-0 ml-12 pb-4 text-gray-900 leading-normal vs:pl-22 pl-24 text-2xl vs:text-xl font-bold text-center">
+              <h1 class="items-center justify-center se:pl-14 se:ml-0 ssm:pl-11 ssm:ml-0 ssm:text-lg vs:ml-0 ml-12 pb-4 text-gray-900 leading-normal vs:pl-22 pl-24 text-2xl vs:text-xl font-bold text-center">
                   Edit Shopping Offer
-                  <button @click.prevent="close1" class=" vs:ml-6 ml-20 ssm:ml-3 ssm:text-xs focus:outline-none text-sm vs:text-xs mb-1 leading-none text-indigo-900">
+                  <button @click.prevent="close1" class=" vs:ml-6 ml-20 se:ml-4 ssm:ml-3 ssm:text-xs focus:outline-none text-sm vs:text-xs mb-1 leading-none text-indigo-900">
                   Close
                   </button>
                 </h1>
@@ -23,7 +23,7 @@
  <!--Delivery information list-->
   <div class="flex flex-col mt-1 ssm:px-2 vs:px-2 justify-center items-center">
       
-      <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
+      <div class="flex flex-row ssm:flex-col ssm:space-x-0 se:space-x-1 ssm:space-y-2 space-x-4 w-full justify-center">
          <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">
               delivery_dining
@@ -55,7 +55,7 @@
          </div>
       </div>
 
-      <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
+      <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col ssm:space-x-0 se:space-x-1 ssm:space-y-2 space-x-4 w-full justify-center">
         <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">
              alarm
@@ -85,7 +85,7 @@
      </div>
      </div>
 
-     <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
+     <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col se:space-x-1 ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
         <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">
              shopping_bag
