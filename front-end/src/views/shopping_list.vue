@@ -1,16 +1,20 @@
 <template>
  <Nav/>
 <div class="flex flex-col justify-center  font-nunito  p-3 gap-y-4">
-<div class="w-5/12  vs:w-full  flex-col justify-center self-center mt-24 gap-y-5 hidden 2xl:block">
-      <p class="text-2xl  font-nunito font-extrabold flex uppercase ">shopping lists</p>
+<div class="  w-6/12  flex-col justify-center self-center mt-24 gap-y-5 hidden 
+              2xl:block 
+              xl:block 
+              lg:block 
+              ">
+      <p class="text-2xl  font-nunito font-bold flex uppercase ">shopping lists</p>
 </div>
 
  <div class=" flex flex-col mt-28 justify-center self-center  w-full bg-white ring-1 ring-gray-300 p-5 rounded-2xl
-              2xl:w-6/12 
-              lg:w-6/12
-              xl:w-6/12
-              md:w-10/12
-              sm:w-10/12
+              2xl:w-6/12 2xl:mt-0
+              lg:w-6/12 lg:mt-0
+              xl:w-6/12 xl:mt-0
+              md:w-10/12 md:mt-0
+              sm:w-11/12 
  " >
         <div class=" flex justify-between mb-4">
             <div class="flex flex-col gap-4">
@@ -42,11 +46,13 @@ import Nav from '../views/Navbar.vue'
 import editShopListModal from "./editShopListModal"
 
 export default {
-  name: 'Deliver',
+  name: 'shopping-list',
   components: {
     Nav,
     editShopListModal
-    
+  },
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
   },
   data(){
     return{
