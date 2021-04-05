@@ -10,14 +10,18 @@
            </div>
             
         </div>
-        <div id="personal_info" class="text-sm w-full gap-x-10 pt-8 vs:text-sm vs:w-full">
+        <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
             <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
           <input id="profile_image" type="file" class="hidden">
-        <div  class="text-sm w-7/12 gap-x-10 pt-8 space-y-8 vs:text-sm vs:w-full">
+        <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
+                      xl:w-7/12
+                      2xl:w-9/12
+                      lg:w-8/12
+                    ">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
         <span class="flex justify-between">
