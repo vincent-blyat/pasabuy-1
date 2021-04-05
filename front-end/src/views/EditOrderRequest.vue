@@ -4,9 +4,9 @@
           <div class="flex flex-col  mt-4">
   
               <!--Create Post section-->
-              <h1 class="items-center justify-center vs:ml-0 ml-12 ssm:pl-11 ssm:ml-0 ssm:text-lg pb-4 text-gray-900 leading-normal vs:pl-22 pl-24 text-2xl vs:text-xl font-bold text-center">
+              <h1 class="items-center justify-center vs:ml-0 ml-12 se:pl-14 se:ml-0 ssm:pl-11 ssm:ml-0 ssm:text-lg pb-4 text-gray-900 leading-normal vs:pl-22 pl-24 text-2xl vs:text-xl font-bold text-center">
                   Edit Order Request
-                  <button @click.prevent="close2" class=" vs:ml-6 ml-20 ssm:ml-3 ssm:text-xs focus:outline-none text-sm vs:text-xs  mb-1 leading-none text-indigo-900">
+                  <button @click.prevent="close2" class=" vs:ml-6 ml-20 se:ml-4 ssm:ml-3 ssm:text-xs focus:outline-none text-sm vs:text-xs  mb-1 leading-none text-indigo-900">
                   Close
                   </button>
                 </h1>
@@ -23,7 +23,7 @@
  <!--Delivery information list-->
   <div class="flex flex-col mt-1 vs:mt-1 ssm:px-2 vs:mt-0 justify-center items-center vs:px-2">
 
-      <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
+      <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 se:space-x-1 space-x-4 w-full justify-center">
          <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">
               delivery_dining
@@ -55,7 +55,7 @@
          </div>
       </div>
 
-     <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
+     <div class="flex flex-row pt-3 ssm:pt-2 ssm:flex-col ssm:space-x-0 se:space-x-1 ssm:space-y-2 space-x-4 w-full justify-center">
         <div class="flex flex-row space-x-2">
              <span class="rounded-lg mt-1.5 material-icons text-red-700">
              alarm
@@ -88,12 +88,12 @@
      <!--end-->
 
     <div class="justify-center flex ssm:px-2 vs:px-2">
-    <div class="flex flex-col ssm:h-36 mt-3 w-31.75 items-start p-4 ssm:p-2 vs:p-2 bg-gray-100 rounded-xl h-auto ssm:w-full vs:w-full">
+    <div class="flex flex-col se:h-36 ssm:h-36 mt-3 w-31.75 items-start p-4 ssm:p-2 vs:p-2 bg-gray-100 rounded-xl h-auto ssm:w-full vs:w-full">
             <div class="flex w-full flex-row items-end justify-between space-x-4 ssm:space-x-0 vs:space-x-0">
                 <p class="text-base ssm:text-sm vs:text-sm lvs:text-base leading-none text-gray-900">Shopping List {{shopping_info.shoppingID}}</p>
                 <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-blue-700">Change</button>
             </div>
-            <div class="flex w-full justify-between ssm:overflow-y-scroll ssm:flex-col ssm:justify-start ssm:items-start items-center flex-row  space-x-4 ssm:space-x-0 vs:space-x-1 py-2 ssm:py-0  px-5 ssm:px-2 vs:px-2">
+            <div class="flex w-full justify-between se:items-start se:overflow-y-scroll se:flex-col ssm:overflow-y-scroll ssm:flex-col ssm:justify-start ssm:items-start items-center flex-row  space-x-4 se:space-x-0 ssm:space-x-0 vs:space-x-1 py-2 ssm:py-0  se:px-2   px-5 ssm:px-2 vs:px-2">
                 <div class="flex flex-col ssm:w-full">
                   <span class="flex ">
                     <span class="pr-2">•</span> 
@@ -136,7 +136,7 @@
 
      <!--Comment section-->
     <div class="justify-center flex mt-3 sm:px-2 vs:px-2">
-     <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm ssm:text-xs text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-fullvs:w-full" placeholder = "Enter your post message here..." v-model="delivery_info.comment"></textarea>
+     <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm ssm:text-xs se:text-xs text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-fullvs:w-full" placeholder = "Enter your post message here..." v-model="delivery_info.comment"></textarea>
     </div>
     <!--end-->
 
