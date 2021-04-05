@@ -42,6 +42,7 @@
                     <div class="w-1/2 px-1 mt-6 text-left text-grey-dark focus:outline-none ">
                         <router-link to="/address-book" class="font-bold" >Back</router-link>
                     </div>
+<<<<<<< HEAD
                     <div class="flex mb-2 -mx-1 vs:m-1 vs:w-full md:w-full xl:w-full xl:pl-8 vs:pl-16 md:pl-16 lg:pl-16 lg:w-full vs:block">
                         <div class="w-1/2 px-1 mt-6 ml-12 vs:ml-6 vs:w-full md:w-full xl:w-full lg:w-full text-grey-dark">
                             <router-link to="/edit-profile" class="font-bold" >Skip for now</router-link>
@@ -49,6 +50,15 @@
                         <div class="flex justify-end w-1/2 px-1 mt-3 vs:mt-7 vs:w-full">
                             <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none ">
                             <router-link to="/verification-message" >NEXT</router-link></button>
+=======
+                    <div class="flex mb-2 -mx-1 vs:m-1 vs:w-full vs:pl-16 vs:mb-7">
+                        <div class="w-1/2 px-1 mt-6 ml-12 vs:w-full text-grey-dark">
+                            <button class="font-bold" @click="saveUser">Skip for now</button>
+                        </div>
+                        <div class="flex justify-end w-1/2 px-1 mt-3 vs:absolute vs:pr-81 vs:mt-16 vs:w-full vs:pb-20">
+                            <button  @click="saveUser" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none ">
+                            NEXT</button>
+>>>>>>> Registration
                     </div>
                 </div>
             </div>
@@ -77,3 +87,22 @@
 
 
 </style>
+<script>
+
+
+import api from '../api'
+export default {
+    methods:{
+        saveUser(){
+            var dataform = {personal:JSON.parse(localStorage.getItem('personal')), account:JSON.parse(localStorage.getItem('account')), address: JSON.parse(localStorage.getItem('address')) }
+
+            console.log('mail=',dataform.personal.email)
+            api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
+                 console.log(res.data);
+                this.$router.push({name:"dashboard"});
+             
+            })
+        }
+    }
+}
+</script>

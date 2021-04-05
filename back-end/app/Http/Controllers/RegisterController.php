@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\emailConfirmation;
 use App\Models\User;
+use App\Models\userAddress;
+use App\Models\userInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
@@ -31,7 +34,9 @@ class RegisterController extends Controller
         // $user = new User();
         // $user->email = $request->email;
         // $user->password = $request->password;
-        // $user->verification_code = sha1(time());
+
+        $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
+        $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
         $request->verificationCode = mt_rand(100000, 999999);
         $data =[
             'name' => $request->firstName,
@@ -41,18 +46,30 @@ class RegisterController extends Controller
         //return response()->json(trim($request->email));
         $email = trim($request->email);   
         $code = $request->verificationCode;
+
+        $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo, 'code'=>$code ];
         if($request != null){
             Mail::to($email)->send(new emailConfirmation($data));
-            return $code;
+            return response()->json($returnValue);
         }
-        return $code;
+        return response()->json($returnValue);
      }
 
 
      //function to put personal info in $addressInfo
     function postAddress(Request $request){
 
-        return response()->json('hello world');
+        $request->validate([
+            'houseNumber' => ['required'],
+            'province' => ['required'],
+            'barangay' => ['required'],
+            'cityMunicipality' => ['required'],
+       ]);
+
+       $this->addressInfo = ['houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
+       
+        
+        return response()->json( $this->addressInfo);
     }
 
      //function to put personal info in $addressInfo
@@ -65,6 +82,38 @@ class RegisterController extends Controller
     //this is the function to call to save the data in database
     function register(Request $request){
 
+       
+        
+        $userInfo = new userInformation();
+        $userInfo->email = $request->email;
+        $userInfo->firstName = $request->firstName;
+        $userInfo->lastName = $request->lastName;
+        $userInfo->phoneNumber = $request->phoneNumber;
+
+        if($userInfo->save()){
+            $userAuth = new user();
+            $userAuth->email = $request->email;
+            $userAuth->password = Hash::make($request->password);
+            
+            if($userAuth->save()){
+                $userAddress = new userAddress();
+                $userAddress->email = $request->email;
+                $userAddress->houseNumber = $request->houseNumber;
+                $userAddress->province = $request->province;
+                $userAddress->barangay = $request->barangay;
+                $userAddress->cityMunicipality = $request->cityMunicipality;
+                
+                $userAddress->save();
+
+                return response()->json('information saved'); 
+            }
+            else{
+                return response()->json('error, information address not saved'); 
+            }
+            
+        }else{
+            return response()->json('error, information address not saved'); 
+        }
 
     }
 }
