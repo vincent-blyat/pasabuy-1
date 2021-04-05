@@ -44,11 +44,11 @@
                     </div>
                     <div class="flex mb-2 -mx-1 vs:m-1 vs:w-full vs:pl-16 vs:mb-7">
                         <div class="w-1/2 px-1 mt-6 ml-12 vs:w-full text-grey-dark">
-                            <a class="font-bold" href="#">Skip for now</a>
+                            <button class="font-bold" @click="saveUser">Skip for now</button>
                         </div>
                         <div class="flex justify-end w-1/2 px-1 mt-3 vs:absolute vs:pr-81 vs:mt-16 vs:w-full vs:pb-20">
-                            <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none ">
-                            <router-link to="/verification-message" >NEXT</router-link></button>
+                            <button  @click="saveUser" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none ">
+                            NEXT</button>
                     </div>
                 </div>
             </div>
@@ -77,3 +77,29 @@
 
 
 </style>
+<script>
+
+
+import api from '../api'
+export default {
+    methods:{
+        saveUser(){
+
+            var data = [JSON.parse(localStorage.getItem('personal')), JSON.parse(localStorage.getItem('account')),JSON.parse(localStorage.getItem('address'))]
+            
+            var dataform = {personal: data[0], account:data[1], address: data[2] }
+            api.post('/api/register', dataform).then((res)=>{
+                 console.log('register ',res.data);
+                // if(res!=null){
+                //     console.log('sucess, info sent');
+                //     console.log(res.data);
+                //     //this.$router.push({name:"dashboard"});
+                // }
+                // else{
+                //     console.log('error, email not sent');
+                // }
+            })
+        }
+    }
+}
+</script>

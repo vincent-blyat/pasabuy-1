@@ -114,8 +114,10 @@ export default {
                
                 if(res!=null){
                     console.log('sucess, email sent');
-                    console.log(res.data);
-                    localStorage.setItem("code", res.data);
+                    console.log(res.data.personalInfo);
+                    localStorage.setItem("code", res.data.code);
+                    localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));
+                    localStorage.setItem("account",JSON.stringify(res.data.account));
                     this.$router.push({name:"verifyemail"});
                 }
                 else{
