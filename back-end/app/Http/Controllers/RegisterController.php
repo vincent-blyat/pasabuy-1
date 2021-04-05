@@ -80,11 +80,11 @@ class RegisterController extends Controller
 
 
     //this is the function to call to save the data in database
-    function register($request){
+    function register($data){
         
 
 
-        return response()->json($request->personal->email);
+        return response()->json($data);
         // $userInfo = new userInformation();
         // $userInfo->email = $request[0]->email;
         // $userInfo->firstName = $request[0]->firstName;

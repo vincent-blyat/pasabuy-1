@@ -88,7 +88,7 @@ export default {
             var data = [JSON.parse(localStorage.getItem('personal')), JSON.parse(localStorage.getItem('account')),JSON.parse(localStorage.getItem('address'))]
             
             var dataform = {personal: data[0], account:data[1], address: data[2] }
-            api.post('/api/register', dataform).then((res)=>{
+            api.post('/api/register', {params: {data:dataform}}).then((res)=>{
                  console.log('register ',res.data);
                 // if(res!=null){
                 //     console.log('sucess, info sent');
