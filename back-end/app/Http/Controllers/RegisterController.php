@@ -80,38 +80,39 @@ class RegisterController extends Controller
 
 
     //this is the function to call to save the data in database
-    function register($data){
+    function register(Request $request){
+
+       
         
+        $userInfo = new userInformation();
+        $userInfo->email = $request->email;
+        $userInfo->firstName = $request->firstName;
+        $userInfo->lastName = $request->lastName;
+        $userInfo->phoneNumber = $request->phoneNumber;
 
-
-        return response()->json($data);
-        // $userInfo = new userInformation();
-        // $userInfo->email = $request[0]->email;
-        // $userInfo->firstName = $request[0]->firstName;
-        // $userInfo->lastName = $request[0]->lastName;
-        // $userInfo->phoneNumber = $request[0]->phoneNumber;
-
-        // if($userInfo->save()){
-        //     $userAuth = new user();
-        //     $userAuth->email = $request[1]->email;
-        //     $userAuth->password = Hash::make($request[1]->password);
+        if($userInfo->save()){
+            $userAuth = new user();
+            $userAuth->email = $request->email;
+            $userAuth->password = Hash::make($request->password);
             
-        //     if($userAuth->save()){
-        //         $userAddress = new userAddress();
-        //         $userAddress->houseNumber = $request[2]->houseNumber;
-        //         $userAddress->province = $request[2]->province;
-        //         $userAddress->barangay = $request[2]->barangay;
-        //         $userAddress->cityMuncipality = $request[2]->cityMuncipality;
+            if($userAuth->save()){
+                $userAddress = new userAddress();
+                $userAddress->houseNumber = $request->houseNumber;
+                $userAddress->province = $request->province;
+                $userAddress->barangay = $request->barangay;
+                $userAddress->cityMuncipality = $request->cityMuncipality;
                 
-        //         $userAddress->save();
-        //     }
-        //     else{
-        //         return response()->json('error, information address not saved'); 
-        //     }
+                $userAddress->save();
+
+                return response()->json('information saved'); 
+            }
+            else{
+                return response()->json('error, information address not saved'); 
+            }
             
-        // }else{
-        //     return response()->json('error, information address not saved'); 
-        // }
+        }else{
+            return response()->json('error, information address not saved'); 
+        }
 
     }
 }

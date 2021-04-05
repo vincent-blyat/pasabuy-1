@@ -84,12 +84,10 @@ import api from '../api'
 export default {
     methods:{
         saveUser(){
-
-            var data = [JSON.parse(localStorage.getItem('personal')), JSON.parse(localStorage.getItem('account')),JSON.parse(localStorage.getItem('address'))]
-            
-            var dataform = {personal: data[0], account:data[1], address: data[2] }
-            api.post('/api/register', {params: {data:dataform}}).then((res)=>{
-                 console.log('register ',res.data);
+            var dataform = {personal:JSON.parse(localStorage.getItem('personal')), account:JSON.parse(localStorage.getItem('account')), address: JSON.parse(localStorage.getItem('address')) }
+            console.log('mail=',dataform.personal.email)
+            api.post('/api/register', {params: {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality,}}).then((res)=>{
+                 console.log(res.data);
                 // if(res!=null){
                 //     console.log('sucess, info sent');
                 //     console.log(res.data);
