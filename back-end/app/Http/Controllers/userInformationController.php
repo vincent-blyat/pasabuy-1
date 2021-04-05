@@ -27,6 +27,8 @@ class userInformationController extends Controller
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userAddress WHERE email = \''.$user->email.'\'');
     
+        if($data == null)
+            return response()->json('');
         return response()->json($data[0]);
     }
 
@@ -35,7 +37,9 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
-    
+
+        if($data == null)
+            return response()->json('');
         return response()->json($data[0]);
     }
 
@@ -64,10 +68,21 @@ class userInformationController extends Controller
         if($user->save()){
             //updating user languages
             $userLang = userLanguages::find(Auth::User()->email);
-            $userLang = userLanguages::where('email',Auth::User()->email)->first();
-            $userLang->languages = $request->language;
-            $userLang->save();
-            return response()->json('success, information saved');
+            if ($userLang == null){
+                $userLang = new userLanguages();
+                $userLang->userLanguageNumber = $userLang->count()+1;
+                $userLang->email = $userEmail;
+                $userLang->languages = $request->language;
+                $userLang->save();
+                return response()->json('success, information saved');
+            }
+            else{
+                $userLang = userLanguages::where('email',Auth::User()->email)->first();
+                $userLang->languages = $request->language;
+                $userLang->save();
+                return response()->json('success, information saved');
+            }
+            
         }
         else{
             return response()->json('error, information not saved');
