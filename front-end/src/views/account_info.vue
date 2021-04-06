@@ -70,5 +70,5 @@ methods:{
     }
 
 }
-}
+} 
 </script>
