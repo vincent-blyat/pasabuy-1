@@ -57,14 +57,14 @@
                   </span>
                 </span>
                 <span class="text-xs text-gray-400 truncate w-36">
-                  {{  }}
+                  {{ user.firstName }}: <strong>{{ user.message }}</strong>
                 </span>
               </div>
             </div>
             <div class="flex flex-col items-start">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·</span
-                >{{ }}</span
+                >{{ timestamp(user.dateCreated) }}</span
               >
             </div>
           </button>
@@ -115,13 +115,13 @@
 
       <div class="p-1 pl-2"
             v-for="(msg, index) in chat"
-            :key="msg.message"
+            :key="index"
             >
              <div v-bind:class="{ 'flex justify-end pr-10 mt-1' : out[index], 'flex items-end pr-10 mt-1': incoming[index] }">
               <div v-bind:class="{'ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg': out[index], 'ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ': incoming[index] }">
                 <p>{{ msg.message }}</p>
                 <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
-                  {{ msg.dateCreated }}
+                  {{ timestamp(msg.dateCreated) }}
                 </span>
               </div>
             </div>
@@ -734,6 +734,7 @@
 import Navbar from "./Navbar";
 import api from "../api";
 import uniq from "lodash/uniqBy"
+import moment from 'moment'
 export default {
   components: {
     Navbar,
@@ -896,6 +897,7 @@ export default {
                   j++;
               }
             }
+            console.log(this.users)
             if(this.activeRoom==null){
               this.setRoom(this.users[0].firstName, this.users[0].roomID,this.users[0].email)
             }
@@ -907,6 +909,9 @@ export default {
         console.log('auth',res.data.email)
         this.authUser = res.data.email;
       })
+    },
+    timestamp(date) {
+      return moment(date).fromNow();
     }
 
 
