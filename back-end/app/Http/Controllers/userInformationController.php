@@ -37,16 +37,9 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
-<<<<<<< HEAD
 
         if($data == null)
             return response()->json('');
-=======
-        
-        if($data == null){
-            return false;
-        }
->>>>>>> AccountSettings
         return response()->json($data[0]);
     }
 
@@ -86,15 +79,9 @@ class userInformationController extends Controller
                 $userLang = userLanguages::where('email',Auth::User()->email)->first();
                 $userLang->languages = $request->language;
                 $userLang->save();
-<<<<<<< HEAD
                 return response()->json('success, information saved');
             }
             
-=======
-            }
-            
-            return response()->json('success, information saved');
->>>>>>> AccountSettings
         }
         else{
             return response()->json('error, information not saved');
