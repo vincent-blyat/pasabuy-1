@@ -36,9 +36,6 @@ class userInformationController extends Controller
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
         
-        if($data==null){
-            return '';
-        }
         return response()->json($data[0]);
     }
 
