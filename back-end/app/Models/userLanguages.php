@@ -9,6 +9,6 @@ class userLanguages extends Model
 {
     use HasFactory;
     protected $table = 'tbl_userLanguages';
-    protected $primaryKey = 'indexUserLanguages';
+    protected $primaryKey = 'email';
     public $timestamps = false;
 }

@@ -74,6 +74,7 @@ class userInformationController extends Controller
                 $userLang->userLanguageNumber = userLanguages::count()+1;
                 $userLang->languages = $request->language;
                 $userLang->save();
+                return response()->json('success, information saved');
             }
             else{
                 $userLang = userLanguages::where('email',Auth::User()->email)->first();

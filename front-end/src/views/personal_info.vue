@@ -127,9 +127,7 @@ methods:{
       api.post('/api/editPersonal', this.personal).then((res)=>{
         console.log(res.data);
       //this.user = res.data;
-      }).catch(() => {
-        location.reload();
-        })
+      })
     },
      Edit(pars) {
       let x=document.getElementById(pars).innerHTML;
