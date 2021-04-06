@@ -792,7 +792,7 @@ el:'#shop-list',
     },
     listlistener(){
       this.list = false;
-    },
+  },
     toggleEditShoppingOffer(){
       this.editShoppingOffer = !this.editShoppingOffer 
     },
