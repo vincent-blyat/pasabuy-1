@@ -4,18 +4,23 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+
     extend: {
       screens: {
-       'xsm':{'min':'0px','max':'259px'}, 
-       'ssm':{'min':'260px','max':'319px'},
+        'xsm':{'min':'0px','max':'259px'}, 
+        'ssm':{'min':'260px','max':'319px'},
         'vs': {'min': '320px', 'max': '499px'},
-       'se': {'min': '320px', 'max': '330px'}, //new
-       'lvs': {'min': '401px', 'max': '499px'},
-       'sm': {'min': '500px', 'max': '639px'},
-       'md': {'min': '640px', 'max': '1023px'},
-        'lg': {'min': '1024px', 'max': '1279px'},
-        'xl': {'min': '1280px', 'max': '1535px'},
-        '2xl': {'min': '1536px'},
+        'se': {'min': '320px', 'max': '330px'},
+        'vvs':{'min': '320px', 'max': '383px'},
+         'lvs': {'min': '401px', 'max': '499px'},
+        'sm': {'min': '500px', 'max': '639px'},
+        's-sm':{'min': '544px', 'max': '639px'},
+        'md': {'min': '640px', 'max': '1023px'},
+         'lg': {'min': '1024px', 'max': '1279px'},
+         'xl': {'min': '1280px', 'max': '1535px'},
+         'xxl': {'min': '1330px', 'max': '1535px'},///////////
+         '2xl': {'min': '1536px'},
+         '2xxl': {'min': '1586px'},////////////
       },
       colors:{
         bastille: '#1E1825',
@@ -47,26 +52,31 @@ module.exports = {
         spacing: {
         0.5: '0.2rem',
         1.4: '0.300rem',
+        15:'3.6rem',
         17: '4.3rem',
-        122: '5.3rem', //new
+        122: '5.3rem',
+        6.5: '6.5rem',
         22: '5.5rem',
-        6.5: '6.5rem',//new
         28.5: '7.5rem',
         355: '8.9rem',
         50: '12.5rem',
+        62: '17rem',
         74:'19rem',
         75: '19rem',
         222: '19.5rem',
         224: '20.5rem',
         87: '22rem',
-        88: '22.5rem',//new
+        88: '22.5rem',
         89: '23rem',
         91: '23.5rem',
         90: '24rem',
         96: '24.9rem',
-        95: '25rem',//new
+        95: '25rem',
+        94: '25.4rem',///////
+        95.5: '25.7rem',///////// 
         96.5: '26rem',
         26.5: '26.5rem',
+        27: '26.7rem',
         96.7: '28rem',
         97: '30rem',
         448: '30.5rem',
@@ -75,11 +85,17 @@ module.exports = {
         97.5: '32.5rem',
         528: '33rem',
         98: '33rem',
+        98.5:'34.3rem',//////////
         550: '34.375rem',
         538: '35rem',
         99: '35rem',
+        99.5:'37rem',
         608: '38rem',
         100:'40rem',
+        101:'40.5rem',
+        110: '45rem',
+        150:'47rem',
+        200: '65rem',
         500: '500rem',
         //px
         eh: '430px',
