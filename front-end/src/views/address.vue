@@ -12,22 +12,33 @@
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
             <div action="#" class="space-y-3">
               <div class="w-full ">
-                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-8 mb-4 font-semibold placeholder-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:z-10 sm:text-sm" placeholder="House Number"  v-model="addressInfo.houseNumber" />
+                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-8 mb-4 font-semibold placeholder-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:z-10 sm:text-sm" placeholder="House Number"  v-model="addressInfo.houseNumber" />   
               </div>
-              <div class="w-full">
-                <input aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province"  v-model="addressInfo.province"  />
               
-              </div>
               <div class="w-full">
-                <input aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Barangay" v-model="addressInfo.barangay" />
-                
-                
-              </div>
-              <div class="w-full">
-                <input aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" placeholder="City/Municipality" v-model="addressInfo.cityMunicipality" />
+                <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="addressInfo.province"  >
+                        <option value="Choose" selected disabled>Choose</option>
+                       <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                   
+                </select>
+              </div>
+              
+              <div class="w-full">
+                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" v-model="addressInfo.cityMunicipality" >
+                 <option value="Choose" selected disabled>Choose</option>
+                       <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunDesc"> {{ city.citymunDesc }} </option>
+                   </select>
+              </div>
+
+              <div class="w-full">
+               <input aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="addressInfo.barangay"/>
+                      <!--  <option value="Choose" selected disabled>Choose</option>
+                       <option v-for="barangay in barangays" v-bind:key="barangay.id" v-bind:value="barangay.brgyDesc"> {{ barangay.brgyDesc }} </option>
+                  
+                </select>-->
                 
               </div>
+              
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
                   <router-link to="/verify-email" class="font-bold underline-none text-blue" >Back</router-link>
@@ -80,7 +91,16 @@ img{
 import api from '../api'
 export default {
     data(){
+
         return{
+
+      provinces: [],
+      cityMunicipality: [],
+      newcityMunicipality: [],
+      barangays: [],
+    selectedrefBrgy: null,
+
+
             addressInfo:{
                houseNumber : null,
                barangay : null,
@@ -91,13 +111,65 @@ export default {
     }, 
     methods:{
         nextPage(){
+
+             var d = document.getElementById("Province");
+             var getProv = d.options[d.selectedIndex].text;
+             this.addressInfo.province=getProv;
+             console.log( this.addressInfo.province)
+
             api.post('/api/postAddress', this.addressInfo).then((res)=>{
                 console.log(res.data)
                 localStorage.setItem("address",JSON.stringify(res.data));
                 this.$router.push({name:"uploadid"});
             })
-        }
-    }
+        },
+
+
+       
+        getProvCode(){
+          var newCityMun=this.newcityMunicipality;
+          this.cityMunicipality=[];
+          var e = document.getElementById("Province");
+          var getProvCode = e.value;
+          for (var i=0; i < newCityMun.length; i++) {
+                  if (newCityMun[i].provCode === getProvCode) {
+               this.cityMunicipality.splice(i, 1, newCityMun[i]);
+                  }      
+            }
+          console.log(getProvCode)
+          console.log(this.cityMunicipality)
+
+       
+        },
+        refProvince(){
+          api.get('/api/refProvince').then((res)=>{
+        this.provinces=res.data
+      
+        
+      })
+        },
+
+      refcityMunicipality(){
+          api.get('/api/refcityMunicipality').then((res)=>{
+        this.cityMunicipality=res.data
+        this.newcityMunicipality=res.data
+        
+      })
+        },
+         refBrgy(){
+          api.get('/api/refBrgy').then((res)=>{
+        this.barangays=res.data
+        
+      })
+        },
+
+    },
+    created(){
+       this.refProvince();
+       this.refcityMunicipality();
+      // this.refBrgy();
+    },
+               
 }
 
 
