@@ -1,5 +1,4 @@
 <template class="bg-gray-bgcolor font-nunito">
-
   <div class="absolute vs:left-5 left-12 top-3 bg-gray-bgcolor">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
         <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
@@ -11,12 +10,16 @@
         <div class="px-10 py-16">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
             <form action="#" class="space-y-3">
-              <div class="w-full ">
-                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-8 mb-4 font-semibold placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
-              </div>
               <div class="w-full">
                 <select aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Province" value="" >
                   <option value="" disabled selected hidden>Province</option>
+                  <option class="text-black">Albay</option>
+                  <option class="text-black">Albay</option>
+                </select>
+              </div>
+              <div class="w-full">
+                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:border-red-600 focus:z-10" placeholder="City/Municipality" value="" >
+                  <option value="" disabled selected hidden>City/Municipality</option>
                   <option class="text-black">Albay</option>
                   <option class="text-black">Albay</option>
                 </select>
@@ -28,12 +31,11 @@
                   <option class="text-black">Albay</option>
                 </select>
               </div>
-              <div class="w-full">
-                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:border-red-600 focus:z-10" placeholder="City/Municipality" value="" >
-                  <option value="" disabled selected hidden>City/Municipality</option>
-                  <option class="text-black">Albay</option>
-                  <option class="text-black">Albay</option>
-                </select>
+              <div class="w-full ">
+                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
+              </div>
+              <div class="w-full ">
+                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark" value="" />
               </div>
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
@@ -49,7 +51,6 @@
         </div>
       </div>
 </template>
-
 
 <style>
     #journal-scroll::-webkit-scrollbar {
@@ -67,7 +68,6 @@
         background-color: rgba(185, 28, 28)
     
     }
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);
@@ -82,4 +82,3 @@ img{
  
 }
 </style>
-

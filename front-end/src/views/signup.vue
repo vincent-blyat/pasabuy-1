@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="flex mb-2 -mx-1 ssm:block">
-                    <div class="w-1/2 px-1 mt-6 text-lg font-extrabold text-left ssm:w-full text-grey-dark text-blue">
+                    <div class="w-1/2 px-1 mt-6 text-lg font-bold text-left ssm:w-full text-grey-dark text-blue">
                         <router-link to="/log-in" >Log instead</router-link>
                     </div>
                     <div class="flex justify-end w-1/2 px-1 mt-3 ssm:justify-start ssm:w-full">
