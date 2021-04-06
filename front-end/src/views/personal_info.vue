@@ -152,8 +152,14 @@ mounted(){
       //this.user = res.data;
     })
     api.get('/api/getLanguages').then((res)=>{
-      console.log('language ' ,res.data);
-      this.personal.language = res.data.languages;
+      if(res){
+        console.log('language ' ,res.data);
+        this.personal.language = res.data.languages;
+      }
+      else{
+         console.log('error ');
+      }
+      
       //this.user = res.data;
     })
   }

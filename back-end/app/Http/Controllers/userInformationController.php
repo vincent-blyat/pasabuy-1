@@ -35,7 +35,10 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
-    
+        
+        if($data == null){
+            return false;
+        }
         return response()->json($data[0]);
     }
 
@@ -64,9 +67,19 @@ class userInformationController extends Controller
         if($user->save()){
             //updating user languages
             $userLang = userLanguages::find(Auth::User()->email);
-            $userLang = userLanguages::where('email',Auth::User()->email)->first();
-            $userLang->languages = $request->language;
-            $userLang->save();
+            if($userLang == null){
+                $userLang= new userLanguages();
+                $userLang->email = Auth::User()->email;
+                $userLang->userLanguageNumber = userLanguages::count()+1;
+                $userLang->languages = $request->language;
+                $userLang->save();
+            }
+            else{
+                $userLang = userLanguages::where('email',Auth::User()->email)->first();
+                $userLang->languages = $request->language;
+                $userLang->save();
+            }
+            
             return response()->json('success, information saved');
         }
         else{
