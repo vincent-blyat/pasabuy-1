@@ -8,9 +8,9 @@ module.exports = {
       screens: {
        'xsm':{'min':'0px','max':'259px'}, 
        'ssm':{'min':'260px','max':'319px'},
-        'se': {'min': '320px', 'max': '330px'}, //new
-       'vs': {'min': '320px', 'max': '499px'},
-        'lvs': {'min': '401px', 'max': '499px'},
+        'vs': {'min': '320px', 'max': '499px'},
+       'se': {'min': '320px', 'max': '330px'}, //new
+       'lvs': {'min': '401px', 'max': '499px'},
        'sm': {'min': '500px', 'max': '639px'},
        'md': {'min': '640px', 'max': '1023px'},
         'lg': {'min': '1024px', 'max': '1279px'},

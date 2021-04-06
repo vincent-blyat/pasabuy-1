@@ -104,7 +104,7 @@ class RegisterController extends Controller
                 $userAddress->cityMunicipality = $request->cityMunicipality;
                 
                 $userAddress->save();
-
+                
                 return response()->json('information saved'); 
             }
             else{
