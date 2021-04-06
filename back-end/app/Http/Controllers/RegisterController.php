@@ -105,7 +105,7 @@ class RegisterController extends Controller
                 
                 $userAddress->save();
                 
-                return response()->json('information saved'); 
+                return true; 
             }
             else{
                 return response()->json('error, information address not saved'); 

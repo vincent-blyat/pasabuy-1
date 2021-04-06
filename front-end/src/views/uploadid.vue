@@ -89,7 +89,16 @@ export default {
             console.log('mail=',dataform.personal.email)
             api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
                  console.log(res.data);
-                this.$router.push({name:"dashboard"});
+                 if(res){
+                     localStorage.removeItem('personal')
+                     localStorage.removeItem('account')
+                     localStorage.removeItem('address')
+                     this.$router.push({name:"dashboard"});
+                 }
+                 else{
+                     console.log('informmation not saved')
+                 }
+                
              
             })
         }
