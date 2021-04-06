@@ -93,7 +93,7 @@ export default {
                      localStorage.removeItem('personal')
                      localStorage.removeItem('account')
                      localStorage.removeItem('address')
-                     this.$router.push({name:"dashboard"});
+                     this.$router.push({name:"accountsettings"});
                  }
                  else{
                      console.log('informmation not saved')
