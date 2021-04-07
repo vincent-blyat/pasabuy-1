@@ -114,6 +114,7 @@ export default {
             api.post('api/post/offer', this.form_data)
                 .then((response) => {
                     console.log(response.json())
+                    this.$router.push({name:"dashboard"});
                 })
                 .catch((errors) => {
                     console.log(errors)
