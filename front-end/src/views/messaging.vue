@@ -37,9 +37,9 @@
         <!---end of search bar-->
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
           <button
-            v-for="(user,index) in uniqUser"
+            v-for="(chatRoom,index) in uniqUser"
             :key="index"
-            @click="setRoom(user.firstName, user.roomID, user.email)"
+            @click="setRoom(chatRoom.firstName, chatRoom.messageRoomNumber, chatRoom.email)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -51,20 +51,20 @@
               />
               <div class="flex flex-col justify-between items-start ml-2">
                 <span class="font-medium text-sm" id="mark">
-                  {{ user.firstName }}
+                  {{ chatRoom.firstName }}
                   <span class="material-icons pl-2" id="iCheck">
                     check_circle
                   </span>
                 </span>
                 <span class="text-xs text-gray-400 truncate w-36">
-                  {{ user.firstName }}: <strong>{{ user.message }}</strong>
+                  {{ chatRoom.firstName }}: <strong>{{ chatRoom.message }}</strong>
                 </span>
               </div>
             </div>
             <div class="flex flex-col items-start">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·</span
-                >{{ timestamp(user.dateCreated) }}</span
+                >{{ timestamp(chatRoom.dateCreated) }}</span
               >
             </div>
           </button>
@@ -747,7 +747,7 @@ export default {
       attachtoggle: false,
       toggleInbox: true,
       toggleChat: false,
-      users: [],
+      chatRooms: [],
       //inbox
       inbox: [],
       //chat
@@ -888,20 +888,18 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
-          //this.users = res.data;
             var i;
             var j;
             for (i = 0,j=0; i < res.data.length; i++) {   
               if (res.data[i].email.localeCompare(this.authUser)) {
-                  this.users[j] = res.data[i];
+                  this.chatRooms[j] = res.data[i];
                   j++;
               }
             }
-            console.log(this.users)
+            console.log(this.chatRooms)
             if(this.activeRoom==null){
-              this.setRoom(this.users[0].firstName, this.users[0].roomID,this.users[0].email)
+              this.setRoom(this.chatRooms[0].firstName, this.chatRooms[0].messageRoomNumber,this.chatRooms[0].email)
             }
-          // console.log(this.users)
         });
     },
     getAuthUser(){
@@ -922,7 +920,7 @@ export default {
   },
   computed: {
     uniqUser() {
-      return uniq(this.users, 'email')
+      return uniq(this.chatRooms, 'email')
     }
 }
 
