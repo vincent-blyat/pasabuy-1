@@ -4,7 +4,7 @@
   <div class="flex justify-between text-gray-100 bg-gray-800 ">
     <!-- logo -->
     <!-- mobile menu button -->
-    <nav class="fixed flex items-center justify-between w-full h-20 p-0 mt-0 bg-red-700 font-nunito 2xl:bg-white 2xl:shadow-md xl:bg-white xl:shadow-md lg:bg-white lg:shadow-md">
+    <nav class="fixed z-50 flex items-center justify-between w-full h-20 p-0 mt-0 bg-red-700 font-nunito 2xl:bg-white 2xl:shadow-md xl:bg-white xl:shadow-md lg:bg-white lg:shadow-md">
       <!--Logo-->
        <div class="flex items-center ">
        <button class="block ml-4 text-white material-icons 2xl:hidden xl:hidden lg:hidden" @click="toggle_event()"> menu</button>

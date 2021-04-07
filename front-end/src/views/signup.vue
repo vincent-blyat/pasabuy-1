@@ -1,11 +1,12 @@
 <template class=" bg-gray-bgcolor font-nunito">
-
+<!---Logo---->
     <div class="absolute vs:left-5 left-12 top-3">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
         <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
             pasaBUY
         </label>
     </div>
+<!---End of Logo---->
 
     <div id="signup" class="flex items-center justify-center w-full h-screen pt-12 bg-gray-bgcolor">
       <div class="w-2/5 mx-auto my-12 overflow-hidden text-center bg-white shadow-md sm:w-10/12 vs:w-10/12 md:w-8/12 lg:w-6/12 flex-grow-1 rounded-xl ssm:w-10/12">

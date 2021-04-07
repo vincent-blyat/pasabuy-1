@@ -11,14 +11,14 @@
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
             <form action="#" class="space-y-3">
               <div class="w-full">
-                <select aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Province" value="" >
+                <select aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-6 mb-4 font-semibold tracking-wide text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Province" value="" >
                   <option value="" disabled selected hidden>Province</option>
                   <option class="text-black">Albay</option>
                   <option class="text-black">Albay</option>
                 </select>
               </div>
               <div class="w-full">
-                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:border-red-600 focus:z-10" placeholder="City/Municipality" value="" >
+                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:border-red-600 focus:z-10" placeholder="City/Municipality" value="" >
                   <option value="" disabled selected hidden>City/Municipality</option>
                   <option class="text-black">Albay</option>
                   <option class="text-black">Albay</option>
@@ -32,10 +32,10 @@
                 </select>
               </div>
               <div class="w-full ">
-                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
+                <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number" value="" />
               </div>
               <div class="w-full ">
-                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark" value="" />
+                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark" value="" />
               </div>
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
