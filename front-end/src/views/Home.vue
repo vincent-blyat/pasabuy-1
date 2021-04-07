@@ -1,5 +1,4 @@
 <template> 
-
     <div id="navbar">
         <nav class="fixed z-10 flex w-full py-4 bg-opacity-50 justify px-7 xl:px-4 font-nunito" :class="{ 'onScroll': !view.topOfPage}">
         <div class="absolute md:left-5 2xl:top-7 2xl:left-8 sm:top-7 left-6 top-3 vs:top-7">

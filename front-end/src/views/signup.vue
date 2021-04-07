@@ -1,11 +1,12 @@
 <template class=" bg-gray-bgcolor font-nunito">
-
+<!---Logo---->
     <div class="absolute vs:left-5 left-12 top-3">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
         <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
             pasaBUY
         </label>
     </div>
+<!---End of Logo---->
 
 
     <div id="signup" class="flex items-center justify-center pt-10 pb-10 bg-gray-bgcolor vs:pt-16">
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <div class="flex mb-2 -mx-1 ssm:block">
-                    <div class="w-1/2 px-1 mt-6 text-lg font-extrabold text-left ssm:w-full text-grey-dark text-blue">
+                    <div class="w-1/2 px-1 mt-6 text-lg font-bold text-left ssm:w-full text-grey-dark text-blue">
                         <router-link to="/log-in" >Log instead</router-link>
                     </div>
                     <div class="flex justify-end w-1/2 px-1 mt-3">

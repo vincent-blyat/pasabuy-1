@@ -1,7 +1,7 @@
 <template class="bg-gray-bgcolor font-nunito">
     <div class="absolute vs:left-5 left-12 top-3 ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-        <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
+        <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red text-red-buttons">
             pasaBUY
         </label>
     </div>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex mb-2 -mx-1 ">
                 <div class="w-1/2 px-1 mt-6 font-bold text-left text-grey-dark text-blue">
-                    <router-link to="/login" >Log instead</router-link>
+                    <router-link to="/log-in" >Log instead</router-link>
                 </div>
                 <div class="flex justify-end w-1/2 px-1">
                 <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:shadow-outline">
