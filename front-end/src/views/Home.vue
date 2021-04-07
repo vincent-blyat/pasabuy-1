@@ -1,57 +1,58 @@
-<template class="w-full h-full mx-auto bg-local bg-no-repeat bg-cover font-nunito" style="background-image: url('img/main-back.jpg')"> 
-
-    <div id="navbar" class="fixed z-10 flex w-full px-4 py-4 bg-transparent font-nunito justify">
-        <div class="absolute vs:left-5 left-6 top-3 ">
+<template> 
+    <div id="navbar">
+        <nav class="fixed z-10 flex w-full py-4 bg-opacity-50 justify px-7 xl:px-4 font-nunito" :class="{ 'onScroll': !view.topOfPage}">
+        <div class="absolute md:left-5 2xl:top-7 2xl:left-8 sm:top-7 left-6 top-3 vs:top-7">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-          <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
+          <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons vs:hidden ssm:hidden 2xl:text-2xl">
             pasaBUY
           </label>
       </div>
-            <div class="flex items-center w-full mt-4 text-right xl:block 2xl:block vs:block lg:block md:block">
+            <div class="flex items-center w-full mt-4 text-right ssm:block sm:block xl:block 2xl:block vs:block lg:block md:block">
                 <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border border-red-700 rounded-3xl focus:outline-none hover:bg-red-50 2xl:text-2xl">
                     <router-link to="/log-in" >Log in</router-link>
                 </button>
                 <button  class="h-10 px-4 m-1 text-white transition-colors duration-150 bg-red-700 2xl:text-2xl rounded-3xl focus:outline-none hover:bg-red-800">
                     <router-link to="/sign-up" >Sign Up</router-link>
                 </button>
-            </div>      
+            </div>
+        </nav>      
     </div>
 
-    <div id="landing" class="w-full h-screen mx-auto bg-local bg-no-repeat bg-cover md:bg-center md:bg-no-repeat vs:bg-center font-nunito" style="background-image: url('img/main-back.jpg')">
-        <div class="flex items-center h-full px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:ml-36 vs:ml-8 ">
+    <div id="landing" class="w-full h-screen bg-no-repeat bg-cover xl:mx-auto ssm:w-full vs:bg-center md:bg-center vs:justify-center sm:bg-cover sm:bg-center ssm:bg-cover ssm:bg-center md:bg-no-repeat font-nunito" style="background-image: url('img/main-back.jpg')">
+        <div class="flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
             <section class="w-9/12 lg:w-9/12 2xl:w-9/12 md:w-9/12">
-                <p class="mb-4 text-5xl font-bold tracking-wide vs:text-4xl xl:w-97 md:w-97 lg:w-97 2xl:w-99 vs:w-90 2xl:text-6xl">
+                <p class="mb-4 text-5xl font-bold tracking-wide sm:pl-12 sm:text-4xl ssm:pl-8 vs:pl-8 vs:text-3xl xl:w-97 md:w-97 2xl:pl-40 lg:text-4xl sm:pt-10 lg:w-90 2xl:w-110 vs:w-91 2xl:text-5xl sm:w-96.5 ssm:w-96.5">
                     Need someone to do your groceries?</p>
-                <p class="text-lg leading-loose text-left 2xl:text-xl xl:w-7/12 vs:w-96">
+                <p class="text-lg leading-loose text-left ssm:w-86 lg:w-98 vs:pl-8 ssm:px-8 sm:pl-12 2xl:text-xl xl:w-7/12 vs:w-96 lg:text-xl 2xl:pl-40">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
-                <button class="items-center px-4 m-1 mt-3 font-semibold tracking-wide text-white transition-colors duration-150 rounded-full md:mt-6 xl:mb-4 bg-red-buttons h-9 focus:shadow-outline hover:bg-red-800 2xl:text-xl">
+                <button class="items-center px-4 m-1 mt-3 font-semibold tracking-wide text-white transition-colors duration-150 rounded-full 2xl:mt-7 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7 sm:ml-12 vs:ml-8 md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-40 hover:bg-red-800 2xl:text-xl">
                    <router-link to="/log-in" >Pasabuy Now</router-link>
                 </button>
             </section>
         </div>
         <!--SECOND-->
-    <div class="flex flex-wrap justify-center bg-white 2xl:pt-40 xl:pt-40 vs:pt-12 font-nunito md:pt-20">
-       <div class="w-1/5 p-1 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 rounded-xl md:w-10/12 vs:w-10/12 md:pt-10">
+    <div class="flex flex-wrap justify-center bg-white sm:pt-16 lg:pt-40 2xl:pt-56 ssm:pt-16 xl:pt-40 vs:pt-12 font-nunito md:pt-20">
+       <div class="w-1/5 p-1 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 vs:pt-10 vs:mx-7 rounded-xl md:w-10/12 vs:w-full vs:justify-center md:pt-10 ssm:w-full sm:w-full sm:mx-7 lg:w-1/4">
             <img class="w-1/2 p-1 mx-auto mb-5 md:p-10" src="img/cart.png"> 
             <h2 class="text-xl font-bold leading-loose tracking-wide text-center md:leading-loose md:text-3xl">Get Help with Shopping</h2>
             <p class="px-4 mb-4 text-center md:leading-normal md:text-2xl">
                 Post a request and let your shopping list be taken care of for you</p>
         </div> 
-        <div class="w-1/5 p-2 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 md:pt-10 rounded-xl md:w-10/12 vs:w-10/12">
+        <div class="w-1/5 p-2 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 lg:w-1/4 vs:pt-10 sm:mx-12 sm:w-full md:pt-10 rounded-xl md:w-10/12 vs:mx-7 vs:w-full">
             <img class="w-1/2 p-1 mx-auto mb-5 md:p-10" src="img/bike.png"> 
             <h2 class="text-xl font-bold leading-loose tracking-wide text-center md:leading-loose md:text-3xl">Get Extra Income</h2>
             <p class="px-4 mb-4 text-center md:leading-normal md:text-2xl">
                 Earn by accepting shopping requests from people near you</p>
         </div> 
-        <div class="w-1/5 p-2 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 md:pt-10 rounded-xl md:w-10/12 vs:w-10/12">
+        <div class="w-1/5 p-2 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 lg:w-1/4 vs:pt-10 sm:mx-12 sm:w-full md:pt-10 rounded-xl md:w-10/12 vs:mx-7 vs:w-full">
             <img class="w-1/2 mx-auto mb-5 md:p-10" src="img/package.png">
             <h2 class="text-xl font-bold leading-loose tracking-wide text-center md:leading-loose md:text-3xl">Explore Pasabuy Now</h2>
-            <p class="px-4 text-center md:leading-normal md:text-2xl">
+            <p class="px-4 pb-5 text-center md:leading-normal md:text-2xl">
                 Sign up now and see how pasaBuy works</p>
         </div>
     </div>
-    <div class="flex flex-wrap items-center self-auto justify-center p-6 pt-10 bg-white font-nunito md:flex">
-            <button class="h-8 px-5 font-semibold tracking-wider text-white transition-colors duration-150 bg-red-700 md:w-80 md:h-14 w-72 rounded-3xl focus:shadow-outline hover:bg-red-700 ">
+    <div class="flex flex-wrap items-center self-auto justify-center p-6 pt-10 bg-white sm:w-full font-nunito md:flex">
+            <button class="h-8 px-5 font-semibold tracking-wider text-white transition-colors duration-150 bg-red-700 md:w-80 md:h-14 sm:w-96.5 sm:h-12 2xl:h-11 2xl:w-89 w-72 rounded-3xl focus:shadow-outline hover:bg-red-700 ">
                 <a href="#" class="inline-flex align-top md:text-2xl">
                 Start Shopping
                 </a>
@@ -60,16 +61,16 @@
         
             
         <!--THIRD-->
-        <div class="flex flex-wrap items-center justify-center px-20 pt-40 bg-white vs:pt-16 font-nunito">
-            <div class="p-1 md:p-5 vs:justify-center vs:w-full md:justify-center md:w-full w-1/4 bg-white h-96.7 rounded-xl">    
-                <h2 class="pt-5 text-3xl font-bold leading-snug tracking-wide text-left md:text-3xl leading-1">We deliver<br class="vs:hidden md:hidden"> more than just groceries</h2>
-                <p class="py-3 mb-6 font-semibold leading-loose text-left text-md xl:mr-3 pt-9 2xl:mr-8 2xl:text-xl 2xl:leading-loose">
+        <div class="flex flex-wrap items-center justify-center px-20 bg-white 2xl:pt-48 sm:pt-20 sm:px-12 vs:px-12 vs:w-full pt-28 vs:pt-16 font-nunito">
+            <div class="p-1 sm:p-0 sm:w-full vs:p-0 md:p-5 sm:px-4 vs:w-full md:justify-center md:w-full w-1/4 bg-white h-96.7 rounded-xl 2xl:pl-5 ">    
+                <h2 class="pt-5 text-3xl font-bold leading-snug tracking-wide text-left lg:text-2xl 2xl:pt-0 md:text-3xl leading-1">We deliver<br class="vs:hidden sm:hidden md:hidden"> more than just groceries</h2>
+                <p class="py-3 mb-6 font-semibold leading-loose text-left text-md xl:mr-3 pt-9 2xl:mr-8 2xl:text-xl 2xl:leading-loose sm:text-lg md:text-lg lg:text-md lg:leading-loose lg:mr-3 lg:mb-0 lg:pt-6" >
                     Did your favorite lotion runout? Or your shampoo? Wanting to buy that branded shirt on sale? Need party supplies for a surprise birthday celebration? pasaBuy got you covered. Your other essentials are just at the end of your fingerprints. </p>
-                    <button class="h-8 px-5 font-semibold tracking-wider text-white transition-colors duration-150 w-26 bg-red-buttons rounded-3xl focus:shadow-outline hover:bg-red-700">
+                    <button class="h-8 px-5 font-semibold tracking-wider text-white transition-colors duration-150 w-26 bg-red-buttons rounded-3xl focus:shadow-outline 2xl:h-10 hover:bg-red-700">
                         <a href="#">Try Now</a> <!--change to router link-->
                     </button>
             </div>
-            <div class="bg-gray-200 xl:w-2/4 2xl:w-5/12 vs:full rounded-xl">
+            <div class="bg-gray-200 xl:w-2/4 2xl:w-150 lg:w-99.5 rounded-xl sm:w-full">
                 <img class="float-right object-contain w-full h-full border" src="img/eimage.png">
             </div>
 
@@ -77,16 +78,16 @@
         </div>
 
 
-        <div class="flex flex-wrap-reverse items-center pt-40 pr-20 bg-white 2xl:pb-56 xl:pb-40 vs:pb-20 vs:pt-20 md:pb-20 md:pt-20 font-nunito ">
-                <div class="float-left bg-gray-200 xl:w-ew xl:h-eh 2xl:w-111 2xl:h-eh">
-                <img class="border w-ew xl:h-eh 2xl:w-111 2xl:h-99" src="img/eimage2.jpg">
+        <div class="flex flex-wrap-reverse items-center pr-20 bg-white sm:px-12 sm:pt-20 vs:px-12 pt-36 2xl:pb-90 2xl:pt-56 xl:pb-40 vs:pb-20 vs:pt-20 md:pb-20 md:pt-20 font-nunito lg:pb-40">
+                <div class="float-left bg-gray-200 sm:justify-center sm:mb-28 xl:w-ew xl:h-eh lg:w-110 2xl:w-111 2xl:h-eh">
+                <img class="border w-ew xl:h-eh 2xl:w-200 2xl:h-99" src="img/eimage2.jpg">
             </div>
 
-                <div class="ml-6 vs:ml-20 md:ml-20 p-1 vs:justify-center md:w-full vs:w-full w-1/4 bg-white h-96.7 rounded-xl">  
-                <h2 class="pt-2 text-3xl font-bold leading-snug tracking-wide text-left leading-1">We value your <br class="vs:hidden md:hidden"> health and <br class="vs:hidden"> safety.</h2>
-                <p class="py-3 mb-6 font-semibold leading-loose text-left pt-11 text-md xl:mr-8 2xl:mr-8">
+                <div class="ml-6 vs:ml-0 sm:pl-0 sm:w-full vs:p-0 md:ml-20 p-1 vs:justify-center md:w-full vs:w-full w-1/4 bg-white h-96.7 rounded-xl">  
+                <h2 class="pt-2 text-3xl font-bold leading-snug tracking-wide text-left 2xl:pt-8 leading-1">We value your <br class="vs:hidden md:hidden sm:hidden 2xl:hidden"> health and <br class="vs:hidden sm:hidden"> safety.</h2>
+                <p class="py-3 mb-6 font-semibold leading-loose text-left md:text-lg 2xl:text-xl 2xl:leading-loose pt-11 text-md xl:mr-8 2xl:mr-8">
                     With pasaBuy, you can limit your presence outside reducing your possibility of contracting the virus. Its security features ensure safe and worry-free transactions with other users on the platform.</p>
-                    <button class="h-8 px-5 mt-2 font-semibold tracking-wider text-white transition-colors duration-150 w-26 bg-red-buttons rounded-3xl focus:shadow-outline hover:bg-red-700">
+                    <button class="h-8 px-5 mt-2 font-semibold tracking-wider text-white transition-colors duration-150 w-26 bg-red-buttons 2xl:h-10 rounded-3xl focus:shadow-outline hover:bg-red-700">
                         <a href="#">Try Now</a> <!--change to router link-->
                     </button>
             </div>
@@ -96,13 +97,13 @@
         
 <!--FOOTER-->
         <footer class="px-4 pb-8 text-white xl:pt-12 md:pt-12 bg-bastille">
-            <div class="container flex flex-col items-center justify-center mx-auto overflow-hidden leading-none xl:px-4">
-                <div class="block w-3/4 mt-6 text-base sm:flex lg:mt-0">
+            <div class="container flex flex-col items-center justify-center mx-auto overflow-hidden leading-none sm:justify-around md:justify-around vs:flex-auto xl:px-4">
+                <div class="block w-3/4 mt-6 text-base md:w-11/12 sm:w-11/12 lg:flex xl:flex 2xl:flex md:flex sm:flex lg:mt-0">
                     <ul class="flex flex-col w-full p-0 font-thin text-left list-none">
                         <li class="inline-block px-3 py-1 font-medium tracking-wide ">Pasabuy</li>
                     </ul>
                     <ul class="flex flex-col w-full p-0 font-thin text-left list-none">
-                        <li class="inline-block px-3 py-1 font-medium tracking-wide">Company</li>
+                        <li class="inline-block px-3 py-1 font-medium tracking-wide sm:px-0">Company</li>
                         <li><a href="#" class="inline-block py-1 pl-3 pr-5 no-underline">About Us</a>
                         </li>
                         <li><a href="#" class="inline-block py-1 pl-3 pr-5 no-underline ">FAQs</a></li>
@@ -113,7 +114,7 @@
                         <li><a href="#" class="inline-block py-1 pl-3 pr-5 text-white no-underline">Privacy</a></li>
                         <li><a href="#" class="inline-block py-1 pl-3 pr-5 no-underline ">Terms</a></li>
                     </ul>
-                    <div class="flex flex-col w-full">
+                    <div class="flex flex-col w-full sm:w-11/12">
                         <div class="inline-block px-3 py-1 font-medium tracking-wide ">©Pasabuy 2021</div>
                         <ul class="flex flex-col w-full p-0 font-thin text-left">
                             <li><a href="#" class="inline-block py-1 pl-3 pr-5 no-underline ">Stay connected with us</a></li>
@@ -172,9 +173,29 @@ img{
 </style>
 
 <script>
+
 export default {
-  components:{
-     
-  }
+  el: '#navbar',
+  data () {
+    return {
+      view: {
+        topOfPage: true
+      }
+    }
+  },
+  beforeMount() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll(){
+      if(window.pageYOffset>0){
+        if(this.view.topOfPage) this.view.topOfPage = false
+      } else {
+        if(!this.view.topOfPage) this.view.topOfPage = true
+      }
+    }
+  },
 }
 </script>
+
+

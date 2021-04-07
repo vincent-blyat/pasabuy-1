@@ -1,21 +1,31 @@
 <template>
 <div class="bg-gray-100 pt-6 font-nunito">
   <!--profile review-->
-  <div class="flex items-center vs:flex-col justify-center space-x-10">
+  <div class="flex items-center ssm:flex-col ssm:h-auto sm:flex-col vs:flex-col md:flex-col md:h-auto vs:h-auto sm:h-auto ssm:pb-6 vs:pb-6 sm:pb-6 md:pb-6 w-full justify-center  ssm:space-x-0 vs:space-x-0 sm:space-x-0 space-x-10">
 
   <!--Rating-->
-    <div class="flex flex-col vs:h-auto h-screen">
+    <div class="flex flex-col ssm:h-auto vs:h-auto sm:h-auto md:h-auto h-screen">
     <div class="flex ">
-      <div class="flex flex-col space-x-4 items-center justify-center p-6 bg-white shadow rounded-xl h-auto" style="width: 304px;">     
+      <div class="flex ssm:px-2 flex-col space-x-4 items-center justify-center py-6 ssm:py-2 vs:py-4 bg-white shadow rounded-xl h-auto w-74 ssm:w-full">     
         <div class="inline-flex mb-3">
-          <p class="font-bold leading-10 text-gray-900 text-4xl">{{rating}} / {{max_rate}}</p>
+          <p class="font-bold leading-10 text-gray-900 ssm:text-2xl vs:text-3xl lvs:text-4xl text-4xl">{{rating}} / {{max_rate}}</p>
         </div>
-        <div class="inline-flex items-start space-x-1 justify-start px-4 py-2 bg-gray-100 rounded-full">
-          <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
-          <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
-          <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
-          <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
-          <img class="w-1/5 h-full rounded-lg" src="img/star_rate.svg"/>
+        <div class="inline-flex items-start space-x-1 justify-start px-4 py-2 ssm:py-1 vs:py-1 lvs:py-2 bg-gray-100 rounded-full">
+          <span class="text-yellow-500 align-middle material-icons md-24">
+                  star_rate
+                </span>
+          <span class="text-yellow-500 align-middle material-icons md-24">
+                  star_rate
+                </span>
+          <span class=" text-yellow-500 align-middle material-icons md-24">
+                  star_rate
+                </span>
+          <span class=" text-yellow-500 align-middle material-icons md-24">
+                  star_rate
+                </span>
+          <span class="text-yellow-500 align-middle material-icons md-24">
+                  star_rate
+                </span>
         </div>
         <div class="flex py-3">
           <p class="text-xs leading-none text-gray-900">based on {{pasabuyers}} Pasabuyers</p>
@@ -78,37 +88,47 @@
 <!--end of rating code-->
 
 <!--user post comments about reviews-->
-  <div class="flex vs:justify-center vs:items-center flex-col vs:mt-6 h-screen vs:h-auto">
+  <div class="flex flex-col ssm:mt-6 ssm:w-full ssm:h-auto vs:mt-6 sm:mt-6 sm:h-auto md:mt-6 md:h-auto h-screen vs:w-full min-w-0 px-2 sm:w-full vs:h-auto">
 
     <!--post 1-->
-    <div class="flex">
-      <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
-        <div class="flex flex-col">
+    <div class="flex ssm:w-full vs:w-full sm:w-full">
+      <div class="inline-flex items-start justify-start p-6 vs:p-4 bg-white shadow rounded-xl h-auto w-608 ssm:w-full vs:w-full sm:w-full ">     
+        <div class="flex flex-col ">
           <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
             <div class="flex">
-              <img class="w-14 h-14 rounded-full" src="img/asta.jpeg"/>
+              <img class="w-14 h-14 ssm:w-10 ssm:h-10 rounded-full" src="img/asta.jpeg"/>
               <div class="flex flex-col items-start px-4">
                 <div class="space-x-8">
-                  <span class="text-base font-bold leading-none text-gray-900">{{users.user1}}</span>
+                  <span class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{users.user1}}</span>
                   <!--check icon here-->
                 </div>
-                <div class="flex-row flex py-2 space-x-4">
+                <div class="flex-row ssm:flex-col ssm:space-x-0 ssm:py-0 ssm:space-y-1 flex py-2 space-x-4">
                   <div class="inline-flex items-start space-x-1 justify-start">
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
                    </div>
                    <div class="inline-flex">
-                    <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date1}}</span>
+                    <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm mt-0.5leading-none text-gray-500">{{datePosted.date1}}</span>
                    </div>
                 </div>
               </div>
             </div>
         </div>
-        <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
-          <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
+        <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 ssm:w-full vs:w-full sm:w-full">
+          <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
       </div>
       </div>    
     </div>
@@ -116,34 +136,44 @@
   <!--end-->
 
   <!--post 2-->
-  <div class="flex py-6">
-    <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
+  <div class="flex py-6 ssm:w-full vs:w-full sm:w-full">
+    <div class="inline-flex space-x-4 items-start justify-start p-6 vs:p-4 bg-white shadow rounded-xl h-auto w-608 vs:w-full sm:w-full">     
       <div class="flex flex-col">
         <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
           <div class="flex">
-            <img class="w-14 h-14 rounded-full" src="img/julius.png"/>
+            <img class="w-14 h-14 ssm:w-10 ssm:h-10 rounded-full" src="img/julius.png"/>
             <div class="flex flex-col items-start px-4">
               <div class="space-x-8">
-                <span class="text-base font-bold leading-none text-gray-900">{{users.user2}}</span>
+                <span class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{users.user2}}</span>
                 <!--check icon here-->
               </div>
-              <div class="flex-row flex py-2 space-x-4">
+              <div class="flex-row flex py-2 space-x-4 ssm:flex-col ssm:space-x-0 ssm:py-0 ssm:space-y-1">
                   <div class="inline-flex items-start space-x-1 justify-start">
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                    <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
+                   <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
                    </div>
                    <div class="inline-flex">
-                    <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date2}}</span>
+                    <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm mt-0.5leading-none text-gray-500">{{datePosted.date2}}</span>
                    </div>
                 </div>
             </div>
           </div>
       </div>
-      <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
-        <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
+      <div class="flex items-start justify-start px-6 py-4  ssm:w-full bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-full sm:w-full">
+        <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
     </div>
     </div>    
   </div>
@@ -151,34 +181,44 @@
 <!--end-->
 
 <!--post 3-->
-<div class="flex vs:pb-6">
-  <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 vs:w-96.5">     
+<div class="flex ssm:w-full vs:w-full sm:w-full">
+  <div class="inline-flex space-x-4 items-start justify-start p-6 vs:p-4 bg-white shadow rounded-xl h-auto w-608 vs:w-full sm:w-full">     
     <div class="flex flex-col">
       <div class="flex flex-grow space-x-4 flex-wrap flex-row w-full justify-between">
         <div class="flex">
-          <img class="w-14 h-14 rounded-full" src="img/baha.jpg"/>
+          <img class="w-14 h-14 ssm:w-10 ssm:h-10 rounded-full" src="img/baha.jpg"/>
           <div class="flex flex-col items-start px-4">
             <div class="space-x-8">
-              <span class="text-base font-bold leading-none text-gray-900">{{users.user3}}</span>
+              <span class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{users.user3}}</span>
               <!--check icon here-->
             </div>
-           <div class="flex-row flex py-2 space-x-4">
+           <div class="flex-row flex py-2 space-x-4 ssm:flex-col ssm:space-x-0 ssm:py-0 ssm:space-y-1">
               <div class="inline-flex items-start space-x-1 justify-start">
-                <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
-                <img class="w-4 h-full rounded-full" src="img/star_rate.svg"/>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class=" text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
+                <span class="text-yellow-500 align-middle material-icons md-18">
+                  star_rate
+                </span>
               </div>
               <div class="inline-flex">
-                <span class="text-sm mt-0.5leading-none text-gray-500">{{datePosted.date3}}</span>
+                <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm mt-0.5leading-none text-gray-500">{{datePosted.date3}}</span>
               </div>
             </div>
           </div>
         </div>
     </div>
-    <div class="flex items-start justify-start px-6 py-4  bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-89">
-      <p class="text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
+    <div class="flex items-start justify-start px-6 py-4 ssm:w-full bg-gray-100 rounded-xl h-auto mt-3 w-99 vs:w-full sm:w-full">
+      <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">{{comments.comment1}}</p>
   </div>
   </div>    
 </div>
