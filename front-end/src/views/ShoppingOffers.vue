@@ -144,12 +144,30 @@
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-600">Chat</p>
           </button>
           </router-link>
-          <button class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
+          <div>
+          <button @click="share=!share" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            share
            </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-500">Share</p>
           </button>
+          <div class="flex w-full">
+            <div v-if="share" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-56 md:right-24 xl:right-91 h-min w-30">
+              <button class="flex flex-row gap-x-2 text-base focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons">
+                share
+               </span>
+                Share on Feed
+              </button>
+              <button class="flex py-2 flex-row font-normal text-base focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons">
+                link
+               </span>
+                Copy link to this post
+              </button>
+              </div>
+              </div>
+          </div>
         </div>
         <!--end-->
       </div>
@@ -177,6 +195,7 @@ export default {
       postSendModal: false,
       postChatModal: false,
       edit1: false,
+      share: false,
       datePosted: '3 hours ago',
       postStatus: 'posted',
       user_info:{
