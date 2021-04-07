@@ -78,7 +78,7 @@
 
         <!--section 3-->
         <div class="flex ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start items-center justify-start mt-4 w-full space-x-4 vs:space-x-0">
-          <div class="flex-col items-start">
+          <div class="flex-col items-start w-full">
             <div class="flex space-x-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               delivery_dining  
@@ -98,7 +98,7 @@
               <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.capacity}}</p>
             </div>
           </div>
-          <div class="flex-col ssm:py-2 vs:py-3">
+          <div class="flex-col w-full ssm:py-2 vs:py-3">
             <div class="flex space-x-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               shopping_cart  
@@ -122,31 +122,34 @@
         <!--end-->
 
         <!--section 4-->
-        <div class="flex flex-grow-0 mt-4 ssm:mt-2 vs:mt-2 items-start justify-start p-4 bg-gray-100 rounded-xl">
+        <div class="flex flex-grow-0 mt-4 ssm:mt-2 vs:mt-2 w-full items-start justify-start p-4 bg-gray-100 rounded-xl">
           <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-loose text-gray-900 h-auto w-full vs:min-w-0 vs:px-2">{{delivery_info.comment}}</p>
         </div>
         <!--section 4-->
 
         <!--section 5-->
         <div class="flex justify-evenly w-full vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 pr-8 ssm:pr-0 vs:pr-0 mt-4 space-x-6">
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
+          <button @click="toggleSendModal" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ">
             send
             </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-600">Send Request</p>
-          </div>
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          </button>
+          <router-link to="/messages">
+          <button class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
            </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-600">Chat</p>
-          </div>
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          </button>
+          </router-link>
+          <button class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            share
            </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-500">Share</p>
-          </div>
+          </button>
         </div>
         <!--end-->
       </div>
@@ -162,6 +165,7 @@
 import EditShoppingOfferPostVue from './EditShoppingOffer.vue'
 import PostModal from "./PostModal"
 import UpdateOfferStatus from './updateOfferStatus'
+import SendRequest from "./sendRequest"
 
 
 export default {
@@ -170,6 +174,8 @@ export default {
       postModalVisible: false,
       postModalVisible1: false,
       postModalVisible2: false,
+      postSendModal: false,
+      postChatModal: false,
       edit1: false,
       datePosted: '3 hours ago',
       postStatus: 'posted',
@@ -184,7 +190,7 @@ export default {
         public_transit: 'Public Transit',
         capacity: 'Up to 3 medium bags or 2 large bags',
         payment_method: 'Payment First',
-        comment: 'Hi! I’ll be going to SM City Legazpi tomorrow. If there’s anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request!',
+        comment: 'Hi! I’ll be  going to SM City Legazpi tomorrow. If there’s anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request!',
         status: 'No Longer Accepting Requests'
       },
     }
@@ -193,6 +199,7 @@ export default {
     PostModal,
     EditShoppingOfferPostVue,
     UpdateOfferStatus,
+    SendRequest,
   },
   methods:{
     togglePostModal(){
@@ -207,6 +214,14 @@ export default {
       this.postModalVisible2 = !this.postModalVisible2
       
     },
+    toggleSendModal(){
+      this.postSendModal = !this.postSendModal
+      
+    },
+    toggleChatModal(){
+      this.postChatModal = !this.postChatModal
+      
+    },
 
     listener(){
       this.postModalVisible = false;
@@ -216,6 +231,9 @@ export default {
     },
     listener2(){
       this.postModalVisible2 = false;
+    },
+    listener3(){
+      this.postSendModal = false;
     }
   }
   
