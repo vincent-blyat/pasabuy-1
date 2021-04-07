@@ -46,7 +46,7 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
                         alarm
                     </span>
-                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule" name="deliverySchedule" v-model='form_data.deliverySchedule'>
+                    <input type="datetime-local" class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule" name="deliverySchedule" v-model='form_data.deliverySchedule'>
                 </div>
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
@@ -88,7 +88,6 @@
 <script>
 
 import api from '../api'
-
 export default {
     data() {
         return {
