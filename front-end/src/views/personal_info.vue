@@ -165,8 +165,7 @@ methods:{
         console.log(res.data);
       //this.user = res.data;
       })
-methods:
-    {
+    },
       handleInput(value) {
       this.name = value;
       alert(this.name)

@@ -15,6 +15,7 @@
               <p class="mb-5 space-y-1 font-light text-gray-500">
                 Log in with your email and password</p>
                 <form action="#" @submit.prevent="loginUser">
+                   <p class="w-full text-red-500 " v-text="errors.email" ></p>
                 <div class=""> 
                   <input v-model="dataForm.email"  aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Email"   />
                 </div>

@@ -25,7 +25,7 @@
               </div>
 
               <div class="w-full">
-                <input aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="addressInfo.barangay"/>
+                <input aria-label="Barangay" name="" type="text" required  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay"   v-model="addressInfo.barangay"/>
               </div>
               <div class="w-full ">
                 <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number"  v-model="addressInfo.houseNumber"/>
@@ -42,132 +42,110 @@
                     NEXT</button> <!-- upload id next -->
                 </div>
               </div>
+            </form>
             </div>
           </div>
         </div>
-      </div>
 </template>
 
 <style>
-    #journal-scroll::-webkit-scrollbar {
-        width: 5px;
-        cursor: pointer;
-      }
-  
-    #journal-scroll::-webkit-scrollbar-track {
-        background-color: rgba(229, 231, 235, var(--bg-opacity));
-        cursor: pointer;
-    }
-  
-    #journal-scroll::-webkit-scrollbar-thumb {
-        cursor: pointer;
-        background-color: rgba(185, 28, 28)
-    
-    }
-#iCheck{
-  font-size:16px;
-  color:rgb(22, 22, 141);
+
+#journal-scroll::-webkit-scrollbar {
+  width: 5px;
+  cursor: pointer;
 }
-#iMessage{
-  font-size:24px;
-  color:rgb(22, 22, 141);
+
+#journal-scroll::-webkit-scrollbar-track {
+  background-color: rgba(229, 231, 235, var(--bg-opacity));
+  cursor: pointer;
 }
-img{ 
+
+#journal-scroll::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: rgba(185, 28, 28);
+}
+#iCheck {
+  font-size: 16px;
+  color: rgb(22, 22, 141);
+}
+#iMessage {
+  font-size: 24px;
+  color: rgb(22, 22, 141);
+}
+img {
   max-width: 100px;
-  width:11%;
- 
+  width: 11%;
 }
-<<<<<<< HEAD
 </style>
 
 <script>
-import api from '../api'
+import api from "../api";
 export default {
-    data(){
-
-        return{
-
+  data() {
+    return {
       provinces: [],
       cityMunicipality: [],
       newcityMunicipality: [],
       barangays: [],
-    selectedrefBrgy: null,
+      selectedrefBrgy: null,
 
+      addressInfo: {
+        houseNumber: null,
+        barangay: null,
+        cityMunicipality: null,
+        province: null,
+      },
+    };
+  },
+  methods: {
+    nextPage() {
+      var d = document.getElementById("Province");
+      var getProv = d.options[d.selectedIndex].text;
+      this.addressInfo.province = getProv;
+      console.log(this.addressInfo.province);
 
-            addressInfo:{
-               houseNumber : null,
-               barangay : null,
-               cityMunicipality :  null,
-               province : null
-            }
+      api.post("/api/postAddress", this.addressInfo).then((res) => {
+        console.log(res.data);
+        localStorage.setItem("address", JSON.stringify(res.data));
+        this.$router.push({ name: "uploadid" });
+      });
+    },
+
+    getProvCode() {
+      var newCityMun = this.newcityMunicipality;
+      this.cityMunicipality = [];
+      var e = document.getElementById("Province");
+      var getProvCode = e.value;
+      for (var i = 0; i < newCityMun.length; i++) {
+        if (newCityMun[i].provCode === getProvCode) {
+          this.cityMunicipality.splice(i, 1, newCityMun[i]);
         }
-    }, 
-    methods:{
-        nextPage(){
-
-             var d = document.getElementById("Province");
-             var getProv = d.options[d.selectedIndex].text;
-             this.addressInfo.province=getProv;
-             console.log( this.addressInfo.province)
-
-            api.post('/api/postAddress', this.addressInfo).then((res)=>{
-                console.log(res.data)
-                localStorage.setItem("address",JSON.stringify(res.data));
-                this.$router.push({name:"uploadid"});
-            })
-        },
-
-
-       
-        getProvCode(){
-          var newCityMun=this.newcityMunicipality;
-          this.cityMunicipality=[];
-          var e = document.getElementById("Province");
-          var getProvCode = e.value;
-          for (var i=0; i < newCityMun.length; i++) {
-                  if (newCityMun[i].provCode === getProvCode) {
-               this.cityMunicipality.splice(i, 1, newCityMun[i]);
-                  }      
-            }
-          console.log(getProvCode)
-          console.log(this.cityMunicipality)
-
-       
-        },
-        refProvince(){
-          api.get('/api/refProvince').then((res)=>{
-        this.provinces=res.data
-      
-        
-      })
-        },
-
-      refcityMunicipality(){
-          api.get('/api/refcityMunicipality').then((res)=>{
-        this.cityMunicipality=res.data
-        this.newcityMunicipality=res.data
-        
-      })
-        },
-         refBrgy(){
-          api.get('/api/refBrgy').then((res)=>{
-        this.barangays=res.data
-        
-      })
-        },
-
+      }
+      console.log(getProvCode);
+      console.log(this.cityMunicipality);
     },
-    created(){
-       this.refProvince();
-       this.refcityMunicipality();
-      // this.refBrgy();
+    refProvince() {
+      api.get("/api/refProvince").then((res) => {
+        this.provinces = res.data;
+      });
     },
-               
-}
 
-
-
+    refcityMunicipality() {
+      api.get("/api/refcityMunicipality").then((res) => {
+        this.cityMunicipality = res.data;
+        this.newcityMunicipality = res.data;
+      });
+    },
+    refBrgy() {
+      api.get("/api/refBrgy").then((res) => {
+        this.barangays = res.data;
+      });
+    },
+  },
+  created() {
+    this.refProvince();
+    this.refcityMunicipality();
+    // this.refBrgy();
+  },
+};
 </script>
-=======
-</style>
->>>>>>> b401b37bfdb1d5e0aca9a443c556a661c10f3850
