@@ -102,7 +102,7 @@ export default {
                 paymentMethod: '',
                 caption: '',
                 isLoggedIn: true,
-                email: 'test@test.com',
+                email: '',
                 postIdentity: 'offer_post',
                 postStatus: 'foo bar'     
             },
@@ -120,6 +120,12 @@ export default {
                     console.log(errors)
                 })
         }
+    },
+    mounted(){
+        api.get('api/user')
+            .then((response)=>{
+               this.form_data.email = response.data.email;
+            })
     }
 }
 </script>
