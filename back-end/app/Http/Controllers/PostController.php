@@ -64,7 +64,7 @@ class PostController extends Controller
 		}
 		else {
 
-			return response->json(['error' => 'You are not logged in.'], 401);
+			return response()->json(['error' => 'You are not logged in.'], 401);
 		}
 	}
 
