@@ -1,7 +1,7 @@
 <template> 
 
         <nav class="fixed z-10 flex w-full py-4 justify-between items-center  xl:px-4 font-nunito" :class="{change_color: scrollPosition > 50}">
-        <div class="absolute items-center ">
+        <div class="absolute items-center ssm:hidden ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
           <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons vs:hidden ssm:hidden 2xl:text-2xl">
             pasaBUY
