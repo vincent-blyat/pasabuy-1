@@ -7,7 +7,7 @@
           </label>
     </div>
 
-    <div id="login" class="flex items-center justify-center pt-20 pb-20 bg-gray-bgcolor vs:pt-16">
+    <div id="login" class="flex items-center justify-center w-full h-screen pt-20 pb-20 bg-gray-bgcolor vs:pt-16">
         <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
             <div class="px-10 py-16">
                 <img class= "w-1/4 mx-auto mb-5 2xl:mx-auto" src="img/id-review.svg">
@@ -19,7 +19,7 @@
                 In the meantime, you can continue setting up your profile</p>
                 <div class="justify-end md:flex">
                     <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
-                     <router-link :to="{name: 'ProfileEdit'}" >NEXT</router-link>
+                     <router-link to="/edit-profile" >NEXT</router-link>
                     </button>
                 </div>
             </div>    

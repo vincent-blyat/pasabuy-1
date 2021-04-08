@@ -1,29 +1,29 @@
 <template>
 <Navbar/>
     <!--Profile code-->
-    <div class="pt-17 bg-gray-100 font-nunito">
-   <div class="flex flex-col vs:justify-center vs:items-center vs:pl-4 vs:w-vs justify-center items-center bg-white w-lg h-auto pt-10 ">
-   <div class="flex flex-row vs:space-x-4 space-x-16 pr-48">
+    <div class="pt-122 bg-gray-100 font-nunito ">
+   <div class="flex flex-col justify-center items-center bg-white h-auto pt-10 ">
+   <div class="flex flex-row ssm:space-x-2 vs:space-x-4 md:space-x-10 sm:space-x-6 space-x-16 ssm:pr-0 vs:pr-12 lvs:pr-24 sm:pr-0 md:pr-12 pr-48">
     <div class="flex">
-        <img class="w-40 h-40 vs:w-20 vs:h-20 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
+        <img class="w-40 h-40 vs:w-20 vs:h-20 ssm:w-16 ssm:h-16 sm:w-20 sm:h-20 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
       </div>
         <div class="flex flex-col">
-         <div class="flex flex-row vs:flex-col  xl:space-x-4">
+         <div class="flex flex-row ssm:flex-col ssm:space-x-0 vs:flex-col vs:space-x-0  sm:space-x-2 space-x-4">
           <div>
-           <p class="text-3xl vs:text-xl font-bold  tracking-wide leading-normal text-gray-900">{{personal.firstname}} {{personal.lastname}}
+           <p class="text-3xl ssm:text-base vs:text-xl sm:text-xl font-bold  sm:mt-1 tracking-wide leading-normal text-gray-900">{{personal.firstname}} {{personal.lastname}}
             <span class="pb-1 text-blue-900 align-middle material-icons md-24">
              verified
             </span>
            </p>
           </div>
-          <div class="inline-flex vs:mt-1 vs:items-start vs:justify-start items-center justify-end">
-           <div class="flex items-center justify-center vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
-            <button class="flex-1 text-base font-bold focus:outline-none tracking-wider leading-loose text-center text-gray-900">
+          <div class="inline-flex vs:mt-1 ssm:justify-start ssm:items-start vs:items-start vs:justify-start sm:mt-0 items-center justify-end">
+           <div class="flex items-center justify-center ssm:pl-2 ssm:pr-2 vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
+            <button class="flex-1 text-base ssm:text-sm font-bold focus:outline-none tracking-wider leading-loose text-center text-gray-900">
             <router-link to="/account-settings" > Edit Profile </router-link></button>
            </div>
           </div>
           </div>
-         <div class="flex flex-col vs:hidden">
+         <div class="flex flex-col ssm:hidden vs:hidden">
           <div class="flex flex-row vs:space-x-4 space-x-8 py-3">
             <div class="flex space-x-2 vs:justify-start vs:items-start items-center justify-center">
              <p class="text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
@@ -42,84 +42,71 @@
                  <span class=" rounded-full material-icons text-black">
               location_on  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
+                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               phone_enabled  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
+                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               alternate_email  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{account_info.email}}</p>
+                 <p class="text-sm leading-none vs:text-xs pt-1 text-gray-700">{{account_info.email}}</p>
                 </div>
             </div>
             </div>
         </div>
     </div>
-    <div class="hidden vs:flex flex-col pr-60 ">
-          <div class="flex flex-row vs:hidden space-x-8 py-3">
-            <div class="flex space-x-2 vs:justify-start vs:items-start items-center justify-center">
-             <p class="text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
-             <button class="focus:outline-none text-base leading-none text-gray-900">Following</button>
-            </div>
-            <div class="flex space-x-2 items-start justify-start h-4">
-             <p class="w-1/5 text-base font-bold leading-none text-gray-900">{{account_info.countFollowers}}</p>
-             <button @click="togglePostModal3" class="focus:outline-none text-base leading-none text-gray-900">Followers</button>
-             <!--Modal-->
-             <Followers v-if="postModalVisible3" @closeModal3="listener3"/>
-             <!--end--> 
-            </div>
-          </div>
+    <div class="hidden vs:flex ssm:flex ssm:pr-0 flex-col pr-60 py-2 sm:pr-10 vs:pr-20 lvs:pr-36">
             <div class="flex flex-col py-3 space-y-2">
                 <div class="inline-flex space-x-2">
                  <span class=" rounded-full material-icons text-black">
               location_on  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
+                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               phone_enabled  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
+                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               alternate_email  
               </span>
-                 <p class="text-sm leading-none pt-1 text-gray-700">{{account_info.email}}</p>
+                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{account_info.email}}</p>
                 </div>
             </div>
             </div>
-             <div class="hidden vs:flex flex-row  space-x-8 pr-56 ">
-            <div class="flex space-x-2 vs:justify-start vs:items-start items-center justify-center">
-             <p class="text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
-             <button class="focus:outline-none text-base leading-none text-gray-900">Following</button>
+             <div class="hidden vs:flex ssm:flex ssm:pr-0 ssm:space-x-4 flex-row  space-x-8 pr-56 sm:pr-4 vs:pr-16 lvs:pr-32">
+            <div class="flex space-x-2 ssm:justify-start ssm:items-start vs:justify-start vs:items-start items-center justify-center">
+             <p class="text-base ssm:text-sm vs:text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
+             <button class="focus:outline-none ssm:text-sm vs:text-base text-base leading-none text-gray-900">Following</button>
             </div>
             <div class="flex space-x-2 items-start justify-start h-4">
-             <p class="w-1/5 text-base font-bold leading-none text-gray-900">{{account_info.countFollowers}}</p>
-             <button @click="togglePostModal3" class="focus:outline-none text-base leading-none text-gray-900">Followers</button>
+             <p class="text-base ssm:text-sm vs:text-base font-bold leading-none text-gray-900">{{account_info.countFollowers}}</p>
+             <button @click="togglePostModal3" class="focus:outline-none ssm:text-sm vs:text-base text-base leading-none text-gray-900">Followers</button>
              <!--Modal-->
              <Followers v-if="postModalVisible3" @closeModal3="listener3"/>
              <!--end--> 
             </div>
           </div>
-    <div class="flex flex-row vs:space-x-6 space-x-14 mt-6 pb-2">
+    <div class="flex flex-row ssm:space-x-1 ssm:min-w-0 vs:space-x-2 lvs:space-x-4 sm:space-x-8 space-x-14 mt-6 vs:min-w-0 sm:min-w-0 vs:mt-3 pb-2 ">
         <div @click=" isActive_function('btn1')" :class="{active: activeBtn === 0 }" >
-         <button @click="toggle" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-black uppercase">Shopping offers</button>
+         <button @click="toggle" class="focus:outline-none text-sm ssm:text-xs vs:text-xs ssm:font-normal font-bold font-nunito tracking-wide vs:tracking-normal leading-none text-center text-black uppercase">Shopping offers</button>
         </div>
         <div @click=" isActive_function('btn2')" :class="{active: activeBtn === 'btn2' }">
-         <button @click ="toggle2" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-black uppercase">Order requests</button>
+         <button @click ="toggle2" class="focus:outline-none text-sm ssm:text-xs vs:text-xs ssm:font-normal font-bold font-nunito tracking-wide vs:tracking-normal leading-none text-center text-black uppercase">Order requests</button>
         </div>
         <div @click=" isActive_function('btn3')" :class="{active: activeBtn === 'btn3' }">
-         <button @click="toggle3" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-gray-900 uppercase">reviews</button>
+         <button @click="toggle3" class="focus:outline-none text-sm ssm:text-xs vs:text-xs ssm:font-normal font-bold font-nunito tracking-wide vs:tracking-normal leading-none text-center text-gray-900 uppercase">reviews</button>
         </div>
         <div @click=" isActive_function('btn4')" :class="{active: activeBtn === 'btn4' }" >
-         <button @click="toggle4" class="focus:outline-none text-sm font-bold font-nunito tracking-wide leading-none text-center text-gray-900 uppercase">about</button>
+         <button @click="toggle4" class="focus:outline-none text-sm ssm:text-xs vs:text-xs ssm:font-normal font-bold font-nunito tracking-wide vs:tracking-normal leading-none text-center text-gray-900 uppercase">about</button>
         </div>
     </div>
    </div>

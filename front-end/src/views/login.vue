@@ -1,14 +1,21 @@
-<template class="font-nunito bg-gray-bgcolor">
+<template class="">
 
-      <div class="absolute vs:left-5 left-12 top-3 ">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-16 h-16 "/>
-          <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
-            pasaBUY
-          </label>
+      <div class="flex items-center ">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+          
+           ">pasaBUY</h1>
       </div>
 
-      <div id="login" class="items-center justify-center w-full pt-20 pb-16 bg-transparent vs:pt-32 vs:pb-20">
-        <div class="absolute overflow-hidden font-bold text-center bg-white shadow-md vs:w-10/12 w-97 vs:left-11 left-98 rounded-xl">
+      <div id="login" class="items-center flex justify-center w-full mt-10  pb-16 bg-transparent px-3 ">
+        <div class=" overflow-hidden font-bold text-center bg-white shadow-md w-full 
+        lg:w-97
+        2xl:w-97  
+        xl:w-97 
+        md:w-97
+        sm:w-97
+        ">
           <div class="px-10 py-16">
             <h1 class="space-x-1 space-y-1 text-2xl">Welcome back!</h1>
               <p class="mb-5 space-y-1 font-light text-gray-500">
@@ -72,11 +79,6 @@
   font-size:24px;
   color:rgb(22, 22, 141);
 }
-img{ 
-  max-width: 100px;
-  width:11%;
- 
-}
 </style>
 <script>
 import api from '../api'
@@ -110,3 +112,11 @@ export default {
 </script>
 
 
+<script>
+export default {
+  
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
+}
+</script>

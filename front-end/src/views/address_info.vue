@@ -7,7 +7,11 @@
         <div>  <label for="sub" id="edt2" @click="edit2=!edit2,Edit('edt2'), show=!show" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label></div>
         </div>
-        <div class="text-sm w-3/5 gap-x-10 space-y-8 pt-8 vs:w-full">
+         <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
+                      xl:w-7/12
+                      2xl:w-9/12
+                      lg:w-8/12
+                    ">
         <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">HOUSE NUMBER</p>
         <span>
@@ -50,9 +54,7 @@
 <script>
 import api from '../api'
 export default {
-   beforeCreate:function () {
-      document.body.className='account';
-  },
+  
 data(){
     return{
     disabled: 0,
@@ -108,3 +110,4 @@ mounted(){
   }
 }
 </script>
+ 

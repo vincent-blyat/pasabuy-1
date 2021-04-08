@@ -1,22 +1,33 @@
 <template class=" bg-gray-bgcolor font-nunito">
 
-    <div class="absolute vs:left-5 left-12 top-3">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-        <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
-            pasaBUY
-        </label>
-    </div>
+    <div class="flex items-center ">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+          
+           ">pasaBUY</h1>
+      </div>
 
-    <div id="signup" class="flex items-center justify-center pt-10 pb-10 bg-gray-bgcolor vs:pt-16">
-      <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 rounded-xl">
+
+    <div id="signup" class="flex items-center justify-center   pb-10  px-4">
+      <div class="w-full my-12 overflow-hidden text-center bg-white shadow-md flex-grow-1 rounded-xl
+      xl:w-2/5 lg:w-2/5 2xl:w-2/5 
+      md:w-97 sm:w-97
+      ">
         <div class="px-10 py-16 ">
             <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Create an account</h1>
               <form action="#" class="space-y-3">
-               <div class="flex mb-6 -mx-1">
-                    <div class="w-1/2 px-1 mr-3">
+               <div class="flex flex-col 
+                md:flex-row md:justify-between md:space-x-6
+                sm:flex-row sm:justify-between sm:space-x-6
+                xl:flex-row xl:justify-between xl:space-x-6
+                2xl:flex-row 2xl:justify-between 2xl:space-x-6
+                lg:flex-row lg:justify-between lg:space-x-6
+                 ">
+                    <div  class="w-full">
                         <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" value="" />
                     </div>
-                    <div class="w-1/2 px-1">
+                    <div  class="w-full">
                         <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" value="" />
                     </div>
                 </div>
@@ -26,11 +37,17 @@
                 <div class="mb-10">
                     <input aria-label="Phone Number" name="" type="text" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Phone Number" value="" />
                 </div>
-                <div class="flex mb-2 -mx-1">
-                    <div class="w-1/2 px-1 mr-3">
-                        <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10" placeholder="Password" value="" />   
+                <div class="flex flex-col  
+                md:flex-row md:justify-between md:space-x-6
+                sm:flex-row sm:justify-between sm:space-x-6
+                xl:flex-row xl:justify-between xl:space-x-6
+                2xl:flex-row 2xl:justify-between 2xl:space-x-6
+                lg:flex-row lg:justify-between lg:space-x-6
+                 ">
+                    <div class="w-full" >
+                        <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="Password" value="" />   
                     </div>
-                    <div class="w-1/2 px-1">
+                    <div class="w-full" >
                         <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" value="" />
                     </div>
                 </div>
@@ -85,9 +102,13 @@
   font-size:24px;
   color:rgb(22, 22, 141);
 }
-img{ 
-  max-width: 100px;
-  width:11%;
- 
-}
 </style>
+
+<script>
+export default {
+  
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
+}
+</script>
