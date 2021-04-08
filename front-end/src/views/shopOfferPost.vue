@@ -26,48 +26,51 @@
     <!--end-->
     <form @submit.prevent='createOfferPost'>
         <!--Delivery information list-->
-        <div class="flex flex-col mt-4 justify-center items-center">
-            <div class="flex flex-row space-x-4 w-full justify-center">
+         <div class="flex flex-col mt-1 vs:mt-1 ssm:px-2 vs:px-2 sm:px-2 justify-center items-center">
+             <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        delivery_dining
-                    </span>
-                    <input class="focus:outline-none flex vs:w-44 w-52  h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500 w-44" placeholder="Delivery Area" name="deliveryArea" v-model='form_data.deliveryArea'>
+              delivery_dining  
+              </span>
+                    <input class="focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52  h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500 w-44" placeholder="Delivery Area" name="deliveryArea" v-model='form_data.deliveryArea'>
                 </div>
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        shopping_cart
-                    </span>
-                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 pl-4 items-center py-2.5 pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Shopping Place" name="shoppingPlace" v-model='form_data.shoppingPlace'>
-                </div>
-            </div>
-            <div class="flex flex-row pt-3 space-x-4 w-full justify-center">
+              shopping_cart  
+              </span>
+                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 pl-4 items-center py-2.5 pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Shopping Place">
+                 </div>
+             </div>
+
+             <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 ssm:pt-2 pt-3 space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        alarm
-                    </span>
-                    <input type="datetime-local" class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Schedule" name="deliverySchedule" v-model='form_data.deliverySchedule'>
-                </div>
-                <div class="flex space-x-2">
-                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        directions_car
-                    </span>
-                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Transport Mode" name="transportMode" v-model='form_data.transportMode'>
-                </div>
-            </div>
-            <div class="flex flex-row pt-3 space-x-4 w-full justify-center">
-                <div class="flex space-x-2">
-                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        shopping_bag
-                    </span>
-                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Capacity" name="capacity" v-model='form_data.capacity'>
+              alarm  
+              </span>
+                    <input type="datetime-local" class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Schedule" name="deliverySchedule" v-model='form_data.deliverySchedule'>
                 </div>
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
-                        payments
-                    </span>
-                    <input class="w-44 focus:outline-none flex vs:w-44 w-52 h-11 py-2.5 pl-4 items-center pr-16 bg-gray-100 rounded-xl text-sm leading-none text-gray-500" placeholder="Payment Method" name="paymentMethod" v-model='form_data.paymentMethod'>
+              directions_car 
+              </span>
+                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Transport Mode"  name="transportMode" v-model='form_data.transportMode'>
+                 </div>
+             </div>
+
+             <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 ssm:pt-2 pt-3 space-x-4 w-full justify-center">
+                <div class="flex space-x-2">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              shopping_bag  
+              </span>
+                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Capacity" name="capacity" v-model='form_data.capacity'>
                 </div>
+                <div class="flex space-x-2">
+                    <span class=" mt-1.5 rounded-full material-icons text-red-600">
+              payments
+              </span>
+                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Payment Method" name="paymentMethod" v-model='form_data.paymentMethod'>
+                 </div>
+             </div>
             </div>
         </div>
         <!--end-->

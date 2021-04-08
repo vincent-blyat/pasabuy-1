@@ -111,7 +111,7 @@
   </div>
 
   <!-- sidebar -->
-  <div class="sidebar overscroll-y-contain overflow-auto lg:hidden 2xl:hidden border-r-2 h-max ssm:h-auto xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full  transition duration-200 ease-in-out">
+  <div class="z-40 sidebar overscroll-y-contain overflow-auto lg:hidden 2xl:hidden border-r-2 h-max ssm:h-auto xl:hidden mt-20 bg-white font-bold text-gray-600 w-64 space-y-4 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full  transition duration-200 ease-in-out">
 
     <!-- logo -->
     <div class="flex mt-0">
@@ -227,7 +227,6 @@ export default {
     return{currentRoute}
     
   },
-
     
 }
 </script>

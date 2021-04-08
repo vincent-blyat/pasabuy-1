@@ -1,31 +1,42 @@
 <template> 
-    <div id="navbar">
-        <nav class="fixed z-10 flex w-full py-4 bg-opacity-50 justify px-7 xl:px-4 font-nunito" :class="{ 'onScroll': !view.topOfPage}">
-        <div class="absolute md:left-5 2xl:top-7 2xl:left-8 sm:top-7 left-6 top-3 vs:top-7">
+
+        <nav class="fixed z-10 flex w-full py-4 justify-between items-center  xl:px-4 font-nunito" :class="{change_color: scrollPosition > 50}">
+        <div class="absolute items-center ssm:hidden ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
           <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons vs:hidden ssm:hidden 2xl:text-2xl">
             pasaBUY
           </label>
       </div>
-            <div class="flex items-center w-full mt-4 text-right ssm:block sm:block xl:block 2xl:block vs:block lg:block md:block">
-                <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border border-red-700 rounded-3xl focus:outline-none hover:bg-red-50 2xl:text-2xl">
-                    <router-link to="/log-in" >Log in</router-link>
+            <div class="flex  items-center w-full mt-2 text-right ssm:flex ssm:justify-between sm:block xl:block 2xl:block vs:block lg:block md:block">
+                <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border-2 border-red-700 rounded-3xl focus:outline-none hover:bg-red-50 2xl:text-2xl">
+                    <router-link to="/log-in" class="font-bold">Log in</router-link>
                 </button>
                 <button  class="h-10 px-4 m-1 text-white transition-colors duration-150 bg-red-700 2xl:text-2xl rounded-3xl focus:outline-none hover:bg-red-800">
                     <router-link to="/sign-up" >Sign Up</router-link>
                 </button>
             </div>
         </nav>      
-    </div>
+    
 
     <div id="landing" class="w-full h-screen bg-no-repeat bg-cover xl:mx-auto ssm:w-full vs:bg-center md:bg-center vs:justify-center sm:bg-cover sm:bg-center ssm:bg-cover ssm:bg-center md:bg-no-repeat font-nunito" style="background-image: url('img/main-back.jpg')">
-        <div class="flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
-            <section class="w-9/12 lg:w-9/12 2xl:w-9/12 md:w-9/12">
-                <p class="mb-4 text-5xl font-bold tracking-wide sm:pl-12 sm:text-4xl ssm:pl-8 vs:pl-8 vs:text-3xl xl:w-97 md:w-97 2xl:pl-40 lg:text-4xl sm:pt-10 lg:w-90 2xl:w-110 vs:w-91 2xl:text-5xl sm:w-96.5 ssm:w-96.5">
+        <div class="  flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
+            <section class="w-full 
+                ml-3
+            xl:w-6/12
+            md:w-7/12
+            lg:w-5/12
+            2xl:w-6/12
+            ">
+                <p class="mb-4 text-3xl font-bold tracking-wide xl:text-5xl
+                2xl:text-6xl
+                ">
                     Need someone to do your groceries?</p>
-                <p class="text-lg leading-loose text-left ssm:w-86 lg:w-98 vs:pl-8 ssm:px-8 sm:pl-12 2xl:text-xl xl:w-7/12 vs:w-96 lg:text-xl 2xl:pl-40">
+                <p class="text-lg leading-loose pr-2 text-left 2xl:text-2xl">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
-                <button class="items-center px-4 m-1 mt-3 font-semibold tracking-wide text-white transition-colors duration-150 rounded-full 2xl:mt-7 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7 sm:ml-12 vs:ml-8 md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-40 hover:bg-red-800 2xl:text-xl">
+                <button class="items-center px-4 m-1 mt-3 
+                font-semibold tracking-wide text-white 
+                transition-colors duration-150 rounded-full 2xl:mt-7
+                 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7   md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-0 hover:bg-red-800 2xl:text-xl">
                    <router-link to="/log-in" >Pasabuy Now</router-link>
                 </button>
             </section>
@@ -141,61 +152,33 @@
 
 </template>
 
-<style>
-    #journal-scroll::-webkit-scrollbar {
-        width: 5px;
-        cursor: pointer;
-      }
-  
-    #journal-scroll::-webkit-scrollbar-track {
-        background-color: rgba(229, 231, 235, var(--bg-opacity));
-        cursor: pointer;
-    }
-  
-    #journal-scroll::-webkit-scrollbar-thumb {
-        cursor: pointer;
-        background-color: rgba(185, 28, 28)
-    
-    }
-#iCheck{
-  font-size:16px;
-  color:rgb(22, 22, 141);
-}
-#iMessage{
-  font-size:24px;
-  color:rgb(22, 22, 141);
-}
-img{ 
-  max-width: 100px;
-  width:11%;
- 
-}
+<style scoped>
+   
+ .change_color {
+       background-color:white
+
+   }
 </style>
 
 <script>
-
 export default {
-  el: '#navbar',
-  data () {
-    return {
-      view: {
-        topOfPage: true
-      }
+  name: "Header",
+      data(){
+          return{
+      scrollPosition: null
+          }
+      },
+    methods: {
+    updateScroll() {
+      this.scrollPosition = window.scrollY
     }
   },
-  beforeMount() {
-    window.addEventListener('scroll', this.handleScroll)
+  mounted() {
+    window.addEventListener('scroll', this.updateScroll);
   },
-  methods: {
-    handleScroll(){
-      if(window.pageYOffset>0){
-        if(this.view.topOfPage) this.view.topOfPage = false
-      } else {
-        if(!this.view.topOfPage) this.view.topOfPage = true
-      }
-    }
-  },
+    destroy() {
+  window.removeEventListener('scroll', this.updateScroll)
+}
+  
 }
 </script>
-
-
