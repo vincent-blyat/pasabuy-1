@@ -370,7 +370,7 @@
 <div v-show="toggleChat">
     <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
       <!------------------------------------------------------->
-        <div class="vs:w-full mt-16 shadow-md" style="min-width:400">
+        <div class="vs:w-full mt-20 shadow-md" style="min-width:400">
         
         <div class="flex items-center justify-between md:items-center pt-1 shadow">
             <div class="flex flex-row">
@@ -659,7 +659,7 @@
     <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
       
       <!------------------------------------------------------->
-        <div class="vs:w-full mt-16 shadow-md sm:w-10/12">
+        <div class="vs:w-full mt-20 shadow-md sm:w-10/12">
         
         <div class="flex justify-items-center md:justify-items-center pt-1 shadow">
               <router-link to="/dashboard">
@@ -668,14 +668,15 @@
               <h4 class="text-base font-bold pt-2 pl-4 ">Message</h4>    
         </div>
 
-        <div v-if="searchMessageInactive" class="flex justify-center w-full py-1 pt-2">
-            <input type="text" class="h-8 w-11/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Search"/>
-            <button  @click="searchBtn" class="align-middle absolute right-8 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
-              search
-              </span></button>
-        </div><!---end of search bar-->
-
-        <button v-if="showSearchResults" class="flex justify-center w-full py-1 pt-2">
+        <div class="w-full flex justify-center">
+          <div v-if="searchMessageInactive" class="border mt-2 border-gray-300 bg-white flex w-10/12 justify-center focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full">
+              <input type="text" class="h-7 w-10/12 pl-3 rounded font-normal text-sm focus:outline-none" placeholder="Search"/>
+              <button  @click="searchBtn" class="align-middle ml-4 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
+                search
+                </span></button>
+          </div><!---end of search bar-->
+        </div>
+        <button v-if="showSearchResults" class="flex justify-center w-full py-1 pt-2 focus:outline-none">
             <input type="text" class="h-8 w-9/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Mark" id="search"/>
             <button class="align-middle mt-1 ml-1 flex items-center h-6 w-6 rounded-full bg-gray-300 focus:outline-none hover:text-red-700">
               <span  @click="closeSearchResults" class="material-icons pl-1" style="font-size:17px">
