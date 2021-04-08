@@ -11,4 +11,12 @@ class Messages extends Model
     protected $table = "tbl_message";
     protected $primaryKey = 'indexMessage';
     public $timestamps = false;
+
+       
+    public function getMessageSender()
+    {
+        # code...
+        return $this->hasOne(userInformation::class, 'email', 'messageSender');
+    }
+
 }

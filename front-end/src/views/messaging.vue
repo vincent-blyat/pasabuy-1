@@ -37,7 +37,7 @@
         <!---end of search bar-->
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
           <button
-            v-for="(chatRoom,index) in uniqUser"
+            v-for="(chatRoom,index) in chatRooms"
             :key="index"
             @click="setRoom(chatRoom.firstName, chatRoom.messageRoomNumber, chatRoom.email)"
             type="button"
@@ -57,7 +57,7 @@
                   </span>
                 </span>
                 <span class="text-xs text-gray-400 truncate w-36">
-                  {{ chatRoom.firstName }}: <strong>{{ chatRoom.message }}</strong>
+                  {{ }}: <strong>{{ }}</strong>
                 </span>
               </div>
             </div>
@@ -119,7 +119,7 @@
             >
              <div v-bind:class="{ 'flex justify-end pr-10 mt-1' : out[index], 'flex items-end pr-10 mt-1': incoming[index] }">
               <div v-bind:class="{'ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg': out[index], 'ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ': incoming[index] }">
-                <p>{{ msg.message }}</p>
+                <p>{{ msg.messageText }}</p>
                 <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
                   {{ timestamp(msg.dateCreated) }}
                 </span>
@@ -733,7 +733,6 @@
 <script>
 import Navbar from "./Navbar";
 import api from "../api";
-import uniq from "lodash/uniqBy"
 import moment from 'moment'
 export default {
   components: {
@@ -752,7 +751,6 @@ export default {
       inbox: [],
       //chat
       activeName: null,
-      activeEmail: null,
       activeRoom: null,
       authUser:null,
       chatIncoming: [],
@@ -815,7 +813,7 @@ export default {
 
     sendbtn() {
       if (this.message != "") {
-        var dataMessage = {roomID:this.activeRoom, message: this.message, receiver: this.activeEmail}
+        var dataMessage = {roomID:this.activeRoom, message: this.message}
         console.log(dataMessage)
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
@@ -843,13 +841,12 @@ export default {
       }
     }, //end sendbtn
 
-    setRoom(name,room_ID,email) {
+    setRoom(name,room_ID) {
       this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
       this.activeRoom = room_ID;
-      this.activeEmail = email;
       this.recipient = name;
     },
     getMessages(){
@@ -858,7 +855,7 @@ export default {
         api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
           var i;
           for(i=0;i<response.data.length;i++){
-            if(response.data[i].email2 != this.authUser){
+            if(response.data[i].messageSender == this.authUser){
               this.chat[i] = response.data[i];
               this.out[i]= true;
               this.incoming[i]= false;
@@ -888,18 +885,19 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
-            var i;
-            var j;
-            for (i = 0,j=0; i < res.data.length; i++) {   
-              if (res.data[i].email.localeCompare(this.authUser)) {
-                  this.chatRooms[j] = res.data[i];
-                  j++;
-              }
-            }
-            console.log(this.chatRooms)
-            if(this.activeRoom==null){
-              this.setRoom(this.chatRooms[0].firstName, this.chatRooms[0].messageRoomNumber,this.chatRooms[0].email)
-            }
+            console.log("chatrooms : ",res.data)
+            // var i;
+            // var j;
+            // for (i = 0,j=0; i < res.data.length; i++) {   
+            //   if (res.data[i].email.localeCompare(this.authUser)) {
+            //       this.chatRooms[j] = res.data[i];
+            //       j++;
+            //   }
+            // }
+            // console.log(this.chatRooms)
+            // if(this.activeRoom==null){
+            //   this.setRoom(this.chatRooms[0].firstName, this.chatRooms[0].messageRoomNumber)
+            // }
         });
     },
     getAuthUser(){
@@ -917,12 +915,8 @@ export default {
   created() {
     this.getAuthUser();
     this.getChatRooms();
-  },
-  computed: {
-    uniqUser() {
-      return uniq(this.chatRooms, 'email')
-    }
-}
+  }
+
 
 }; //end export default
 
