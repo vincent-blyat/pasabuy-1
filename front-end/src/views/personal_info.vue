@@ -62,9 +62,9 @@
        
         </form>
         </div>
-       <div v-if="toggle" class="fixed inset-0 bg-white bg-opacity-75"></div>
-        <div v-if="toggle" class=" absolute items-center z-40  inset-0 ">
-        <div class="flex   w-full p-3  items-center justify-center
+       <div v-if="toggle" class="fixed inset-0 h-max bg-white bg-opacity-75"></div>
+        <div v-if="toggle" class=" fixed items-center  inset-0 overflow-y-auto ">
+        <div class="flex   mt-4 w-full p-3  items-center justify-center
         py-20
         ">
           <div class=" bg-white ring-1  ring-gray-300 p-5 w-full rounded-md
@@ -78,15 +78,8 @@
           ">
             <p class="text-lg font-extrabold">Edit Personal Information</p>
             <hr class="mb-5 border-2 border-red-700 bg-red-700">
-            <div class="flex flex-col items-center gap-y-3 justify-center mb-4">
-            <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500
-            xl:w-40 xl:h-40
-            2xl:w-40 2xl:h-40
-            lg:w-40 lg:h-40
-            "/>
-            <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
-          </div>
-          <div>
+           
+          <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
             <div class="relative grid grid-cols-2 gap-y-4
             ">
                 <span>Firstname:</span> <input id="f_name"   type="text" :value="personal.name" class=" pl-2 bg-transparent border-2 border-gray-400"/>
@@ -105,7 +98,7 @@
                   <label for="female">Female</label>
                   </span>
               </div>
-                  <span>Birthday:</span>  <input class=" pl-2 bg-transparent border-2 border-gray-400" @keyup="personal.birdate=$event.target.value" type="date" id="start" name="trip-start"
+                  <span>Birthday:</span>  <input class=" pl-2 w-full bg-transparent border-2 border-gray-400" @keyup="personal.birdate=$event.target.value" type="date" id="start" name="trip-start"
                  min="1990-01-01"  v-model="personal.birdate" >
                 <span>Language: </span> <input type="text" :value="personal.language" class=" pl-2 bg-transparent border-2 border-gray-400"/>
             </div>
@@ -118,6 +111,7 @@
           </div>
         </div>
     </div>
+
     </div>
   
 </template>
@@ -152,12 +146,6 @@ data(){
     }
   
 },
-methods:
-    {
-      handleInput(value) {
-      this.name = value;
-      alert(this.name)
-    },
-    }
+
 }
 </script>
