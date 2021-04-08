@@ -41,6 +41,7 @@
             class="ring-2 ring-gray-400 font-bold w-full"
           />
         </span>
+      </span>
         </div>
         <div v-if="toggle" class="fixed inset-0 h-max bg-white bg-opacity-75"></div>
         <div v-if="toggle" class=" fixed overflow-y-auto items-center  inset-0 ">

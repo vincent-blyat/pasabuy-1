@@ -70,6 +70,7 @@
                         Privacy Policy
                     </a>
                 </div>
+              </form>
             </div>
           </div>
         </div>

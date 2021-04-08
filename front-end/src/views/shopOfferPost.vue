@@ -72,7 +72,7 @@
                  </div>
              </div>
             </div>
-        </div>
+        
         <!--end-->
         <!--Comment section-->
         <div class="justify-center flex mt-6">
