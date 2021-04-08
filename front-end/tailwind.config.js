@@ -10,7 +10,8 @@ module.exports = {
         'xsm':{'min':'0px','max':'259px'}, 
         'ssm':{'min':'260px','max':'319px'},
         'vs': {'min': '320px', 'max': '499px'},
-        'vsv':{'min': '320px','max':'360'},
+        'vsv':{'min': '320px','max':'360px'},/////
+        'vsvs':{'min': '360px','max':'445px'},////
         'x-v': {'min':'0px', 'max': '499px'},/////
         'se': {'min': '320px', 'max': '330px'},
         'vvs':{'min': '320px', 'max': '383px'},
