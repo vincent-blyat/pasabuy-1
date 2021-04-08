@@ -1,4 +1,4 @@
-<template class=" bg-gray-bgcolor font-nunito">
+<template class=" font-nunito">
 
     <div class="flex items-center ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
@@ -8,10 +8,10 @@
            ">pasaBUY</h1>
       </div>
 
-    <div id="verifyemail" class="flex items-center justify-center w-full px-4   bg-gray-bgcolor">
+    <div id="verifyemail" class="flex items-center justify-center w-full px-4   ">
       <div class="w-full my-12 overflow-hidden text-center bg-white shadow-md 
        xl:w-2/5 lg:w-2/5 2xl:w-2/5 
-      sm:w-2/5 md:w-2/5
+      md:w-97 sm:w-97
       ">
         <div class="px-10 py-16 ">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold pb-7">Verify your email</h1>
@@ -38,7 +38,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     #journal-scroll::-webkit-scrollbar {
         width: 5px;
         cursor: pointer;
@@ -66,3 +66,12 @@
 }
 
 </style>
+
+<script>
+export default {
+  
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
+}
+</script>
