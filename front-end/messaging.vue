@@ -7,7 +7,7 @@
       <!--------------------------inbox corner----------------------------->
         <div class="mt-20 md:1/5 shadow-md relative" style="min-width:300px">
         
-        <div class="relative flex justify-items-center md:justify-items-center py-1 shadow">
+        <div class="relative flex justify-items-center md:justify-items-center pb-2 pt-1 shadow">
               <button class="focus:outline-none pl-5 hover:text-red-700" @click="backbtn();" type="button"><span class="material-icons pt-2" id="iMessage">
                 chat</span></button>
               <h4 class="text-base font-semibold pt-2 pl-4 ">Message</h4>    
@@ -99,7 +99,7 @@
           
         </div>
 
-      <div class="overflow-auto pb-1 h-5/6 mb-1" id="journal-scroll">
+      <div class="overflow-auto pb-1 h-4/5 mb-1" id="journal-scroll">
 
        <!--------------U sent a request to Mark Arl------>
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
@@ -387,7 +387,7 @@
         </div>
 
         <!--------------Someone sent u a request------>
-        <div v-if="false" class="top-0 flex justify items-center shadow-lg bg-white border">
+        <div v-if="true" class="top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span><span class="font-semibold mr-2 ">{{sender}}</span>request you a request</span>
               <span class="ml-2">for</span>
@@ -432,7 +432,7 @@
 
 
       <!----chat box---->
-      <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
+      <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
         
         <div class="p-2 flex justify-end">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
@@ -668,14 +668,14 @@
               <h4 class="text-base font-bold pt-2 pl-4 ">Message</h4>    
         </div>
 
-        <div v-if="searchMessageInactive" class="flex justify-center w-full relative py-1 pt-2">
+        <div v-if="searchMessageInactive" class="flex justify-center w-full py-1 pt-2">
             <input type="text" class="h-8 w-11/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Search"/>
             <button  @click="searchBtn" class="align-middle absolute right-8 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
               search
               </span></button>
         </div><!---end of search bar-->
 
-        <button v-if="showSearchResults" class="flex justify-center w-full relative py-1 pt-2">
+        <button v-if="showSearchResults" class="flex justify-center w-full py-1 pt-2">
             <input type="text" class="h-8 w-9/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Mark" id="search"/>
             <button class="align-middle mt-1 ml-1 flex items-center h-6 w-6 rounded-full bg-gray-300 focus:outline-none hover:text-red-700">
               <span  @click="closeSearchResults" class="material-icons pl-1" style="font-size:17px">
@@ -686,7 +686,7 @@
     <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
 
           <div v-if="searchMessageInactive">
-            <button @click ="navMark" type="button" class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+            <button @click ="navMark" type="button" class="focus:bg-gray-200 w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
               <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                 <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="mark"> {{ inbox[0].name}} <span class="material-icons pl-2" id="iCheck" >
                   check_circle
@@ -701,7 +701,7 @@
                 </div>
             </button>
 
-            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200  w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
               <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                 <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="gwen">{{ inbox[1].name}}<span class="material-icons pl-2" id="iCheck" >
                   check_circle
@@ -723,7 +723,7 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
                 <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                   <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
                     check_circle
