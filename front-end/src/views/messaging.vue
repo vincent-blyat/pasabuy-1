@@ -12,7 +12,6 @@
                 chat</span></button>
               <h4 class="text-base font-semibold pt-2 pl-4 ">Message</h4>    
         </div>
-
         <div v-if="searchMessageInactive" class="flex justify-center w-full relative py-1 pt-2">
             <input type="text" class="h-8 w-11/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Search"/>
             <button  @click="searchBtn" class="align-middle absolute right-8 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
@@ -115,7 +114,6 @@
               </div>
             </span>
         </div><!------------------->
-
         <!--------------Someone sent u a request------>
         <div v-if="true" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
@@ -129,7 +127,6 @@
               </div>
             </span>
         </div><!------------------->
-
         <!--------------transaction details------>
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
@@ -206,9 +203,6 @@
             </div>
           </div>
         </div><!----------------------------------------->
-
-
-
         <div class="p-1 ml-12">
          <div class="flex items-end pr-10 mt-1">
             <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
@@ -216,7 +210,6 @@
               <div class="mx-4 mb-2 text-sm font-semibold">
                 <span>Order Details</span>
               </div>
-
               <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
                 <div class="flex flex-col px-2">
                   
@@ -224,26 +217,21 @@
                     <span class="text-red-700 material-icons" style="font-size:18px">place</span>
                     <span class="pl-2 pb-1">{{placeFrom}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
                     <span class="pl-2 pb-1">{{destination}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
                     <span class="pl-2 pb-1">{{timeAlloted}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
                     <span class="pl-2">{{paymentMethod}}</span>
                   </div>
                   
-
                 </div>
               </div>
-
               <div class="mx-4 p-2 bg-white rounded-lg text-sm">
                 <div>
                   <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">8 items</span></span>
@@ -258,13 +246,11 @@
                     </ul>
                 </div>
                 <div></div>
-
               </div>
             </div>
             </div>
          </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8 "> 
@@ -275,14 +261,11 @@
           </div>
          </div>
         </div>
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[1].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >{{chatOutgoing[1].timeSent}}</span> </div>
         </div>
-
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -293,15 +276,11 @@
           </div>
          </div>
         </div>
-
-
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[2].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[2].timeSent}} </span> </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -312,13 +291,11 @@
             </div>
          </div>
         </div>
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[3].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[3].timeSent}}</span> </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -329,12 +306,8 @@
           </div>
          </div>
         </div>
-
-
         <div id="chatmsg"></div>
-
       </div>
-
       <div v-if="attachment" class="sticky bottom-11">
           <div class="w-full bg-white bg-opacity-100 flex justify-start pt-2">
             
@@ -346,7 +319,6 @@
               </button>
               <span id="file" class="text-sm font-semibold text-gray-500 pl-4 pb-1 pb-2">No file chosen yet</span>
             </div>
-
           </div>
       </div>
        
@@ -385,7 +357,6 @@
                   more_horiz</span></button>
             </div> 
         </div>
-
         <!--------------Someone sent u a request------>
         <div v-if="true" class="top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
@@ -399,21 +370,18 @@
               </div>
             </span>
         </div><!------------------->
-
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span>You sent a request to</span>
               <span class="font-semibold ml-2">{{recipient}}</span>
               <span class="ml-2">for</span>
               <span class="font-semibold ml-2">Post {{postNum}} </span>
-
               <div class="flex justify-end">
                 <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 rounded-full border border-gray-700 "><span>Cancel Request</span></button>
                 <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full bg-red-700 text-white"><span>View Post</span></button>
               </div>
             </span>
         </div><!------------------->
-
         <!--------------transaction details------>
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
@@ -429,8 +397,6 @@
               </div>
             </span>
         </div><!------------------->
-
-
       <!----chat box---->
       <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
         
@@ -494,9 +460,6 @@
             </div>
           </div>
         </div><!----------------------------------------->
-
-
-
         <div class="p-1 ml-12">
          <div class="flex items-end pr-10 mt-1">
             <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
@@ -504,7 +467,6 @@
               <div class="mx-4 mb-2 text-sm font-semibold">
                 <span>Order Details</span>
               </div>
-
               <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
                 <div class="flex flex-col px-2">
                   
@@ -512,26 +474,21 @@
                     <span class="text-red-700 material-icons" style="font-size:18px">place</span>
                     <span class="pl-2 pb-1">{{placeFrom}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
                     <span class="pl-2 pb-1">{{destination}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
                     <span class="pl-2 pb-1">{{timeAlloted}}</span>
                   </div>
-
                   <div class="flex items-start">
                     <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
                     <span class="pl-2">{{paymentMethod}}</span>
                   </div>
                   
-
                 </div>
               </div>
-
               <div class="mx-4 p-2 bg-white rounded-lg text-sm">
                 <div>
                   <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">8 items</span></span>
@@ -546,13 +503,11 @@
                     </ul>
                 </div>
                 <div></div>
-
               </div>
             </div>
             </div>
          </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8 "> 
@@ -563,14 +518,11 @@
           </div>
          </div>
         </div>
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[1].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >{{chatOutgoing[1].timeSent}}</span> </div>
         </div>
-
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -581,15 +533,11 @@
           </div>
          </div>
         </div>
-
-
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[2].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[2].timeSent}} </span> </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -600,13 +548,11 @@
             </div>
          </div>
         </div>
-
         <div class="p-2 flex justify-end ">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
             <p>{{chatOutgoing[3].sent}}</p>
             <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[3].timeSent}}</span> </div>
         </div>
-
         <div class="p-1 pl-2">
          <div class="flex items-end pr-10 mt-1"> 
            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
@@ -617,13 +563,8 @@
           </div>
          </div>
         </div>
-
-
-
         <div id="chatmsg"></div>
-
     </div><!--end overflow--->
-
       <div v-if="attachment" class="sticky bottom-11">
           <div class="w-full bg-white bg-opacity-100 flex justify-start pt-2">
             
@@ -635,7 +576,6 @@
               </button>
               <span id="file" class="text-sm font-semibold text-gray-500 pl-4 pb-1 pb-2">No file chosen yet</span>
             </div>
-
           </div>
       </div>
        
@@ -649,12 +589,9 @@
                     send</span>
               </button>
       </div>
-
-
   </div>
 </div>
 </div><!-------------end inbox------------->
-
 <div v-show="toggleInbox">
     <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
       
@@ -667,7 +604,6 @@
                 keyboard_backspace</span></button></router-link>
               <h4 class="text-base font-bold pt-2 pl-4 ">Message</h4>    
         </div>
-
         <div class="w-full flex justify-center">
           <div v-if="searchMessageInactive" class="border mt-2 border-gray-300 bg-white flex w-10/12 justify-center focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full">
               <input type="text" class="h-7 w-10/12 pl-3 rounded font-normal text-sm focus:outline-none" placeholder="Search"/>
@@ -753,11 +689,9 @@
 
 <script>
 import Navbar from './Navbar'
-
 export default {
     components:{
       Navbar,
-
     },
     props:{
       //message: String 
@@ -771,7 +705,6 @@ export default {
           searchMessageInactive: true,
           showSearchResults: false,
           attachment:false,
-
           attach:'add',
         //inbox
           inbox: [
@@ -806,7 +739,6 @@ export default {
           destination: 'SM City ',
           timeAlloted: 'Tomorrow, 5 PM',
           paymentMethod: 'Payment First via GCash transfer',
-
           //shoppingList
           shoppingList: [
             { items: 'Baking Soda'},
@@ -817,13 +749,10 @@ export default {
             { items: 'cocoa powder'},
           ],
           shoppingListSize: 8,
-
       }
     },
-
     methods: {
       sendbtn(){
-
         const fileInputBtn = document.getElementById('fileInput');
         var printtext = document.getElementById('chatmsg');
         var copytext = document.getElementById('typemsg');
@@ -841,7 +770,6 @@ export default {
             document.getElementById("attach").innerHTML="add";
           }
         }
-
         if(copiedtext!=='' ){
           var printnow = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+copiedtext+'<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >'+'<br>'+'3:45 PM'+' | '+'Today'+'</span>'+'</div> '
               
@@ -851,13 +779,11 @@ export default {
           box.scrollIntoView();
         }
       },//end sendbtn
-
       searchBtn(){
         this.showSearchResults=!this.showSearchResults;
         this.searchMessageInactive=!this.searchMessageInactive;
         document.getElementByID('search').value ='Mark';
       },
-
       alert(){
         alert('called');
       },
@@ -867,12 +793,10 @@ export default {
           this.showSearchResults=!this.showSearchResults
         }
       },
-
       searchBackBtn(){
         this.showSearchResults=!this.showSearchResults;
         this.searchMessageInactive=!this.searchMessageInactive;
       },
-
       attachbtn(){
         this.attachment = !this.attachment;
         if( this.attachment == true){
@@ -884,7 +808,6 @@ export default {
           document.getElementById("attach2").innerHTML="add";
         }
       },
-
       messagebtn(){
         this.toggleInbox=!this.toggleInbox;
         this.toggleChat=!this.toggleChat;
@@ -894,7 +817,6 @@ export default {
         var res = bText.substring(0, bLen-13);
         document.getElementById("active").innerHTML = res;
       },
-
        navMark(){
         this.toggleInbox=!this.toggleInbox;
         this.toggleChat=!this.toggleChat;
@@ -904,23 +826,18 @@ export default {
         var res = bText.substring(0, bLen-13);
         document.getElementById("active").innerHTML = res;
       },
-
       backChat(){
         this.toggleInbox=!this.toggleInbox;
         this.toggleChat=!this.toggleChat;
       },
-
       threedots(){
         this.toggle = !this.toggle;
         
       },//end threedots
-
       attachPhoto(){
         const fileInputBtn = document.getElementById('photoInput');
         const fileholder = document.getElementById('photo');
-
         fileInputBtn.click();
-
         fileInputBtn.addEventListener("change", function(){
         if (fileInputBtn.value){
            fileholder.innerHTML = fileInputBtn.value;
@@ -929,82 +846,58 @@ export default {
         }
         })
       },
-
       attachFile(){
         const fileInputBtn = document.getElementById('fileInput');
         const fileholder = document.getElementById('file');
-
         fileInputBtn.click();
-
         fileInputBtn.addEventListener("change", function(){
         if (fileInputBtn.value){
            fileholder.innerHTML = fileInputBtn.value;
-
         } else {
         fileholder.innerhtml = "";
         }
         })
       }
-
-
-
     }//end methods
-
   }//end export default
-
 const add = document.querySelector("#add");
 const del = document.querySelector("#del");
-
 document.addEventListener("click", function(event) { 
     if(event.target.closest(".add")) return add.classList.add("hide");
-
     if(event.target.closest(".del")) return del.classList.add("hide");
-
 })
-
-
 </script>
 
 <style>
     .hide{
     display:none;
 }
-
 #journal-scroll::-webkit-scrollbar {
     width: 3px;
     cursor: pointer;
   }
-
 #journal-scroll::-webkit-scrollbar-track {
     background-color: rgba(229, 231, 235, var(--bg-opacity));
     cursor: pointer;
 }
-
 #scrollInbox::-webkit-scrollbar-thumb {
     cursor: pointer;
     background-color: rgba(185, 28, 28)
-
 }
-
 #scrollInbox::-webkit-scrollbar {
     width: 0px;
     cursor: pointer;
   }
-
 #scrollInbox::-webkit-scrollbar-track {
     background-color: rgba(219,216,216, var(--bg-opacity));
     cursor: pointer;
 }
-
 #scrollInbox::-webkit-scrollbar-thumb {
     cursor: pointer;
     background-color: rgb(219, 216, 216)
-
 }
-
 /*minimized desktop version and mobile version
 screen sizes lesser than 639px*/
-
 .desktopVersion{
   display:none;
   }
@@ -1020,7 +913,6 @@ screen sizes lesser than 639px*/
    display:none;
 }
 }
-
 #iCheck{
 font-size:16px;
 color:rgb(22, 22, 141);
@@ -1029,7 +921,6 @@ color:rgb(22, 22, 141);
 font-size:24px;
 color:rgb(22, 22, 141);
 }
-
 .material-icons {
 font-family: 'Material Icons';
 font-weight: normal;

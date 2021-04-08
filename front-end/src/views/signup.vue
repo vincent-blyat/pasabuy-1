@@ -92,8 +92,6 @@
         background-color: rgba(185, 28, 28)
     
     }
-
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);

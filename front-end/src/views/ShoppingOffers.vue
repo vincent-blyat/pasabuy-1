@@ -1,4 +1,3 @@
-
 <template> 
     <!--post comment-->
     <div class="bg-gray-100 pt-6 font-nunito">
@@ -184,8 +183,6 @@ import EditShoppingOfferPostVue from './EditShoppingOffer.vue'
 import PostModal from "./PostModal"
 import UpdateOfferStatus from './updateOfferStatus'
 import SendRequest from "./sendRequest"
-
-
 export default {
   data() {
     return {
@@ -224,7 +221,6 @@ export default {
     togglePostModal(){
       this.postModalVisible = !this.postModalVisible
     },
-
     togglePostModal1(){
       this.postModalVisible1 = !this.postModalVisible1
       
@@ -241,7 +237,6 @@ export default {
       this.postChatModal = !this.postChatModal
       
     },
-
     listener(){
       this.postModalVisible = false;
     },

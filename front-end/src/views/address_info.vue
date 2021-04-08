@@ -68,10 +68,8 @@ data(){
     barangay:'Banquerohan'
     },
     }
-
 },
 methods:{
-
     submit () {
        
     },
@@ -86,8 +84,6 @@ methods:{
          
       }
     }
-
 }
 }
 </script>
- 

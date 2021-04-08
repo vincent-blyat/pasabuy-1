@@ -3,13 +3,13 @@
 
     <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
-        <div class="pt-5 bg-gray-100 mv:pt-1 font-nunito rounded-xl llg:pl-5">
+        <div class="pt-5 bg-gray-100 mv:pt-1 font-nunito rounded-xl llg:pl-5 mv:w-screen">
    <div class="w-full min-w-0 px-2 ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 rounded-xl">
    <!--Modal-->
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
-    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow vs:w-screen rounded-xl ssm:space-x-2 sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
+    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow vs:w-stretch rounded-xl ssm:space-x-2 sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
         <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
@@ -22,42 +22,42 @@
     <div class="justify-center h-auto bg-transparent ssm:px-0 dv:space-x-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full dv:w-608 rounded-xl">
       <div class="flex items-start justify-start dv:flex-wrap vs:space-x-2 ssm:flex-col ssm:justify-start">
           <button type="button" class=" inline-flex ssm:float-left 2xl:w-50 ssm:px-0 dv:justify-around md:justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vsv:px-0 vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
-               <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
+               <span class="pr-1 mt-0.5 ssm:pr-0  align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Posts</label>
+                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
               </button>
 
               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg top-15 w-44 focus:outline-none x-v:leading-tight" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
-                <div class="py-1" role="none" v-if="filter">
-                  <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
+              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg vs:top-12 top-15 w-44 focus:outline-none x-v:leading-tight vsv:text-sm vsv:w-36 vsv:left-0" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
+                <div class="py-1 " role="none" v-if="filter">
+                  <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 vsv:px-2 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST TYPE</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900 vsv:px-2 vsv:py-0" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
-                 <label for="" class="cursor-pointer"> All Posts</label>
+                 <label for="" class="cursor-pointer vsv:text-xs"> All Posts</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900 vsv:px-2 vsv:py-0 vsv:text-xs" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
 
-                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm vsv:pb-1 vsv:px-2 vsv:py-0 vsv:text-xs hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons  text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right md:justify-around dv:justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50 vsv:ml-20 vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
-               <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
+                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right md:justify-around dv:justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white vsv:right-0 s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm vsv:float-right mv:focus:bg-transparent mv:shadow-none"  @click="filter2 =! filter2">
+               <span class="pt-1 pr-2 vsv:ml-6 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
                  <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
@@ -66,15 +66,15 @@
                 </span>
               </button>
               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-52 top-15 left-52 2xl:left-58 2xl:w-60 focus:outline-none vs:left-40 mv:right-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-52 top-15 left-52 2xl:left-58 2xl:w-60 focus:outline-none vs:left-58 sm:left-74 vsv:left-32 vsvs:left-40 vsvs:w-44 vs:top-12 vsv:w-40" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
-                 <label for=""> POST FROM</label></a>
+                 <label for="" class="vsv:text-xs"> POST FROM</label></a>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <label for="" class="pt-1 text-gray-900 cursor-pointer vsv:text-xs"> Following Only</label></a>
+                 <a href="#" class="block px-4 py-2 text-sm text-gray-600 vsv:text-xs" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>

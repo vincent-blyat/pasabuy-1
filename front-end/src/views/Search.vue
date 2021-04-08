@@ -124,7 +124,6 @@
                           </span>
                           Edit Post
                         </button>
-
                          <!-----UPDATE STATUS------>
                       <UpdateOrderStatus v-if="updateOrderStatus" @closeModal3="listener2"/>
                         <button  @click="toggleUpdateOrderStatus" class="font-normal focus:outline-none ">
@@ -144,7 +143,6 @@
               </div>
           </div>
         </div><!----------------------------------->
-
         <div class="flex flex-wrap justify-center overflow-hidden">
         <div class="flex vs:pl-6 xsm:pl-3 ssm:pl-2 vs:pl-2 lvs:pl-2 sm:pl-3 py-2 text-sm bg-transparent bg-white w-99"> 
           <div class="px-2 text-sm font-semibold bg-gray-200 rounded-full text-red-danger">
@@ -238,7 +236,6 @@
           </div> 
         </div>
       </div>
-
       <!---------------SEND, MESSAGE, SHARE------------->
       <div class="flex pb-3 text-sm xsm:text-s bg-transparent rounded-b-lg flex flex-cols bg-white h-10">
           <div class="flex items-center justify-between xsm:px-2 ssm:px-2 vs:px-2 lvs:px-5 sm:px-8 md:px-16 lg:px-16 xl:px-16 2xl:px-16 py-2 bg-white rounded-b-lg w-full">
@@ -275,7 +272,6 @@
             </div>
         </div>
       </div> <!-----END----->
-
     </div><!-------------------------->
 
   </div><!--------end of bottom elements---------->
@@ -324,14 +320,12 @@
   font-size:24px;
   color:rgb(22, 22, 141);
 }
-
 .material-icons.md-12 { font-size: 18px; }
 img{ 
   max-width: 100px;
   width:11%;
  
 }
-
 .overlay {
   position: fixed;
   z-index: 9998;
@@ -341,7 +335,6 @@ img{
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
 }
-
 .modal-vue .modal {
   position: relative;
   width: 300px;
@@ -350,21 +343,17 @@ img{
   padding: 20px 30px;
   background-color: #fff;
 }
-
 .modal-vue .close{
   position: absolute;
   top: 10px;
   right: 10px;
 }
-
 </style>
 
 <script>
-
 import Navbar from './Navbar'
 import EditShoppingOffer from "./EditShoppingOffer"
 import UpdateOrderStatus from "./updateOrderStatus"
-
  export default {
     data() {
     return {
@@ -374,13 +363,11 @@ import UpdateOrderStatus from "./updateOrderStatus"
       edit:false,
       editShoppingOffer:false,
       updateOrderStatus:false,
-
       searchProfileResult:{
         firstname: "Tony",
         lastname: "Stark",
         address: "Los Angeles, California",
         dateposted: "13 hours ago",
-
       },
       searchPostResult:{
         firstName:"Monica",
@@ -398,13 +385,11 @@ import UpdateOrderStatus from "./updateOrderStatus"
  
       }
     },
-
   components:{
     Navbar,
     EditShoppingOffer,
     UpdateOrderStatus,
   },
-
   methods:{
     toggleEditShoppingOffer(){
       this.editShoppingOffer = !this.editShoppingOffer 
@@ -419,7 +404,6 @@ import UpdateOrderStatus from "./updateOrderStatus"
       this.updateOrderStatus = false;
     },
  
-
   }
 }
 </script>

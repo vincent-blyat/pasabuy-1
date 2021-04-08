@@ -111,8 +111,6 @@
         background-color: rgba(185, 28, 28)
     
     }
-
-
 </style>
 
 <script>
@@ -120,7 +118,6 @@ export default {
  
   created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
-
   },
 data(){
     return{
@@ -174,7 +171,6 @@ methods:{
         this.delete2=null;
         this.edit2=null;
     }
-
 }
 }
 </script>
