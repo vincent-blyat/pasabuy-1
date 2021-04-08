@@ -31,7 +31,7 @@
                 2xl:text-6xl
                 ">
                     Need someone to do your groceries?</p>
-                <p class="text-lg leading-loose text-left 2xl:text-2xl">
+                <p class="text-lg leading-loose pr-2 text-left 2xl:text-2xl">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
                 <button class="items-center px-4 m-1 mt-3 
                 font-semibold tracking-wide text-white 
