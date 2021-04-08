@@ -7,7 +7,7 @@
       <!--------------------------inbox corner----------------------------->
         <div class="mt-20 md:1/5 shadow-md relative" style="min-width:300px">
         
-        <div class="relative flex justify-items-center md:justify-items-center py-1 shadow">
+        <div class="relative flex justify-items-center md:justify-items-center pb-2 pt-1 shadow">
               <button class="focus:outline-none pl-5 hover:text-red-700" @click="backbtn();" type="button"><span class="material-icons pt-2" id="iMessage">
                 chat</span></button>
               <h4 class="text-base font-semibold pt-2 pl-4 ">Message</h4>    
@@ -99,19 +99,49 @@
           
         </div>
 
-      <div class="overflow-auto pb-1 h-5/6 mb-1" id="journal-scroll">
+      <div class="overflow-auto pb-1 h-4/5 mb-1" id="journal-scroll">
 
-        <div class="sticky top-0 flex justify items-center shadow-lg bg-white border">
-
+       <!--------------U sent a request to Mark Arl------>
+        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span>You sent a request to</span>
               <span class="font-semibold ml-2">{{recipient}}</span>
               <span class="ml-2">for</span>
               <span class="font-semibold ml-2">Post {{postNum}} </span>
-
+              
               <div class="flex justify-end relative">
                 <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700 "><span>Cancel Request</span></button>
                 <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"><span>View Post</span></button>
+              </div>
+            </span>
+        </div><!------------------->
+
+        <!--------------Someone sent u a request------>
+        <div v-if="true" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+            <span class="text-sm p-3 w-full">
+              <span><span class="font-semibold mr-2 ">{{sender}}</span>request you a request</span>
+              <span class="ml-2">for</span>
+              <span class="font-semibold ml-2">Post {{postNum2}} </span>
+              
+              <div class="flex justify-end relative">
+                <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700 "><span>Decline</span></button>
+                <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"><span>Accept</span></button>
+              </div>
+            </span>
+        </div><!------------------->
+
+        <!--------------transaction details------>
+        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+            <span class="text-sm p-3 w-full">
+              <div class="flex flex-row justify-between">
+                <span>Transaction <span class="font-semibold ml-2">{{postNum2 }} </span> </span>
+                
+                <span class="rounded border border-blue-700 px-1">Confirmed</span>
+                
+              </div>
+              <div class="flex justify-end relative">
+                <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700 "><span>View Details</span></button>
+                <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"><span>Update</span></button>
               </div>
             </span>
         </div>
@@ -308,15 +338,6 @@
       <div v-if="attachment" class="sticky bottom-11">
           <div class="w-full bg-white bg-opacity-100 flex justify-start pt-2">
             
-            <div v-if="false" class="photo flex items-center">
-              <input type="file" id="photoInput" accept=".png, .jpg" style="display:none">
-              <button id="attachPhoto" @click="attachPhoto" class="ml-4 mb-2 pt-2 pb-1 px-3 bg-gray-300 focus:outline-none hover:bg-white hover:text-red-700 rounded-lg">
-              <span class="material-icons" style="font-size:22px">
-                wallpaper</span>
-              </button>
-              <span id="photo" class="text-sm pl-4 pb-1"></span>
-            </div>
-            <!----ml-4 mb-2 pt-2 pb-1 px-3----->
             <div class="flex items-center">
               <input type="file" id="fileInput" accept=" .png .jpg .xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" style="display:none">
               <button id="attachFile" @click="attachFile" class=" w-8 bg-gray-100 ml-3 mb-2 focus:outline-none hover:bg-white hover:text-red-700 rounded-md">
@@ -342,8 +363,390 @@
     </div><!--end of right corner-->
   </div>
 </div><!--end of desktop version-->
-  
-<!-------------------------------------------------------------->
+
+
+<!------------mobile version--------------------->
+<div class="mobileVersion">
+<div v-show="toggleChat">
+    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
+      <!------------------------------------------------------->
+        <div class="vs:w-full mt-16 shadow-md" style="min-width:400">
+        
+        <div class="flex items-center justify-between md:items-center pt-1 shadow">
+            <div class="flex flex-row">
+              <button class="focus:outline-none pl-5 hover:text-red-700" @click="backChat" type="button"><span class="material-icons pt-2" id="iMessage">
+                  keyboard_backspace</span></button>
+              <h4 class="text-base font-bold pt-2 pl-4 ">{{activeName}}</h4> 
+              <span class="material-icons pl-3 pt-3" id="iCheck" > check_circle </span>
+            </div>
+            <div class="align-middle">
+              <button v-if="toggle" class="absolute right-2 mt-7 px-2 h-9 w-24 rounded bg-gray-100 border-solid border-2 border-gray-300 hover:text-red-700"><span class="font-semibold">Delete</span></button>
+              <button @click="threedots" class="pt-1 mr-3 focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
+                  more_horiz</span></button>
+            </div> 
+        </div>
+
+        <!--------------Someone sent u a request------>
+        <div v-if="true" class="top-0 flex justify items-center shadow-lg bg-white border">
+            <span class="text-sm p-3 w-full">
+              <span><span class="font-semibold mr-2 ">{{sender}}</span>request you a request</span>
+              <span class="ml-2">for</span>
+              <span class="font-semibold ml-2">Post {{postNum2}} </span>
+              
+              <div class="flex justify-end">
+                <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700 "><span>Decline</span></button>
+                <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"><span>Accept</span></button>
+              </div>
+            </span>
+        </div><!------------------->
+
+        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+            <span class="text-sm p-3 w-full">
+              <span>You sent a request to</span>
+              <span class="font-semibold ml-2">{{recipient}}</span>
+              <span class="ml-2">for</span>
+              <span class="font-semibold ml-2">Post {{postNum}} </span>
+
+              <div class="flex justify-end">
+                <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 rounded-full border border-gray-700 "><span>Cancel Request</span></button>
+                <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full bg-red-700 text-white"><span>View Post</span></button>
+              </div>
+            </span>
+        </div><!------------------->
+
+        <!--------------transaction details------>
+        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+            <span class="text-sm p-3 w-full">
+              <div class="flex flex-row justify-between">
+                <span>Transaction <span class="font-semibold ml-2">{{postNum2 }} </span> </span>
+                
+                <span class="rounded border border-blue-700 px-1">Confirmed</span>
+                
+              </div>
+              <div class="flex justify-end">
+                <button class=" mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700 "><span>View Details</span></button>
+                <button class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"><span>Update</span></button>
+              </div>
+            </span>
+        </div><!------------------->
+
+
+      <!----chat box---->
+      <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
+        
+        <div class="p-2 flex justify-end">
+          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
+            <p>{{ chatOutgoing[0].sent}}</p>
+            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[0].timeSent}} </span> </div>
+        </div>
+        
+        <div class=" flex justify-end mt-2">
+          <div class="ml-32 bg-gray-100 text-sm rounded-lg">
+            
+            <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
+              <div class="mx-4 mb-2 text-sm font-semibold">
+                <span>Order Details</span>
+              </div>
+
+              <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
+                <div class="flex flex-col px-2">
+                  
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:18px">place</span>
+                    <span class="pl-2 pb-1"> {{placeFrom}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
+                    <span class="pl-2 pb-1">SM {{destination}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
+                    <span class="pl-2 pb-1">{{timeAlloted}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
+                    <span class="pl-2">{{paymentMethod}}</span>
+                  </div>
+                  
+
+                </div>
+              </div>
+
+              <div class="mx-4 p-2 bg-white rounded-lg text-sm">
+                <div>
+                  <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">{{shoppingListSize }}items</span></span>
+                </div>
+                <div>
+                    <ul class="text-gray-600 list-disc list-inside pl-4 ">
+                      <li v-for="items in shoppingList" :key="items.ShoppingList">
+                        <span>
+                          {{ items.items}}
+                        </span>
+                      </li>
+                    </ul>
+                </div>
+                <div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!----------------------------------------->
+
+
+
+        <div class="p-1 ml-12">
+         <div class="flex items-end pr-10 mt-1">
+            <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
+              <div>
+              <div class="mx-4 mb-2 text-sm font-semibold">
+                <span>Order Details</span>
+              </div>
+
+              <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
+                <div class="flex flex-col px-2">
+                  
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:18px">place</span>
+                    <span class="pl-2 pb-1">{{placeFrom}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
+                    <span class="pl-2 pb-1">{{destination}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
+                    <span class="pl-2 pb-1">{{timeAlloted}}</span>
+                  </div>
+
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
+                    <span class="pl-2">{{paymentMethod}}</span>
+                  </div>
+                  
+
+                </div>
+              </div>
+
+              <div class="mx-4 p-2 bg-white rounded-lg text-sm">
+                <div>
+                  <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">8 items</span></span>
+                </div>
+                <div>
+                    <ul class="text-gray-600 list-disc list-inside pl-4 ">
+                      <li v-for="items in shoppingList" :key="items.ShoppingList">
+                        <span>
+                          {{ items.items}}
+                        </span>
+                      </li>
+                    </ul>
+                </div>
+                <div></div>
+
+              </div>
+            </div>
+            </div>
+         </div>
+        </div>
+
+        <div class="p-1 pl-2">
+         <div class="flex items-end pr-10 mt-1"> 
+           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8 "> 
+           <div class="rounded-lg ">
+            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+              <p>{{ chatIncoming[0].received}}</p>
+              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{ chatIncoming[0].timeReceived}}</span></div>
+          </div>
+         </div>
+        </div>
+
+        <div class="p-2 flex justify-end ">
+          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
+            <p>{{chatOutgoing[1].sent}}</p>
+            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >{{chatOutgoing[1].timeSent}}</span> </div>
+        </div>
+
+
+        <div class="p-1 pl-2">
+         <div class="flex items-end pr-10 mt-1"> 
+           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
+           <div class="rounded-lg ">
+            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+              <p>{{chatIncoming[1].received}}</p>
+              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[1].timeReceived}}</span></div>
+          </div>
+         </div>
+        </div>
+
+
+
+        <div class="p-2 flex justify-end ">
+          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
+            <p>{{chatOutgoing[2].sent}}</p>
+            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[2].timeSent}} </span> </div>
+        </div>
+
+        <div class="p-1 pl-2">
+         <div class="flex items-end pr-10 mt-1"> 
+           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
+            <div class="rounded-lg ">
+            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+              <p>{{chatIncoming[2].received}}</p>
+              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[2].timeReceived}}</span></div>
+            </div>
+         </div>
+        </div>
+
+        <div class="p-2 flex justify-end ">
+          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
+            <p>{{chatOutgoing[3].sent}}</p>
+            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[3].timeSent}}</span> </div>
+        </div>
+
+        <div class="p-1 pl-2">
+         <div class="flex items-end pr-10 mt-1"> 
+           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
+           <div class="rounded-lg ">
+            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+              <p>{{chatIncoming[3].received}}</p>
+             <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[3].received}}</span></div>
+          </div>
+         </div>
+        </div>
+
+
+
+        <div id="chatmsg"></div>
+
+    </div><!--end overflow--->
+
+      <div v-if="attachment" class="sticky bottom-11">
+          <div class="w-full bg-white bg-opacity-100 flex justify-start pt-2">
+            
+            <div class="flex items-center">
+              <input type="file" id="fileInput" accept=" .png .jpg .xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" style="display:none">
+              <button id="attachFile" @click="attachFile" class=" w-8 bg-gray-100 ml-3 mb-2 focus:outline-none hover:bg-white hover:text-red-700 rounded-md">
+              <span class="material-icons" style="font-size:22px">
+                attachment</span>
+              </button>
+              <span id="file" class="text-sm font-semibold text-gray-500 pl-4 pb-1 pb-2">No file chosen yet</span>
+            </div>
+
+          </div>
+      </div>
+       
+      <div class=" w-pl-4 pr-4 mt-1 w-full absolute bottom-1 flex flex-cols justify-between items-center" style="min-width:400">
+              <button class="h-6 w-6 ml-4 mr-1 bg-gray-400 rounded-full focus:outline-none hover:text-white" @click="attachbtn" type="button">
+               <span class="material-icons" id="attach2">
+                    {{attach}}</span>
+              </button>
+              <input type="text" class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full" placeholder="Type a message" id="typemsg" />
+              <button  @click="sendbtn" class="w-8 h-8 flex items-center pl-1 rounded-full focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
+                    send</span>
+              </button>
+      </div>
+
+
+  </div>
+</div>
+</div><!-------------end inbox------------->
+
+<div v-show="toggleInbox">
+    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
+      
+      <!------------------------------------------------------->
+        <div class="vs:w-full mt-16 shadow-md sm:w-10/12">
+        
+        <div class="flex justify-items-center md:justify-items-center pt-1 shadow">
+              <router-link to="/dashboard">
+              <button class="focus:outline-none pl-5 hover:text-red-700" @click="backbtn();" type="button"><span class="material-icons pt-2" id="iMessage">
+                keyboard_backspace</span></button></router-link>
+              <h4 class="text-base font-bold pt-2 pl-4 ">Message</h4>    
+        </div>
+
+        <div v-if="searchMessageInactive" class="flex justify-center w-full py-1 pt-2">
+            <input type="text" class="h-8 w-11/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Search"/>
+            <button  @click="searchBtn" class="align-middle absolute right-8 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
+              search
+              </span></button>
+        </div><!---end of search bar-->
+
+        <button v-if="showSearchResults" class="flex justify-center w-full py-1 pt-2">
+            <input type="text" class="h-8 w-9/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Mark" id="search"/>
+            <button class="align-middle mt-1 ml-1 flex items-center h-6 w-6 rounded-full bg-gray-300 focus:outline-none hover:text-red-700">
+              <span  @click="closeSearchResults" class="material-icons pl-1" style="font-size:17px">
+              close
+              </span></button>
+        </button><!---end of search bar-->
+
+    <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
+
+          <div v-if="searchMessageInactive">
+            <button @click ="navMark" type="button" class="focus:bg-gray-200 w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
+                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="mark"> {{ inbox[0].name}} <span class="material-icons pl-2" id="iCheck" >
+                  check_circle
+                  </span></span> 
+                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
+                  </span> 
+                </div>
+              </div>
+                <div class="flex flex-col items-start"> 
+                  <span class="text-gray-700 text-xs">
+                  <span class="font-light pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
+                </div>
+            </button>
+
+            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200  w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
+                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="gwen">{{ inbox[1].name}}<span class="material-icons pl-2" id="iCheck" >
+                  check_circle
+                  </span></span> 
+                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[1].message}}
+                  </span> 
+                  </div>
+                </div>
+                <div class="flex flex-col items-start"> 
+                  <span class="text-gray-700 text-xs">
+                  <span class="font-bold pl-1 pr-1">·</span>{{ inbox[1].time}}</span>
+              </div>
+            </button>  
+          </div> <!---------------navigation message------------>
+
+          <div v-if="showSearchResults" class="divide-y divide-gray-300">
+
+            <div class="py-2 flex justify-center font-normal text-xs italic">
+              <span>Search Results</span>
+            </div>
+            <div>
+              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+                <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
+                  <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
+                    check_circle
+                    </span></span> 
+                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
+                    </span> 
+                  </div>
+                </div>
+                  <div class="flex flex-col items-start"> 
+                    <span class="text-gray-700 text-xs">
+                    <span class="font-bold pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
+                  </div>
+              </button>
+            </div>
+            
+          </div> <!---------------search message results------------>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
 
 </template>
 
@@ -395,7 +798,9 @@ export default {
           //sent a request
           activity: 'You sent a request to to',
           recipient: 'Mark Aral',
+          sender: 'Monica Rambeau',
           postNum: '#2021352',
+          postNum2: '#130317',
           placeFrom: 'Banquerohan, Legazpi City',
           destination: 'SM City ',
           timeAlloted: 'Tomorrow, 5 PM',
@@ -471,9 +876,11 @@ export default {
         this.attachment = !this.attachment;
         if( this.attachment == true){
           document.getElementById("attach").innerHTML="close";
+          document.getElementById("attach2").innerHTML="close";
         } 
         else if(this.attachment ==false){
           document.getElementById("attach").innerHTML="add";
+          document.getElementById("attach2").innerHTML="add";
         }
       },
 
@@ -595,7 +1002,7 @@ document.addEventListener("click", function(event) {
 }
 
 /*minimized desktop version and mobile version
-screen sizes lesser than 600px*/
+screen sizes lesser than 639px*/
 
 .desktopVersion{
   display:none;
@@ -604,8 +1011,8 @@ screen sizes lesser than 600px*/
   display:inline;
 }
  
-/*for screen sizes 768px++*/
-@media only screen and (min-width: 600px) {
+/*for screen sizes 639px++*/
+@media only screen and (min-width: 639px) {
   .desktopVersion{
     display:inline;}
   .mobileVersion{
