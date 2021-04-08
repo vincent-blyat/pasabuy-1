@@ -1,14 +1,18 @@
 <template class=" bg-gray-bgcolor font-nunito">
 
-    <div class="absolute vs:left-5 left-12 top-3 bg-gray-bgcolor">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-          <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
-            pasaBUY
-          </label>
-    </div>
+    <div class="flex items-center ">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+          
+           ">pasaBUY</h1>
+      </div>
 
-    <div id="verifyemail" class="flex items-center justify-center w-full h-screen pt-20 bg-gray-bgcolor">
-      <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 flex-grow-1 rounded-xl ssm:w-11/12">
+    <div id="verifyemail" class="flex items-center justify-center w-full px-4   bg-gray-bgcolor">
+      <div class="w-full my-12 overflow-hidden text-center bg-white shadow-md 
+       xl:w-2/5 lg:w-2/5 2xl:w-2/5 
+      sm:w-2/5 md:w-2/5
+      ">
         <div class="px-10 py-16 ">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold pb-7">Verify your email</h1>
             <p class="pb-10 text-base font-bold text-gray-700 ">
@@ -59,11 +63,6 @@
 #iMessage{
   font-size:24px;
   color:rgb(22, 22, 141);
-}
-img{ 
-  max-width: 100px;
-  width:11%;
- 
 }
 
 </style>
