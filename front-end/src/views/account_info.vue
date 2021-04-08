@@ -80,23 +80,5 @@ data(){
     }
   
 },
-methods:{
-
-    submit () {
-       
-    },
-     Edit(pars) {
-      let x=document.getElementById(pars).innerHTML;
-      if(x=='Edit'){
-          document.getElementById(pars).innerHTML="Save";
-          
-      }
-      else{
-         document.getElementById(pars).innerHTML="Edit"; 
-         
-      }
-    }
-
-}
 }
 </script>
