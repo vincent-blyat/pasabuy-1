@@ -49,9 +49,12 @@
     }
 </style>
 
-
 <script>
-
-
+export default {
+  
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
+}
 </script>
 
