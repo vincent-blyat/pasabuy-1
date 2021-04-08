@@ -76,7 +76,6 @@
         </div>
     </div>
     </div>
-  </div>
 </template>
 <script>
 import api from '../api'
