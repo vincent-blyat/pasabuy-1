@@ -31,7 +31,7 @@
         py-20
         ">
           <div class="  bg-white ring-1  ring-gray-300 p-5 w-full rounded-md
-             2xl:w-6/12 
+             2xl:w-6/12  
               lg:w-6/12
               xl:w-6/12 
               md:w-8/12
