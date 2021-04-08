@@ -9,10 +9,10 @@
       </div>
 
 
-    <div id="signup" class="flex items-center justify-center  pb-10  px-4">
+    <div id="signup" class="flex items-center justify-center   pb-10  px-4">
       <div class="w-full my-12 overflow-hidden text-center bg-white shadow-md flex-grow-1 rounded-xl
       xl:w-2/5 lg:w-2/5 2xl:w-2/5 
-      sm:w-2/5 md:w-2/5
+      md:w-97 sm:w-97
       ">
         <div class="px-10 py-16 ">
             <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Create an account</h1>
