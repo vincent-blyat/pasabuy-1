@@ -99,7 +99,8 @@
           lg:flex
          ">
         <input type="search" class="w-auto vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
-        <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
+        <button class="material-icons mr-2 text-gray-400 w-full" >
+          <router-link to="/search"> search</router-link></button>
         </div>
         <div  class="hidden  2xl:block lg:block xl:block">
              <Dropdown/>
