@@ -43,6 +43,17 @@ class userInformationController extends Controller
         return response()->json($data[0]);
     }
 
+    public function getValidID()
+    {
+        # code...
+        $user = Auth::user();
+        $data = DB::select('SELECT * FROM tbl_userid WHERE email = \''.$user->email.'\'');
+
+        if($data == null)
+            return response()->json('');
+        return response()->json($data[0]);
+    }
+
     public function editPersonal(Request $request)
     {
         # code...

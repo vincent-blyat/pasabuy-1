@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
     Route::post('/editPersonal', [userInformationController::class, 'editPersonal']);
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
+    Route::get('/getValidID', [userInformationController::class, 'getValidID']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

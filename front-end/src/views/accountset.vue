@@ -92,9 +92,9 @@ export default {
   mounted() {
     //get the user information from the laravel API
     api
-      .get("/api/getPersonal")
+      .get('/api/getValidID')
       .then((res) => {
-        console.log(res.data);
+        console.log('asd',res.data);
         if (!res.data.verifyStatus.localeCompare("unverified")) {
           this.verification_status.msg = "Your account is not fully verified.";
           this.unverified = true;
@@ -105,7 +105,7 @@ export default {
         //this.user = res.data;
       })
       .catch((error) => {
-        this.error = error.response.data.errors;
+        console.log(error)
       });
   },
 };
