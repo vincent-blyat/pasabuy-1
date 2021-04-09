@@ -1,7 +1,9 @@
 <template class="">
 
       <div class="flex items-center ">
+        <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        </router-link>
         <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
           text-red-buttons block
           
@@ -9,7 +11,7 @@
       </div>
 
       <div id="login" class="items-center flex justify-center w-full mt-10  pb-16 bg-transparent px-3 ">
-        <div class=" overflow-hidden font-bold text-center bg-white shadow-md w-full 
+        <div class=" overflow-hidden font-bold text-center bg-white shadow-md w-full rounded-xl
         lg:w-97
         2xl:w-97  
         xl:w-97 

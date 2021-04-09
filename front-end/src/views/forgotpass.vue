@@ -1,6 +1,8 @@
 <template class="bg-gray-bgcolor font-nunito">
     <div class="absolute vs:left-5 left-12 top-3 ">
+      <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
+      </router-link>
         <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red text-red-buttons">
             pasaBUY
         </label>
@@ -14,18 +16,21 @@
                 Enter your email and we'll send you a link to get back into your account</p>
               <form action="#" class="space-y-3">
                 <div class="mb-2 -mx-1">
-                <div>
-                    <input aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email" value="" />
+                  <div>
+                      <input aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email" value="" />
+                  </div>
+
+                  <div class="flex mb-2 -mx-1 ">
+                    <div class="w-1/2 px-1 mt-6 text-lg font-bold text-left text-grey-dark text-blue">
+                        <router-link to="/log-in" >Log instead</router-link>
+                    </div>
+                    <div class="flex justify-end w-1/2 px-1 mt-3">
+                        <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
+                            <router-link to="/forgot-password-verify" >SEND</router-link>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex mb-2 -mx-1 ">
-                <div class="w-1/2 px-1 mt-6 font-bold text-left text-grey-dark text-blue">
-                    <router-link to="/log-in" >Log instead</router-link>
-                </div>
-                <div class="flex justify-end w-1/2 px-1">
-                <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:shadow-outline">
-                    <router-link to="/forgot-password-verify">Send</router-link></button>
-                </div>
-                </div>
+                  
                 </div>
             </form>
           </div>

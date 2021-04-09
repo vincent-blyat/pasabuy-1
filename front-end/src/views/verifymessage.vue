@@ -1,6 +1,8 @@
 <template class="font-nunito">
      <div class="flex items-center ">
+       <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        </router-link>
         <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
           text-red-buttons block
           

@@ -16,7 +16,7 @@ import forgotpassword from '../views/forgotpass.vue'
 import forgotPassVerify from '../views/forgotPassVerify.vue'
 import verifyemail from '../views/verifyemail.vue'
 import Shopping_List from '../views/shopping_list.vue'
-
+import Notifications from '../views/mobile_notification.vue'
 
 const routes = [
   {
@@ -138,6 +138,11 @@ const routes = [
     component: Shopping_List
   },
 
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: Notifications
+  },
 
 ]
 

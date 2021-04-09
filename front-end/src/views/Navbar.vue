@@ -20,7 +20,7 @@
          hidden 2xl:block xl:block lg:block ">pasaBUY</h1>
       </div>
        </div>
-       <img v-if="currentRoute=='' " src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 2xl:hidden xl:hidden lg:hidden block"/>
+       <img v-if="currentRoute=='' " src="/img/pasaBUYwhiteLogo.png" class=" 2xl:hidden xl:hidden lg:hidden block"/>
       <div class=" hidden  
       2xl:flex 2xl:ml-60 
       xl:flex xl:ml-72 xl:mr-16
@@ -46,59 +46,21 @@
             notifications
           </span>
           <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</span>
-             <div v-if="show" class="fixed float-left h-auto pt-2 mt-80 overflow-hidden bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
-               <h1 class="mt-4 mb-4 ml-4 font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
-               <!--notification 1-->
-                <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
-                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
-                <p class="pl-1 mx-2 text-sm text-gray-800">
-                <span class="font-bold" href="#">Mark Aral </span> 
-                <span class ="font-semibold"> successfully delivered your order. </span><br> 
-                <span class ="font-semibold"> Would you like to write a review? </span><br>
-                <router-link to="#" class="font-bold text-blue-500">Review</router-link>
-                <span class="text-xs text-gray-500"> 2 hours ago</span>
-                </p>
-                </div>
-              <!--notification 2-->
-              <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
-                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
-                <p class="pl-1 mx-2 text-sm text-gray-800">
-                <span class="font-bold" href="#">Mark Aral </span> 
-                <span class ="font-semibold"> is on their way to deliver your order </span><br>
-                <router-link to="/orders" class="font-bold text-blue-500">View Order</router-link>
-                <span class="text-xs text-gray-500"> 2 hours ago</span>
-                </p>
-                </div>
-                <!--notification 3-->
-              <div class="flex items-start px-4 py-3 -mx-2 border-b hover:bg-gray-100">
-                <img class="object-cover w-10 h-10 mx-1 rounded-full" src="https://ptetutorials.com/images/user-profile.png" alt="avatar">
-                <p class="pl-1 mx-2 text-sm text-gray-800">
-                <span class="font-bold" href="#">Mark Aral </span> 
-                <span class ="font-semibold"> is on their way to deliver your order </span><br>
-                <router-link to="/orders" class="font-bold text-blue-500">View Order</router-link>
-                <span class="text-xs text-gray-500"> 2 hours ago</span>
-                </p>
-              </div>  
-            </div>   
+              
       </div>
       </div>
       <div class=" flex  mr-2 gap-x-5 ">
-        <div v-if="currentRoute=='' " class=" 
-         items-center flex ring-2 ring-gray-400 rounded-2xl bg-white
-         2xl:hidden
-         xl:hidden
-         lg:hidden
-         ">
-        <input type="search" class="w-auto vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
-        <button class="material-icons mr-2 text-gray-400 w-full" >search</button>
-        </div>
+       
+        
+        <button class="material-icons mr-2 text-white w-full" >search</button>
+       
         <div class=" 
          items-center hidden ring-2 ring-gray-400 rounded-2xl bg-white
           2xl:flex
           xl:flex
           lg:flex
          ">
-        <input type="search" class="w-auto vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
+        <input type="search" class="w-auto focus:outline-none vs:w-28 text-black  pl-3 rounded-2xl h-10" placeholder="Search">
         <button class="material-icons mr-2 text-gray-400 w-full" >
           <router-link to="/search"> search</router-link></button>
         </div>
@@ -107,8 +69,15 @@
         </div>
 
       </div>
-      
+        <div v-if="show" class="fixed hidden xl:block lg:block pb-24 2xl:block overflow-y-auto top-20 h-full right-60 pt-2  bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
+               <h1 class="mt-4 mb-4 ml-4 text-black font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
+             
+                  <Notification/>
+              
+             
+            </div> 
     </nav>
+    
   </div>
 
   <!-- sidebar -->
@@ -137,7 +106,7 @@
       </span>
       <p class=" text-gray-500">Messages</p>
       </div></router-link>
-      <router-link to="/ss"  class="rounded-2xl   "> 
+      <router-link to="/notification"  class="rounded-2xl   "> 
       <div class="mobile rounded-2xl items-center flex h-10 space-x-2 pl-2 ">
        <span class="material-icons ">
             notifications
@@ -198,10 +167,11 @@
 import { computed } from 'vue';
 import {useRoute} from 'vue-router';
 import Dropdown from './dropmenu.vue';
+import Notification from './Notification.vue'
 export default {
   name:'navBar',
  components:{
-    Dropdown
+    Dropdown,Notification
   },
   beforeCreate:function () {
       document.body.className='account';
