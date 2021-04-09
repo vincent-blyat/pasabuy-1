@@ -54,8 +54,6 @@
         background-color: rgba(185, 28, 28)
     
     }
-
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);
@@ -64,7 +62,6 @@
   font-size:24px;
   color:rgb(22, 22, 141);
 }
-
 </style>
 
 <script>
@@ -93,7 +90,4 @@ export default {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
 }
-
-
-
 </script>

@@ -1,7 +1,7 @@
 <template> 
 
         <nav class="fixed z-10 flex w-full py-4 justify-between items-center  xl:px-4 font-nunito" :class="{change_color: scrollPosition > 50}">
-        <div class="absolute items-center ssm:hidden ">
+        <div class="absolute items-center ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
           <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons vs:hidden ssm:hidden 2xl:text-2xl">
             pasaBUY
@@ -31,7 +31,7 @@
                 2xl:text-6xl
                 ">
                     Need someone to do your groceries?</p>
-                <p class="text-lg leading-loose pr-2 text-left 2xl:text-2xl">
+                <p class="text-lg leading-loose text-left 2xl:text-2xl">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
                 <button class="items-center px-4 m-1 mt-3 
                 font-semibold tracking-wide text-white 
@@ -156,7 +156,6 @@
    
  .change_color {
        background-color:white
-
    }
 </style>
 

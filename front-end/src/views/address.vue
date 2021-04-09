@@ -1,10 +1,10 @@
 <template class="bg-gray-bgcolor font-nunito">
-  <div class="absolute vs:left-5 left-12 top-3 bg-gray-bgcolor">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-        <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
-            pasaBUY
-        </label>
-    </div>
+  <div class="flex items-center bg-gray-bgcolor">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+           ">pasaBUY</h1>
+      </div>
     <div id="address" class="flex items-center justify-center w-full h-screen pt-16 pb-10 bg-gray-bgcolor">
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 ssm:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">

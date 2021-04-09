@@ -1,427 +1,426 @@
-<template class="font-nunito bg-gray-bgcolor">
-<Navbar/>
-    
-   <!--START OF 'POST OFFER OR REQUEST' CODE-->
-      <div class="flex flex-wrap pt-12 overflow-hidden vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
-    <div class="w-3/5 overflow-hidden mobile-view-w md:w-full">
-      <div class="flex flex-wrap float-right pt-12 rounded-lg 2xl:w-8/12 md:w-full xl:w-3/4 vs:justify-center vs:w-full sm:w-full vs:mt-1 lg:w-4/5">
-         <div class="relative flex items-center justify-center py-2 pl-6 bg-white shadow-md sm:w-full vs:px-0 md:w-full md:pl-0 md:py-0 sm:py-0 lg:w-full vs:pl-0 md:rounded-none mobile-view-w sm:rounded-none 2xl:w-full vs:justify-center rounded-xl vs:rounded-none xl:w-full">
-            <button class="absolute w-12 h-12 rounded-full left-7 border-1 vs:left-5 focus:outline-none">
-              <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </button>
-            <div class="justify-center pl-3 mx-5 vs:pl-5 vs:mr-7 md:pl-20 md:mx-0 sm:pr-7 md:float-right md:w-full ml-15 2xl:w-full lg:w-full xl:w-full vs:w-5/6 sm:w-11/12 md:pr-7"> 
-              <!--modal-->
-              <PostModal v-if="postModalVisible" @closeModal="listener"/>
-                <button  @click="togglePostModal" class="float-right px-3 py-2 my-5 text-base text-left text-gray-500 placeholder-gray-500 bg-gray-200 border rounded-full appearance-none xl:w-full lg:w-full 2xl:w-full vs:my-3 h-14 vs:w-full vs:h-11 md:w-11/12 sm:w-full vs:text-base md:mx-10 w-97 sm:text-lg focus:outline-none focus:shadow-outline-blue focus:border-blue-300">Post a shopping offer<span class="vs:hidden sm:hidden lg:mx-0"> or an order request</span>
-              </button>
-            </div>
-          </div>
-        </div>
+<template class="bg-gray-bgcolor">
+    <Navbar/>
 
-          <!--START OF 'FILTER' CODE-->
-          <div class="flex flex-wrap w-3/4 px-0 pt-3 md:w-full vs:pt-1 lg:w-4/5 2xl:w-8/12 2xl:float-right xl:float-right xl:block vs:w-full lg:float-right md:float-left sm:w-full">
-            <div class="w-full vs:py-0.5 sm:py-0 py-1.5 text-sm font-normal rounded-lg sm:justify-around">
-              
-              <button type="button" class=" inline-flex 2xl:w-50 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vs:text-base sm:text-lg sm:bg-transparent font-nunito border vs:shadow-none vs:w-40 vs:bg-transparent sm:text-gray-500 md:bg-transparent md:shadow-none md:border-none sm:border-none sm:shadow-none vs:border-none border-gray-300 rounded-full shadow-sm w-44 vs:font-bold vs:text-gray-500 hover:bg-gray-50 focus:outline-none  md:w-52 md:text-lg md:text-gray-500" id="options-menu"  @click="filter =! filter">
-               <span class="pr-1 mt-0.5 align-bottom material-icons-round md-24">
+    <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
+        <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
+        <div class="pt-5 bg-gray-100 mv:pt-1 font-nunito rounded-xl llg:pl-5 mv:w-screen">
+   <div class="w-full min-w-0 px-2 ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 rounded-xl">
+   <!--Modal-->
+   <PostModal v-if="postModalVisible" @closeModal="listener"/>
+   <!--end--> 
+   <div class="flex items-center justify-center pt-16 dv:float-right">
+    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow vs:w-stretch rounded-xl ssm:space-x-2 sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+        <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
+        Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
+    </div>
+  </div>
+  <!--end-->
+
+<!--FILTER--->
+     <div class="relative flex items-center justify-center pt-3 ssm:justify-around x-v:pt-2 dv:float-right">
+    <div class="justify-center h-auto bg-transparent ssm:px-0 dv:space-x-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full dv:w-608 rounded-xl">
+      <div class="flex items-start justify-start dv:flex-wrap vs:space-x-2 ssm:flex-col ssm:justify-start">
+          <button type="button" class=" inline-flex ssm:float-left 2xl:w-50 ssm:px-0 dv:justify-around md:justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vsv:px-0 vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
+               <span class="pr-1 mt-0.5 ssm:pr-0  align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 cursor-pointer"> All Posts</label>
-                <span class="pt-1 pl-2 text-gray-500 align-middle md-24 material-icons">
+                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
+                <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
               </button>
 
               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-44 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
-                <div class="py-1" role="none" v-if="filter">
-                  <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
+              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg vs:top-12 top-15 w-44 focus:outline-none x-v:leading-tight vsv:text-sm vsv:w-36 vsv:left-0" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
+                <div class="py-1 " role="none" v-if="filter">
+                  <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 vsv:px-2 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST TYPE</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
-                    <span class="pr-3 mt-0.5 align-bottom material-icons-round text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900 vsv:px-2 vsv:py-0" role="menuitem" >
+                    <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
-                 <label for="" class="cursor-pointer"> All Posts</label>
+                 <label for="" class="cursor-pointer vsv:text-xs"> All Posts</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900 vsv:px-2 vsv:py-0 vsv:text-xs" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
 
-                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm vsv:pb-1 vsv:px-2 vsv:py-0 vsv:text-xs hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons  text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
 
-              <button type="button" class="2xl:w-64 inline-flex vs:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white  vs:shadow-none border vs:bg-transparent vs:border-none border-gray-300 vs:w-56 vs:text-base rounded-full vs:font-bold vs:font-nunito vs:text-gray-500 sm:bg-transparent sm:border-none md:text-lg vs:ml-0 md:text-gray-500 md:bg-gray-bgcolor md:float-right md:border-none md:shadow-none sm:shadow-none sm:text-gray-500 sm:float-right sm:text-lg shadow-sm align-bottom hover:bg-gray-50 sm:mr-8 vvs:px-0 vvs:w-44 md:mr-8 vs:focus:bg-transparent  focus:outline-none md:focus:bg-transparent" id="options-menu"  @click="filter2 =! filter2">
-               <span class="pt-1 pr-2 align-middle vvs:pr-1 material-icons">
+                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right md:justify-around dv:justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white vsv:right-0 s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm vsv:float-right mv:focus:bg-transparent mv:shadow-none"  @click="filter2 =! filter2">
+               <span class="pt-1 pr-2 vsv:ml-6 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 cursor-pointer"> Following Only</label>
-                <span class="pt-1 pl-2 text-gray-500 align-middle vvs:pl-1 md-24 material-icons">
+                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
               </button>
-
-               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg vs:left-64 w-52 2xl:left-98.5 2xxl:left-99 xl:left-90 xxl:left-95.5 lg:left-90 md:left-60 2xl:w-60 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <!---------OPTIONS----------->
+              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-52 top-15 left-52 2xl:left-58 2xl:w-60 focus:outline-none vs:left-58 sm:left-74 vsv:left-32 vsvs:left-40 vsvs:w-44 vs:top-12 vsv:w-40" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
-                 <label for=""> POST FROM</label></a>
+                 <label for="" class="vsv:text-xs"> POST FROM</label></a>
                   <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <label for="" class="pt-1 text-gray-900 cursor-pointer vsv:text-xs"> Following Only</label></a>
+                 <a href="#" class="block px-4 py-2 text-sm text-gray-600 vsv:text-xs" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
+             
 
-                <label for="" class="inline-flex pt-2.5 ml-4 hidden text-red-700 align-top md-18 text-sm">
-                  <span class="material-icons">
-                  place
-                </span> {{ filterPost.filterAddress }}</label>
-              
-            </div>
-          </div>
-          
-          <!--END-->
+      </div>
+    </div>
+     </div>
+  
 
-<!---------------------------START OF 'NO LONGER ACCEPTING OFFERS' POST------------------------------------------------>
-          <div class="relative z-10 flex flex-wrap float-right w-3/4 pt-3 sm:w-full lg:w-4/5 md:float-left md:w-full 2xl:w-8/12 vs:pt-2 vs:w-full ">
-            <div class="flex items-center w-full p-5 bg-white vs:pt-4 rounded-t-xl px-7 vs:w-full vs:rounded-none sm:rounded-none md:w-full md:rounded-none">
-              <button class="top-0 left-0 rounded-full border-1 vs:absolute vs:left-5 vs:top-7 focus:outline-none">
-                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-              </button>
-              <div class="ml-2 vs:ml-12 ">
-                <h5 class="font-bold vs:text-lg font-nunito sm:text-lg"> {{ deliveryPostOffer.firstname }} {{ deliveryPostOffer.lastname }}
+  <!--user post-->
+  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right ">
+    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+      <div class="flex flex-col items-start justify-start">
+
+        <!--section 1-->
+        <div class="relative flex flex-row justify-between flex-grow w-full">
+          <div class="inline-flex">
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
+              <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info.firstname}} {{user_info.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
                   <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
-                  <!-------OPTION(POST)----------->
-                  <button @click="edit1=!edit1" class="absolute right-8 vs:hidden sm:hidden focus:outline-none md:hidden">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full">
-                    <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl right-5 h-min w-30 ">
-                        <!--EDIT POST--->
-                      <EditShoppingOffer v-if="editShoppingOffer" @closeModal1="listener3"/>
-                        <button  @click="toggleEditShoppingOffer" class="flex flex-row gap-x-2 focus:outline-none">
-                          <span class="font-medium text-gray-500 material-icons">
-                            mode
-                          </span>
-                          Edit Post
-                        </button>
-
-                         <!-----UPDATE STATUS------>
-                      <updateOfferStatus v-if="updateOfferStatus" @closeUpdate="listener7"/>
-                        <button  @click="toggleupdateOfferStatus" class="flex flex-row font-normal focus:outline-none gap-x-2">
-                          <span class="font-normal text-gray-500 material-icons">
-                            autorenew
-                          </span>
-                          Update Status
-                        </button>
-                        <!---END-->
-
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-                 </h5>
-                    <p class="text-sm font-normal text-gray-400 sm:text-base vs:text-base">
-                      <span>{{ deliveryPostOffer.time }}</span>
-                    </p>
-                  </div>
+                </h5>
               </div>
-
-            <!--NO LONGER ACCEPTING REQUESTS TEXT-->
-            <div class="flex items-center w-full bg-white px-7">
-              <div class="p-1 px-2 text-sm font-semibold bg-gray-200 rounded-full vs:pt-0 text-red-danger">
-                <span class="inline-block align-middle material-icons">
-                  remove_circle_outline
-                  </span>
-                  <label class="pl-1 font-bold align-bottom sm:text-lg vs:text-lg vvs:text-base">{{ deliveryPostOffer.status }}</label> 
+              <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted}}</span>
               </div>
-            </div>
-
-            <!--DETAILS-->
-            <div class="flex w-full p-3 bg-white vs:leading-loose px-7 vvs:pr-0 gap-y-4">
-              <div class="flex flex-wrap w-full overflow-hidden lg:relative vs:pt-2">
-                <!--AREA-->
-                <div class="w-2/4 overflow-hidden vs:w-full sm:w-full">
-                  <span class="items-center text-red-700 lg:absolute lg:left-0 material-icons">
-                    delivery_dining
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top lg:pl-7 vs:pl-3 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base"> Delivering to {{ deliveryPostOffer.deliveryPlace }}</label> 
-                </div>
-                
-                <!--SHOPPING LOCATION-->
-                <div class="w-1/2 pl-3 overflow-hidden vs:pl-0 vs:w-full sm:w-full sm:pl-0" >
-                  <span class="text-red-700 material-icons vs:pl-0 lg:absolute lg:left-62 ">
-                    shopping_cart
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 lg:pl-7 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base">{{ deliveryPostOffer.shoppingPlace }}</label>
-                </div>
-              
-                <!--TIME-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full" >
-                  <span class="text-red-700 material-icons ">
-                    watch_later  
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base">{{ deliveryPostOffer.schedule }}</label>
-                </div>
-              
-                <!--TRANSPO-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full">
-                  <span class="pl-3 text-red-700 material-icons vs:pl-0 sm:pl-0">
-                    directions_car_filled
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base">{{ deliveryPostOffer.transportation }}</label>
-                </div>
-              
-                <!--SIZES OF BAGS-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full">
-                  <span class="text-red-700 material-icons lg:absolute lg:left-0">
-                    shopping_bag
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top lg:pl-7 vs:pl-3 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base">{{ deliveryPostOffer.limitation }}</label>
-                </div>
-              
-                <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full">
-                  <span class="pl-3 text-red-700 vs:pl-0 sm:pl-0 material-icons">
-                    payments
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-black vs:text-base sm:pl-3 sm:text-black sm:text-base">{{ deliveryPostOffer.paymentMethod }}</label>
-                </div>
-              </div>
-            </div>
-            
-            <!--POST MESSAGE-->
-            <div class="flex items-center w-full px-5 py-2 bg-white">
-              <div class="p-5 text-sm leading-loose bg-gray-200 rounded-lg vs:mr-5 vs:font-medium vs:text-base sm:text-base sm:font-semibold vvs:mr-0">
-                {{ deliveryPostOffer.comment }}
-              </div>
-            </div>
-
-             <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg shadow-md vs:rounded-none sm:rounded-none md:rounded-none vvs:justify-around s-sm:text-lg">
-            
-            <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons-round md-24 ">
-                send
-                </span>
-              <sendRequest v-if="sendrequest" @closeSendRequest="listener8"/>
-              <button  @click="togglesendRequest" class="font-bold align-top cursor-pointer s-sm:text-lg">Send Request</button>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 md:pl-36 vs:pl-12 vvs:pl-0 material-icons-round md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer s-sm:text-lg">Chat</router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 md:pl-36 vs:pl-16 vvs:pl-0 vvs:pr-0 material-icons-round md-24">
-                  share
-              </span>
-              <button @click="share2=!share2" class="font-bold align-top cursor-pointer mmd:text-base focus:outline-none ">Share</button>
-                <div class="w-full">
-                    <div v-if="share2" class="absolute right-0 py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl h-min w-30 ">
-                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                </div>
             </div>
           </div>
-          </div>
-
-          
-          <!--END-->
- <!--------------------------START OF ORDER REQUESR POST----------------------------------------------->
-          <!----------START OF ACCEPTING OFFERS(EDIT ORDER REQUEST)---------->
-          <div class="relative flex flex-wrap float-right w-3/4 pt-3 pb-20 sm:w-full z-00 lg:w-4/5 md:w-full 2xl:w-8/12 vs:pt-3 vs:w-full">
-            <div class="flex items-center w-full p-5 bg-white rounded-t-lg px-7 vs:w-full vs:rounded-none">
-              <button class="top-0 left-0 rounded-full border-1 vs:absolute vs:left-5 vs:top-7 focus:outline-none">
-                <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+          <div class="vs:mt-1">
+            <button @click="edit1=!edit1" class="absolute right-0 focus:outline-none ">
+              <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
+            </button>
+            <div class="flex w-full ">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl vs:text-sm vs:right-0 top-5 right-8">
+             <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
+              <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons vs:md-14">
+                mode
+               </span>
+                Edit Post
               </button>
-              <div class="ml-2 vs:ml-12">
-                <h5 class="font-bold vs:text-lg font-nunito sm:text-lg"> {{ deliveryPostRequest.firstname }} {{ deliveryPostRequest.lastname }}
+             <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
+              <button  @click="togglePostModal2" class="flex flex-row text-base font-normal vs:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons vs:md-14">
+                autorenew
+               </span>
+                Update Status
+              </button>
+              <button class="flex flex-row text-base gap-x-2 vs:text-sm vs:md-14"> 
+                <span class="text-gray-500 material-icons">delete</span>Delete</button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!--end-->
+
+        <!--section 2-->
+        <div class="inline-flex items-center justify-start px-2 py-1 mt-4 space-x-2 bg-gray-100 rounded-full">
+          <span class="text-red-600 rounded-full material-icons">
+              remove_circle_outline
+              </span>
+          <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
+              {{delivery_info.status}}</p>
+        </div>
+        <!--end-->
+
+        <!--section 3-->
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
+          <div class="flex-col items-start w-full">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              delivery_dining  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.delivery_area}}</p>
+            </div>
+            <div class="flex py-2 space-x-2 ">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              alarm  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.schedule}}</p>
+            </div>
+            <div class="flex space-x-2 ">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              shopping_bag  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.capacity}}</p>
+            </div>
+          </div>
+          <div class="flex-col w-full ssm:py-2 vs:py-3">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              shopping_cart  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.shopping_place}}</p>
+            </div>
+            <div class="flex py-2 space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              directions_car  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.public_transit}}</p>
+            </div>
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              payments  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.payment_method}}</p>
+            </div>
+          </div>
+        </div>
+        <!--end-->
+
+        <!--section 4-->
+        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl">
+          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{delivery_info.comment}}</p>
+        </div>
+        <!--section 4-->
+
+        <!--section 5-->
+        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
+          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+            send
+            </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
+          </button>
+          <router-link to="/messages">
+          <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
+           forum
+           </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Chat</p>
+          </button>
+          </router-link>
+          <div>
+          <button @click="share1=!share1" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 x-v:pr-1 ssm:pr-0 material-icons md-24 x-v:md-16">
+           share
+           </span>
+            <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
+          </button>
+          <div class="flex w-full">
+            <div v-if="share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-0 h-min w-30">
+              <button class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+                share
+               </span>
+                Share on Feed
+              </button>
+              <button class="flex flex-row py-2 text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:md-16 x-v:inline-block x-v:align-top">
+                link
+               </span>
+                Copy link to this post
+              </button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!--end-->
+      </div>
+    </div>
+  </div>
+  <!--end of user post-->
+
+  <!--user post-->
+  <div class="relative flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
+    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+      <div class="flex flex-col items-start justify-start">
+
+        <!--section 1-->
+       <div class="relative flex flex-row justify-between flex-grow w-full">
+          <div class="inline-flex">
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
+              <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info1.firstname}} {{user_info1.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
-                  <label class="pl-1 font-normal text-gray-400 align-middle">posted a shopping offer</label>
-                  <button @click="edit2=!edit2" class="absolute sm:hidden vs:hidden md:hidden right-8 focus:outline-none">
-                    <img class="w-6 h-auto" src="img/3dot.svg"/>
-                  </button>
-                  <div class="w-full " >
-                    <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl right-5 h-min w-30 ">
-                        <!--EDIT POST--->
-                      <EditOrderRequest v-if="editOrderRequest" @closeModal2="listener5"/>
-                        <button  @click="toggleEditOrderRequest" class="flex flex-row gap-x-2 focus:outline-none">
-                          <span class="font-medium text-gray-500 material-icons">
-                            mode
-                          </span>
-                          Edit Post
-                        </button>
-
-                         <!-----UPDATE STATUS------>
-                      <UpdateOrderStatus v-if="updateOrderStatus" @closeModal3="listener4"/>
-                        <button  @click="toggleUpdateOrderStatus" class="flex flex-row font-normal focus:outline-none gap-x-2">
-                          <span class="font-normal text-gray-500 material-icons">
-                            autorenew
-                          </span>
-                          Update Status
-                        </button>
-                        <!---END-->
-
-                      <router-link to="#" class="flex flex-row gap-x-2"> 
-                        <span class="text-gray-500 material-icons">delete</span>Delete</router-link>
-                    </div>
-                    </div>
-                 </h5>
-                    <p class="text-sm font-normal text-gray-400 sm:text-base vs:text-base">
-                      <span>{{ deliveryPostRequest.time }}</span>
-                    </p>
-                  </div>
+                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                </h5>
               </div>
-
-            <!--NO LONGER ACCEPTING REQUESTS TEXT-->
-            <div class="flex items-center w-full pb-1 bg-white px-7">
-              <div class="p-1 px-2 text-sm font-bold bg-gray-200 rounded-full vs:mt-0 text-waterloo vs:text-lg sm:text-lg">
-                <span class="inline-block align-middle material-icons">
-                  check_circle_outline
-                  </span>
-                  <label class="pl-1 align-bottom vvs:text-base">{{ deliveryPostRequest.status }}</label> 
+              <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted1}}</span>
               </div>
             </div>
+          </div>
+          <div class="vs:mt-1">
+            <button @click="edit2=!edit2" class="absolute right-0 focus:outline-none ">
+              <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
+            </button>
+            <div class="flex w-full ">
+            <div v-if="edit2" class="absolute right-0 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl top-16">
+            <EditOrderRequest v-if="editOrderRequest" @closeModal2="listener5"/>
+              <button  @click="toggleEditOrderRequest" class="flex flex-row text-base x-v:text-sm gap-x-2 focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+                mode
+               </span>
+                Edit Post
+              </button>
+             <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
+              <button  @click="togglePostModal2" class="flex flex-row text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:md-16">
+                autorenew
+               </span>
+                Update Status
+              </button>
+              <button class="flex flex-row text-base gap-x-2 x-v:text-sm"> 
+                <span class="text-gray-500 material-icons x-v:md-16">delete</span>Delete</button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!--end-->
 
-            <!--DETAILS-->
-            <div class="flex flex-col w-full p-3 bg-white vs:leading-loose font-nunito px-7 gap-y-4 sm:font-semibold">
-              <div class="flex flex-wrap w-full overflow-hidden lg:relative">
-                <!--AREA-->
-                <div class="w-2/4 overflow-hidden vs:w-full sm:w-full">
-                 <span class="text-red-700 material-icons ">
-                    watch_later  
-                  </span>
-                  <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-base sm:pl-3 sm:text-base">{{ deliveryPostRequest.schedule }}</label>
-                </div>
-                
-                <!--SHOPPING LOCATION-->
-                <div class="w-1/2 pl-3 overflow-hidden vs:pl-0 sm:pl-0 sm:w-full vs:w-full">
-                  <span class="text-red-700 material-icons vs:pl-0 sm:pl-0">
-                    shopping_cart
-                    </span>
-                    <label class="inline-flex pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-base sm:pl-3 sm:text-base">{{ deliveryPostRequest.shoppingPlace }}</label>
-                </div>
-              
-                <!--TIME-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full">
-                   <span class="items-center text-red-700 lg:absolute lg:left-0 material-icons">
-                    delivery_dining
-                  </span>
-                  <label class="inline-flex pt-1 pl-1 text-sm font-normal text-gray-800 align-top lg:pl-7 vs:pl-3 vs:text-base sm:pl-3 sm:text-base sm:font-semibold"> Delivering to {{ deliveryPostRequest.deliveryPlace }}</label> 
-                  
-                </div>
-              
-              
-                <!--MODE OF PAYMENT-->
-                <div class="w-1/2 overflow-hidden vs:w-full sm:w-full">
-                  <span class="pl-3 text-red-700 vs:pl-0 sm:pl-0 material-icons">
-                    payments
-                    </span>
-                    <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top vs:pl-3 vs:text-base sm:pl-3 sm:text-base">{{ deliveryPostRequest.paymentMethod }}</label>
-                </div>
-              </div>
+        <!--section 2-->
+        <div class="inline-flex items-center justify-start px-2 py-1 mt-4 space-x-2 bg-gray-100 rounded-full">
+          <span class="text-red-600 rounded-full material-icons">
+              remove_circle_outline
+              </span>
+          <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
+              {{delivery_info1.status}}</p>
+        </div>
+        <!--end-->
+
+        <!--section 3-->
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
+          <div class="flex-col items-start w-full">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              delivery_dining  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.delivery_area}}</p>
             </div>
-            
-            <div class="flex items-center w-full gap-y-4 font-nunito">
-              <div class="w-full px-5 py-2 font-medium bg-white vs:pr-8 vvs:mr-0">
-                <div class="flex flex-wrap w-full p-2 overflow-hidden bg-gray-200 rounded-lg">
-                
-                  <div class="w-2/4 overflow-hidden vs:w-full sm:w-full ">
-                    <h2 class="pb-2 text-base vs:text-lg vs:font-bold sm:text-lg sm:font-bold">
-                      Shopping List
-                      <label class="pl-3 text-gray-500">8 items</label>
-                      </h2>
-                    <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-base vs:leading-relaxed vs:font-semibold sm:text-base sm:leading-relaxed sm:font-semibold">
-                      <li v-for="shopListRequest1 in shopListRequest1" :key="shopListRequest1.items" >{{ shopListRequest1.items }}</li>
-                    </ul>
-                  </div>
-                  <div class="w-2/4 overflow-hidden vs:w-full">
-                    <ul id="shop-list" class="pl-5 text-sm leading-loose list-disc list-inside pt-7 vs:leading-relaxed vs:text-base vs:font-semibold vs:pl-3 vs:pt-0 sm:text-base sm:leading-relaxed sm:font-semibold sm:pt-0 sm:pl-3">
-                      <li v-for="shopListRequest2 in shopListRequest2" :key="shopListRequest2.items" >
-                      {{ shopListRequest2.items }}</li>
-                    </ul>
-                  </div>
-              </div>
-              <p class="px-5 py-5 text-sm font-medium leading-loose vs:font-medium vs:text-base sm:font-semibold sm:text-base vvs:px-0">
-                {{ deliveryPostRequest.comment }}
+            <div class="flex py-2 space-x-2 ">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              alarm  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.schedule}}</p>
+            </div>
+          </div>
+          <div class="flex-col w-full ">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              shopping_cart  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.shopping_place}}</p>
+            </div>
+            <div class="flex py-2 space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              payments  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.payment_method}}</p>
+            </div>
+          </div>
+        </div>
+        <!--end-->
+
+        <!--section 4-->
+        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
+          <div class="flex-col items-start w-full">
+          <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
+            <label class="pl-3 text-gray-500">8 items</label>
+          </span>
+          <div class="flex-col">
+            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
+              <li v-for="shopListRequest1 in shopListRequest1" :key="shopListRequest1.items" >{{ shopListRequest1.items }}</li>
+            </ul>
+          </div>
+          </div>
+          <div class="flex-col items-start w-full xl:pt-6 2xl:pt-6 lg:pt-6">
+          <div class="flex-col">
+            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
+              <li v-for="shopListRequest2 in shopListRequest2" :key="shopListRequest2.items" >{{ shopListRequest2.items }}</li>
+            </ul>
+          </div>
+        </div>
+        </div>
+
+        <p class="px-5 py-5 text-sm font-medium leading-loose vs:font-medium ssm:pb-0 vs:text-xs sm:font-semibold sm:text-xs vvs:px-0">
+                {{ delivery_info1.comment }}
               </p>
               <hr>
+        <!--section 4-->
+
+        <!--section 5-->
+        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
+          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
+            send
+            </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
+          </button>
+          <router-link to="/messages">
+          <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
+           forum
+           </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Chat</p>
+          </button>
+          </router-link>
+          <div>
+          <button @click="share2=!share2" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
+           share
+           </span>
+            <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
+          </button>
+          <div class="flex w-full">
+            <div v-if="share2" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-0 h-min w-30">
+              <button class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+                share
+               </span>
+                Share on Feed
+              </button>
+              <button class="flex flex-row py-2 text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:md-16 x-v:inline-block x-v:align-top">
+                link
+               </span>
+                Copy link to this post
+              </button>
               </div>
-            </div>
-
-             <!--SEND, CHAT, SHARE-->
-          <div class="flex justify-center w-full py-4 tracking-wide bg-white rounded-b-lg shadow-md vs:rounded-none sm:rounded-none md:rounded-none vvs:justify-around">
-            
-            <!--SEND A REQUEST/OFFER-->
-            <div class="font-extrabold focus:text-gray-600">
-              <span class="pr-2 material-icons-round md-24 ">
-                send
-                </span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
-            </div>
-
-            <!--CHAT-->
-            <div class="font-bold focus:text-gray-600 text-balticsea">
-              <span class="pl-24 pr-2 md:pl-36 vs:pl-12 vvs:pl-0 material-icons-round md-24">
-              forum
-              </span>
-              <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block">Chat</router-link>
-            </div>
-
-            <!--SHARE-->
-            <div class="font-bold focus:text-gray-600">
-              <span class="pl-24 pr-2 md:pl-36 vs:pl-16 vvs:pl-0 vvs:pr-0 material-icons-round md-24">
-                  share
-              </span>
-              <button @click="share2=!share2" class="font-bold align-top cursor-pointer mmd:text-base focus:outline-none ">Share</button>
-                <div class="w-full">
-                    <div v-if="share2" class="absolute right-0 py-2 pt-2 pl-2 pr-4 bg-white rounded-lg shadow-xl h-min w-30 ">
-                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2">
-                        <span class="text-gray-500 material-icons">mode</span>Share on feed</router-link>
-                      <router-link to="#" class="flex flex-row mt-1 mb-1 ml-1 mr-1 gap-x-2"> 
-                        <span class="text-gray-500 material-icons">link</span>Copy link to the Post</router-link>
-                    </div>
-                </div>
-            </div>
+              </div>
           </div>
-          </div>
-
+        </div>
+        <!--end-->
+      </div>
+    </div>
   </div>
+   </div>
+   </div>
+        </div>
 
- 
-          
-
-
-        
-        <!----------------------------START OF SHOPPING LISTS--------------------->
-        <div class="w-2/5 pt-12 overflow-hidden pl-7 vs:hidden ssm:hidden md:hidden sm:hidden">
+   <!----------------------------START OF SHOPPING LISTS--------------------->
+        <div class="w-2/5 pt-20 overflow-hidden llg:w-35 pl-7 vs:hidden ssm:hidden md:hidden sm:hidden xsm:hidden">
           <!-----------ACTIVE ORDERS---------------------->
             <div class="mb-3 bg-white shadow-md w-72 rounded-2xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
@@ -451,7 +450,7 @@
                 </label>
               </div>
 
-              <div class="relative z-0 flex items-center w-65  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
+              <div class="relative z-0 flex items-center w-220  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
@@ -489,7 +488,7 @@
             <!-----------END OF ACTIVE ORDERS---------------->
           
             <!-----------ACTIVE DELIVERIES---------------------->
-            <div class="z-0 mb-3 bg-white w-72 rounded-xl vs:hidden">
+            <div class="z-0 mb-3 bg-white w-72 rounded-xl vs:hidden xsm:hidden ssm:hidden">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE DELIVERIES
                   <span class="inline-flex pl-16 pr-3 align-bottom material-icons-round md-18">
@@ -517,7 +516,7 @@
                 </label>
               </div>
 
-              <div class="relative flex items-center w-65  z-0  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
+              <div class="relative flex items-center w-220  z-0  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
               </button>
@@ -559,7 +558,7 @@
             <!-----------END OF ACTIVE DELIVERIES---------------->
           
 
-          <div class="flex flex-wrap float-left font-nunito md:block vs:hidden">
+          <div class="flex flex-wrap float-left font-nunito md:block vs:hidden xsm:hidden ssm:hidden">
             <div class="mb-3 bg-white w-72 rounded-xl">
                <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 SHOPPING LIST
@@ -594,71 +593,36 @@
                   </div>
                   </div>
                 </div>
-          
-              <!--ends-->
-
-            
-            </div>
-            </div>
+        </div>
+</div>
 </template>
-
-<style>
- #journal-scroll::-webkit-scrollbar {
-        width: 5px;
-        cursor: pointer;
-      }
-  
-    #journal-scroll::-webkit-scrollbar-track {
-        background-color: rgba(229, 231, 235, var(--bg-opacity));
-        cursor: pointer;
-    }
-  
-    #journal-scroll::-webkit-scrollbar-thumb {
-        cursor: pointer;
-        background-color: rgba(185, 28, 28)
-    
-    }
-#iCheck{
-  font-size:16px;
-  color:rgb(22, 22, 141);
-}
-#iMessage{
-  font-size:24px;
-  color:rgb(22, 22, 141);
-}
-img{ 
-  max-width: 100px;
-  width:11%;
- 
-}
-</style>
 
 <script>
 import Navbar from './Navbar'
+import EditShoppingOfferPostVue from './EditShoppingOffer.vue'
 import PostModal from "./PostModal"
+import UpdateOfferStatus from './updateOfferStatus'
+import SendRequest from "./sendRequest"
 import editShopListModal from "./editShopListModal"
 import api from '../api'
 import ShoppingList from "./ShoppingList"
-import EditShoppingOffer from "./EditShoppingOffer"
-import EditOrderRequest from "./EditOrderRequest"
-import UpdateOrderStatus from "./updateOrderStatus"
 import createShopList from "./createShopList"
-import updateOfferStatus from "./updateOfferStatus"
-import sendRequest from "./sendRequest"
+import EditOrderRequest from "./EditOrderRequest"
 
 export default {
-el:'#shop-list',
-    data() {
+    el:'#shop-list',
+  data() {
     return {
       postModalVisible: false,
-      edit1:false,
-      edit2:false,
-      show:false,
-      share1:false,
-      share2:false,
-      NewList:false,
+      postModalVisible1: false,
+      postModalVisible2: false,
+      postSendModal: false,
+      postChatModal: false,
       editVisible: false,
-      editVisible1: false,
+      edit1: false,
+      edit2: false,
+      share1: false,
+      share2: false,
       filter: false,
       filter2: false,
       isOpen:false,
@@ -677,40 +641,40 @@ el:'#shop-list',
 
       filterPost:{
         filterAddress: "Bonot, Legazpi City"
+    createShopList:false,
+    editOrderRequest:false,
+
+      datePosted: '3 hours ago',
+      datePosted1: '13 hours ago',
+      postStatus: 'posted',
+      user_info:{
+        firstname: 'Yami',
+        lastname: 'Yami'
       },
-
-      deliveryPostOffer:{
-              firstname:'Sarah',
-              lastname:'Panadero',
-              time: '14 hours ago',
-              address: 'Banquerohan, Legazpi',
-              comment: "Hi! I'll be going to SM City Legazpi tommorow. If there's anyone who wants to pasabuy their groceries, I am willing to help out. Just send me a request. PS. WHOLO ON APRIL",
-              status: "No longer Accepting Requests",
-              deliveryPlace: "Banquerohan area only",
-              shoppingPlace: "Shopping at SM City Legazpi",
-              paymentMethod: "Payment first",
-              schedule: "Tomorrow at 2 PM",
-              transportation: "Public Transit",
-              limitation: "Up to 3 medium or 2 large bags",
-              
-
-          },
-
-          deliveryPostRequest:{
-              firstname:'Jane',
-              lastname:'Doe',
-              time: '11 hours ago',
-              address: 'Banquerohan, Legazpi',
-              comment: "Hi! If there's anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!",
-              status: "Accepting Offers",
-              deliveryPlace: "Banquerohan, Legazpi",
-              shoppingPlace: "SM Legazpi",
-              paymentMethod: "GCash",
-              schedule: "Tomorrow at 5 PM",
-              
-
-          },
-
+      delivery_info:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: 'Let me Know',
+        status: 'No Longer Accepting Requests'
+      },
+      user_info1:{
+        firstname: 'Jane',
+        lastname: 'Doe'
+      },
+      delivery_info1:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: "Hi! If there's anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!",
+        status: 'No Longer Accepting Requests'
+      },
       activeDeliveries:{
         transNo: '61913174',
         address: 'Ligao',
@@ -755,25 +719,49 @@ el:'#shop-list',
 
     }
   },
-  
   components: {
     Navbar,
     PostModal,
-    editShopListModal,
-    ShoppingList,
-    EditShoppingOffer,
-    EditOrderRequest,
-    UpdateOrderStatus,
+    EditShoppingOfferPostVue,
+    UpdateOfferStatus,
+    SendRequest,
     createShopList,
-    updateOfferStatus,
-    sendRequest,
+    ShoppingList,
+    editShopListModal,
+    EditOrderRequest,
+    
   },
   methods:{
     togglePostModal(){
       this.postModalVisible = !this.postModalVisible
     },
+    togglePostModal1(){
+      this.postModalVisible1 = !this.postModalVisible1
+      
+    },
+    togglePostModal2(){
+      this.postModalVisible2 = !this.postModalVisible2
+      
+    },
+    toggleSendModal(){
+      this.postSendModal = !this.postSendModal
+      
+    },
+    toggleChatModal(){
+      this.postChatModal = !this.postChatModal
+      
+    },
     listener(){
       this.postModalVisible = false;
+    },
+    listener1(){
+      this.postModalVisible1 = false;
+    },
+    listener2(){
+      this.postModalVisible2 = false;
+    },
+    listener3(){
+      this.postSendModal = false;
     },
     toggleeditShopList(){
       this.editVisible = !this.editVisible 
@@ -781,54 +769,19 @@ el:'#shop-list',
     editlistener(){
       this.editVisible = false;
     },
-    toggleeditShopList1(){
-      this.editVisible1 = !this.editVisible 
-    },
-    editlistener1(){
-      this.editVisible1 = false;
-    },
-    toggleList(){
-      this.list = !this.list
-    },
-    listlistener(){
-      this.list = false;
-  },
-    toggleEditShoppingOffer(){
-      this.editShoppingOffer = !this.editShoppingOffer 
-    },
-    listener3(){
-      this.editShoppingOffer = false;
-    },
-    toggleUpdateOrderStatus(){
-      this.updateOrderStatus = !this.updateOrderStatus
-    },
-    listener4(){
-      this.updateOrderStatus = false;
-    },
-    toggleEditOrderRequest(){
-      this.editOrderRequest = !this.editOrderRequest
-    },
-    listener5(){
-      this.editOrderRequest = false;
-    },
     togglecreateShopList(){
       this.createShopList = !this.createShopList
     },
     listener6(){
       this.createShopList = false;
     },
-    toggleupdateOfferStatus(){
-      this.updateOfferStatus = !this.updateOfferStatus
+     toggleEditOrderRequest(){
+      this.editOrderRequest = !this.editOrderRequest
     },
-    listener7(){
-      this.updateOfferStatus = false;
+    listener5(){
+      this.editOrderRequest = false;
     },
-    togglesendRequest(){
-      this.sendrequest = !this.sendrequest
-    },
-    listener8(){
-      this.sendrequest = false;
-    },
+<<<<<<< HEAD
   },
     mounted(){
     api.get('/api/user').then((res)=>{
@@ -839,5 +792,9 @@ el:'#shop-list',
   }
  
    
+=======
+  }
+  
+>>>>>>> 595e6381c6067b396abc5eb2f4ae84ecfc201c3d
 }
 </script>

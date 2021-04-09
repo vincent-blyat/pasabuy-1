@@ -24,15 +24,9 @@
                     ">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
-        <span class="flex justify-between">
-        <p v-if="show" id="name">{{personal.firstname + ' ' + personal.lastname}}</p>
-        <input type="text" v-if="hidden" 
-        id="input_fname" v-model="personal.firstname" 
-        class="ring-2 ring-gray-400 font-bold w-full">
-        <input type="text" v-if="hidden" 
-        id="input_lname" v-model="personal.lastname" 
-        class="ring-2 ring-gray-400 font-bold w-full">
-        </span>
+        <span>
+        <p >{{personal.name}} {{personal.midname}} {{personal.lastname}}</p>
+       </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2 ">
         <p class="text-gray-500">PHONE NUMBER</p>
@@ -110,7 +104,7 @@
             </div>
             <div class="flex justify-end mt-4 space-x-4">
               <button @click="toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
-              <button @click="toggle=false" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
+              <button @click="submit" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
               
             </div>
           </div>
@@ -122,8 +116,8 @@
   
 </template>
 <script>
-import Profile from './ProfileEdit.vue'
 import api from '../api'
+import Profile from './ProfileEdit.vue'
 export default {
   
   name:'personal',
@@ -140,7 +134,7 @@ data(){
     show2:true,
     edit2:false,
     message:'yeah',
-    personal:  {
+     personal:  {
       firstname:'',
       lastname:'',
       phone_number:'',
@@ -152,6 +146,7 @@ data(){
     }
   
 },
+
 methods:{
 
     submit () {

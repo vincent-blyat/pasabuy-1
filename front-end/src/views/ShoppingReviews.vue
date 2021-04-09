@@ -252,7 +252,6 @@ export default {
         user2: 'Julius Novachrono',
         user3: 'Baha-haha-haha'
       },
-
     }
   }
 }
