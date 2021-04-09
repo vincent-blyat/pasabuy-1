@@ -1,6 +1,8 @@
 <template class="font-nunito">
     <div class="absolute vs:left-5 left-12 top-3 ">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
+        <router-link to="/">
+            <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
+        </router-link>
         <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
             pasaBUY
         </label>

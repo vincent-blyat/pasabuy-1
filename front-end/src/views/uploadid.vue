@@ -1,7 +1,9 @@
 <template class="bg-gray-00 font-nunito">
 
   <div class="flex items-center ">
+      <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+      </router-link>
         <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
           text-red-buttons block
           
@@ -82,7 +84,7 @@
             <div class="flex justify-between mt-4 items-center">
                <router-link to="/address-book"> <span class="font-bold">Back</span></router-link>
                 <div class=" space-x-4">
-                  <router-link to="">  <span class="font-bold">Skip for now</span></router-link>
+                  <router-link to="/dashboard">  <span class="font-bold">Skip for now</span></router-link>
                    <router-link to="/verification-message"> <button class="h-10 m-2 text-white transition-colors duration-150
                     bg-red-buttons px-7 rounded-3xl focus:outline-none ">Next</button></router-link>
                 </div>
