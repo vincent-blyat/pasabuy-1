@@ -19,5 +19,20 @@ class messageRoom extends Model
         // return $this->hasManyThrough(Messages::class,userInformation::class,'messageRoomNumber', 'messageSender', 'messageRoomNumber','email');
         return $this->hasMany(Messages::class, 'messageRoomNumber', 'messageRoomNumber');
     }
+
+    public function getEmail1()
+    {
+        # code...
+        // return $this->hasManyThrough(Messages::class,userInformation::class,'messageRoomNumber', 'messageSender', 'messageRoomNumber','email');
+        return $this->hasOne(userInformation::class, 'email', 'email1');
+    }
+
+    public function getEmail2()
+    {
+        # code...
+        // return $this->hasManyThrough(Messages::class,userInformation::class,'messageRoomNumber', 'messageSender', 'messageRoomNumber','email');
+        return $this->hasOne(userInformation::class, 'email', 'email2');
+    }
+    
     
 }

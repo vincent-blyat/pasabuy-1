@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\NewChatMessage;
 use App\Models\messageRoom;
 use App\Models\userInformation;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class messageController extends Controller
@@ -16,7 +17,7 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $chatrooms = messageRoom::with('getMessages', 'getMessages.getMessageSender')->get();
+        $chatrooms = messageRoom::with('getMessages', 'getEmail1','getEmail2', 'getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
         return $chatrooms;
     }
 
@@ -35,7 +36,12 @@ class messageController extends Controller
         $newMessage->messageSender = Auth::user()->email;
         $newMessage->messageText =$request->message;
         $newMessage->messageNumber = $messageCount.'-Message';
-        $newMessage->save();
+        if($newMessage->save()){
+            $msgRoom = messageRoom::find($request->roomID);
+            $msgRoom = messageRoom::where('messageRoomNumber',$request->roomID)->first();
+            $msgRoom->dateModified = Carbon::now();
+            $msgRoom->save();
+        }
         
         broadcast(new NewChatMessage($newMessage))->toOthers();
     }

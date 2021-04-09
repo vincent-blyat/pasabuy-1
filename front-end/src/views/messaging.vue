@@ -39,7 +39,8 @@
           <button
             v-for="(chatRoom,index) in chatRooms"
             :key="index"
-            @click="setRoom(chatRoom.firstName, chatRoom.messageRoomNumber, chatRoom.email)"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
             type="button"
             class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -51,20 +52,34 @@
               />
               <div class="flex flex-col justify-between items-start ml-2">
                 <span class="font-medium text-sm" id="mark">
-                  {{ chatRoom.firstName }}
+                  {{ chatRoomNames[index]}}
                   <span class="material-icons pl-2" id="iCheck">
                     check_circle
                   </span>
                 </span>
                 <span class="text-xs text-gray-400 truncate w-36">
-                  {{ }}: <strong>{{ }}</strong>
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
                 </span>
               </div>
             </div>
             <div class="flex flex-col items-start">
               <span class="text-gray-700 text-xs">
-                <span class="font-bold pl-1 pr-1">·</span
-                >{{ timestamp(chatRoom.dateCreated) }}</span
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
               >
             </div>
           </button>
@@ -114,18 +129,39 @@
           </div>
 
       <div class="p-1 pl-2"
-            v-for="(msg, index) in chat"
+            v-for="(chat, index) in chatRooms"
             :key="index"
             >
-             <div v-bind:class="{ 'flex justify-end pr-10 mt-1' : out[index], 'flex items-end pr-10 mt-1': incoming[index] }">
-              <div v-bind:class="{'ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg': out[index], 'ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ': incoming[index] }">
+      <div v-if="chat.messageRoomNumber===activeRoom">
+      <div class="p-1 pl-2"
+            v-for="(msg, index) in chat.get_messages"
+            :key="index"
+            >
+            <div v-if="msg.messageSender === authUser">
+             <div class="flex justify-end pr-10 mt-1">
+              <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
                 <p>{{ msg.messageText }}</p>
+               
                 <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
-                  {{ timestamp(msg.dateCreated) }}
+                  {{ timestamp(msg.dateCreated) }}  
                 </span>
               </div>
             </div>
-        </div>
+            </div>
+             <div v-else>
+             <div class="flex items-end pr-10 mt-1">
+              <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
+                <p>{{ msg.messageText }}</p>
+               
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ timestamp(msg.dateCreated) }}  
+                </span>
+              </div>
+            </div>
+            </div>
+      </div>
+      </div>
+      </div>
 <!-- ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg -->
 
 
@@ -747,6 +783,7 @@ export default {
       toggleInbox: true,
       toggleChat: false,
       chatRooms: [],
+      chatRoomNames:[],
       //inbox
       inbox: [],
       //chat
@@ -783,11 +820,9 @@ export default {
 
   watch:{
     activeRoom(val,oldval){
-      if(oldval){
-        console.log(oldval,'<-oldval val->', val)
+      if(oldval){      
         this.disconnect(oldval)
       }
-      console.log('watching...')
       this.connect()
     }
   },
@@ -795,30 +830,26 @@ export default {
   methods: {
 
     connect(){
-      console.log('this will connect to roomID ',this.activeRoom)
+      console.log("connect")
       if(this.activeRoom !=null){
         let vm =this;
-        vm.getMessages();
+        vm.getChatRooms();
         window.Echo.private("chat."+this.activeRoom).listen('.message.new',()=>{
           console.log('listening...')
-          vm.getMessages();
           vm.getChatRooms();
         })
       }
     },
     disconnect(oldval){
-      console.log('this will discconeccet to', oldval)
       window.Echo.leave('chat.'+oldval)
     },
 
     sendbtn() {
       if (this.message != "") {
         var dataMessage = {roomID:this.activeRoom, message: this.message}
-        console.log(dataMessage)
         api.get('/sanctum/csrf-cookie').then(() => {
           api.post('/api/sendMessage', dataMessage).then((res)=>{
             console.log('success, message sent.  ', res.data)
-            this.getMessages();
             this.getChatRooms();
             // var printnow =
             // '<div class="flex justify-end pr-10 mt-1">' +
@@ -829,7 +860,6 @@ export default {
             // this.timestamp +
             // "</span>" +
             // "</div> ";
-            console.log('send')
             // printtext.insertAdjacentHTML("beforeend", printnow);
             this.message = "";
             var box = document.getElementById("journal-scroll");
@@ -842,35 +872,35 @@ export default {
     }, //end sendbtn
 
     setRoom(name,room_ID) {
-      this.chat=[];
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
       this.activeRoom = room_ID;
       this.recipient = name;
+      console.log('setroom')
     },
-    getMessages(){
-      if(this.activeRoom!=null){
-        console.log('active room number: ',this.activeRoom);
-        api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
-          var i;
-          for(i=0;i<response.data.length;i++){
-            if(response.data[i].messageSender == this.authUser){
-              this.chat[i] = response.data[i];
-              this.out[i]= true;
-              this.incoming[i]= false;
-            }
-            else{
-              this.chat[i] = response.data[i];
-              this.out[i]= false;
-              this.incoming[i]= true;
-            }
-          }
-        })
-      }else{
-        console.log('not found')
-      }
-    },
+    // getMessages(){
+    //   if(this.activeRoom!=null){
+    //     console.log('active room number: ',this.activeRoom);
+    //     api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
+    //       var i;
+    //       for(i=0;i<response.data.length;i++){
+    //         if(response.data[i].messageSender == this.authUser){
+    //           this.chat[i] = response.data[i];
+    //           this.out[i]= true;
+    //           this.incoming[i]= false;
+    //         }
+    //         else{
+    //           this.chat[i] = response.data[i];
+    //           this.out[i]= false;
+    //           this.incoming[i]= true;
+    //         }
+    //       }
+    //     })
+    //   }else{
+    //     console.log('not found')
+    //   }
+    // },
 
     backChat() {
       this.toggleInbox = !this.toggleInbox;
@@ -885,24 +915,43 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
-            console.log("chatrooms : ",res.data)
-            // var i;
+            this.chatRooms = res.data;
+            console.log(this.chatRooms)
+            var i;
             // var j;
-            // for (i = 0,j=0; i < res.data.length; i++) {   
-            //   if (res.data[i].email.localeCompare(this.authUser)) {
-            //       this.chatRooms[j] = res.data[i];
-            //       j++;
-            //   }
-            // }
-            // console.log(this.chatRooms)
-            // if(this.activeRoom==null){
-            //   this.setRoom(this.chatRooms[0].firstName, this.chatRooms[0].messageRoomNumber)
-            // }
+            //var x=0;
+            for(i=0; i<this.chatRooms.length; i++){
+              if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
+                this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName
+              }
+              else{
+                this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName 
+              }
+            
+              // for(j=0; j<this.chatRooms[i].get_messages.length; j++){
+              //   if(this.chatRooms[i].get_messages[j].messageSender == this.authUser){
+              //     this.chat[j]=this.chatRooms[i];
+              //     this.out[j]= true;
+              //     this.incoming[j]= false;
+              //   }
+              //   else{
+              //     this.chat[j]=this.chatRooms[i]
+              //     this.out[j]= false;
+              //     this.incoming[j]= true;
+              //   }
+              // //  x++;
+              // }
+            }
+           console.log('chat-lenght=', this.chat.length)
+            if(this.activeRoom==null){
+              this.setRoom(this.chatRoomNames[0], 
+              this.chatRooms[0]
+              .messageRoomNumber)
+            }
         });
     },
     getAuthUser(){
       api.get('api/user').then((res)=>{
-        console.log('auth',res.data.email)
         this.authUser = res.data.email;
       })
     },
@@ -915,8 +964,7 @@ export default {
   created() {
     this.getAuthUser();
     this.getChatRooms();
-  }
-
+  },
 
 }; //end export default
 
