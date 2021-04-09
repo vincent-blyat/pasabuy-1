@@ -74,7 +74,7 @@
         </div>
 
       </div>
-        <div v-if="show" class="fixed overflow-y-auto top-20 h-full right-60 pt-2  bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
+        <div v-if="show" class="fixed hidden xl:block lg:block  2xl:block overflow-y-auto top-20 h-full right-60 pt-2  bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
                <h1 class="mt-4 mb-4 ml-4 text-black font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
               <div>
                   <Notification/>
