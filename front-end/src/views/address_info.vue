@@ -61,9 +61,27 @@
           <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
               <div class="grid grid-cols-2 gap-y-4">
                 <span>House Number:</span> <input   type="number" v-model="address_info.house_number"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Province:</span> <input type="text" v-model="address_info.province"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>City/Municaplity: </span> <input v-model="address_info.city" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Barangay: </span> <input v-model="address_info.barangay" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 
+                 
+                <span>Province:</span> 
+                <select  id="Province" @change="getProvCode()" v-model="selectedProvince" class=" pl-2 bg-transparent border-2 border-gray-400">
+                  <option value="Province" disabled>Choose Province</option>
+                  <option v-for="province in refProvince" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
+                </select>
+                
+                
+                <span>City/Municaplity: </span>
+                <select id="City"  @change="getCityCode()" v-model="selectedCity" class=" pl-2 bg-transparent border-2 border-gray-400">
+                  <option value="City" disabled>Choose City/Municipality</option>
+                  <option v-for="city in refCity" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
+                </select>
+                
+                
+                <span>Barangay: </span>
+                <select  v-model="selectedBrgy" class=" pl-2 bg-transparent border-2 border-gray-400">
+                  <option value="Brgy" disabled>Choose Baranggay</option>
+                  <option v-for="brgy in refBaranggay" v-bind:key="brgy.id" v-bind:value="brgy.brgyDesc"> {{ brgy.brgyDesc }} </option>
+                </select>
                 
               </div>
             <div class="flex justify-end mt-4 space-x-4">
@@ -90,6 +108,9 @@ data(){
     show:true,
     show2:true,
     edit2:false,
+    selectedProvince:'Province',
+    selectedCity:'City',
+    selectedBrgy:'Brgy',
     address_info:{
         house_number:'',
         province:'',
@@ -102,15 +123,21 @@ data(){
         city:'',
         barangay:''
     },
+    refProvince:[],
+    refCity:[],
+    newrefCity:[],
+    refBaranggay:[],
+    newrefBaranggay:[],
     }
 
 },
 methods:{
 
     submit () {
-      console.log(this.address_info)
-        api.post('/api/editAddress', this.address_info).then((res)=>{
-        console.log(res.data);
+      this.address_info.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
+      this.address_info.city = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
+      this.address_info.barangay = this.selectedBrgy;
+      api.post('/api/editAddress', this.address_info).then((res)=>{
       //this.user = res.data;
         }).catch((errors) => {
             console.log(errors)
@@ -128,21 +155,58 @@ methods:{
         this.address_info.province= this.old.province
         this.address_info.city= this.old.city
         this.address_info.barangay=this.old.barangay
-    }
+    },
+    getProvCode() {
+      var newCityMun = this.newrefCity;
+      this.refCity = [];
+      var getProvCode = document.getElementById("Province").value;
+      for (var i = 0; i < newCityMun.length; i++) {
+        if (newCityMun[i].provCode === getProvCode) {
+          this.refCity.splice(i, 1, newCityMun[i]);
+        }
+      }
+    },
+    getCityCode() {
+      var newBrgy = this.newrefBaranggay;
+      this.refBaranggay = [];
+      var getCityCode = document.getElementById("City").value;
+      for (var i = 0; i < newBrgy.length; i++) {
+        if (newBrgy[i].citymunCode === getCityCode) {
+          this.refBaranggay.splice(i, 1, newBrgy[i]);
+        }
+      }
+    },
 
 },
 mounted(){
     //get the user information from the laravel API
     api.get('/api/getAddress').then((res)=>{
-      console.log('address info ',res.data);
       this.address_info.house_number = res.data.houseNumber;
       this.address_info.province = res.data.province;
       this.address_info.city = res.data.cityMunicipality;
       this.address_info.barangay = res.data.barangay;
       //this.user = res.data;
     }).catch((error) => {
-      this.error=error.response.data.errors;
+      console.log(error);
     })
+    api.get("/api/refProvince").then((res) => {
+        this.refProvince = res.data;
+    }).catch((error) => {
+      console.log(error);
+    })
+   
+    api.get("/api/refcityMunicipality").then((res) => {
+        this.newrefCity = res.data;
+    }).catch((error) => {
+      console.log(error);
+    })
+
+    api.get("/api/refBrgy").then((res) => {
+        this.newrefBaranggay = res.data;
+    }).catch((error) => {
+      console.log(error);
+    })
+
   }
 }
 </script>

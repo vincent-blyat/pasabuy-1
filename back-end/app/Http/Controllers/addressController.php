@@ -15,12 +15,7 @@ class addressController extends Controller
         return DB::select('SELECT * FROM refcitymun ORDER BY  citymunDesc');
     }
     function refBrgy(){
-        DB::table('refbrgy')->orderBy('brgyDesc', 'asc')->chunk(100, function ($users) {
-            foreach ($users as $user) {
-                //
-                return $users;
-            }
-        });
+        return DB::select('SELECT * FROM refbrgy ORDER BY brgyDesc');
         
     }
 }
