@@ -4,7 +4,7 @@
             <div class="flex gap-4">
             <p class="font-bold font-nunito text-sm">Address Info</p>
             </div>
-        <div>  <label  id="edt2" @click="toggle=!toggle" class="
+        <div>  <label  id="edt2" @click="setOldData();toggle=!toggle" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label>
                 
         </div>
@@ -60,14 +60,14 @@
             
           <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
               <div class="grid grid-cols-2 gap-y-4">
-                <span>House Number:</span> <input   type="number" :v-model="address_info.house_number"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Province:</span> <input type="text" :v-model="address_info.province"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>City/Municaplity: </span> <input :v-model="address_info.city" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Barangay: </span> <input :v-model="address_info.barangay" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>House Number:</span> <input   type="number" v-model="address_info.house_number"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>Province:</span> <input type="text" v-model="address_info.province"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>City/Municaplity: </span> <input v-model="address_info.city" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>Barangay: </span> <input v-model="address_info.barangay" type="text" class=" pl-2 bg-transparent border-2 border-gray-400"/>
                 
               </div>
             <div class="flex justify-end mt-4 space-x-4">
-              <button @click="toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
+              <button @click="getOldData();toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
               <button @click="submit" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
               
             </div>
@@ -84,6 +84,7 @@ export default {
   
 data(){
     return{
+    toggle:false,
     disabled: 0,
     hidden:false,
     show:true,
@@ -95,30 +96,38 @@ data(){
         city:'',
         barangay:''
     },
+    old:{
+        house_number:'',
+        province:'',
+        city:'',
+        barangay:''
+    },
     }
 
 },
 methods:{
 
     submit () {
+      console.log(this.address_info)
         api.post('/api/editAddress', this.address_info).then((res)=>{
         console.log(res.data);
-
       //this.user = res.data;
-        }).catch(() => {
-            location.reload();
+        }).catch((errors) => {
+            console.log(errors)
         })
+        this.toggle=false;
     },
-     Edit(pars) {
-      let x=document.getElementById(pars).innerHTML;
-      if(x=='Edit'){
-          document.getElementById(pars).innerHTML="Save";
-          
-      }
-      else{
-         document.getElementById(pars).innerHTML="Edit"; 
-         this.submit();
-      }
+    setOldData(){
+        this.old.house_number=this.address_info.house_number
+        this.old.province= this.address_info.province
+        this.old.city= this.address_info.city
+        this.old.barangay=this.address_info.barangay
+    },
+    getOldData(){
+        this.address_info.house_number=this.old.house_number
+        this.address_info.province= this.old.province
+        this.address_info.city= this.old.city
+        this.address_info.barangay=this.old.barangay
     }
 
 },

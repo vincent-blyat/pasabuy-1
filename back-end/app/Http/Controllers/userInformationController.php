@@ -111,10 +111,13 @@ class userInformationController extends Controller
              'city' => ['required'],
              'barangay' => ['required']
         ]);
-        
         //updating userinfo table
         $userEmail = Auth::User()->email;
         $user = userAddress::where('email',$userEmail)->first();
+        if($user==null){
+            $user = new userAddress();
+            $user->email = $userEmail;
+        }
         $user->houseNumber = $request->house_number;
         $user->province = $request->province;
         $user->cityMunicipality = $request->city;
