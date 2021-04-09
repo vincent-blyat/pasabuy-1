@@ -638,12 +638,7 @@ export default {
       createShopList:false,
       updateOfferStatus:false,
       sendrequest:false,
-
-      filterPost:{
-        filterAddress: "Bonot, Legazpi City",
-    createShopList:false,
-    editOrderRequest:false,
-
+      filterAddress: "Bonot, Legazpi City",
       datePosted: '3 hours ago',
       datePosted1: '13 hours ago',
       postStatus: 'posted',
@@ -651,6 +646,7 @@ export default {
         firstname: 'Yami',
         lastname: 'Yami'
       },
+
       delivery_info:{
         delivery_area: 'Naga City',
         shopping_place: 'SM City Legazpi',
@@ -716,8 +712,7 @@ export default {
       { items: 'powdered sugar' },
       { items: 'cocoa powder' },
     ],
-    },
-  }
+    }
   },
   components: {
     Navbar,
