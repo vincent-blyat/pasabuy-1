@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Messages;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class userInformationController extends Controller
 {
@@ -165,6 +167,6 @@ class userInformationController extends Controller
             return response()->json('error, information not saved');
         }
     }
-
+  
 
 }
