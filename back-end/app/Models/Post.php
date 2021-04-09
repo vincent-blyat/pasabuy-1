@@ -27,9 +27,9 @@ class Post extends Model
     });
 	}
 
-    public function pasabuy_user() {
-    	$this->belongsTo(PasabuyUser::class, 'email', 'email');
-    }
+    // public function pasabuy_user() {
+    // 	$this->belongsTo(PasabuyUser::class, 'email', 'email');
+    // }
 
     public function offer_post() {
     	return $this->hasOne(OfferPost::class, 'postNumber', 'postNumber');
