@@ -460,7 +460,7 @@
           </div>
 
           <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
-            <div
+            <!-- <div
               class="sticky top-0 flex justify items-center shadow-lg bg-white border"
             >
               <span class="text-sm p-3 w-full">
@@ -482,8 +482,8 @@
                   </button>
                 </div>
               </span>
-            </div>
-            <div class="flex justify-end mt-2">
+            </div> -->
+            <!-- <div class="flex justify-end mt-2">
               <div class="ml-32 bg-gray-100 text-sm rounded-lg">
                 <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
                   <div class="mx-4 mb-2 text-sm font-semibold">
@@ -554,10 +554,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!----------------------------------------->
 
-            <div class="p-1 ml-12">
+            <!-- <div class="p-1 ml-12">
               <div class="flex items-end pr-10 mt-1">
                 <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
                   <div>
@@ -630,9 +630,43 @@
                   </div>
                 </div>
               </div>
+            </div> -->
+
+            
+            <div class="p-1 pl-2"
+                  v-for="(chat, index) in chatRooms"
+                  :key="index"
+                  >
+            <div v-if="chat.messageRoomNumber===activeRoom">
+            <div class="p-1 pl-2"
+                  v-for="(msg, index) in chat.get_messages"
+                  :key="index"
+                  >
+                  <div v-if="msg.messageSender === authUser">
+                  <div class="flex justify-end pr-10 mt-1">
+                    <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
+                      <p>{{ msg.messageText }}</p>
+                    
+                      <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                        {{ timestamp(msg.dateCreated) }}  
+                      </span>
+                    </div>
+                  </div>
+                  </div>
+                  <div v-else>
+                  <div class="flex items-end pr-10 mt-1">
+                    <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
+                      <p>{{ msg.messageText }}</p>
+                    
+                      <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                        {{ timestamp(msg.dateCreated) }}  
+                      </span>
+                    </div>
+                  </div>
+                  </div>
             </div>
-
-
+            </div>
+            </div>
             <div id="chatmsg"></div>
           </div>
           <!--end overflow--->
@@ -674,6 +708,8 @@
               class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full"
               placeholder="Type a message"
               id="typemsg"
+              @keyup.enter="sendbtn"
+              v-model="message"
             />
             <button
               @click="sendbtn"
@@ -727,7 +763,10 @@
           <!---end of search bar-->
           <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
             <button
-              @click="setRoom"
+              v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
               type="button"
               class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -739,22 +778,33 @@
                 />
                 <div class="flex flex-col justify-between items-start ml-2">
                   <span class="font-medium text-sm" id="mark"
-                    >{{ 
-                    }}<span class="material-icons pl-2" id="iCheck">
+                    >{{ chatRoomNames[index] }}<span class="material-icons pl-2" id="iCheck">
                       check_circle
                     </span></span
                   >
                   <span
                     class="text-xs text-gray-400 truncate w-50 s:w-32 md:w-28 xl:w-36 lg:w-36 2xl:w-36"
                   >
-                    {{  }}
+                    {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
                   </span>
                 </div>
               </div>
               <div class="flex flex-col items-start">
                 <span class="text-gray-700 text-xs">
                   <span class="font-bold pl-1 pr-1">·</span
-                  >{{  }}</span
+                  >{{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}</span
                 >
               </div>
             </button>
