@@ -70,7 +70,6 @@
     
     }
    
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);

@@ -10,17 +10,23 @@ module.exports = {
         'xsm':{'min':'0px','max':'259px'}, 
         'ssm':{'min':'260px','max':'319px'},
         'vs': {'min': '320px', 'max': '499px'},
+        'vsv':{'min': '320px','max':'360px'},/////
+        'vsvs':{'min': '360px','max':'445px'},////
+        'x-v': {'min':'0px', 'max': '499px'},/////
         'se': {'min': '320px', 'max': '330px'},
         'vvs':{'min': '320px', 'max': '383px'},
          'lvs': {'min': '401px', 'max': '499px'},
         'sm': {'min': '500px', 'max': '639px'},
-        's-sm':{'min': '544px', 'max': '639px'},
+        's-sm':{'min': '544px', 'max': '639px'},//////
         'md': {'min': '640px', 'max': '1023px'},
          'lg': {'min': '1024px', 'max': '1279px'},
+         'llg':{'min': '1024px', 'max': '1239px'},
          'xl': {'min': '1280px', 'max': '1535px'},
          'xxl': {'min': '1330px', 'max': '1535px'},///////////
          '2xl': {'min': '1536px'},
          '2xxl': {'min': '1586px'},////////////
+         'mv': {'min': '0px', 'max': '1023px'},
+         'dv':{'min': '1024px'},
       },
       colors:{
         bastille: '#1E1825',
@@ -60,7 +66,9 @@ module.exports = {
         28.5: '7.5rem',
         355: '8.9rem',
         50: '12.5rem',
+        58:'14.5rem',
         62: '17rem',
+        63: '17.5rem',
         74:'19rem',
         75: '19rem',
         222: '19.5rem',
@@ -92,6 +100,7 @@ module.exports = {
         99.5:'37rem',
         608: '38rem',
         100:'40rem',
+        105: '40.2rem',
         101:'40.5rem',
         110: '45rem',
         150:'47rem',
@@ -100,7 +109,10 @@ module.exports = {
         //px
         eh: '430px',
         ew: '844px',
-        65: '267px',
+        220: '267px',
+
+        65:'65%',
+        35:'35%',
         
           
       },

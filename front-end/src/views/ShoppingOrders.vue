@@ -238,18 +238,15 @@ export default {
      togglePostModal(){
       this.postModalVisible = !this.postModalVisible
     },
-
     togglePostModal2(){
       this.postModalVisible2 = !this.postModalVisible2
     },
-
     togglePostModal3(){
       this.postModalVisible3 = !this.postModalVisible3
     },
     toggleSendModal(){
       this.postSendModal = !this.postSendModal
     },
-
     listener(){
       this.postModalVisible = false;
     },
