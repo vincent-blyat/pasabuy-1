@@ -54,13 +54,13 @@
           <div class="flex ml-1 xsm:items-center"> <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
             <div class="flex flex-col justify-between items-start ml-2 pt-1 align-middle"> 
               <span class="font-medium text-sm" id="mark">{{ searchProfileResult.firstname }} {{ searchProfileResult.lastname }} <span class="material-icons pl-2 vs:mr-28 md:mr-48 lg:mr-64 lg:pr-2 xl:mr-64" id="iCheck" >verified</span>
-                  <button><span class="xsm:text-s xsm:hidden ssm:hidden vs:hidden top-3 font-semibold rounded-full px-2 pb-1 sm:ml-32 border border-gray-600 hover:text-red-700">Following</span></button>
-                  <button><span class="xsm:text-s xsm:hidden ssm:hidden vs:hidden top-3 font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700">Message</span></button>
+                  <button><span class="xsm:text-xs xsm:hidden ssm:hidden vs:hidden top-3 font-semibold rounded-full px-2 pb-1 sm:ml-32 border border-gray-600 hover:text-red-700">Following</span></button>
+                  <button><span class="xsm:text-xs xsm:hidden ssm:hidden vs:hidden top-3 font-semibold rounded-full px-2 pb-1 ml-3 border border-gray-600 hover:text-red-700">Message</span></button>
              </span> 
               <span class="text-xs text-gray-600"> {{ searchProfileResult.address }}</span>
               <div class="flex flex-row mt-2">
-                <button><span class="xsm:text-s ssm:text-s vs:text-s xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 border border-gray-600 hover:text-red-700">Following</span></button>
-                <button><span class="xsm:text-s ssm:text-s vs:text-s xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 ml-2 border border-gray-600 hover:text-red-700">Message</span></button>
+                <button><span class="xsm:text-xs ssm:text-xs vs:text-xs xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 border border-gray-600 hover:text-red-700">Following</span></button>
+                <button><span class="xsm:text-xs ssm:text-xs vs:text-xs xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 ml-2 border border-gray-600 hover:text-red-700">Message</span></button>
               </div>
 
 
@@ -89,8 +89,8 @@
               <span class="text-xs text-gray-600"> {{ searchProfileResult.address }}</span> 
 
               <div class="flex flex-row mt-2">
-                <button><span class="xsm:text-s ssm:text-s vs:text-s xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 border border-gray-600 hover:text-red-700">Following</span></button>
-                <button><span class="xsm:text-s ssm:text-s vs:text-s xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 ml-2 border border-gray-600 hover:text-red-700">Message</span></button>
+                <button><span class="xsm:text-xs ssm:text-xs vs:text-xs xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 border border-gray-600 hover:text-red-700">Following</span></button>
+                <button><span class="xsm:text-xs ssm:text-xs vs:text-xs xsm:inline ssm:inline vs:inline hidden top-3 font-semibold rounded-full pb-1 px-2 ml-2 border border-gray-600 hover:text-red-700">Message</span></button>
               </div>
 
               </div>
@@ -161,13 +161,13 @@
         
         <div class="flex flex-row xsm:flex-col ssm:flex-col vs:flex-col lvs:flex-col vs:flex-col vs:ml-3 w-full">
           
-          <div class="flex flex-col vs:pl-4 md:pl-12 lg:pl-8 xl:pl-12 2xl:pl-12 xsm:pl-1 ssm:pl-1 vs:pl-1 lvs:pl-1">
+          <div class="flex flex-col vs:pl-4 md:pl-12 lg:pl-8 xl:pl-12 2xl:pl-12 xsm:pl-3 ssm:pl-3 vs:pl-3 lvs:pl-3">
             <div><!--AREA-->
              <div class="w-full overflow-hidden mmd:w-2/4 pb-2">
                 <span class="items-center text-red-700 material-icons">
                   delivery_dining
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs font-normal text-gray-800 align-top">Delivering at {{ searchPostResult.deliveryAddress }}</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Delivering at {{ searchPostResult.deliveryAddress }}</label> 
               </div>
             </div>
 
@@ -177,7 +177,7 @@
                 <span class="text-red-700 material-icons ">
                     watch_later  
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs  text-gray-800 align-top">{{ searchPostResult.schedule }}</label>
+                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">{{ searchPostResult.schedule }}</label>
               </div>
             </div>
 
@@ -186,19 +186,19 @@
                 <span class="text-red-700 material-icons">
                     shopping_bag
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs text-gray-800 align-top">Up to 3 medium or 2 large bags</label>
+                <label class="inline-block pt-1 pl-1 text-sm text-gray-800 align-top">Up to 3 medium or 2 large bags</label>
               </div>
             </div>
           </div>
 
-          <div class="flex flex-col vs:pl-4 pl-16 xsm:pl-1 ssm:pl-1 vs:pl-1 lvs:pl-1">
+          <div class="flex flex-col vs:pl-4 pl-16 xsm:pl-3 ssm:pl-3 vs:pl-3 lvs:pl-3">
               
             <div><!--AREA-->
              <div class="w-full overflow-hidden mmd:w-2/4 pb-2">
                 <span class="items-center text-red-700 material-icons">
                   shopping_cart
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs font-normal text-gray-800 align-top">Shopping at {{ searchPostResult.shoppingAddress }}</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">Shopping at {{ searchPostResult.shoppingAddress }}</label> 
               </div>
             </div>
 
@@ -207,7 +207,7 @@
                 <span class="items-center text-red-700 material-icons">
                   directions_car_filled
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs font-normal text-gray-800 align-top">{{ searchPostResult.transportation }}</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">{{ searchPostResult.transportation }}</label> 
               </div>
             </div>
 
@@ -216,7 +216,7 @@
                 <span class="items-center text-red-700 material-icons">
                   payments
                 </span>
-                <label class="inline-block pt-1 pl-1 text-sm xsm:text-xs ssm:text-xs vs:text-xs lvs:text-xs font-normal text-gray-800 align-top">{{ searchPostResult.paymentMethod }}</label> 
+                <label class="inline-block pt-1 pl-1 text-sm font-normal text-gray-800 align-top">{{ searchPostResult.paymentMethod }}</label> 
               </div>
             </div>
 
@@ -237,19 +237,19 @@
         </div>
       </div>
       <!---------------SEND, MESSAGE, SHARE------------->
-      <div class="flex pb-3 text-sm xsm:text-s bg-transparent rounded-b-lg flex flex-cols bg-white h-10">
-          <div class="flex items-center justify-between xsm:px-2 ssm:px-2 vs:px-2 lvs:px-5 sm:px-8 md:px-16 lg:px-16 xl:px-16 2xl:px-16 py-2 bg-white rounded-b-lg w-full">
+      <div class="flex pb-3 text-sm xsm:text-xs bg-transparent rounded-b-lg flex flex-cols bg-white h-10">
+          <div class="flex items-center justify-between xsm:px-4 ssm:px-2 vs:px-4 lvs:px-5 sm:px-8 md:px-16 lg:px-16 xl:px-16 2xl:px-16 py-2 bg-white rounded-b-lg w-full">
  
             <!--SEND A REQUEST/OFFER-->
             <div class="font-extrabold flex flex-row focus:text-gray-600">
               <span class="pr-2 xsm:text-sm ssm:text-sm vs:text-sm lvs:text-sm material-icons">
                 send</span>
-              <label class="font-bold align-top cursor-pointer">Send Offer</label>
+              <label class="text-sm font-bold align-top cursor-pointer">Send Offer</label>
             </div>
 
             <!--CHAT-->
             <div class="xsm:px-3 flex flex-row font-bold focus:text-gray-600 text-balticsea">
-              <span class="lvs:pl-2 xsm:text-sm ssm:text-sm vs:text-sm lvs:text-sm xsm:pl-2  pr-2 material-icons">
+              <span class="lvs:pl-2 xsm:text-sm ssm:text-sm vs:text-sm lvs:text-sm xsm:pl-1  pr-2 material-icons">
               forum
               </span>
               <router-link to="/messages" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"> <span class="">Chat</span> </router-link>
@@ -257,7 +257,7 @@
 
             <!--SHARE-->
             <div class="font-bold flex flex-row focus:text-gray-600">
-              <span class="lvs:pl-2 xsm:pl-2 pr-2 material-icons xsm:text-sm ssm:text-sm vs:text-sm lvs:text-sm">
+              <span class="lvs:pl-2 xsm:pl-1 pr-2 material-icons xsm:text-sm ssm:text-sm vs:text-sm lvs:text-sm">
                   share
               </span>
               <button @click="isOpen=!isOpen" class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"><span class="">Share</span></button>
