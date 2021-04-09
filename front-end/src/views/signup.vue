@@ -16,7 +16,7 @@
       ">
         <div class="px-10 py-16 ">
             <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Create an account</h1>
-              <form action="#" class="space-y-3">
+              <div action="#" class="space-y-3">
                <div class="flex flex-col 
                 md:flex-row md:justify-between md:space-x-6
                 sm:flex-row sm:justify-between sm:space-x-6
@@ -70,7 +70,7 @@
                         Privacy Policy
                     </a>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
