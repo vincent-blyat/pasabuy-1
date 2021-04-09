@@ -431,37 +431,24 @@
                 <span class="inline-flex align-bottom material-icons-round md-18">
                     navigate_next
                 </span>
+
               </header>
-        <div class="text-base bg-white rounded-b-xl">
-          <label for="" class="pl-6 font-normal text-gray-500"> 8 items </label>
+              <hr>
+              <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
+                <label for="" class="pt-2 pl-3 font-bold">
+                 Transaction #{{ activeOrders.transactNo }}
+                </label>
+              </div>
 
-          <label
-            for=""
-            class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo"
-          >
-            {{ activeOrders.stat }}
-          </label>
-        </div>
+              <div class="text-base bg-white rounded-b-xl">
+                <label for="" class="pl-6 font-normal text-gray-500 ">
+                  8 items
+                </label>
 
-        <div
-          class="relative z-0 flex items-center w-65 p-1.5 rounded-xl ml-2 bg-gray-bgcolor"
-        >
-          <button class="top-0 left-0 pl-2 rounded-full border-1">
-            <img
-              class="w-10 h-10 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
-          </button>
-          <div class="ml-2">
-            <h5 class="text-sm font-bold">
-              {{ activeOrders.first_name }} {{ activeOrders.last_name }}
-              <span
-                class="inline-block text-blue-900 align-middle material-icons-round md-18"
-              >
-                verified
-              </span>
-            </h5>
+                <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
+                  {{ activeOrders.stat }}
+                </label>
+              </div>
 
               <div class="relative z-0 flex items-center w-220  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
@@ -510,47 +497,24 @@
                 <span class="inline-flex align-bottom material-icons-round md-18">
                     navigate_next
                 </span>
+
               </header>
-          <div class="absolute h-10 p-2 mr-2 rounded-full right-2 bg-success">
-            <span class="inline-flex text-white align-middle material-icons">
-              chat
-            </span>
-            <router-link
-              to="/messages"
-              class="font-bold align-top cursor-pointer mmd:text-base mmd:inline-block"
-            ></router-link>
-          </div>
-        </div>
-        <div class="pt-2 pb-8 pr-3 text-sm tracking-wide bg-white rounded-b-xl">
-          <a href="" class="float-right font-bold">View Full Details</a>
-        </div>
-      </div>
-      <!-----------END OF ACTIVE ORDERS---------------->
+              <hr>
+              <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
+                <label for="" class="pt-2 pl-3 font-bold">
+                  Transaction #{{ activeDeliveries.transNo }}
+                </label>
+              </div>
 
-      <!-----------ACTIVE DELIVERIES---------------------->
-      <div class="z-0 mb-3 bg-white w-72 rounded-xl vs:hidden">
-        <header
-          class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500"
-        >
-          ACTIVE DELIVERIES
-          <span
-            class="inline-flex pl-16 pr-3 align-bottom material-icons-round md-18"
-          >
-            navigate_before
-          </span>
-          <span class="inline-flex align-bottom material-icons-round md-18">
-            navigate_next
-          </span>
-        </header>
-        <hr />
-        <div class="px-2 pt-2 text-base bg-white rounded-b-xl">
-          <label for="" class="pt-2 pl-3 font-bold">
-            Transaction #{{ activeDeliveries.transNo }}
-          </label>
-        </div>
+              <div class="text-base bg-white rounded-b-xl">
+                <label for="" class="pl-6 font-normal text-gray-500 ">
+                  8 items
+                </label>
 
-        <div class="text-base bg-white rounded-b-xl">
-          <label for="" class="pl-6 font-normal text-gray-500"> 8 items </label>
+                <label for="" class="float-right px-3 m-2 py-0.5 text-sm font-semibold border rounded-md border-waterloo text-waterloo">
+                  {{ activeDeliveries.stats }}
+                </label>
+              </div>
 
               <div class="relative flex items-center w-220  z-0  p-1.5 rounded-xl ml-2 bg-gray-bgcolor">
               <button class="top-0 left-0 pl-2 rounded-full border-1">
@@ -631,8 +595,6 @@
                 </div>
         </div>
 </div>
-        </div>
-    </div>
 </template>
 
 <script>
