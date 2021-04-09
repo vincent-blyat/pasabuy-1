@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class userInformationController extends Controller
 {
@@ -52,6 +54,39 @@ class userInformationController extends Controller
         if($data == null)
             return response()->json('');
         return response()->json($data[0]);
+    }
+
+     public function getAccount()
+    {
+        # code...
+        $user = Auth::user();
+        $data = DB::select('SELECT * FROM tbl_userAuthentication WHERE email = \''.$user->email.'\'');
+
+        if($data == null)
+            return response()->json('');
+        return response()->json($data[0]);
+    }
+
+    public function editAccount(Request $request)
+    {
+        # code...
+        $request->validate([
+            'email' => ['required'],
+            'currPassword' => ['required'],
+            'newPassword' => ['required'],
+       ]);
+        $hashedPassword = Auth::user()->getAuthPassword();
+        $user = User::where('email',Auth::user()->email)->first();
+        if (Hash::check( $request->currPassword,  $hashedPassword)) {
+            // The passwords match...
+            $user->email = $request->email;
+            $user->password = Hash::make($request->newPassword);
+            $user->save();
+            return response()->json(true);
+        }else{
+            return response()->json(false);
+        }
+        
     }
 
     public function editPersonal(Request $request)

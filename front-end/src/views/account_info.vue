@@ -4,7 +4,7 @@
             <div class="flex gap-4">
             <p class="font-bold font-nunito text-sm">Account Info</p>
             </div>
-           <div>  <label for="sub" id="edt3" @click="toggle=!toggle" class="
+           <div>  <label for="sub" id="edt3" @click="setOldValue();toggle=!toggle;" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label></div>
         </div> 
         <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
@@ -44,13 +44,14 @@
             
           <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
               <div class="grid grid-cols-2 gap-y-4">
-                <span>Email:</span> <input   type="text" :v-model="account_info.email"   class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Current Password:</span> <input type="password" placeholder="Current password"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>New Password:</span> <input type="password" placeholder="New password"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span></span><span class="text-red-700"> {{errors}}</span>
+                <span>Email:</span> <input   type="text" v-model="account_info.email"   class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>Current Password:</span> <input type="password" v-model="account_info.currPassword" placeholder="Current password"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>New Password:</span> <input type="password" v-model="account_info.newPassword" placeholder="New password"  class=" pl-2 bg-transparent border-2 border-gray-400"/>
               
               </div>
             <div class="flex justify-end mt-4 space-x-4">
-              <button @click="toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
+              <button @click="getOldValue();toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
               <button @click="submit" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
               
             </div>
@@ -74,21 +75,42 @@ export default {
       account_info: {
         email: "",
         password: "",
+        currPassword:"",
+        newPassword:"",
         password_int: "",
         type: "password",
       },
+      old: {
+        email: "",
+        password: "",
+      },
+      errors:""
     };
   },
   methods: {
-    submit() {},
-    Edit(pars) {
-      let x = document.getElementById(pars).innerHTML;
-      if (x == "Edit") {
-        document.getElementById(pars).innerHTML = "Save";
-      } else {
-        document.getElementById(pars).innerHTML = "Edit";
-      }
+    submit() {
+      api.post('/api/editAccount', this.account_info).then((res)=>{
+        if(res.data){
+          console.log("Success, Information Saved")
+          this.toggle=false
+        }
+        else{
+          this.errors = "Incorrect Password"
+        }
+      //this.user = res.data;
+      })
     },
+    setOldValue(){
+      this.old.email = this.account_info.email;
+      this.account_info.currPassword ="";
+      this.account_info.newPassword ="";
+      this.old.password =this.account_info.password;
+      this.errors="";
+    },
+    getOldValue(){
+      this.account_info.email = this.old.email;
+      this.account_info.password = this.old.password;
+    }
   },
   mounted() {
     //get the user information from the laravel API
@@ -100,8 +122,8 @@ export default {
         this.account_info.password = "password";
         //this.user = res.data;
       })
-      .catch(() => {
-        //this.error=error.response.data.errors;
+      .catch((error) => {
+        console.log(error)
       });
   },
 }
