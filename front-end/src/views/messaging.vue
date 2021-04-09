@@ -86,20 +86,53 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-                <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                  <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
+               <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
                     check_circle
-                    </span></span> 
-                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                    </span> 
-                  </div>
-                </div>
-                  <div class="flex flex-col items-start"> 
-                    <span class="text-gray-700 text-xs">
-                    <span class="font-bold pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                  </div>
-              </button>
+                  </span>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36">
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>  
             </div>
             
           </div> <!---------------search message results------------>
@@ -284,9 +317,10 @@
                     send</span>
               </button>
       </div>
+      </div>
     </div><!--end of right corner-->
   </div>
-</div><!--end of desktop version-->
+<!--end of desktop version-->
 
 
 <!------------mobile version--------------------->
@@ -351,12 +385,6 @@
         </div><!------------------->
       <!----chat box---->
       <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
-        
-        <div class="p-2 flex justify-end">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
-            <p>{{ chatOutgoing[0].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[0].timeSent}} </span> </div>
-        </div>
         
         <div class=" flex justify-end mt-2">
           <div class="ml-32 bg-gray-100 text-sm rounded-lg">
@@ -617,20 +645,53 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-                <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                  <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
+               <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
                     check_circle
-                    </span></span> 
-                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                    </span> 
-                  </div>
-                </div>
-                  <div class="flex flex-col items-start"> 
-                    <span class="text-gray-700 text-xs">
-                    <span class="font-bold pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                  </div>
-              </button>
+                  </span>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36">
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>  
             </div>
             
           </div> <!---------------search message results------------>
@@ -655,6 +716,10 @@ export default {
   data() {
     return {
       //buttons
+      searchMessageInactive: true,
+      showSearchResults: false,
+      attachment:false,
+      attach:'add',
       toggle: false,
       attachtoggle: false,
       toggleInbox: true,
@@ -674,23 +739,25 @@ export default {
       incoming:[],
       chat: [],
       //sent a request
-      activity: "You sent a request to to",
-      recipient: null,
-      postNum: "#2021352",
-      placeFrom: "Banquerohan, Legazpi City",
-      destination: "SM City ",
-      timeAlloted: "Tomorrow, 5 PM",
-      paymentMethod: "Payment First via GCash transfer",
-
-      //shoppingList
+       //sent a request
+      activity: 'You sent a request to to',
+      recipient: 'Mark Aral',
+      sender: 'Monica Rambeau',
+      postNum: '#2021352',
+      postNum2: '#130317',
+      placeFrom: 'Banquerohan, Legazpi City',
+      destination: 'SM City ',
+      timeAlloted: 'Tomorrow, 5 PM',
+      paymentMethod: 'Payment First via GCash transfer',
+        //shoppingList
       shoppingList: [
-        { items: "Baking Soda" },
-        { items: "Choco Syrup" },
-        { items: "cocoa powder" },
-        { items: "flour 1 kg" },
-        { items: "brown sugar" },
-        { items: "cocoa powder" },
-      ],
+            { items: 'Baking Soda'},
+            { items: 'Choco Syrup'},
+            { items: 'cocoa powder'},
+            { items: 'flour 1 kg'},
+            { items: 'brown sugar'},
+            { items: 'cocoa powder'},
+        ],
       shoppingListSize: 8,
     };
   },
@@ -853,8 +920,8 @@ document.addEventListener("click", function (event) {
 
   if (event.target.closest(".del")) return del.classList.add("hide");
 });
-</script>
-// <script>
+
+
 // import Navbar from './Navbar'
 // export default {
 //     components:{
@@ -1033,7 +1100,8 @@ document.addEventListener("click", function (event) {
 //     if(event.target.closest(".add")) return add.classList.add("hide");
 //     if(event.target.closest(".del")) return del.classList.add("hide");
 // })
-// </script>
+</script>
+
 
 <style>
     .hide{
