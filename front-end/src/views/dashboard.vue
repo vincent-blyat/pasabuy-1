@@ -640,7 +640,7 @@ export default {
       sendrequest:false,
 
       filterPost:{
-        filterAddress: "Bonot, Legazpi City"
+        filterAddress: "Bonot, Legazpi City",
     createShopList:false,
     editOrderRequest:false,
 
@@ -716,8 +716,8 @@ export default {
       { items: 'powdered sugar' },
       { items: 'cocoa powder' },
     ],
-
-    }
+    },
+  }
   },
   components: {
     Navbar,
@@ -781,7 +781,6 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
-<<<<<<< HEAD
   },
     mounted(){
     api.get('/api/user').then((res)=>{
@@ -792,9 +791,5 @@ export default {
   }
  
    
-=======
-  }
-  
->>>>>>> 595e6381c6067b396abc5eb2f4ae84ecfc201c3d
 }
 </script>
