@@ -104,5 +104,5 @@ export default {
         //this.error=error.response.data.errors;
       });
   },
-};
+}
 </script>

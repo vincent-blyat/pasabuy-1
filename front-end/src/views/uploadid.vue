@@ -82,9 +82,9 @@
             <div class="flex justify-between mt-4 items-center">
                <router-link to="/address-book"> <span class="font-bold">Back</span></router-link>
                 <div class=" space-x-4">
-                  <router-link to="">  <span class="font-bold">Skip for now</span></router-link>
-                   <router-link to="/verification-message"> <button class="h-10 m-2 text-white transition-colors duration-150
-                    bg-red-buttons px-7 rounded-3xl focus:outline-none ">Next</button></router-link>
+                  <button class="font-bold" @click="saveUser">Skip for now</button>
+                 <button class="h-10 m-2 text-white transition-colors duration-150
+                    bg-red-buttons px-7 rounded-3xl focus:outline-none " @click="saveUser">Next</button>
                 </div>
             </div>
               
@@ -112,8 +112,8 @@
     
     }
 </style>
-
 <script>
+import api from '../api'
 export default {
  
   created: function () {
@@ -170,7 +170,28 @@ methods:{
         this.browse2='Browse';
         this.delete2=null;
         this.edit2=null;
-    }
-}
+    },
+        saveUser(){
+            var dataform = {personal:JSON.parse(localStorage.getItem('personal')), account:JSON.parse(localStorage.getItem('account')), address: JSON.parse(localStorage.getItem('address')) }
+
+            console.log('mail=',dataform.personal.email)
+            api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
+                 console.log(res.data);
+                 if(res){
+                     localStorage.removeItem('personal')
+                     localStorage.removeItem('account')
+                     localStorage.removeItem('address')
+                     this.$router.push({name:"accountsettings"});
+                 }
+                 else{
+                     console.log('informmation not saved')
+                 }
+                
+             
+            })
+        }
+
+},
+
 }
 </script>

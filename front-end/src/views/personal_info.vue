@@ -116,52 +116,51 @@
   
 </template>
 <script>
-import Profile from "./ProfileEdit.vue";
-import api from "../api";
+import api from '../api'
+import Profile from './ProfileEdit.vue'
 export default {
   name: "personal",
   component: {
     Profile,
   },
-  data() {
-    return {
-      toggle: false,
-      avatar: null,
-      disabled: 0,
-      hidden: false,
-      show: true,
-      show2: true,
-      edit2: false,
-      message: "yeah",
-      personal: {
-        firstname: "",
-        lastname: "",
-        phone_number: "",
-        work: "",
-        gender: "",
-        language: "",
-        birdate: "",
-      },
-    };
-  },
-  methods: {
-    submit() {
-      api
-        .post("/api/editPersonal", this.personal)
-        .then((res) => {
-          console.log(res.data);
-          //this.user = res.data;
-        })
-        .catch(() => {
-          location.reload();
-        });
+data(){
+    return{
+      toggle:false,
+      avatar:null,
+    disabled: 0,
+    hidden:false,
+    show:true,
+    show2:true,
+    edit2:false,
+    message:'yeah',
+     personal:  {
+      firstname:'',
+      lastname:'',
+      phone_number:'',
+      work:'',
+      gender:'',
+      language:'',
+      birdate: ''
     },
-    handleInput(value) {
+    }
+  
+},
+
+methods:{
+
+    submit () {
+      api.post('/api/editPersonal', this.personal).then((res)=>{
+        console.log(res.data);
+      //this.user = res.data;
+      })
+    },
+      handleInput(value) {
       this.name = value;
-      alert(this.name);
+      alert(this.name)
     },
-  },
-  mounted() {
+
+},
+mounted(){
     //get the user information from the laravel API
     api.get("/api/getPersonal").then((res) => {
       console.log("personal info", res.data);

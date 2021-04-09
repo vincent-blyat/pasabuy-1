@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $table = 'tbl_userAuthentication';
     protected $primaryKey = 'indexUserAuthentication';
+    public $timestamps = false;
     protected $fillable = [
         'name',
         'email',

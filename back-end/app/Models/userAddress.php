@@ -9,7 +9,7 @@ class userAddress extends Model
 {
     use HasFactory;
     protected $table = 'tbl_userAddress';
-    protected $primaryKey = 'email';
+    protected $primaryKey = 'indexUserAddress';
     public $timestamps = false;
     // protected $fillable = [
     //     'email',

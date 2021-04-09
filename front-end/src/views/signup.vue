@@ -25,17 +25,17 @@
                 lg:flex-row lg:justify-between lg:space-x-6
                  ">
                     <div  class="w-full">
-                        <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" value="" />
+                        <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" v-model="PersonalInfo.firstName" />
                     </div>
                     <div  class="w-full">
-                        <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" value="" />
+                        <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" v-model="PersonalInfo.lastName" />
                     </div>
                 </div>
                 <div class="mb-6">
-                    <input aria-label="Email" name="" type="email" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email" value="" />
+                    <input aria-label="Email" name="" type="email" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email" v-model="PersonalInfo.email"  />
                 </div>
                 <div class="mb-10">
-                    <input aria-label="Phone Number" name="" type="text" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Phone Number" value="" />
+                    <input aria-label="Phone Number" name="" type="text" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Phone Number" v-model="PersonalInfo.phoneNumber"  />
                 </div>
                 <div class="flex flex-col  
                 md:flex-row md:justify-between md:space-x-6
@@ -45,10 +45,10 @@
                 lg:flex-row lg:justify-between lg:space-x-6
                  ">
                     <div class="w-full" >
-                        <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="Password" value="" />   
+                        <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="Password" v-model="PersonalInfo.password"/>   
                     </div>
                     <div class="w-full" >
-                        <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" value="" />
+                        <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" v-model="PersonalInfo.confirmPassword" />
                     </div>
                 </div>
                 <div class="flex mb-2 -mx-1 ">
@@ -56,8 +56,8 @@
                         <router-link to="/log-in" >Log instead</router-link>
                     </div>
                     <div class="flex justify-end w-1/2 px-1 mt-3">
-                        <button class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
-                            <router-link to="/verify-email" >NEXT</router-link>
+                        <button @click="nextPage" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
+                           NEXT
                         </button>
                     </div>
                 </div>
@@ -70,10 +70,10 @@
                         Privacy Policy
                     </a>
                 </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
-    </div>
 </template>
 
 <style>
@@ -103,9 +103,39 @@
 </style>
 
 <script>
+import api from '../api'
 export default {
-  
-  created: function () {
+    data(){
+        return{
+            PersonalInfo:{
+               firstName : null,
+               lastName : null,
+               email :  null,
+               phoneNumber : null,
+               password : null,
+               confirmPassword : null
+            }
+        }
+    }, 
+    methods:{
+        nextPage(){
+            api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
+               
+                if(res!=null){
+                    console.log('sucess, email sent');
+                    console.log(res.data.personalInfo);
+                    localStorage.setItem("code", res.data.code);
+                    localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));
+                    localStorage.setItem("account",JSON.stringify(res.data.account));
+                    this.$router.push({name:"verifyemail"});
+                }
+                else{
+                    console.log('error, email not sent');
+                }
+            })
+        }
+    },
+    created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
 }

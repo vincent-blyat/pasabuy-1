@@ -21,14 +21,12 @@
               <p class="mb-5 space-y-1 font-light text-gray-500">
                 Log in with your email and password</p>
                 <form action="#" @submit.prevent="loginUser">
+                   <p class="w-full text-red-500 " v-text="errors.email" ></p>
                 <div class=""> 
-                  <p class="w-full text-red-500 " v-text="errors.email" ></p>
-                  <input aria-label="Email" name="email"
-                v-model="dataForm.email" type="email" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email"  />
+                  <input  v-model="dataForm.email"  aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email"  />
                 </div>
                 <div class="text-2xl">
-                  <input aria-label="Password" name="password"
-                v-model="dataForm.password" type="password" required class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l" placeholder="Password"  />
+                  <input  v-model="dataForm.password" aria-label="Password" name="" type="password" required class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l" placeholder="Password"/>
                 </div>
                 <div class="mt-6 text-left text-md text-grey-dark">
                   <a class="font-bold underline-none " href="#">
@@ -97,7 +95,7 @@ export default {
           // Login...
     
            api.post('/api/login', this.dataForm).then(()=>{
-              localStorage.setItem('isLoggedIn', 'true');
+              localStorage.setItem('isLoggedIn', true);
               console.log('yay logged in');
               this.$router.push({name:"dashboard"});
             }).catch((errors)=>{
@@ -106,13 +104,7 @@ export default {
         
       });
     }
-  }
-}
-</script>
-
-
-<script>
-export default {
+  },
   
   created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";

@@ -431,7 +431,7 @@
                 <span class="inline-flex align-bottom material-icons-round md-18">
                     navigate_next
                 </span>
-
+              </header>
         <div class="text-base bg-white rounded-b-xl">
           <label for="" class="pl-6 font-normal text-gray-500"> 8 items </label>
 
@@ -510,7 +510,7 @@
                 <span class="inline-flex align-bottom material-icons-round md-18">
                     navigate_next
                 </span>
-
+              </header>
           <div class="absolute h-10 p-2 mr-2 rounded-full right-2 bg-success">
             <span class="inline-flex text-white align-middle material-icons">
               chat
@@ -645,6 +645,7 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import EditOrderRequest from "./EditOrderRequest"
+import api from '../api'
 
 export default {
     el:'#shop-list',
@@ -662,9 +663,20 @@ export default {
       share2: false,
       filter: false,
       filter2: false,
-    createShopList:false,
-    editOrderRequest:false,
-
+      isOpen:false,
+      isOpen1:false,
+      isOpen2:false,
+      isOpen3:false,
+      isOpen4:false,
+      user: null,
+      list:false,
+      editShoppingOffer:false,
+      editOrderRequest:false,
+      updateOrderStatus:false,
+      createShopList:false,
+      updateOfferStatus:false,
+      sendrequest:false,
+      filterAddress: "Bonot, Legazpi City",
       datePosted: '3 hours ago',
       datePosted1: '13 hours ago',
       postStatus: 'posted',
@@ -672,6 +684,7 @@ export default {
         firstname: 'Yami',
         lastname: 'Yami'
       },
+
       delivery_info:{
         delivery_area: 'Naga City',
         shopping_place: 'SM City Legazpi',
@@ -704,16 +717,6 @@ export default {
         rate: '4.9',
         stats: "Confirmed"
       },
-
-      activeDeliveries: {
-        transNo: "61913174",
-        address: "Ligao",
-        firstName: "Hanbin",
-        lastName: "Kim",
-        rate: "4.9",
-        stats: "Confirmed",
-      },
-
       activeOrders: {
         transactNo: "1267643764",
         address: "Legazpi",
@@ -724,28 +727,28 @@ export default {
       },
 
       shopList: [
-        { items: "Pork" },
-        { items: "Beef" },
-        { items: "Pork" },
-        { items: "Beef" },
-        { items: "Pork" },
-        { items: "Beef" },
-      ],
+      { items: 'Pork' },
+      { items: 'Beef' },
+      { items: 'Pork' },
+      { items: 'Beef' },
+      { items: 'Pork' },
+      { items: 'Beef' },
+    ],
 
-      shopListRequest1: [
-        { items: "Flour (1kg)" },
-        { items: "Vanilla extract (50ml)" },
-        { items: "brown sugar" },
-        { items: "cocoa powder" },
-      ],
+    shopListRequest1: [
+      { items: 'Flour (1kg)' },
+      { items: 'Vanilla extract (50ml)' },
+      { items: 'brown sugar' },
+      { items: 'cocoa powder' },
+    ],
 
-      shopListRequest2: [
-        { items: "baking soda" },
-        { items: "Chocolate syrup" },
-        { items: "powdered sugar" },
-        { items: "cocoa powder" },
-      ],
-    };
+    shopListRequest2: [
+      { items: 'baking soda' },
+      { items: 'Chocolate syrup' },
+      { items: 'powdered sugar' },
+      { items: 'cocoa powder' },
+    ],
+    }
   },
   components: {
     Navbar,
@@ -810,16 +813,14 @@ export default {
       this.editOrderRequest = false;
     },
   },
-    mounted() {
-    api
-      .get("/api/user")
-      .then((res) => {
-        this.user = res.data;
-      })
-      .catch((error) => {
-        this.error = error.response.data.errors;
-      });
-  },
-  
+    mounted(){
+    api.get('/api/user').then((res)=>{
+      this.user = res.data;
+    }).catch((error) => {
+      this.error=error.response.data.errors;
+    })
+  }
+ 
+   
 }
 </script>
