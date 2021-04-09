@@ -137,8 +137,9 @@ methods:{
       this.address_info.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
       this.address_info.city = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
       this.address_info.barangay = this.selectedBrgy;
-      api.post('/api/editAddress', this.address_info).then((res)=>{
+      api.post('/api/editAddress', this.address_info).then(()=>{
       //this.user = res.data;
+      console.log('Success')
         }).catch((errors) => {
             console.log(errors)
         })
