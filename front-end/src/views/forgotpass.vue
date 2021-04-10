@@ -8,7 +8,7 @@
         </label>
     </div>
     
-    <div id="forgotPassword" class="flex items-center justify-center pt-32 pb-32 bg-gray-100">
+    <div id="forgotPassword" class="flex items-center justify-center pt-20 pb-32 bg-gray-100">
       <div class="w-4/12 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 md:w-4/12 rounded-xl">
             <div class="px-10 py-16">
               <h1 class="mb-5 space-x-1 space-y-1 text-2xl font-bold">Forgot Password</h1>

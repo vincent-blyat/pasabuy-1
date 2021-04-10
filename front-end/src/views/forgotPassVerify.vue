@@ -7,7 +7,7 @@
             pasaBUY
         </label>
     </div>
-    <div id="forgotPassword" class="flex items-center justify-center pt-32 pb-32 bg-gray-100">
+    <div id="forgotPassword" class="flex items-center justify-center pt-20 pb-32 bg-gray-100">
       <div class="w-4/12 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 flex-grow-1 md:w-4/12 rounded-xl">
             <div class="px-10 py-16">
                 <h2 class="items-center justify-center mb-5 text-2xl font-bold md:flex font-raleways ">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="mt-4 text-left text-grey-dark">
                     Did you received the link?
-                    <router-link to="/forgot-password" class="font-bold border-b border-grey-dark" href="#">
+                    <router-link to="/forgot-password" class="font-bold" href="#">
                         Resend
                     </router-link> 
                 </div>
