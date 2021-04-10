@@ -2,7 +2,7 @@
  <div v-on:click.self="close" class="z-50 bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center ssm:px-2 vs:px-2">
    <div class="inline-flex flex-col bg-white shadow rounded-xl h-auto w-448 ssm:w-full vs:w-full" >
 
-       <div class="flex flex-row w-full justify-end space-x-28 items-center py-4">
+       <div class="flex flex-row w-full justify-end se:space-x-11 ssm:space-x-8 vs:space-x-16 space-x-28 items-center py-4">
        <h1 class="text-gray-900  leading-normal ssm:text-sm vs:text-base lvs:text-xl text-xl font-bold">
          Create a Review
        </h1>
@@ -19,7 +19,7 @@
            <img class="w-14 h-14 ssm:w-10 ssm:h-10 rounded-full" src="img/asta.jpeg"/>
            <div class="flex flex-col justify-center items-center py-3">
              <div class="">
-               <span class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">Asta Stariaa</span>
+               <span class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{visitorUser}}</span>
                <!--check icon here-->
              </div>
              <div class="flex ssm:flex-col ssm:space-x-0 ssm:py-0 ssm:space-y-1">
@@ -37,7 +37,7 @@
                        <label for="one"></label>
                    </div>
                         <div class="w-full justify-center items-center flex">
-                     <span class="">{{value}}/5</span>
+                     <span class="">{{value}}/{{maxStarRate}}</span>
                    </div>
                 </div>
              </div>
@@ -45,7 +45,7 @@
          </div>
      </div>
      <div class="flex items-start justify-start ">
-       <textarea class="text-sm ssm:text-xs vs:text-xs focus:outline-none lvs:text-sm leading-normal text-gray-900 w-full px-6 py-4 bg-gray-100 rounded-xl h-auto w-full ssm:w-full vs:w-full sm:w-full" placeholder="Write a comment"></textarea>
+       <textarea class="text-sm ssm:text-xs vs:text-xs focus:outline-none lvs:text-sm leading-normal text-gray-900 w-full px-6 py-4 bg-gray-100 rounded-xl h-auto w-full ssm:w-full vs:w-full sm:w-full" placeholder="Write a comment" style="resize:none;"></textarea>
    </div>
    </div>    
 <!--end-->
@@ -60,6 +60,8 @@ export default {
     data(){
       return{
         value: '0',
+        visitorUser: 'Asta Staria',
+        maxStarRate: '5',
       }
     },
     methods: {
@@ -88,12 +90,9 @@ export default {
  padding: 0;
  margin: 0 5px;
  padding-bottom: 0;
-
+content: url('/img/star_rate.svg');
 }
 
-.stars label::before{
-    content: url('/img/star_rate.svg');
-}
 
 .stars input:checked ~ label{
   content: url('/img/star_rating.svg');
@@ -109,16 +108,5 @@ export default {
   text-shadow: black;
 }
 
-.stars .result:before{
-  position:absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 274px;
-  display:none;
-}
-
-.stars input:checked ~ .result:before{
-  display: block;
-}
 
 </style>
