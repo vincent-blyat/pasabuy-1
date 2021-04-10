@@ -6,6 +6,7 @@ use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use App\Http\Controllers\addressController;
 use App\Http\Controllers\forgotPasswordController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
 use Illuminate\Http\Request;
@@ -44,6 +45,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
     Route::get('/getPosts', [PostController::class, 'getAllPosts']);
     Route::post('/share', [PostController::class, 'sharePost']);
+    Route::get('/getNotifications', [NotificationController::class, 'getAll']);
+    Route::get('/getUnreadNotifications', [NotificationController::class, 'getUnread']);
  
     
 });

@@ -45,7 +45,7 @@
        <span id="notif" class="text-gray-500 material-icons \">
             notifications
           </span>
-          <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</span>
+          <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications </span> <span class="text-red-500">{{unreadNotif}}</span>
               
       </div>
       </div>
@@ -111,7 +111,7 @@
        <span class="material-icons ">
             notifications
           </span>
-      <p class="text-gray-500">Notifications</p>   
+      <p class="text-gray-500">Notifications</p> 
       </div></router-link>
      <router-link to="/edit-profile" class="rounded-2xl">
       <div class="mobile rounded-2xl items-center flex h-10 pl-2 space-x-2 ">
@@ -168,6 +168,7 @@ import { computed } from 'vue';
 import {useRoute} from 'vue-router';
 import Dropdown from './dropmenu.vue';
 import Notification from './Notification.vue'
+import api from "../api"
 export default {
   name:'navBar',
  components:{
@@ -181,6 +182,7 @@ export default {
             isOpen:false,
             show:false,
             activeBtn:false,
+            unreadNotif:null
         }
     },
       methods:{
@@ -198,7 +200,12 @@ export default {
     return{currentRoute}
     
   },
-    
+  created(){
+    api.get('api/getUnreadNotifications').then((res)=>{
+      console.log(res.data)
+      this.unreadNotif = res.data.length
+    })
+  }
 }
 </script>
 <style scoped>
