@@ -281,7 +281,7 @@
           </button>
           <div class="flex w-full">
             <div v-show="share2==post_info.postNumber && share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+              <button @click="share(post_info.postNumber)" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
                 share
                </span>
@@ -646,6 +646,15 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
+    share(postNumber){
+      var shareData = {email:this.user.email, postNum: postNumber}
+      console.log(shareData)
+      // api.post('/api/share',shareData).then((res)=>{
+      //   console.log(res.data)
+      // }).catch((error) => {
+      //  console.log(error)
+      // })
+    }
   },
     mounted(){
     api.get('/api/user').then((res)=>{
