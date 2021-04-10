@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
     Route::get('/getPosts', [PostController::class, 'getAllPosts']);
+    Route::post('/share', [PostController::class, 'sharePost']);
  
     
 });

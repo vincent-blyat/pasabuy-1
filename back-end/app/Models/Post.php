@@ -42,4 +42,11 @@ class Post extends Model
     public function get_user_name() {
         return $this->hasOne(userInformation::class, 'email', 'email');
     }
+
+    
+    public function sharePost()
+    {
+        # code...
+        return $this->hasMany(Share::class,'postNumber','postNumber');
+    }
 }

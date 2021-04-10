@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\OfferPost;
 use App\Models\RequestPost;
+use App\Models\Share;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -136,9 +137,28 @@ class PostController extends Controller
 	public function getAllPosts(Request $request) {
 
 		$user = Auth::user();
-		$data = Post::with('offer_post','request_post','get_user_name')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
+		$data = Post::with('offer_post','request_post','get_user_name','sharePost')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
 		return $data;
+	}
+	
+	public function sharePost(Request $request)
+	{
+		# code...
+		$user = Auth::user();
+		$postNum = $request->postNum;
+
+		$newShare = new Share();
+		$newShare->sharerEmail = $user->email;
+		$newShare->shareNumber = Share::count()+1;
+		$newShare->postNumber = $postNum;
+		if($newShare->save()){
+			return response()->json(["Success"],200);
+		}else{
+			return response()->json(["Error"],500);
+		}
+
+		
 	}
     
 }

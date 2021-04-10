@@ -647,13 +647,13 @@ export default {
       this.editOrderRequest = false;
     },
     share(postNumber){
-      var shareData = {email:this.user.email, postNum: postNumber}
+      var shareData = {postNum: postNumber}
       console.log(shareData)
-      // api.post('/api/share',shareData).then((res)=>{
-      //   console.log(res.data)
-      // }).catch((error) => {
-      //  console.log(error)
-      // })
+      api.post('/api/share',shareData).then((res)=>{
+        console.log(res.data)
+      }).catch((error) => {
+       console.log(error)
+      })
     }
   },
     mounted(){
