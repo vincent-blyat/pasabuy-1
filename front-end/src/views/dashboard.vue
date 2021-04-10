@@ -115,11 +115,11 @@
             </div>
           </div>
           <div class="vs:mt-1" v-if="post_info.email == user.email">
-            <button @click="edit1=!edit1" class="absolute right-0 focus:outline-none ">
+            <button @click="edit1=!edit1; edit2=post_info.postNumber" class="absolute right-0 focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
             <div class="flex w-full ">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl vs:text-sm vs:right-0 top-5 right-8">
+            <div v-if="edit1 && edit2==post_info.postNumber" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl vs:text-sm vs:right-0 top-5 right-8">
              <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
               <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons vs:md-14">
