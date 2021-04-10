@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\userInformation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -33,8 +34,9 @@ class SharedNotification extends Notification
 
     public function toDatabase($notifiable)
     {
+        $user = userInformation::where('email',Auth::user()->email)->get();
         return [
-            'sharerEmail' => Auth::user()->email,
+            'sharer' => $user[0]->firstName.' '.$user[0]->lastName,
             'postNumber' => $this->postNumber,
         ];
     }
