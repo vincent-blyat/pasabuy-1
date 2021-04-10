@@ -779,7 +779,14 @@ export default {
     api.get('/api/user').then((res)=>{
       this.user = res.data;
     }).catch((error) => {
-      this.error=error.response.data.errors;
+       console.log(error)
+    })
+  },
+  created(){
+    api.get('/api/getPosts').then((res)=>{
+      console.log(res.data)
+    }).catch((error) => {
+      console.log(error)
     })
   }
  

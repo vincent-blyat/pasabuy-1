@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\OfferPost;
 use App\Models\RequestPost;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -58,12 +59,7 @@ class PostController extends Controller
 			$post->offer_post()->save($offer_post);
 		});
 
-		return response()->json(
-			'data' => [
-				'message' => 'Offer post created successfully.'
-			],
-			201
-		);
+		return response()->json(['message' => 'Offer post created successfully.'],201);
 	}
 
 	/**
@@ -111,8 +107,7 @@ class PostController extends Controller
 			$post->request_post()->save($request_post);
 		});
 		
-		return response()->json(
-			'data' => [
+		return response()->json([
 				'message' => 'Request post created successfully.'
 			],
 			201
@@ -132,11 +127,10 @@ class PostController extends Controller
 		$data = DB::select("SELECT * FROM tbl_post post, tbl_shoppingOfferPost offer_post, tbl_orderRequestPost request_post WHERE post.postNumber = offer_post.postNumber OR post.postNumber = request_post.postNumber AND post.postDeleteStatus = 0 AND post.email = ?", [$user->email]);
 
 		return response()->json([
-			'data' => [
 				$data
 			],
 			200
-		]);
+		);
 	}
     
 }

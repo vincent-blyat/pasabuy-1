@@ -38,7 +38,7 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               shopping_cart  
               </span>
-                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 pl-4 items-center py-2.5 pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Shopping Place">
+                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 pl-4 items-center py-2.5 pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Shopping Place" v-model='form_data.shoppingPlace'>
                  </div>
              </div>
 
@@ -108,7 +108,7 @@ export default {
                 postIdentity: 'offer_post',
                 postStatus: 'foo bar'     
             },
-            errors: []
+            errors: null
         }
     },
     methods: {
@@ -121,6 +121,7 @@ export default {
                 })
                 .catch((errors) => {
                     console.log(errors)
+                
                 })
         }
     },
