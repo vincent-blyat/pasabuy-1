@@ -52,7 +52,15 @@
                     check_circle
                   </span>
                 </span>
-                <span class="text-xs text-gray-400 truncate w-36">
+               <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
                   {{chatRoom.get_messages[chatRoom
                     .get_messages.length-1]
                     .get_message_sender.firstName}} 
@@ -107,7 +115,15 @@
                     check_circle
                   </span>
                 </span>
-                <span class="text-xs text-gray-400 truncate w-36">
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
                   {{chatRoom.get_messages[chatRoom
                     .get_messages.length-1]
                     .get_message_sender.firstName}} 
@@ -611,7 +627,15 @@
                     check_circle
                   </span>
                 </span>
-                <span class="text-xs text-gray-400 truncate w-36">
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
                   {{chatRoom.get_messages[chatRoom
                     .get_messages.length-1]
                     .get_message_sender.firstName}} 
@@ -666,7 +690,15 @@
                     check_circle
                   </span>
                 </span>
-                <span class="text-xs text-gray-400 truncate w-36">
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
                   {{chatRoom.get_messages[chatRoom
                     .get_messages.length-1]
                     .get_message_sender.firstName}} 
