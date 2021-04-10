@@ -114,7 +114,7 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1">
+          <div class="vs:mt-1" v-if="post_info.email == user.email">
             <button @click="edit1=!edit1" class="absolute right-0 focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
