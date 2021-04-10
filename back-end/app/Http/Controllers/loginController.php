@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 
@@ -28,7 +29,6 @@ class loginController extends Controller
             'invalid'=>['The provided credentials are incorrect.']
         ]);
     }
-
 
     public function logout(Request $request)
     {

@@ -5,7 +5,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use App\Http\Controllers\addressController;
+use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\resetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
+ 
     
 });
 
@@ -62,3 +65,7 @@ Route::get('refBrgy',[addressController::class, 'refBrgy'] );
 
 Route::post('post/offer', [PostController::class, 'create_offer_post'])->name('create_offer_post');
 Route::post('post/request', [PostController::class, 'create_request_post']);
+
+
+Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
