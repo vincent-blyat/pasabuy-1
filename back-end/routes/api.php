@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
-    Route::get('/getPosts', [PostController::class, 'get_user_posts']);
+    Route::get('/getPosts', [PostController::class, 'getAllPosts']);
  
     
 });

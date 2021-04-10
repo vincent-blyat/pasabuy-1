@@ -132,5 +132,13 @@ class PostController extends Controller
 			200
 		);
 	}
+
+	public function getAllPosts(Request $request) {
+
+		$user = Auth::user();
+		$data = Post::with('offer_post','request_post','get_user_name')->where('tbl_post.postDeleteStatus','=',0)->where('email','!=',$user->email)->orderBy('tbl_post.dateCreated','desc')->get();
+
+		return $data;
+	}
     
 }

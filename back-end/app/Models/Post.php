@@ -38,4 +38,8 @@ class Post extends Model
     public function request_post() {
         return $this->hasOne(RequestPost::class, 'postNumber', 'postNumber');
     }
+
+    public function get_user_name() {
+        return $this->hasOne(userInformation::class, 'email', 'email');
+    }
 }
