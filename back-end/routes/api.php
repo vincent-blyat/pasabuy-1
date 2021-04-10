@@ -28,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+	Route::get('/user/posts', [PostController::class, 'get_user_posts']);
+	Route::post('post/offer', [PostController::class, 'create_offer_post']);
+	Route::post('post/request', [PostController::class, 'create_request_post']);
     Route::get('/getPersonal', [userInformationController::class, 'getPersonal']);
     Route::get('/getAddress', [userInformationController::class, 'getAddress']);
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
