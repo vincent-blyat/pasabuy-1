@@ -206,7 +206,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               delivery_dining  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliveryArea}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliveryAddress}}</p>
             </div>
             <div class="flex py-2 space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
@@ -214,14 +214,8 @@
               </span>
               <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliverySchedule}}</p>
             </div>
-            <div class="flex space-x-2 ">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              shopping_bag  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.capacity}}</p>
-            </div>
           </div>
-          <div class="flex-col w-full ssm:py-2 vs:py-3">
+          <div class="flex-col w-full ">
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_cart  
@@ -230,22 +224,31 @@
             </div>
             <div class="flex py-2 space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              directions_car  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.transportMode}}</p>
-            </div>
-            <div class="flex space-x-2">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               payments  
               </span>
               <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.paymentMethod}}</p>
             </div>
           </div>
         </div>
+        <!--end-->
 
         <!--section 4-->
+        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0" v-if="post_info.request_post != null">
+          <div class="flex-col items-start w-full">
+          <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
+            <label class="pl-3 text-gray-500">{{post_info.request_post.shoppingList.split(',').length}} items</label>
+          </span>
+          <div class="flex-col">
+            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
+              <li v-for="(shoppingList,index ) in post_info.request_post.shoppingList.split(',')" :key="index" >{{ shoppingList }}</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+        <!--section 4-->
+        <!--section 4-->
         <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.offer_post != null">
-          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.offer_info.caption}}</p>
+          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.offer_post.caption}}</p>
         </div>
         <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.request_post != null">
           <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.request_post.caption}}</p>
@@ -659,8 +662,7 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
-  }
- 
+  },
    
 }
 </script>
