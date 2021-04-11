@@ -46,17 +46,11 @@ data:()=>{
     toggle:false,
     toggle_email:false,
     toggle_password:false,
-    disabled: 0,
-    hidden:false,
-    show:true,
-    show2:true,
-    edit3:false,
-    new_email:['sanJuan@gmail.com'],
+    
     account_info:{
         email:'sanJuan@gmail.com',
         password:'password',
-        password_int:'',
-        type:'password',
+       
     },
     }
   
