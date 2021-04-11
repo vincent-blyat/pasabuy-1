@@ -68,7 +68,7 @@
         py-20
         ">
           <div class=" bg-white ring-1  ring-gray-300  p-5 w-full rounded-xl
-             2xl:w-97 
+             2xl:w-97 2xl:ml-5
               lg:w-97
               xl:w-97   xl:mr-16
               md:w-8/12
@@ -78,7 +78,7 @@
           ">
           <div class="flex flex-row items-center  justify-between p-3">
             <p class="hidden lg:block 2xl:block xl:block"></p>
-            <p class="text-lg font-extrabold">Update Personal Info</p>
+            <p class="text-lg font-extrabold xl:ml-9 lg:ml-9 2xl:ml-9">Update Personal Info</p>
             <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false"> Close</p>
           </div>
            
