@@ -2,7 +2,7 @@
     <div class="ring-1 ring-gray-300 bg-white p-5 rounded-2xl shadow-sm" >
         <div class=" flex justify-between">
             <div class="flex gap-4">
-            <p class="font-bold font-nunito text-sm">Education Info</p>
+            <p class="font-bold font-nunito text-sm ">Education Info</p>
             </div>
            <div>  <label for="sub" id="edt3" @click="toggle=!toggle" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label></div>
@@ -42,7 +42,7 @@
           ">
              <div class="flex flex-row items-center  justify-between p-3">
             <p class="hidden lg:block 2xl:block xl:block"></p>
-            <p class="text-lg font-extrabold">Update Education Info</p>
+            <p class="text-lg font-extrabold xl:ml-8 lg:ml-8 2xl:ml-8">Update Education Info</p>
             <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false"> Close</p>
           </div>
            
