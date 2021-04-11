@@ -58,15 +58,15 @@ class userInformationController extends Controller
         return response()->json($data[0]);
     }
 
-     public function getAccount()
+     public function confirmUser(Request $request)
     {
         # code...
-        $user = Auth::user();
-        $data = DB::select('SELECT * FROM tbl_userAuthentication WHERE email = \''.$user->email.'\'');
-
-        if($data == null)
-            return response()->json('');
-        return response()->json($data[0]);
+        $hashedPassword = Auth::user()->getAuthPassword();
+        if (Hash::check( $request->currPassword,  $hashedPassword)) {
+            return response()->json(true);
+        }else{
+            return response()->json(false);
+        }
     }
 
     public function editAccount(Request $request)

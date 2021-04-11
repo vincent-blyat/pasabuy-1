@@ -35,10 +35,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
     Route::post('/editAccount', [userInformationController::class, 'editAccount']);
     Route::get('/getValidID', [userInformationController::class, 'getValidID']);
-    Route::get('/getAccount', [userInformationController::class, 'getAccount']);
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
+    Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
  
     
 });

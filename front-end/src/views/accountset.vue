@@ -95,13 +95,19 @@ export default {
       .get('/api/getValidID')
       .then((res) => {
         console.log('asd',res.data);
-        if (!res.data.verifyStatus.localeCompare("unverified")) {
+        if(res.data.verifyStatus != null){
+          if (!res.data.verifyStatus.localeCompare("unverified")) {
+            this.verification_status.msg = "Your account is not fully verified.";
+            this.unverified = true;
+          } else {
+            this.verification_status.msg = "Your account is fully verified.";
+            this.unverified = false;
+          }   
+        }else{
           this.verification_status.msg = "Your account is not fully verified.";
           this.unverified = true;
-        } else {
-          this.verification_status.msg = "Your account is fully verified.";
-          this.unverified = false;
         }
+        
         //this.user = res.data;
       })
       .catch((error) => {
