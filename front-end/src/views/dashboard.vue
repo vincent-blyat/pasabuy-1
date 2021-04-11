@@ -10,7 +10,7 @@
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
     <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -99,7 +99,7 @@
         <!--section 1-->
         <div class="relative flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.get_user_name.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
                 <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.get_user_name.firstName}} {{post_info.get_user_name.lastName}}
@@ -530,6 +530,7 @@ export default {
       datePosted1: '13 hours ago',
       postStatus: 'posted',
       user_info:[],
+      profilePicture:null,
 
       // delivery_info:{
       //   delivery_area: 'Naga City',
@@ -653,16 +654,28 @@ export default {
     }).catch((error) => {
        console.log(error)
     })
+
+    api.get('/api/getPersonal').then((resp)=>{
+      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
+    }).catch((error) => {
+       console.log(error)
+    })
   },
   created(){
     api.get('/api/getPosts').then((res)=>{
-      console.log(res.data)
+      
+      var i;
+      for(i=0;i<res.data.length;i++){
+        res.data[i].get_user_name.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].get_user_name.profilePicture)
+      }
+      // res.data.get_user_name.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data.get_user_name.profilePicture)
       this.delivery_info=res.data
       console.log(this.delivery_info)
     }).catch((error) => {
       console.log(error)
     })
-  },
+  }
+
    
 }
 </script>

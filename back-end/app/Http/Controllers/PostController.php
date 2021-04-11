@@ -138,6 +138,14 @@ class PostController extends Controller
 		$user = Auth::user();
 		$data = Post::with('offer_post','request_post','get_user_name')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
+		// for($i=0;$i<count($data);$i++){
+		// 	$data->get_user_name->profilePicture = utf8_encode($data->get_user_name->profilePicture);
+		// }
+		foreach ($data as $convertingImage){ 
+			// Code Here
+			$convertingImage->get_user_name->profilePicture = utf8_encode($convertingImage->get_user_name->profilePicture);
+		}
+		//$data[0]->get_user_name->profilePicture = utf8_encode($data[0]->get_user_name->profilePicture);
 		return $data;
 	}
     
