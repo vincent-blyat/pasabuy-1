@@ -31,35 +31,61 @@
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
             
           <div v-if="searchMessageInactive">
-            <button @click ="navMark" type="button" class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="mark"> {{ inbox[0].name}} <span class="material-icons pl-2" id="iCheck" >
-                  check_circle
-                  </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                  </span> 
-                </div>
+            <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+               <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
               </div>
-                <div class="flex flex-col items-start"> 
-                  <span class="text-gray-700 text-xs">
-                  <span class="font-light pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                </div>
-            </button>
-
-            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="gwen">{{ inbox[1].name}}<span class="material-icons pl-2" id="iCheck" >
-                  check_circle
-                  </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[1].message}}
-                  </span> 
-                  </div>
-                </div>
-                <div class="flex flex-col items-start"> 
-                  <span class="text-gray-700 text-xs">
-                  <span class="font-bold pl-1 pr-1">·</span>{{ inbox[1].time}}</span>
-              </div>
-            </button>  
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>  
           </div> <!---------------navigation message------------>
 
           <div v-if="showSearchResults" class="divide-y divide-gray-300">
@@ -68,20 +94,61 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-                <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                  <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
+               <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
                     check_circle
-                    </span></span> 
-                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                    </span> 
-                  </div>
-                </div>
-                  <div class="flex flex-col items-start"> 
-                    <span class="text-gray-700 text-xs">
-                    <span class="font-bold pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                  </div>
-              </button>
+                  </span>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>  
             </div>
             
           </div> <!---------------search message results------------>
@@ -143,11 +210,6 @@
             </span>
         </div>
 
-        <div class="p-2 flex justify-end">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
-            <p>{{ chatOutgoing[0].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[0].timeSent}} </span> </div>
-        </div>
         
         <div class=" flex justify-end mt-2">
           <div class="ml-32 bg-gray-100 text-sm rounded-lg">
@@ -203,109 +265,41 @@
             </div>
           </div>
         </div><!----------------------------------------->
-        <div class="p-1 ml-12">
-         <div class="flex items-end pr-10 mt-1">
-            <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
-              <div>
-              <div class="mx-4 mb-2 text-sm font-semibold">
-                <span>Order Details</span>
-              </div>
-              <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
-                <div class="flex flex-col px-2">
-                  
-                  <div class="flex items-start">
-                    <span class="text-red-700 material-icons" style="font-size:18px">place</span>
-                    <span class="pl-2 pb-1">{{placeFrom}}</span>
-                  </div>
-                  <div class="flex items-start">
-                    <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
-                    <span class="pl-2 pb-1">{{destination}}</span>
-                  </div>
-                  <div class="flex items-start">
-                    <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
-                    <span class="pl-2 pb-1">{{timeAlloted}}</span>
-                  </div>
-                  <div class="flex items-start">
-                    <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
-                    <span class="pl-2">{{paymentMethod}}</span>
-                  </div>
-                  
-                </div>
-              </div>
-              <div class="mx-4 p-2 bg-white rounded-lg text-sm">
-                <div>
-                  <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">8 items</span></span>
-                </div>
-                <div>
-                    <ul class="text-gray-600 list-disc list-inside pl-4 ">
-                      <li v-for="items in shoppingList" :key="items.ShoppingList">
-                        <span>
-                          {{ items.items}}
-                        </span>
-                      </li>
-                    </ul>
-                </div>
-                <div></div>
+              
+      <div class="p-1 pl-2"
+            v-for="(chat, index) in chatRooms"
+            :key="index"
+            >
+      <div v-if="chat.messageRoomNumber===activeRoom">
+      <div class="p-1 pl-2"
+            v-for="(msg, index) in chat.get_messages"
+            :key="index"
+            >
+            <div v-if="msg.messageSender === authUser">
+             <div class="flex justify-end pr-10 mt-1">
+              <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
+                <p>{{ msg.messageText }}</p>
+               
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ timestamp(msg.dateCreated) }}  
+                </span>
               </div>
             </div>
             </div>
-         </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8 "> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{ chatIncoming[0].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{ chatIncoming[0].timeReceived}}</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[1].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >{{chatOutgoing[1].timeSent}}</span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[1].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[1].timeReceived}}</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[2].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[2].timeSent}} </span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-            <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[2].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[2].timeReceived}}</span></div>
+             <div v-else>
+             <div class="flex items-end pr-10 mt-1">
+              <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
+                <p>{{ msg.messageText }}</p>
+               
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ timestamp(msg.dateCreated) }}  
+                </span>
+              </div>
             </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[3].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[3].timeSent}}</span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[3].received}}</p>
-             <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[3].received}}</span></div>
-          </div>
-         </div>
-        </div>
+            </div>
+      </div>
+      </div>
+      </div>
         <div id="chatmsg"></div>
       </div>
       <div v-if="attachment" class="sticky bottom-11">
@@ -327,14 +321,22 @@
                <span class="material-icons" id="attach">
                     {{attach}}</span>
               </button>
-              <input type="text" class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full" placeholder="Type a message" id="typemsg" />
-              <button  @click="sendbtn" class="w-8 h-8 flex items-center pl-1 rounded-full focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
+             <input
+              type="text"
+              class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full"
+              placeholder="Type a message"
+              id="typemsg"
+              @keyup.enter="sendbtn"
+              v-model="message"
+            />
+             <button  @click="sendbtn" class="w-8 h-8 flex items-center pl-1 rounded-full focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
                     send</span>
               </button>
       </div>
+      </div>
     </div><!--end of right corner-->
   </div>
-</div><!--end of desktop version-->
+<!--end of desktop version-->
 
 
 <!------------mobile version--------------------->
@@ -400,12 +402,6 @@
       <!----chat box---->
       <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
         
-        <div class="p-2 flex justify-end">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
-            <p>{{ chatOutgoing[0].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[0].timeSent}} </span> </div>
-        </div>
-        
         <div class=" flex justify-end mt-2">
           <div class="ml-32 bg-gray-100 text-sm rounded-lg">
             
@@ -508,61 +504,42 @@
             </div>
          </div>
         </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8 "> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{ chatIncoming[0].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{ chatIncoming[0].timeReceived}}</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[1].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >{{chatOutgoing[1].timeSent}}</span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[1].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[1].timeReceived}}</span></div>
-          </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[2].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[2].timeSent}} </span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-            <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[2].received}}</p>
-              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[2].timeReceived}}</span></div>
+        
+      <div class="p-1 pl-2"
+            v-for="(chat, index) in chatRooms"
+            :key="index"
+            >
+      <div v-if="chat.messageRoomNumber===activeRoom">
+      <div class="p-1 pl-2"
+            v-for="(msg, index) in chat.get_messages"
+            :key="index"
+            >
+            <div v-if="msg.messageSender === authUser">
+             <div class="flex justify-end pr-10 mt-1">
+              <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
+                <p>{{ msg.messageText }}</p>
+               
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ timestamp(msg.dateCreated) }}  
+                </span>
+              </div>
             </div>
-         </div>
-        </div>
-        <div class="p-2 flex justify-end ">
-          <div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">
-            <p>{{chatOutgoing[3].sent}}</p>
-            <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" > {{chatOutgoing[3].timeSent}}</span> </div>
-        </div>
-        <div class="p-1 pl-2">
-         <div class="flex items-end pr-10 mt-1"> 
-           <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-8"> 
-           <div class="rounded-lg ">
-            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
-              <p>{{chatIncoming[3].received}}</p>
-             <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{chatIncoming[3].received}}</span></div>
-          </div>
-         </div>
-        </div>
+            </div>
+             <div v-else>
+             <div class="flex items-end pr-10 mt-1">
+              <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
+                <p>{{ msg.messageText }}</p>
+               
+                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
+                  {{ timestamp(msg.dateCreated) }}  
+                </span>
+              </div>
+            </div>
+            </div>
+      </div>
+      </div>
+      </div>
+
         <div id="chatmsg"></div>
     </div><!--end overflow--->
       <div v-if="attachment" class="sticky bottom-11">
@@ -584,8 +561,14 @@
                <span class="material-icons" id="attach2">
                     {{attach}}</span>
               </button>
-              <input type="text" class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full" placeholder="Type a message" id="typemsg" />
-              <button  @click="sendbtn" class="w-8 h-8 flex items-center pl-1 rounded-full focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
+             <input
+              type="text"
+              class="w-10/12 h-8 flex pl-4 border focus:outline-none focus:ring-1 focus:ring-gray-400 rounded-full"
+              placeholder="Type a message"
+              id="typemsg"
+              @keyup.enter="sendbtn"
+              v-model="message"
+            />  <button  @click="sendbtn" class="w-8 h-8 flex items-center pl-1 rounded-full focus:outline-none hover:text-red-700" type="button"><span class="material-icons">
                     send</span>
               </button>
       </div>
@@ -623,35 +606,61 @@
     <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
 
           <div v-if="searchMessageInactive">
-            <button @click ="navMark" type="button" class="focus:bg-gray-200 w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="mark"> {{ inbox[0].name}} <span class="material-icons pl-2" id="iCheck" >
-                  check_circle
-                  </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                  </span> 
-                </div>
+            <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
               </div>
-                <div class="flex flex-col items-start"> 
-                  <span class="text-gray-700 text-xs">
-                  <span class="font-light pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                </div>
-            </button>
-
-            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200  w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-              <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="gwen">{{ inbox[1].name}}<span class="material-icons pl-2" id="iCheck" >
-                  check_circle
-                  </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[1].message}}
-                  </span> 
-                  </div>
-                </div>
-                <div class="flex flex-col items-start"> 
-                  <span class="text-gray-700 text-xs">
-                  <span class="font-bold pl-1 pr-1">·</span>{{ inbox[1].time}}</span>
-              </div>
-            </button>  
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>   
           </div> <!---------------navigation message------------>
 
           <div v-if="showSearchResults" class="divide-y divide-gray-300">
@@ -660,20 +669,61 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
-                <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
-                  <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
+               <button
+            v-for="(chatRoom,index) in chatRooms"
+            :key="index"
+            @click="setRoom(chatRoomNames[index], 
+                            chatRoom.messageRoomNumber)"
+            type="button"
+            class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
+            >
+            <div class="flex ml-2">
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                class="rounded-lg h-8 w-7 pt-1"
+              />
+              <div class="flex flex-col justify-between items-start ml-2">
+                <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
                     check_circle
-                    </span></span> 
-                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
-                    </span> 
-                  </div>
-                </div>
-                  <div class="flex flex-col items-start"> 
-                    <span class="text-gray-700 text-xs">
-                    <span class="font-bold pl-1 pr-1">·</span>{{ inbox[0].time}}</span>
-                  </div>
-              </button>
+                  </span>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
+                                                                        .get_messages.length-1].messageSender === authUser">
+                  You : 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+                <span class="text-xs text-gray-400 truncate w-36" v-else>
+                  {{chatRoom.get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.firstName}} 
+                    {{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .get_message_sender.lastName}}: 
+                  <strong>{{  chatRoom
+                    .get_messages[chatRoom
+                    .get_messages.length-1]
+                    .messageText}}</strong>
+                </span>
+              </div>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="text-gray-700 text-xs">
+                <span class="font-bold pl-1 pr-1">·
+                  </span>
+                  {{  timestamp(chatRoom
+                  .get_messages[chatRoom
+                  .get_messages.length-1].dateCreated)}}
+                  </span
+              >
+            </div>
+          </button>  
             </div>
             
           </div> <!---------------search message results------------>
@@ -686,187 +736,404 @@
 </div>
 
 </template>
-
 <script>
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
+import api from "../api";
+import moment from 'moment'
 export default {
-    components:{
-      Navbar,
-    },
-    props:{
-      //message: String 
-    },
-    data() {
-      return{
-        //buttons
-          toggle:false,
-          toggleInbox:true,
-          toggleChat: false,
-          searchMessageInactive: true,
-          showSearchResults: false,
-          attachment:false,
-          attach:'add',
-        //inbox
-          inbox: [
-            { name: 'Mark Aral', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Gwen Lopez', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Monica Rambeau', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-          
-          ],
-        //chat
-          activeName: 'Mark Aral',
-          chatIncoming: [
-            { received: 'Yeah, sure! No problem. I am already on my way to SM City Legazpi.', timeReceived:'1:26 PM    |    Today'},
-            { received: 'Sorry, it took me a while. I had to shop for three orders. Anyway, I am already in my car. I will deliver these two orders first here in Legazpi.', timeReceived:'2:40 PM    |    Today'},
-            { received: 'I am two mins away from your house. ', timeReceived:'3:12 PM    |    Today'},
-            { received: 'No problem. Thanks as well for the handsome pay!', timeReceived:'3:39 PM    |    Today'},
-          ],
-          chatOutgoing:[
-            { sent: 'Do you think you can do it in time? I need it before 4 pm so I hope you can deliver it in time.', timeSent:'1:24 PM    |    Today'},
-            { sent: 'Thank you so much! Let me know when you are on your way.', timeSent:'1:31 PM    |    Today'},
-            { sent: 'No problem, chat me when you are near my house already', timeSent:'2:45 PM    |    Today'},
-            { sent: 'Thanks for help', timeSent: '3:36  | Today'},
-          ],
-          //sent a request
-          activity: 'You sent a request to to',
-          recipient: 'Mark Aral',
-          sender: 'Monica Rambeau',
-          postNum: '#2021352',
-          postNum2: '#130317',
-          placeFrom: 'Banquerohan, Legazpi City',
-          destination: 'SM City ',
-          timeAlloted: 'Tomorrow, 5 PM',
-          paymentMethod: 'Payment First via GCash transfer',
-          //shoppingList
-          shoppingList: [
+  components: {
+    Navbar,
+  },
+    //message: String
+  data() {
+    return {
+      //buttons
+      searchMessageInactive: true,
+      showSearchResults: false,
+      attachment:false,
+      attach:'add',
+      toggle: false,
+      attachtoggle: false,
+      toggleInbox: true,
+      toggleChat: false,
+      chatRooms: [],
+      chatRoomNames:[],
+      //inbox
+      inbox: [],
+      //chat
+      activeName: null,
+      activeRoom: null,
+      authUser:null,
+      chatIncoming: [],
+      chatOutgoing: [],
+      message:null,
+      out :[],
+      incoming:[],
+      chat: [],
+      //sent a request
+       //sent a request
+      activity: 'You sent a request to to',
+      recipient: 'Mark Aral',
+      sender: 'Monica Rambeau',
+      postNum: '#2021352',
+      postNum2: '#130317',
+      placeFrom: 'Banquerohan, Legazpi City',
+      destination: 'SM City ',
+      timeAlloted: 'Tomorrow, 5 PM',
+      paymentMethod: 'Payment First via GCash transfer',
+        //shoppingList
+      shoppingList: [
             { items: 'Baking Soda'},
             { items: 'Choco Syrup'},
             { items: 'cocoa powder'},
             { items: 'flour 1 kg'},
             { items: 'brown sugar'},
             { items: 'cocoa powder'},
-          ],
-          shoppingListSize: 8,
+        ],
+      shoppingListSize: 8,
+    };
+  },
+
+  watch:{
+    activeRoom(val,oldval){
+      if(oldval){      
+        this.disconnect(oldval)
+      }
+      this.connect()
+    }
+  },
+
+  methods: {
+
+    connect(){
+      console.log("connect")
+      if(this.activeRoom !=null){
+        let vm =this;
+        vm.getChatRooms();
+        window.Echo.private("chat."+this.activeRoom).listen('.message.new',()=>{
+          console.log('listening...')
+          vm.getChatRooms();
+        })
       }
     },
-    methods: {
-      sendbtn(){
-        const fileInputBtn = document.getElementById('fileInput');
-        var printtext = document.getElementById('chatmsg');
-        var copytext = document.getElementById('typemsg');
-        var copiedtext = copytext.value;
-        if (fileInputBtn.value){
-          var fileText = fileInputBtn.value;
-          var printFile = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+fileText+'</div> '  
-          printtext.insertAdjacentHTML('beforeend', printFile);
-          document.getElementById('typemsg').value = '';
-          this.attachment = !this.attachment;
-          if( this.attachment == true){
-          document.getElementById("attach").innerHTML="close";
-          } 
-          else if(this.attachment ==false){
-            document.getElementById("attach").innerHTML="add";
-          }
-        }
-        if(copiedtext!=='' ){
-          var printnow = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+copiedtext+'<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >'+'<br>'+'3:45 PM'+' | '+'Today'+'</span>'+'</div> '
-              
-          printtext.insertAdjacentHTML('beforeend', printnow);
-          document.getElementById('typemsg').value = '';
-          var box = document.getElementById('journal-scroll');
-          box.scrollIntoView();
-        }
-      },//end sendbtn
-      searchBtn(){
-        this.showSearchResults=!this.showSearchResults;
-        this.searchMessageInactive=!this.searchMessageInactive;
-        document.getElementByID('search').value ='Mark';
-      },
-      alert(){
-        alert('called');
-      },
-      closeSearchResults(){
-        if(this.searchMessageInactive==false){
-          this.searchMessageInactive=!this.searchMessageInactive;
-          this.showSearchResults=!this.showSearchResults
-        }
-      },
-      searchBackBtn(){
-        this.showSearchResults=!this.showSearchResults;
-        this.searchMessageInactive=!this.searchMessageInactive;
-      },
-      attachbtn(){
-        this.attachment = !this.attachment;
-        if( this.attachment == true){
-          document.getElementById("attach").innerHTML="close";
-          document.getElementById("attach2").innerHTML="close";
-        } 
-        else if(this.attachment ==false){
-          document.getElementById("attach").innerHTML="add";
-          document.getElementById("attach2").innerHTML="add";
-        }
-      },
-      messagebtn(){
-        this.toggleInbox=!this.toggleInbox;
-        this.toggleChat=!this.toggleChat;
-        var b = document.getElementById('gwen');
-        var bText = b.textContent;
-        var bLen = bText.length;
-        var res = bText.substring(0, bLen-13);
-        document.getElementById("active").innerHTML = res;
-      },
-       navMark(){
-        this.toggleInbox=!this.toggleInbox;
-        this.toggleChat=!this.toggleChat;
-        var b = document.getElementById('mark');
-        var bText = b.textContent;
-        var bLen = bText.length;
-        var res = bText.substring(0, bLen-13);
-        document.getElementById("active").innerHTML = res;
-      },
-      backChat(){
-        this.toggleInbox=!this.toggleInbox;
-        this.toggleChat=!this.toggleChat;
-      },
-      threedots(){
-        this.toggle = !this.toggle;
-        
-      },//end threedots
-      attachPhoto(){
-        const fileInputBtn = document.getElementById('photoInput');
-        const fileholder = document.getElementById('photo');
-        fileInputBtn.click();
-        fileInputBtn.addEventListener("change", function(){
-        if (fileInputBtn.value){
-           fileholder.innerHTML = fileInputBtn.value;
-        } else {
-        fileholder.innerhtml = "";
-        }
+    disconnect(oldval){
+      window.Echo.leave('chat.'+oldval)
+    },
+
+    sendbtn() {
+      if (this.message != "") {
+        var dataMessage = {roomID:this.activeRoom, message: this.message}
+        api.get('/sanctum/csrf-cookie').then(() => {
+          api.post('/api/sendMessage', dataMessage).then((res)=>{
+            console.log('success, message sent.  ', res.data)
+            this.getChatRooms();
+            // var printnow =
+            // '<div class="flex justify-end pr-10 mt-1">' +
+            // '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
+            // copiedtext +
+            // '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
+            // "<br>" +
+            // this.timestamp +
+            // "</span>" +
+            // "</div> ";
+            // printtext.insertAdjacentHTML("beforeend", printnow);
+            this.message = "";
+            var box = document.getElementById("journal-scroll");
+            box.scrollIntoView();
+          })
         })
-      },
-      attachFile(){
-        const fileInputBtn = document.getElementById('fileInput');
-        const fileholder = document.getElementById('file');
-        fileInputBtn.click();
-        fileInputBtn.addEventListener("change", function(){
-        if (fileInputBtn.value){
-           fileholder.innerHTML = fileInputBtn.value;
-        } else {
-        fileholder.innerhtml = "";
-        }
-        })
+      }else{
+        return;
       }
-    }//end methods
-  }//end export default
+    }, //end sendbtn
+
+    setRoom(name,room_ID) {
+      this.toggleInbox = !this.toggleInbox;
+      this.toggleChat = !this.toggleChat;
+      this.activeName = name;
+      this.activeRoom = room_ID;
+      this.recipient = name;
+      console.log('setroom')
+    },
+    // getMessages(){
+    //   if(this.activeRoom!=null){
+    //     console.log('active room number: ',this.activeRoom);
+    //     api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
+    //       var i;
+    //       for(i=0;i<response.data.length;i++){
+    //         if(response.data[i].messageSender == this.authUser){
+    //           this.chat[i] = response.data[i];
+    //           this.out[i]= true;
+    //           this.incoming[i]= false;
+    //         }
+    //         else{
+    //           this.chat[i] = response.data[i];
+    //           this.out[i]= false;
+    //           this.incoming[i]= true;
+    //         }
+    //       }
+    //     })
+    //   }else{
+    //     console.log('not found')
+    //   }
+    // },
+
+    backChat() {
+      this.toggleInbox = !this.toggleInbox;
+      this.toggleChat = !this.toggleChat;
+    },
+
+    threedots() {
+      this.toggle = !this.toggle;
+    }, //end threedots
+    attachbtn() {
+      this.attachtoggle = !this.attachtoggle;
+    },
+    getChatRooms() {
+        api.get('/api/getChatroom').then((res) => {
+            this.chatRooms = res.data;
+            console.log(this.chatRooms)
+            var i;
+            // var j;
+            //var x=0;
+            for(i=0; i<this.chatRooms.length; i++){
+              if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
+                this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName
+              }
+              else{
+                this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName 
+              }
+            
+              // for(j=0; j<this.chatRooms[i].get_messages.length; j++){
+              //   if(this.chatRooms[i].get_messages[j].messageSender == this.authUser){
+              //     this.chat[j]=this.chatRooms[i];
+              //     this.out[j]= true;
+              //     this.incoming[j]= false;
+              //   }
+              //   else{
+              //     this.chat[j]=this.chatRooms[i]
+              //     this.out[j]= false;
+              //     this.incoming[j]= true;
+              //   }
+              // //  x++;
+              // }
+            }
+           console.log('chat-lenght=', this.chat.length)
+            if(this.activeRoom==null){
+              this.setRoom(this.chatRoomNames[0], 
+              this.chatRooms[0]
+              .messageRoomNumber)
+            }
+        });
+    },
+    getAuthUser(){
+      api.get('api/user').then((res)=>{
+        this.authUser = res.data.email;
+      })
+    },
+    timestamp(date) {
+      return moment(date).fromNow();
+    }
+
+
+  }, //end methods
+  created() {
+    this.getAuthUser();
+    this.getChatRooms();
+  },
+
+}; //end export default
+
 const add = document.querySelector("#add");
 const del = document.querySelector("#del");
-document.addEventListener("click", function(event) { 
-    if(event.target.closest(".add")) return add.classList.add("hide");
-    if(event.target.closest(".del")) return del.classList.add("hide");
-})
+
+document.addEventListener("click", function (event) {
+  if (event.target.closest(".add")) return add.classList.add("hide");
+
+  if (event.target.closest(".del")) return del.classList.add("hide");
+});
+
+
+// import Navbar from './Navbar'
+// export default {
+//     components:{
+//       Navbar,
+//     },
+//     props:{
+//       //message: String 
+//     },
+//     data() {
+//       return{
+//         //buttons
+//           toggle:false,
+//           toggleInbox:true,
+//           toggleChat: false,
+//           searchMessageInactive: true,
+//           showSearchResults: false,
+//           attachment:false,
+//           attach:'add',
+//         //inbox
+//           inbox: [
+//             { name: 'Mark Aral', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+//             { name: 'Gwen Lopez', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+//             { name: 'Monica Rambeau', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+//             { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+//             { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+          
+//           ],
+//         //chat
+//           activeName: 'Mark Aral',
+//           chatIncoming: [
+//             { received: 'Yeah, sure! No problem. I am already on my way to SM City Legazpi.', timeReceived:'1:26 PM    |    Today'},
+//             { received: 'Sorry, it took me a while. I had to shop for three orders. Anyway, I am already in my car. I will deliver these two orders first here in Legazpi.', timeReceived:'2:40 PM    |    Today'},
+//             { received: 'I am two mins away from your house. ', timeReceived:'3:12 PM    |    Today'},
+//             { received: 'No problem. Thanks as well for the handsome pay!', timeReceived:'3:39 PM    |    Today'},
+//           ],
+//           chatOutgoing:[
+//             { sent: 'Do you think you can do it in time? I need it before 4 pm so I hope you can deliver it in time.', timeSent:'1:24 PM    |    Today'},
+//             { sent: 'Thank you so much! Let me know when you are on your way.', timeSent:'1:31 PM    |    Today'},
+//             { sent: 'No problem, chat me when you are near my house already', timeSent:'2:45 PM    |    Today'},
+//             { sent: 'Thanks for help', timeSent: '3:36  | Today'},
+//           ],
+//           //sent a request
+//           activity: 'You sent a request to to',
+//           recipient: 'Mark Aral',
+//           sender: 'Monica Rambeau',
+//           postNum: '#2021352',
+//           postNum2: '#130317',
+//           placeFrom: 'Banquerohan, Legazpi City',
+//           destination: 'SM City ',
+//           timeAlloted: 'Tomorrow, 5 PM',
+//           paymentMethod: 'Payment First via GCash transfer',
+//           //shoppingList
+//           shoppingList: [
+//             { items: 'Baking Soda'},
+//             { items: 'Choco Syrup'},
+//             { items: 'cocoa powder'},
+//             { items: 'flour 1 kg'},
+//             { items: 'brown sugar'},
+//             { items: 'cocoa powder'},
+//           ],
+//           shoppingListSize: 8,
+//       }
+//     },
+//     methods: {
+//       sendbtn(){
+//         const fileInputBtn = document.getElementById('fileInput');
+//         var printtext = document.getElementById('chatmsg');
+//         var copytext = document.getElementById('typemsg');
+//         var copiedtext = copytext.value;
+//         if (fileInputBtn.value){
+//           var fileText = fileInputBtn.value;
+//           var printFile = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+fileText+'</div> '  
+//           printtext.insertAdjacentHTML('beforeend', printFile);
+//           document.getElementById('typemsg').value = '';
+//           this.attachment = !this.attachment;
+//           if( this.attachment == true){
+//           document.getElementById("attach").innerHTML="close";
+//           } 
+//           else if(this.attachment ==false){
+//             document.getElementById("attach").innerHTML="add";
+//           }
+//         }
+//         if(copiedtext!=='' ){
+//           var printnow = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+copiedtext+'<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >'+'<br>'+'3:45 PM'+' | '+'Today'+'</span>'+'</div> '
+              
+//           printtext.insertAdjacentHTML('beforeend', printnow);
+//           document.getElementById('typemsg').value = '';
+//           var box = document.getElementById('journal-scroll');
+//           box.scrollIntoView();
+//         }
+//       },//end sendbtn
+//       searchBtn(){
+//         this.showSearchResults=!this.showSearchResults;
+//         this.searchMessageInactive=!this.searchMessageInactive;
+//         document.getElementByID('search').value ='Mark';
+//       },
+//       alert(){
+//         alert('called');
+//       },
+//       closeSearchResults(){
+//         if(this.searchMessageInactive==false){
+//           this.searchMessageInactive=!this.searchMessageInactive;
+//           this.showSearchResults=!this.showSearchResults
+//         }
+//       },
+//       searchBackBtn(){
+//         this.showSearchResults=!this.showSearchResults;
+//         this.searchMessageInactive=!this.searchMessageInactive;
+//       },
+//       attachbtn(){
+//         this.attachment = !this.attachment;
+//         if( this.attachment == true){
+//           document.getElementById("attach").innerHTML="close";
+//           document.getElementById("attach2").innerHTML="close";
+//         } 
+//         else if(this.attachment ==false){
+//           document.getElementById("attach").innerHTML="add";
+//           document.getElementById("attach2").innerHTML="add";
+//         }
+//       },
+//       messagebtn(){
+//         this.toggleInbox=!this.toggleInbox;
+//         this.toggleChat=!this.toggleChat;
+//         var b = document.getElementById('gwen');
+//         var bText = b.textContent;
+//         var bLen = bText.length;
+//         var res = bText.substring(0, bLen-13);
+//         document.getElementById("active").innerHTML = res;
+//       },
+//        navMark(){
+//         this.toggleInbox=!this.toggleInbox;
+//         this.toggleChat=!this.toggleChat;
+//         var b = document.getElementById('mark');
+//         var bText = b.textContent;
+//         var bLen = bText.length;
+//         var res = bText.substring(0, bLen-13);
+//         document.getElementById("active").innerHTML = res;
+//       },
+//       backChat(){
+//         this.toggleInbox=!this.toggleInbox;
+//         this.toggleChat=!this.toggleChat;
+//       },
+//       threedots(){
+//         this.toggle = !this.toggle;
+        
+//       },//end threedots
+//       attachPhoto(){
+//         const fileInputBtn = document.getElementById('photoInput');
+//         const fileholder = document.getElementById('photo');
+//         fileInputBtn.click();
+//         fileInputBtn.addEventListener("change", function(){
+//         if (fileInputBtn.value){
+//            fileholder.innerHTML = fileInputBtn.value;
+//         } else {
+//         fileholder.innerhtml = "";
+//         }
+//         })
+//       },
+//       attachFile(){
+//         const fileInputBtn = document.getElementById('fileInput');
+//         const fileholder = document.getElementById('file');
+//         fileInputBtn.click();
+//         fileInputBtn.addEventListener("change", function(){
+//         if (fileInputBtn.value){
+//            fileholder.innerHTML = fileInputBtn.value;
+//         } else {
+//         fileholder.innerhtml = "";
+//         }
+//         })
+//       }
+//     }//end methods
+//   }//end export default
+// const add = document.querySelector("#add");
+// const del = document.querySelector("#del");
+// document.addEventListener("click", function(event) { 
+//     if(event.target.closest(".add")) return add.classList.add("hide");
+//     if(event.target.closest(".del")) return del.classList.add("hide");
+// })
 </script>
+
 
 <style>
     .hide{

@@ -1,7 +1,9 @@
 <template class=" bg-gray-bgcolor font-nunito">
 
     <div class="flex items-center ">
+        <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        </router-link>
         <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
           text-red-buttons block
           
@@ -16,7 +18,7 @@
       ">
         <div class="px-10 py-16 ">
             <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Create an account</h1>
-              <form action="#" class="space-y-3">
+              <div action="#" class="space-y-3">
                <div class="flex flex-col 
                 md:flex-row md:justify-between md:space-x-6
                 sm:flex-row sm:justify-between sm:space-x-6
@@ -52,7 +54,7 @@
                     </div>
                 </div>
                 <div class="flex mb-2 -mx-1 ">
-                    <div class="w-1/2 px-1 mt-6 text-lg font-extrabold text-left text-grey-dark text-blue">
+                    <div class="w-1/2 px-1 mt-6 text-lg font-bold text-left text-grey-dark text-blue">
                         <router-link to="/log-in" >Log instead</router-link>
                     </div>
                     <div class="flex justify-end w-1/2 px-1 mt-3">
@@ -70,7 +72,7 @@
                         Privacy Policy
                     </a>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

@@ -1,13 +1,13 @@
 <template> 
 
-        <nav class="fixed z-10 flex w-full py-4 justify-between items-center  xl:px-4 font-nunito" :class="{change_color: scrollPosition > 50}">
+        <nav class="fixed z-10 flex items-center justify-between w-full py-4 xl:px-4 font-nunito" :class="{change_color: scrollPosition > 100}">
         <div class="absolute items-center ">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
           <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons vs:hidden ssm:hidden 2xl:text-2xl">
             pasaBUY
           </label>
       </div>
-            <div class="flex  items-center w-full mt-2 text-right ssm:flex ssm:justify-between sm:block xl:block 2xl:block vs:block lg:block md:block">
+            <div class="flex items-center w-full mt-2 text-right ssm:flex ssm:justify-between sm:block xl:block 2xl:block vs:block lg:block md:block">
                 <button class="h-10 px-4 m-1 text-red-700 transition-colors duration-150 border-2 border-red-700 rounded-3xl focus:outline-none hover:bg-red-50 2xl:text-2xl">
                     <router-link to="/log-in" class="font-bold">Log in</router-link>
                 </button>
@@ -19,30 +19,19 @@
     
 
     <div id="landing" class="w-full h-screen bg-no-repeat bg-cover xl:mx-auto ssm:w-full vs:bg-center md:bg-center vs:justify-center sm:bg-cover sm:bg-center ssm:bg-cover ssm:bg-center md:bg-no-repeat font-nunito" style="background-image: url('img/main-back.jpg')">
-        <div class="  flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
-            <section class="w-full 
-                ml-3
-            xl:w-6/12
-            md:w-7/12
-            lg:w-5/12
-            2xl:w-6/12
-            ">
-                <p class="mb-4 text-3xl font-bold tracking-wide xl:text-5xl
-                2xl:text-6xl
-                ">
+        <div class="flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
+            <section class="w-full ml-3 xl:w-6/12 md:w-7/12 lg:w-5/12 2xl:w-6/12 ">
+                <p class="mb-4 text-3xl font-bold tracking-wide xl:text-5xl 2xl:text-6xl ">
                     Need someone to do your groceries?</p>
                 <p class="text-lg leading-loose text-left 2xl:text-2xl">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
-                <button class="items-center px-4 m-1 mt-3 
-                font-semibold tracking-wide text-white 
-                transition-colors duration-150 rounded-full 2xl:mt-7
-                 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7   md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-0 hover:bg-red-800 2xl:text-xl">
+                <button class="items-center px-4 m-1 mt-3 font-semibold tracking-wide text-white transition-colors duration-150 rounded-full 2xl:mt-7 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7 md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-0 hover:bg-red-800 2xl:text-xl">
                    <router-link to="/log-in" >Pasabuy Now</router-link>
                 </button>
             </section>
         </div>
         <!--SECOND-->
-    <div class="flex flex-wrap justify-center bg-white sm:pt-16 lg:pt-40 2xl:pt-56 ssm:pt-16 xl:pt-40 vs:pt-12 font-nunito md:pt-20">
+    <div class="flex flex-wrap justify-center bg-white sm:pt-16 lg:pt-40 2xl:pt-56 ssm:pt-16 xl:pt-28 vs:pt-12 font-nunito md:pt-20">
        <div class="w-1/5 p-1 pt-20 m-4 mt-8 mb-4 mr-2 bg-gray-200 vs:pt-10 vs:mx-7 rounded-xl md:w-10/12 vs:w-full vs:justify-center md:pt-10 ssm:w-full sm:w-full sm:mx-7 lg:w-1/4">
             <img class="w-1/2 p-1 mx-auto mb-5 md:p-10" src="img/cart.png"> 
             <h2 class="text-xl font-bold leading-loose tracking-wide text-center md:leading-loose md:text-3xl">Get Help with Shopping</h2>
@@ -155,29 +144,38 @@
 <style scoped>
    
  .change_color {
-       background-color:white
+       background-color:white;
+       box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px
+   }
+   .scrollbehavior{
+       scroll-behavior: smooth;
    }
 </style>
 
 <script>
 export default {
+
   name: "Header",
       data(){
           return{
-      scrollPosition: null
+                scrollPosition: null
           }
       },
+
     methods: {
-    updateScroll() {
-      this.scrollPosition = window.scrollY
+
+        updateScroll() {
+        this.scrollPosition = window.scrollY
+        }
+
+  },
+
+        mounted() {
+            window.addEventListener('scroll', this.updateScroll);
+  },
+
+        destroy() {
+            window.removeEventListener('scroll', this.updateScroll)
     }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.updateScroll);
-  },
-    destroy() {
-  window.removeEventListener('scroll', this.updateScroll)
-}
-  
 }
 </script>
