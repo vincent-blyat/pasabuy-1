@@ -20,15 +20,16 @@
             Update your email below. There will be a new email sent that you
             will need to verify this new email.
           </p>
+         
         </div>
-        <span class="text-red-500">{{ errors }}</span>
+         <p class="text-center text-red-500">{{ errors }}</p>
         <div class=" ">
           <div class="flex flex-col p-5 space-y-4">
             <div class="flex flex-col">
               <span class="ml-2">Password</span>
               <input
                 id="password"
-                v-mode="password"
+                v-model="password"
                 type="password"
                 class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"
               />
@@ -38,6 +39,7 @@
               <span class="ml-2">New Email</span>
               <input
                 id="new_email"
+                v-model="newEmail"
                 type="text"
                 class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"
               />
@@ -57,7 +59,7 @@
       </div>
     </div>
   </div>
-  <Confirmation v-if="toggle_confirmation" />
+  <Confirmation v-if="toggle_confirmation" :email="newEmail"/>
 </template>
 
 <script>
@@ -74,25 +76,30 @@ export default {
       user: null,
       errors: null,
       password: null,
+      newEmail:null
     };
   },
   methods: {
     nextPage() {
       
-      var params = { currPassword: this.password };
+      var params = { password: this.password, email:this.newEmail };
       api
         .post("api/confirmUser", params)
         .then((res) => {
-          if (res.data) {
-            console.log(res.data);
-            this.toggle = false;
-            this.toggle_confirmation = !this.toggle_confirmation;
-          } else {
-            this.errors = "Incorrect Password.";
-          }
+          this.toggle = false;
+          this.toggle_confirmation = !this.toggle_confirmation;
+          this.toggle_confirmation=true;
+          localStorage.setItem('a',res.data.code)
         })
         .catch((errors) => {
-          console.log(errors);
+          console.log(errors.response.data);
+          this.errors=null;
+          if(errors.response.data.email == undefined)
+            this.errors = errors.response.data.password+' '
+          else if(errors.response.data.password == undefined)
+            this.errors = errors.response.data.email+' '
+          else
+            this.errors = errors.response.data.email+' '+ errors.response.data.password
         });
     },
   },

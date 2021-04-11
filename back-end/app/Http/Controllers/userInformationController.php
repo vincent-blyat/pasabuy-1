@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\emailConfirmation;
 use App\Models\User;
 use App\Models\Messages;
 use App\Models\userAddress;
@@ -11,7 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class userInformationController extends Controller
 {
@@ -61,34 +64,65 @@ class userInformationController extends Controller
      public function confirmUser(Request $request)
     {
         # code...
+        $validator=Validator::make($request->all(),[
+            'password' => ['required'],
+            'email' => ['required','email','unique:tbl_userAuthentication']
+       ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
         $hashedPassword = Auth::user()->getAuthPassword();
-        if (Hash::check( $request->currPassword,  $hashedPassword)) {
-            return response()->json(true);
+        if (Hash::check( $request->password,  $hashedPassword)) {
+            $code = mt_rand(100000, 999999);
+            $data =[
+                'name' => $request->firstName,
+                'verification_code' =>  $code
+            ];
+            $email = trim($request->email);   
+            $returnValue = ['code'=>Hash::make($code) ];
+            if($request != null){
+                Mail::to($email)->send(new emailConfirmation($data));
+                return response()->json($returnValue,200);
+            }
+            return response()->json(['error'=>'An error occured'],422);
         }else{
-            return response()->json(false);
+            return response()->json(['password'=>'Incorrect Password'],422);
         }
     }
 
-    public function editAccount(Request $request)
+    public function changeEmail(Request $request)
     {
         # code...
-        $request->validate([
-            'email' => ['required'],
-            'currPassword' => ['required'],
-            'newPassword' => ['required'],
-       ]);
-        $hashedPassword = Auth::user()->getAuthPassword();
-        $user = User::where('email',Auth::user()->email)->first();
-        if (Hash::check( $request->currPassword,  $hashedPassword)) {
-            // The passwords match...
+        if (Hash::check( $request->typeCode,  $request->code)){
+            $user = userInformation::where('email',Auth::user()->email)->first();
             $user->email = $request->email;
-            $user->password = Hash::make($request->newPassword);
-            $user->save();
-            return response()->json(true);
+            if($user->save()){
+                return response()->json(['message'=>'Successfully changed email'],200);
+            }else{
+                return response()->json(['error'=>'An error occured'],422);
+            }
+           
         }else{
-            return response()->json(false);
+            return response()->json(['error'=>'Incorrect Code'],422);
         }
-        
+
+    }
+
+    public function changePassword(Request $request)
+    {
+        # code...
+        if (Hash::check( $request->typeCode,  $request->code)){
+            $user = userInformation::where('email',Auth::user()->email)->first();
+            $user->email = $request->email;
+            if($user->save()){
+               return response()->json(['message'=>'Successfully changed email'],200);
+            }else{
+                return response()->json(['error'=>'An error occured'],422);
+            }
+        }else{
+            return response()->json(['error'=>'Incorrect Code'],422);
+        }
+
     }
 
     public function editPersonal(Request $request)
