@@ -16,7 +16,7 @@
             <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
-          <input id="profile_image" type="file" class="hidden">
+          <input id="profile_image" type="file" class="hidden" @change="change_profile">
         <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
                       xl:w-7/12
                       2xl:w-9/12
@@ -186,7 +186,12 @@ methods:{
         this.personal.gender=this.old.gender
         this.personal.language=this.old.language
         this.personal.birdate=this.old.birdate
-    }
+    },
+    change_profile(e){
+      const file=e.target.files[0]
+      this.profile=URL.createObjectURL(file);
+    },
+
 },
 created(){
     //get the user information from the laravel API
