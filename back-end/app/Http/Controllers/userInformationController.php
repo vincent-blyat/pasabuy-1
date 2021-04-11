@@ -111,16 +111,25 @@ class userInformationController extends Controller
     public function changePassword(Request $request)
     {
         # code...
-        if (Hash::check( $request->typeCode,  $request->code)){
-            $user = userInformation::where('email',Auth::user()->email)->first();
-            $user->email = $request->email;
+
+        $validator=Validator::make($request->all(),[
+            'currentPassword' => ['required'],
+            'password' => ['required','confirmed','min:8']
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        $hashedPassword = Auth::user()->getAuthPassword();
+        if (Hash::check( $request->currentPassword,  $hashedPassword)){
+            $user = User::where('email',Auth::user()->email)->first();
+            $user->password = Hash::make($request->newPassword);
             if($user->save()){
-               return response()->json(['message'=>'Successfully changed email'],200);
+               return response()->json(['message'=>'Successfully changed password'],200);
             }else{
                 return response()->json(['error'=>'An error occured'],422);
             }
         }else{
-            return response()->json(['error'=>'Incorrect Code'],422);
+            return response()->json(['password'=>'Incorrect current password'],422);
         }
 
     }

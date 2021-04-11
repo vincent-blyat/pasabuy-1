@@ -23,29 +23,30 @@
                   Choose a strong password and dont reuse it for other accounts
                 </p>
           </div>
+          <p class="text-center text-red-500">{{errors}}</p>
           <div class=" ">
             <div class="flex flex-col p-5 space-y-4
             ">
              <div class="flex flex-col">
                 <span class="ml-2">Current Password</span>
-                 <input id="password"   type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                 <input id="password"  v-model="currentPassword" type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
             </div>
             
              <div class="flex flex-col">
                 <span class="ml-2">New Password</span>
-                 <input id="password"   type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                 <input id="password" v-model="password"  type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
             </div>
             
              <div class="flex flex-col">
                 <span class="ml-2">Confirm Password</span>
-                 <input id="password"   type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                 <input id="password" v-model="password_confirmation"  type="password" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
             </div>
             
               </div>
             
           </div>
            <div class="flex justify-between mt-4 px-5 text-2xlspace-x-4 items-center">
-             <button @click="toggle=false" class="px-4 bg-red-buttons text-white focus:outline-none w-full h-8 shadow-xl ring-1 ring-gray-300 rounded-2xl">Save</button>
+             <button @click="save" class="px-4 bg-red-buttons text-white focus:outline-none w-full h-8 shadow-xl ring-1 ring-gray-300 rounded-2xl">Save</button>
             </div>
           </div>
         </div>
@@ -53,12 +54,33 @@
 </template>
 
 <script>
+import api from "../api"
 export default {
 data(){
     return{
         toggle:true,
-       
+        password:null,
+        password_confirmation:null,
+        currentPassword:null,
+        errors:null
     }
+},
+methods:{
+  save(){
+    var params = {password:this.password,currentPassword:this.currentPassword,password_confirmation:this.password_confirmation}
+    api.post('/api/changePassword',params).then((res)=>{
+      console.log(res.data.message)
+       this.toggle=false
+    }).catch((errors)=>{
+      if(errors.response.data.currentPassword == undefined)
+        this.errors=errors.response.data.password+' '
+      else if(errors.response.data.password == undefined)
+        this.errors=errors.response.data.currentPassword+' '
+      else
+        this.errors=errors.response.data.currentPassword+' '+errors.response.data.password
+    })
+   
+  }
 }
 
 }
