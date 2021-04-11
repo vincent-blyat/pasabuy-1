@@ -122,7 +122,7 @@ class userInformationController extends Controller
         $hashedPassword = Auth::user()->getAuthPassword();
         if (Hash::check( $request->currentPassword,  $hashedPassword)){
             $user = User::where('email',Auth::user()->email)->first();
-            $user->password = Hash::make($request->newPassword);
+            $user->password = Hash::make($request->password);
             if($user->save()){
                return response()->json(['message'=>'Successfully changed password'],200);
             }else{
@@ -165,13 +165,13 @@ class userInformationController extends Controller
                 $userLang->userLanguageNumber = userLanguages::count()+1;
                 $userLang->languages = $request->language;
                 $userLang->save();
-                return response()->json('success, information saved');
+                return response()->json(['message'=>'Success, Information saved.'],200);
             }
             else{
                 $userLang = userLanguages::where('email',Auth::User()->email)->first();
                 $userLang->languages = $request->language;
                 $userLang->save();
-                return response()->json('success, information saved');
+                return response()->json(['message'=>'Success, Information saved.'],200);
             }
             
         }
@@ -204,10 +204,10 @@ class userInformationController extends Controller
         $user->barangay = $request->barangay;
        
         if($user->save()){
-            return response()->json('success, information saved');
+            return response()->json(['message'=>'Success, Information saved'],200);
         }
         else{
-            return response()->json('error, information not saved');
+            return response()->json(['error'=>'An error occured'],422);
         }
     }
   

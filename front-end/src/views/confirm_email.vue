@@ -46,6 +46,7 @@
 
 <script>
 import api from "../api"
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
 props:['email'],
 data(){
@@ -61,7 +62,8 @@ methods:{
         console.log(this.email)
         this.code = localStorage.getItem('a')
         var params= {code:this.code,email:this.email,typeCode:this.typeCode}
-        api.post('api/changeEmail',params).then(()=>{
+        api.post('api/changeEmail',params).then((res)=>{
+            VueSimpleAlert.alert(res.data.message,"Success","success")
             localStorage.removeItem('a')
             this.toggle=false
         }).catch((errors)=>{

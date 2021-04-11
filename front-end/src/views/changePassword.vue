@@ -55,6 +55,7 @@
 
 <script>
 import api from "../api"
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
 data(){
     return{
@@ -69,8 +70,8 @@ methods:{
   save(){
     var params = {password:this.password,currentPassword:this.currentPassword,password_confirmation:this.password_confirmation}
     api.post('/api/changePassword',params).then((res)=>{
-      console.log(res.data.message)
-       this.toggle=false
+      VueSimpleAlert.alert(res.data.message,"Success","success")
+      this.toggle=false
     }).catch((errors)=>{
       if(errors.response.data.currentPassword == undefined)
         this.errors=errors.response.data.password+' '
@@ -79,7 +80,6 @@ methods:{
       else
         this.errors=errors.response.data.currentPassword+' '+errors.response.data.password
     })
-   
   }
 }
 

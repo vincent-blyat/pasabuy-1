@@ -118,6 +118,7 @@
 <script>
 import api from '../api'
 import Profile from './ProfileEdit.vue'
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
   name: "personal",
   component: {
@@ -160,7 +161,7 @@ methods:{
     submit () {
       console.log(this.personal)
       api.post('/api/editPersonal', this.personal).then((res)=>{
-        console.log(res.data);
+         VueSimpleAlert.alert(res.data.message,"Success","success")
       //this.user = res.data;
       })
       this.toggle=false;
