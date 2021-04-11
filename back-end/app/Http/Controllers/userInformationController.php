@@ -8,6 +8,7 @@ use App\Models\Messages;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userInformation WHERE  email = \''.$user->email.'\'');
-    
+        $data[0]->profilePicture= utf8_encode($data[0]->profilePicture);
         return response()->json($data[0]);
     }
 
@@ -132,6 +133,25 @@ class userInformationController extends Controller
             return response()->json(['password'=>'Incorrect current password'],422);
         }
 
+    }
+
+    public function updateProfilePic(Request $request)
+    {
+        # code...
+        $validator=Validator::make($request->all(),[
+            'photo' => 'required|file|image',
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        $contents = file_get_contents($request->photo->path());
+        $user = userInformation::where('email',Auth::user()->email)->first();
+        $user->profilePicture = $contents;
+        if($user->save()){
+            return response()->json(['message'=>'Profilce Picture successfully changed.'],200);
+        }else{
+            return response()->json(['error'=>'Something went wrong'],422);
+        }
     }
 
     public function editPersonal(Request $request)

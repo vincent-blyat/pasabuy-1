@@ -13,7 +13,7 @@
         <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
-            <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
+            <img :src="personal.profilePic" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
           <input id="profile_image" type="file" class="hidden" @change="change_profile">
@@ -141,7 +141,8 @@ data(){
       work:'',
       gender:'',
       language:'',
-      birdate: ''
+      birdate: '',
+      profilePic:null
     },
     old:  {
       firstname:'',
@@ -191,18 +192,25 @@ methods:{
     change_profile(e){
       const file=e.target.files[0]
       this.profile=URL.createObjectURL(file);
+      const data = new FormData();
+      data.append('photo', file);
+      api.post('/api/updateProfilePic',data).then((res)=>{
+        this.getData()
+        VueSimpleAlert.alert(res.data.message,"Success","success")
+      }).catch((errors)=>{
+        VueSimpleAlert.alert("Something went wrong.","Error","error")
+        console.log(errors.response)
+      })
     },
-
-},
-created(){
-    //get the user information from the laravel API
-        api.get("/api/getPersonal").then((res) => {
+     getData(){
+          api.get("/api/getPersonal").then((res) => {
           console.log("personal info", res.data);
           this.personal.firstname = res.data.firstName;
           this.personal.lastname = res.data.lastName;
           this.personal.phone_number = res.data.phoneNumber;
           this.personal.gender = res.data.gender;
           this.personal.birdate = res.data.birthDate;
+          this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
           //this.user = res.data;
         });
         api.get("/api/getLanguages").then((res) => {
@@ -215,6 +223,12 @@ created(){
 
           //this.user = res.data;
         });
+        }
+
+},
+created(){
+    //get the user information from the laravel API
+       this.getData();
   },
 };
 </script>
