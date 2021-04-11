@@ -98,6 +98,7 @@
 </template>
 <script>
 import api from '../api'
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
   
 data(){
@@ -137,9 +138,9 @@ methods:{
       this.address_info.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
       this.address_info.city = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
       this.address_info.barangay = this.selectedBrgy;
-      api.post('/api/editAddress', this.address_info).then(()=>{
+      api.post('/api/editAddress', this.address_info).then((res)=>{
       //this.user = res.data;
-      console.log('Success')
+       VueSimpleAlert.alert(res.data.message,"Success","success")
         }).catch((errors) => {
             console.log(errors)
         })

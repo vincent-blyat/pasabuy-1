@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\emailConfirmation;
 use App\Models\User;
 use App\Models\Messages;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class userInformationController extends Controller
 {
@@ -21,7 +25,7 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userInformation WHERE  email = \''.$user->email.'\'');
-    
+        $data[0]->profilePicture= utf8_encode($data[0]->profilePicture);
         return response()->json($data[0]);
     }
 
@@ -58,37 +62,96 @@ class userInformationController extends Controller
         return response()->json($data[0]);
     }
 
-     public function getAccount()
+     public function confirmUser(Request $request)
     {
         # code...
-        $user = Auth::user();
-        $data = DB::select('SELECT * FROM tbl_userAuthentication WHERE email = \''.$user->email.'\'');
-
-        if($data == null)
-            return response()->json('');
-        return response()->json($data[0]);
+        $validator=Validator::make($request->all(),[
+            'password' => ['required'],
+            'email' => ['required','email','unique:tbl_userAuthentication']
+       ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        $hashedPassword = Auth::user()->getAuthPassword();
+        if (Hash::check( $request->password,  $hashedPassword)) {
+            $code = mt_rand(100000, 999999);
+            $data =[
+                'name' => $request->firstName,
+                'verification_code' =>  $code
+            ];
+            $email = trim($request->email);   
+            $returnValue = ['code'=>Hash::make($code) ];
+            if($request != null){
+                Mail::to($email)->send(new emailConfirmation($data));
+                return response()->json($returnValue,200);
+            }
+            return response()->json(['error'=>'An error occured'],422);
+        }else{
+            return response()->json(['password'=>'Incorrect Password'],422);
+        }
     }
 
-    public function editAccount(Request $request)
+    public function changeEmail(Request $request)
     {
         # code...
-        $request->validate([
-            'email' => ['required'],
-            'currPassword' => ['required'],
-            'newPassword' => ['required'],
-       ]);
-        $hashedPassword = Auth::user()->getAuthPassword();
-        $user = User::where('email',Auth::user()->email)->first();
-        if (Hash::check( $request->currPassword,  $hashedPassword)) {
-            // The passwords match...
+        if (Hash::check( $request->typeCode,  $request->code)){
+            $user = userInformation::where('email',Auth::user()->email)->first();
             $user->email = $request->email;
-            $user->password = Hash::make($request->newPassword);
-            $user->save();
-            return response()->json(true);
+            if($user->save()){
+                return response()->json(['message'=>'Successfully changed email'],200);
+            }else{
+                return response()->json(['error'=>'An error occured'],422);
+            }
+           
         }else{
-            return response()->json(false);
+            return response()->json(['error'=>'Incorrect Code'],422);
         }
-        
+
+    }
+
+    public function changePassword(Request $request)
+    {
+        # code...
+
+        $validator=Validator::make($request->all(),[
+            'currentPassword' => ['required'],
+            'password' => ['required','confirmed','min:8']
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        $hashedPassword = Auth::user()->getAuthPassword();
+        if (Hash::check( $request->currentPassword,  $hashedPassword)){
+            $user = User::where('email',Auth::user()->email)->first();
+            $user->password = Hash::make($request->password);
+            if($user->save()){
+               return response()->json(['message'=>'Successfully changed password'],200);
+            }else{
+                return response()->json(['error'=>'An error occured'],422);
+            }
+        }else{
+            return response()->json(['password'=>'Incorrect current password'],422);
+        }
+
+    }
+
+    public function updateProfilePic(Request $request)
+    {
+        # code...
+        $validator=Validator::make($request->all(),[
+            'photo' => 'required|file|image',
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        $contents = file_get_contents($request->photo->path());
+        $user = userInformation::where('email',Auth::user()->email)->first();
+        $user->profilePicture = $contents;
+        if($user->save()){
+            return response()->json(['message'=>'Profilce Picture successfully changed.'],200);
+        }else{
+            return response()->json(['error'=>'Something went wrong'],422);
+        }
     }
 
     public function editPersonal(Request $request)
@@ -122,13 +185,13 @@ class userInformationController extends Controller
                 $userLang->userLanguageNumber = userLanguages::count()+1;
                 $userLang->languages = $request->language;
                 $userLang->save();
-                return response()->json('success, information saved');
+                return response()->json(['message'=>'Success, Information saved.'],200);
             }
             else{
                 $userLang = userLanguages::where('email',Auth::User()->email)->first();
                 $userLang->languages = $request->language;
                 $userLang->save();
-                return response()->json('success, information saved');
+                return response()->json(['message'=>'Success, Information saved.'],200);
             }
             
         }
@@ -161,10 +224,10 @@ class userInformationController extends Controller
         $user->barangay = $request->barangay;
        
         if($user->save()){
-            return response()->json('success, information saved');
+            return response()->json(['message'=>'Success, Information saved'],200);
         }
         else{
-            return response()->json('error, information not saved');
+            return response()->json(['error'=>'An error occured'],422);
         }
     }
   
