@@ -57,7 +57,7 @@
           ">
          <div class="flex flex-row items-center  justify-between p-3">
             <p class="hidden lg:block 2xl:block xl:block"></p>
-            <p class="text-lg font-extrabold">Update Address Info</p>
+            <p class="text-lg flex  font-extrabold xl:ml-8 lg:ml-8 2xl:ml-8">Update Address Info</p>
             <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false"> Close</p>
           </div>
             
