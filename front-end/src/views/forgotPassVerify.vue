@@ -16,7 +16,7 @@
                 Please check your email and click on the received link to reset you password.</p>
                 <div class="flex justify-center py-5">
                     <button class="w-full h-12 px-5 py-2 text-white transition-colors duration-150 bg-red-700 rounded-3xl focus:shadow-outline hover:bg-red-700">
-                        <router-link to="/forgot-password-verify" >Log in</router-link></button>
+                        <router-link to="/log-in" >Log in</router-link></button>
                 </div>
                 <div class="mt-4 text-left text-grey-dark">
                     Did you received the link?
