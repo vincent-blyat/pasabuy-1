@@ -5,22 +5,28 @@ xl:flex justify-center
 lg:flex
 2xl:flex 
 ">
-<div class=" w-6/12 self-center pl-5">
-<p class=" w-full text-xl font-nunito font-bold">ACCOUNT SETTINGS</p>
+<div class="w-608 mr-10  
+      2xl:block 
+      lg:block   
+      xl:block 
+          
+      justify-center self-center  gap-y-5  hidden ">
+      <p class="text-2xl   font-nunito font-bold uppercase ">Account Settings</p>
 </div>
 </div>
 <div class="  flex justify-center self-center font-nunito mb-11 mt-24
             2xl:mt-4
             xl:mt-4 
             lg:mt-4  w-full
-            ">
+            " >
 <div class="  w-full px-3      flex flex-col justify-center self-center gap-y-5 space-y-4
-              2xl:w-3/6 
-              lg:w-3/6
-              xl:w-3/6
+              2xl:w-608  2xl:mr-16
+              lg:w-608  lg:mr-16
+              xl:w-608 xl:mr-16
               md:w-8/12
-              sm:w-10/12
-            ">
+              sm:w-10/12 
+
+            "     >
             
         <Personal />
         <Address/>
