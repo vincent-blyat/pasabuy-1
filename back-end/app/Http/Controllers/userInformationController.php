@@ -8,7 +8,6 @@ use App\Models\Messages;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use App\Models\userLanguages;
-use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class userInformationController extends Controller
 {
@@ -144,6 +144,7 @@ class userInformationController extends Controller
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
         }
+
         $contents = file_get_contents($request->photo->path());
         $user = userInformation::where('email',Auth::user()->email)->first();
         $user->profilePicture = $contents;

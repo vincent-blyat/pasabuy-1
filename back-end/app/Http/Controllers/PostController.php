@@ -7,8 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\OfferPost;
+use App\Models\PasabuyUser;
 use App\Models\RequestPost;
-use App\Models\Share;
+use App\Models\share;
 use App\Models\User;
 use App\Notifications\SharedNotification;
 use Illuminate\Support\Facades\Auth;
@@ -139,9 +140,15 @@ class PostController extends Controller
 	public function getAllPosts(Request $request) {
 
 		$user = Auth::user();
-		$data = Post::with('offer_post','request_post','get_user_name','sharePost')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
+		// $data = PasabuyUser::has('post')->with('post','post.offer_post','post.request_post')->get();
+		$data = Post::with('offer_post','request_post')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
-		return $data;
+		foreach ($data as $convertingImage){ 
+			
+			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
+		}
+
+		return response()->json($data);
 	}
 	
 	public function sharePost(Request $request)
@@ -150,9 +157,9 @@ class PostController extends Controller
 		$user = Auth::user();
 		$postNum = $request->postNum;
 
-		$newShare = new Share();
+		$newShare = new share();
 		$newShare->sharerEmail = $user->email;
-		$newShare->shareNumber = Share::count()+1;
+		$newShare->shareNumber = share::count()+1;
 		$newShare->postNumber = $postNum;
 		if($newShare->save()){
 			//find the right user to notify, in this case the owner of the post
