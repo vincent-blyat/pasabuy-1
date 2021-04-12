@@ -55,8 +55,11 @@
               shadow-2xl
               h-auto
           ">
-            <p class="text-lg font-extrabold">Edit Address Information</p>
-            <hr class="mb-5 border-2 border-red-700 bg-red-700">
+            <div class="flex flex-row items-center  justify-between p-3">
+            <p class="hidden lg:block 2xl:block xl:block"></p>
+            <p class="text-lg flex  font-extrabold xl:ml-8 lg:ml-8 2xl:ml-8">Update Address Info</p>
+            <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false"> Close</p>
+          </div>
             
           <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
               <div class="grid grid-cols-2 gap-y-4">
