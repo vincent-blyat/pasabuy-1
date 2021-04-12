@@ -18,6 +18,7 @@ class messageController extends Controller
     public function getChatroom()
     {
         $chatrooms = messageRoom::with('getMessages', 'getEmail1','getEmail2', 'getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+
         return $chatrooms;
     }
 

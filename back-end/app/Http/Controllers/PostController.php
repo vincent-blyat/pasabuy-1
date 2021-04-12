@@ -158,11 +158,6 @@ class PostController extends Controller
 		
 		foreach ($data as $convertingImage){ 
 			
-			$convertingImage->post->user->profilePicture = utf8_encode($convertingImage->post->user->profilePicture);
-		}
-
-		foreach ($data as $convertingImage){ 
-			
 			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
 		}
 

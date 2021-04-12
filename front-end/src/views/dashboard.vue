@@ -1,5 +1,5 @@
 <template class="bg-gray-bgcolor">
-    <Navbar/>
+    <Navbar  />
 
     <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
@@ -665,12 +665,6 @@ export default {
     }
   },
     mounted(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
-    }).catch((error) => {
-       console.log(error)
-    })
-
     api.get('/api/getPersonal').then((resp)=>{
       this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
     }).catch((error) => {
@@ -678,6 +672,13 @@ export default {
     })
   },
   created(){
+    api.get('/api/user').then((res)=>{
+      this.user = res.data;
+    }).catch((error) => {
+       console.log(error)
+    })
+
+
     api.get('/api/getPosts').then((res)=>{
       console.log(res.data)
       var i;

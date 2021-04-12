@@ -13,6 +13,7 @@
                 </p>
               </div>
             </div>
+         
 </template>
 
 <script>
@@ -22,7 +23,8 @@ export default {
   data(){
     return{
       allNotifications:null,
-      sharedNotif: "App\\Notifications\\SharedNotification"
+     
+      sharedNotif: "App\\Notifications\\SharedNotification",
     }
   },
   methods:{
@@ -34,15 +36,7 @@ export default {
     api.get('api/getNotifications').then((res)=>{
       this.allNotifications = res.data
     })
-    var userId;
-    api.get('api/user').then((res)=>{
-      userId = res.data.indexUserAuthentication
-    })
-    console.log(userId)
-    window.Echo.private('App.Models.User.' + userId)
-    .notification((notification) => {
-        console.log('notifications ',notification);
-    });
   },
 }
+
 </script>
