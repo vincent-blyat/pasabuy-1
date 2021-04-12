@@ -9,7 +9,7 @@ use App\Models\Post;
 use App\Models\OfferPost;
 use App\Models\PasabuyUser;
 use App\Models\RequestPost;
-use App\Models\share;
+use App\Models\Share;
 use App\Models\User;
 use App\Notifications\SharedNotification;
 use Illuminate\Support\Facades\Auth;
@@ -175,9 +175,9 @@ class PostController extends Controller
 		$user = Auth::user();
 		$postNum = $request->postNum;
 
-		$newShare = new share();
+		$newShare = new Share();
 		$newShare->sharerEmail = $user->email;
-		$newShare->shareNumber = share::count()+1;
+		$newShare->shareNumber = Share::count()+1;
 		$newShare->postNumber = $postNum;
 		if($newShare->save()){
 			//find the right user to notify, in this case the owner of the post

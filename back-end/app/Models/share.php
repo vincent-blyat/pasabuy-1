@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class share extends Model
+class Share extends Model
 {
     use HasFactory;
     protected $table = 'tbl_share';
