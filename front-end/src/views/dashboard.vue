@@ -99,10 +99,10 @@
         <!--section 1-->
         <div class="relative flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.get_user_name.profilePicture"/>
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.get_user_name.firstName}} {{post_info.get_user_name.lastName}}
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.user.firstName}} {{post_info.user.lastName}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
@@ -663,19 +663,17 @@ export default {
   },
   created(){
     api.get('/api/getPosts').then((res)=>{
-      
+      console.log(res.data)
       var i;
       for(i=0;i<res.data.length;i++){
-        res.data[i].get_user_name.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].get_user_name.profilePicture)
+        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
       }
-      // res.data.get_user_name.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data.get_user_name.profilePicture)
+   
       this.delivery_info=res.data
       console.log(this.delivery_info)
     }).catch((error) => {
       console.log(error)
     })
   }
-
-   
 }
 </script>

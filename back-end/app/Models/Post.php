@@ -39,7 +39,7 @@ class Post extends Model
         return $this->hasOne(RequestPost::class, 'postNumber', 'postNumber');
     }
 
-    public function get_user_name() {
+    public function user() {
         return $this->hasOne(userInformation::class, 'email', 'email');
     }
 }

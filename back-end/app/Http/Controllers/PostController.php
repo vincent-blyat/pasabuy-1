@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\OfferPost;
+use App\Models\PasabuyUser;
 use App\Models\RequestPost;
 use Illuminate\Support\Facades\Auth;
 
@@ -136,17 +137,14 @@ class PostController extends Controller
 	public function getAllPosts(Request $request) {
 
 		$user = Auth::user();
-		$data = Post::with('offer_post','request_post','get_user_name')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
+		// $data = PasabuyUser::has('post')->with('post','post.offer_post','post.request_post')->get();
+		$data = Post::with('offer_post','request_post')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
-		// for($i=0;$i<count($data);$i++){
-		// 	$data->get_user_name->profilePicture = utf8_encode($data->get_user_name->profilePicture);
-		// }
 		foreach ($data as $convertingImage){ 
-			// Code Here
-			$convertingImage->get_user_name->profilePicture = utf8_encode($convertingImage->get_user_name->profilePicture);
+			
+			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
 		}
-		//$data[0]->get_user_name->profilePicture = utf8_encode($data[0]->get_user_name->profilePicture);
-		return $data;
+
+		return response()->json($data);
 	}
-    
 }
