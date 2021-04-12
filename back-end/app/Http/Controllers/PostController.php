@@ -150,6 +150,24 @@ class PostController extends Controller
 
 		return response()->json($data);
 	}
+
+	public function getAllShares(Request $request)
+	{
+		# code...
+		$data = share::with('post','post.offer_post','post.request_post','user')->orderBy('dateCreated','desc')->get();
+		
+		foreach ($data as $convertingImage){ 
+			
+			$convertingImage->post->user->profilePicture = utf8_encode($convertingImage->post->user->profilePicture);
+		}
+
+		foreach ($data as $convertingImage){ 
+			
+			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
+		}
+
+		return response()->json($data);
+	}
 	
 	public function sharePost(Request $request)
 	{
@@ -170,9 +188,9 @@ class PostController extends Controller
 			$userToNotif = User::where('email',$userToNotif[0]->email)->get();
 			$userToNotif = User::find($userToNotif[0]->indexUserAuthentication);
 			$userToNotif->notify(new SharedNotification($postNum));
-			return response()->json(["Success"],200);
+			return response()->json(['message'=>'You have successfully shared this post'],200);
 		}else{
-			return response()->json(["Error"],500);
+			return response()->json(["Error"=>"An error occured"],500);
 		}
 
 		

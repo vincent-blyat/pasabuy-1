@@ -86,13 +86,13 @@
       </div>
     </div>
      </div>
-  
-
+     
   <!--user post-->
   <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
     v-for="(post_info, index) in delivery_info"
     :key="index"
     >
+    
     <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -253,6 +253,8 @@
         <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.request_post != null">
           <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.request_post.caption}}</p>
         </div>
+
+        
         <!--section 4-->
     
         <!--section 5-->
@@ -493,6 +495,7 @@ import SendRequest from "./sendRequest"
 import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
+import VueSimpleAlert from 'vue-simple-alert'
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
 
@@ -510,6 +513,7 @@ export default {
       edit2: false,
       share1: false,
       share2: false,
+      shares:[],
       filter: false,
       filter2: false,
       isOpen:false,
@@ -651,9 +655,12 @@ export default {
       var shareData = {postNum: postNumber}
       console.log(shareData)
       api.post('/api/share',shareData).then((res)=>{
+        VueSimpleAlert.alert(res.data.message,"Success","success")
         console.log(res.data)
+        this.share1 = false;
       }).catch((error) => {
-       console.log(error)
+        VueSimpleAlert.alert(error.response.data.error,"Error","error")
+        console.log(error)
       })
     }
   },
@@ -680,6 +687,17 @@ export default {
    
       this.delivery_info=res.data
       console.log(this.delivery_info)
+    }).catch((error) => {
+      console.log(error)
+    })
+
+     api.get('/api/getShares').then((res)=>{
+      var i;
+      for(i=0;i<res.data.length;i++){
+        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
+      }
+      this.shares=res.data
+      console.log(this.shares)
     }).catch((error) => {
       console.log(error)
     })

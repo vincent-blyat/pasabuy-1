@@ -44,9 +44,9 @@ class Post extends Model
     }
 
     
-    public function sharePost()
+    public function share()
     {
         # code...
-        return $this->hasMany(Share::class,'postNumber','postNumber');
+        return $this->hasMany(share::class,'postNumber','postNumber');
     }
 }
