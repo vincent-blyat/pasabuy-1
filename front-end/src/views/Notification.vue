@@ -30,11 +30,19 @@ export default {
       return moment(date).fromNow();
     }
   },
-  created(){
+  mounted(){
     api.get('api/getNotifications').then((res)=>{
-      console.log(res.data)
       this.allNotifications = res.data
     })
+    var userId;
+    api.get('api/user').then((res)=>{
+      userId = res.data.indexUserAuthentication
+    })
+    console.log(userId)
+    window.Echo.private('App.Models.User.' + userId)
+    .notification((notification) => {
+        console.log('notifications ',notification);
+    });
   },
 }
 </script>

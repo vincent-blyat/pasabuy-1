@@ -659,7 +659,7 @@ export default {
         console.log(res.data)
         this.share1 = false;
       }).catch((error) => {
-        VueSimpleAlert.alert(error.response.data.error,"Error","error")
+        VueSimpleAlert.alert('An error occured',"Error","error")
         console.log(error)
       })
     }
