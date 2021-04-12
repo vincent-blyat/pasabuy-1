@@ -41,7 +41,7 @@
       </span>
       <p class=" text-gray-500">Messages</p>
       </div></router-link>
-      <div class="flex gap-x-4 py-4 cursor-pointer  items-center" @click="activeBtn=!activeBtn,show=!show" :class="{active_notif: activeBtn }">
+      <div class="flex gap-x-4 py-4 cursor-pointer  items-center" @click="notif()" :class="{active_notif: activeBtn }">
        <span id="notif" class="text-gray-500 material-icons \">
             notifications
           </span>
@@ -193,6 +193,15 @@ export default {
 // add our event listener for the click
              sidebar.classList.toggle("-translate-x-full");
         
+            },
+            notif(){
+              this.activeBtn=!this.activeBtn
+              this.show=!this.show
+              api.post('/api/readNotif').then((res)=>{
+                 this.unreadNotif = res.data.length
+              }).catch((errors)=>{
+                console.log(errors)
+              })
             }
         },
     setup() {

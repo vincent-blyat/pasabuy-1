@@ -21,4 +21,13 @@ class NotificationController extends Controller
         // }
         return response()->json(Auth::user()->unreadNotifications);
     }
+    public function readNotif()
+    {
+        # code...
+        // foreach (Auth::user()->unreadNotifications as $notification) {
+        //     echo $notification;
+        // }
+        Auth::user()->unreadNotifications->markAsRead();
+        return response()->json(Auth::user()->unreadNotifications);
+    }
 }

@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getShares', [PostController::class, 'getAllShares']);
     Route::get('/getNotifications', [NotificationController::class, 'getAll']);
     Route::get('/getUnreadNotifications', [NotificationController::class, 'getUnread']);
+    Route::post('/readNotif', [NotificationController::class, 'readNotif']);
     Route::post('/changeEmail', [userInformationController::class, 'changeEmail']);
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
