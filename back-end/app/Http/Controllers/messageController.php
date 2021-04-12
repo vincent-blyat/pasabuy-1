@@ -17,8 +17,17 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $chatrooms = messageRoom::with('getMessages', 'getEmail1','getEmail2', 'getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+        $chatrooms = messageRoom::with('getEmail1','getEmail2', 'getMessages', 'getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
 
+        // for($i=0;$i<count($chatrooms);$i++)
+        //         $chatrooms[$i]->get_messages->getMessageSender->profilePicture = utf8_encode($chatrooms[$i]->get_messages->getMessageSender->profilePicture);
+		// foreach ($chatrooms as $convertingImage){ 
+
+        //     foreach($convertingImage[0]->get_messages[0] as $msg)
+		// 	    $msg->getMessageSender->profilePicture = utf8_encode($msg->getMessageSender->profilePicture);
+		// }
+        // $chatrooms[0]->get_messages[0]->getMessageSender->profilePicture = utf8_encode($chatrooms[0]->get_messages[0]->getMessageSender->profilePicture);
+        // $chatrooms[0]->get_messages[1]->getMessageSender->profilePicture = utf8_encode($chatrooms[0]->get_messages[1]->getMessageSender->profilePicture);
         return $chatrooms;
     }
 

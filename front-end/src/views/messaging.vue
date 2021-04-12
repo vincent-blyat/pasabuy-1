@@ -891,8 +891,8 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
+            console.log(res)
             this.chatRooms = res.data;
-            console.log(this.chatRooms)
             var i;
             // var j;
             //var x=0;
