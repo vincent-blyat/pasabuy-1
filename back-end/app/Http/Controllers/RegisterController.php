@@ -9,6 +9,7 @@ use App\Models\userInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -21,15 +22,31 @@ class RegisterController extends Controller
 
     //function to put personal info in $personalInfo and  $accountInfo; 
     function postPersonal(Request $request){
-        // return response()->json("hello");
-        $request->validate([
-            'firstName' => ['required'],
-            'lastName' => ['required'],
-            'email' => ['required'],
-            'phoneNumber' => ['required'],
-            'password' => ['required'],
-            'verificationCode'=> ''
-       ]);
+        
+        // custom error messages
+       $messages = ['password.regex' => array(' Must contain at least one lowercase letter (a – z)',
+                                            ' Must contain at least one uppercase letter (A – Z)',
+                                            ' Must contain at least one digit (0-9)',
+                                            ' Must contain a special character',
+                     )];
+       $validator=Validator::make($request->all(),[
+            'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'lastName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'email' => ['required','email','unique:tbl_userAuthentication'],
+            'phoneNumber' => ['required','numeric','digits:11'],
+            'password' => ['required',
+                            'min:8',
+                            'confirmed',
+                            'regex:/[a-z]/',      // must contain at least one lowercase letter
+                            'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                            'regex:/[0-9]/',      // must contain at least one digit
+                            'regex:/[@$!%*#?&]/', // must contain a special character
+                        ],
+            ],$messages);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
         
         // $user = new User();
         // $user->email = $request->email;
@@ -114,6 +131,9 @@ class RegisterController extends Controller
         }else{
             return response()->json('error, information address not saved'); 
         }
+
+    }
+    public function messages(){
 
     }
 }
