@@ -54,15 +54,15 @@ class RegisterController extends Controller
 
         $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
         $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
-        $request->verificationCode = mt_rand(100000, 999999);
+        $code = mt_rand(100000, 999999);
         $data =[
             'name' => $request->firstName,
-            'verification_code' => $request->verificationCode
+            'verification_code' => $code
         ];
 
         //return response()->json(trim($request->email));
         $email = trim($request->email);   
-        $code = $request->verificationCode;
+        $code = Hash::make($code);
 
         $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo, 'code'=>$code ];
         if($request != null){
@@ -133,7 +133,15 @@ class RegisterController extends Controller
         }
 
     }
-    public function messages(){
-
+   
+    public function confirmCode(Request $request)
+    {
+        # code...
+        if(Hash::check($request->textCode, $request->code)){
+            return response()->json(true); 
+        }else{
+            return response()->json(['error'=>'Error, Code doesn\'t match.'], 422); 
+        }
     }
+  
 }
