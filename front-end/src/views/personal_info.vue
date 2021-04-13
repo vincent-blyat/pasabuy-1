@@ -5,7 +5,7 @@
             <p class="font-bold font-nunito text-sm">Personal Info</p>
             </div>
            <div> 
-               <label for="sub" id="edt1" @click="toggle=!toggle" class="
+               <label for="sub" id="edt1" @click="setOldData();toggle=!toggle" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label>
            </div>
             
@@ -13,10 +13,10 @@
         <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
-            <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
+            <img :src="personal.profilePic" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
-          <input id="profile_image" type="file" class="hidden">
+          <input id="profile_image" type="file" class="hidden" @change="change_profile">
         <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
                       xl:w-7/12
                       2xl:w-9/12
@@ -24,21 +24,9 @@
                     ">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
-<<<<<<< HEAD
-        <span class="flex justify-between">
-        <p v-if="show" id="name">{{personal.firstname + ' ' + personal.lastname}}</p>
-        <input type="text" v-if="hidden" 
-        id="input_fname" v-model="personal.firstname" 
-        class="ring-2 ring-gray-400 font-bold w-full">
-        <input type="text" v-if="hidden" 
-        id="input_lname" v-model="personal.lastname" 
-        class="ring-2 ring-gray-400 font-bold w-full">
-        </span>
-=======
         <span>
-        <p >{{personal.name}} {{personal.midname}} {{personal.lastname}}</p>
+        <p >{{personal.firstname}} {{personal.midname}} {{personal.lastname}}</p>
        </span>
->>>>>>> origin/master
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2 ">
         <p class="text-gray-500">PHONE NUMBER</p>
@@ -74,9 +62,9 @@
        
         </form>
         </div>
-       <div v-if="toggle" class="fixed inset-0 bg-white bg-opacity-75"></div>
-        <div v-if="toggle" class=" absolute items-center z-40  inset-0 ">
-        <div class="flex   w-full p-3  items-center justify-center
+       <div v-if="toggle" class="fixed inset-0 h-max bg-white bg-opacity-75"></div>
+        <div v-if="toggle" class=" fixed items-center  inset-0 overflow-y-auto ">
+        <div class="flex   mt-4 w-full p-3  items-center justify-center
         py-20
         ">
           <div class=" bg-white ring-1  ring-gray-300 p-5 w-full rounded-md
@@ -90,57 +78,51 @@
           ">
             <p class="text-lg font-extrabold">Edit Personal Information</p>
             <hr class="mb-5 border-2 border-red-700 bg-red-700">
-            <div class="flex flex-col items-center gap-y-3 justify-center mb-4">
-            <img src="img/yami.jpg" class=" w-16 h-16 rounded-full ring-2 ring-gray-500
-            xl:w-40 xl:h-40
-            2xl:w-40 2xl:h-40
-            lg:w-40 lg:h-40
-            "/>
-            <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
-          </div>
-          <div>
+           
+          <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
             <div class="relative grid grid-cols-2 gap-y-4
             ">
-                <span>Firstname:</span> <input id="f_name"   type="text" :value="personal.name" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Middlename:</span> <input type="text" :value="personal.midname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Lastname: </span> <input type="text" :value="personal.lastname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Phone number: </span> <input type="number" :value="personal.phone_number" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Work: </span> <input type="text" :value="personal.work" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>Firstname:</span> <input id="f_name"   type="text" v-model="personal.firstname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>Middlename:</span> <input type="text" v-model="personal.midname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <span>Lastname: </span> <input type="text" v-model="personal.lastname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>Phone number: </span> <input type="number" v-model="personal.phone_number" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>Work: </span> <input type="text" v-model="personal.work" class=" pl-2 bg-transparent border-2 border-gray-400"/>
                 <span>Gender</span>
                 <div class=" space-x-4">
                   <span class="space-x-2">
-                  <span><input type="radio" value="Male" id="male" name="gender" v-model="personal.gender"/></span>
+                  <span><input type="radio" id="male" value="Male" name="gender" v-model="personal.gender" :checked="personal.gender=='Male'"/></span>
                   <label for="male">Male</label>
                   </span>
                   <span class="space-x-2">
-                  <span><input type="radio" value="Female" id="female" name="gender" v-model="personal.gender"/></span>
+                  <span><input type="radio" id="female" value="Female" name="gender" v-model="personal.gender" :checked="personal.gender=='Female'"/></span>
                   <label for="female">Female</label>
                   </span>
               </div>
-                  <span>Birthday:</span>  <input class=" pl-2 bg-transparent border-2 border-gray-400" @keyup="personal.birdate=$event.target.value" type="date" id="start" name="trip-start"
+                  <span>Birthday:</span>  <input class=" pl-2 w-full bg-transparent border-2 border-gray-400" @keyup="personal.birdate=$event.target.value" type="date" id="start" name="trip-start"
                  min="1990-01-01"  v-model="personal.birdate" >
-                <span>Language: </span> <input type="text" :value="personal.language" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                <span>Language: </span> <input type="text" v-model="personal.language" class=" pl-2 bg-transparent border-2 border-gray-400"/>
             </div>
             <div class="flex justify-end mt-4 space-x-4">
-              <button @click="toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
-              <button @click="toggle=false" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
+              <button @click="getOldData(); toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
+              <button @click="submit" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
               
             </div>
           </div>
           </div>
         </div>
     </div>
+
     </div>
   
 </template>
 <script>
-import Profile from './ProfileEdit.vue'
 import api from '../api'
+import Profile from './ProfileEdit.vue'
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
-  
-  name:'personal',
-  component:{
-   Profile,
+  name: "personal",
+  component: {
+    Profile,
   },
 data(){
     return{
@@ -159,44 +141,94 @@ data(){
       work:'',
       gender:'',
       language:'',
+      birdate: '',
+      profilePic:null
+    },
+    old:  {
+      firstname:'',
+      lastname:'',
+      phone_number:'',
+      work:'',
+      gender:'',
+      language:'',
       birdate: ''
     },
     }
   
 },
+
 methods:{
 
     submit () {
+      console.log(this.personal)
       api.post('/api/editPersonal', this.personal).then((res)=>{
-        console.log(res.data);
+         VueSimpleAlert.alert(res.data.message,"Success","success")
       //this.user = res.data;
-      }).catch(() => {
-        location.reload();
-        })
-
+      })
+      this.toggle=false;
     },
       handleInput(value) {
       this.name = value;
       alert(this.name)
     },
+    setOldData(){
+        this.old.firstname=this.personal.firstname
+        this.old.lastname=this.personal.lastname
+        this.old.phone_number=this.personal.phone_number
+        this.old.work=this.personal.work
+        this.old.gender=this.personal.gender
+        this.old.language=this.personal.language
+        this.old.birdate=this.personal.birdate
+    },
+    getOldData(){
+        this.personal.firstname=this.old.firstname
+        this.personal.lastname=this.old.lastname
+        this.personal.phone_number=this.old.phone_number
+        this.personal.work=this.old.work
+        this.personal.gender=this.old.gender
+        this.personal.language=this.old.language
+        this.personal.birdate=this.old.birdate
+    },
+    change_profile(e){
+      const file=e.target.files[0]
+      this.profile=URL.createObjectURL(file);
+      const data = new FormData();
+      data.append('photo', file);
+      api.post('/api/updateProfilePic',data).then((res)=>{
+        this.getData()
+        VueSimpleAlert.alert(res.data.message,"Success","success")
+      }).catch((errors)=>{
+        VueSimpleAlert.alert("Something went wrong.","Error","error")
+        console.log(errors.response)
+      })
+    },
+     getData(){
+          api.get("/api/getPersonal").then((res) => {
+          console.log("personal info", res.data);
+          this.personal.firstname = res.data.firstName;
+          this.personal.lastname = res.data.lastName;
+          this.personal.phone_number = res.data.phoneNumber;
+          this.personal.gender = res.data.gender;
+          this.personal.birdate = res.data.birthDate;
+          this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
+          //this.user = res.data;
+        });
+        api.get("/api/getLanguages").then((res) => {
+          if (res) {
+            console.log("language ", res.data);
+            this.personal.language = res.data.languages;
+          } else {
+            console.log("error ");
+          }
+
+          //this.user = res.data;
+        });
+        }
 
 },
-mounted(){
+created(){
     //get the user information from the laravel API
-    api.get('/api/getPersonal').then((res)=>{
-      console.log('personal info' ,res.data);
-      this.personal.firstname = res.data.firstName;
-      this.personal.lastname = res.data.lastName;
-      this.personal.phone_number = res.data.phoneNumber;
-      this.personal.gender = res.data.gender;
-      this.personal.birdate = res.data.birthDate; 
-      //this.user = res.data;
-    })
-    api.get('/api/getLanguages').then((res)=>{
-      console.log('language ' ,res.data);
-      this.personal.language = res.data.languages;
-      //this.user = res.data;
-    })
-  }
-}
+       this.getData();
+  },
+};
 </script>

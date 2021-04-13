@@ -1,6 +1,6 @@
 <template>
 <div> 
-<div v-on:click.self="close3" class="bg-black font-nunito bg-opacity-25 fixed flex w-full ssm:px-2 vs:px-2 inset-0 justify-center items-center">
+<div v-on:click.self="close3" class="z-50 bg-black font-nunito bg-opacity-25 fixed flex w-full ssm:px-2 vs:px-2 inset-0 justify-center items-center">
        <div class="inline-flex flex-col bg-white shadow rounded-xl h-56 w-95 ssm:w-full vs:w-full" >
        <div class="flex flex-row justify-around py-2">
         <h1 class="text-gray-900 pl-32 ssm:pl-17 ssm:text-xl vs:pl-6.5 lvs:pl-32 ssm:pr-0 pr-8 leading-normal text-2xl font-bold">

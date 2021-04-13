@@ -11,9 +11,14 @@
     "axios": "^0.20.0-0",
     "core-js": "^3.6.5",
     "js-cookie": "^2.2.1",
+    "luxon": "^1.26.0",
+    "moment": "^2.29.1",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
-    "vue-router": "^4.0.0-0"
+    "vue-datetime": "^1.0.0-beta.14",
+    "vue-router": "^4.0.0-0",
+    "vue-simple-alert": "^1.1.1",
+    "weekstart": "^1.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.4",
@@ -26,7 +31,11 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
+    "install": "^0.13.0",
+    "laravel-echo": "^1.10.0",
+    "npm": "^7.9.0",
     "postcss": "^7.0.35",
+    "pusher-js": "^7.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   }
 }

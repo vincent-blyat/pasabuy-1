@@ -2,9 +2,15 @@
 
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use App\Http\Controllers\addressController;
+use App\Http\Controllers\forgotPasswordController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\resetPasswordController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,13 +26,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+	Route::get('/user/posts', [PostController::class, 'get_user_posts']);
+	Route::post('post/offer', [PostController::class, 'create_offer_post']);
+	Route::post('post/request', [PostController::class, 'create_request_post']);
     Route::get('/getPersonal', [userInformationController::class, 'getPersonal']);
     Route::get('/getAddress', [userInformationController::class, 'getAddress']);
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
     Route::post('/editPersonal', [userInformationController::class, 'editPersonal']);
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
+    Route::post('/editAccount', [userInformationController::class, 'editAccount']);
+    Route::get('/getValidID', [userInformationController::class, 'getValidID']);
+    Route::get('/getChatroom', [messageController::class, 'getChatroom']);
+    Route::get('/getMessages', [messageController::class, 'getMessages']);
+    Route::post('/sendMessage', [messageController::class, 'sendMessage']);
+    Route::get('/getPosts', [PostController::class, 'getAllPosts']);
+    Route::post('/share', [PostController::class, 'sharePost']);
+    Route::get('/getShares', [PostController::class, 'getAllShares']);
+    Route::get('/getNotifications', [NotificationController::class, 'getAll']);
+    Route::get('/getUnreadNotifications', [NotificationController::class, 'getUnread']);
+    Route::post('/readNotif', [NotificationController::class, 'readNotif']);
+    Route::post('/changeEmail', [userInformationController::class, 'changeEmail']);
+    Route::post('/changePassword', [userInformationController::class, 'changePassword']);
+    Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
+    Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
+ 
+    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -37,6 +64,8 @@ Route::middleware('auth:sanctum')->get('/authenticated', function () {
     return true;
 });
 
+
+
 Route::post('login',[loginController::class, 'login'] )->name('login');
 Route::post('postPersonal',[RegisterController::class, 'postPersonal'] );
 Route::post('postID',[RegisterController::class, 'postID'] );
@@ -46,3 +75,10 @@ Route::post('logout',[loginController::class, 'logout'] );
 Route::get('refProvince',[addressController::class, 'refProvince'] );
 Route::get('refcityMunicipality',[addressController::class, 'refcityMunicipality'] );
 Route::get('refBrgy',[addressController::class, 'refBrgy'] );
+
+Route::post('post/offer', [PostController::class, 'create_offer_post'])->name('create_offer_post');
+Route::post('post/request', [PostController::class, 'create_request_post']);
+
+
+Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
