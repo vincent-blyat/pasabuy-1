@@ -17,39 +17,33 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $chatrooms = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
-        // $chatrooms = Messages::with('getMessageSender')->get();
-        // for($i=0;$i<count($chatrooms);$i++)
-        //         $chatrooms[$i]->get_messages->getMessageSender->profilePicture = utf8_encode($chatrooms[$i]->get_messages->getMessageSender->profilePicture);
-		 
-        for($i=0;$i<count($chatrooms);$i++){
-            echo "email='". $chatrooms[$i]->get_email1."'";
-            $chatrooms[$i]->get_email1->profilePicture = utf8_encode($chatrooms[$i]->get_email1->profilePicture);
-            $chatrooms[$i]->get_email2->profilePicture = utf8_encode($chatrooms[$i]->get_email2->profilePicture);
-            
-            for($x=0;$x<count($chatrooms[$i]->get_messages[$x]);$x++){
-                $chatrooms[$i]->get_messages[$x]->get_message_sender->profilePicture = utf8_encode($chatrooms[$i]->get_messages[$x]->get_message_sender->profilePicture);
-            }
-                // $chatrooms[$i]->get_messages[$x]->getMessageSender->profilePicture = utf8_encode($chatrooms[$i]->get_messages[$x]->getMessageSender->profilePicture);
-        }
-        // foreach($chatrooms as $temp){
-        //     // $temp->get_message_sender->profilePicture = utf8_encode( $temp->get_message_sender->profilePicture);
-        //     $msg = $temp->get_message_sender;
-        //     return $msg;
-        //     // $msg = $temp->get_message_sender;
-        //     // $msg->firstName = "potaaa";
+        $data = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+
+        // $data = utf8_encode(json_decode(json_encode($data)));
+        // $data = $data->toArray();
+       // echo "".$data."";
+        // for($i=0;$i<$data->count();$i++){
+        //     // echo "-".json_encode($data[$i]->getEmail1)."-";
+        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
+        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
+        //     for($x=0;$x<$data[$i]->getMessages[$x]->count();$x++)
+        //         $data[$i]->getMessages[$x]->getMessageSender->profilePicture = utf8_encode(  $data[$i]->getMessages[$x]->getMessageSender->profilePicture );
         // }
-        // $chatrooms->get_message_sender->profilePicture = 
-        // data[0].get_messages[1].get_message_sender.profilePicture
-        // foreach ($chatrooms as $convertingImage){ 
-        //     $convertingImage->get_email1->profilePicture = utf8_encode($convertingImage->get_email1->profilePicture);
-        //     $convertingImage->get_email2->profilePicture = utf8_encode($convertingImage->get_email2->profilePicture);
-        //     foreach($convertingImage[0]->get_messages[0] as $msg)
-		// 	    $msg->get_message_sender->profilePicture = utf8_encode($msg->get_message_sender->profilePicture);
-		// }
-        // $chatrooms[0]->get_messages[0]->getMessageSender->profilePicture = utf8_encode($chatrooms[0]->get_messages[0]->getMessageSender->profilePicture);
-        // $chatrooms[0]->get_messages[1]->getMessageSender->profilePicture = utf8_encode($chatrooms[0]->get_messages[1]->getMessageSender->profilePicture);
-        return $chatrooms;
+        $x=0;
+		foreach ($data as $convertingImage){ 
+			$convertingImage->getEmail1->profilePicture = utf8_encode($convertingImage->getEmail1->profilePicture);
+            $convertingImage->getEmail2->profilePicture = utf8_encode($convertingImage->getEmail2->profilePicture);
+            foreach($data[$x]->getMessages as $dp)
+                $dp->getMessageSender->profilePicture =  utf8_encode( $dp->getMessageSender->profilePicture);
+            $x++;
+		}
+
+        
+
+		return response()->json($data);
+
+       // $chatrooms = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+   
     }
 
     public function sendMessage(Request $request)

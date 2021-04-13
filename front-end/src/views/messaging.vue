@@ -41,7 +41,7 @@
             >
             <div class="flex ml-2">
               <img
-                src="https://ptetutorials.com/images/user-profile.png"
+                :src="chatRoomPic[index]"
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
@@ -104,7 +104,7 @@
             >
             <div class="flex ml-2">
               <img
-                src="https://ptetutorials.com/images/user-profile.png"
+                :src="chatRoomPic[index]"
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
@@ -287,13 +287,17 @@
             </div>
             </div>
              <div v-else>
+            
              <div class="flex items-end pr-10 mt-1">
+              <img :src="msg.get_message_sender.profilePicture" alt="sunil" class="rounded-lg h-8 w-8 "> 
+              <div class="rounded-lg ">
               <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
                 <p>{{ msg.messageText }}</p>
                
                 <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
                   {{ timestamp(msg.dateCreated) }}  
                 </span>
+              </div>
               </div>
             </div>
             </div>
@@ -616,7 +620,7 @@
             >
             <div class="flex ml-2">
               <img
-                src="https://ptetutorials.com/images/user-profile.png"
+                :src="chatRoomPic[index]"
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
@@ -679,7 +683,7 @@
             >
             <div class="flex ml-2">
               <img
-                src="https://ptetutorials.com/images/user-profile.png"
+                :src="chatRoomPic[index]"
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
@@ -758,6 +762,7 @@ export default {
       toggleChat: false,
       chatRooms: [],
       chatRoomNames:[],
+      chatRoomPic:[],
       //inbox
       inbox: [],
       //chat
@@ -894,15 +899,22 @@ export default {
             console.log(res)
             this.chatRooms = res.data;
             var i;
-            // var j;
+            var j;
             //var x=0;
             for(i=0; i<this.chatRooms.length; i++){
               if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
-                this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName
+                this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
+                this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
+                
               }
               else{
-                this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName 
+                this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
+                this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
               }
+              for(j=0;j<this.chatRooms[i].get_messages.length;j++){
+                this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
+              }
+
             
               // for(j=0; j<this.chatRooms[i].get_messages.length; j++){
               //   if(this.chatRooms[i].get_messages[j].messageSender == this.authUser){
