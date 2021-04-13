@@ -178,7 +178,7 @@ class PostController extends Controller
 			//find the right user to notify, in this case the owner of the post
 			$userToNotif = Post::where('postNumber',$postNum)->get();
 			if($userToNotif[0]->email == $user->email){
-				return response()->json(["Success"],200);
+				return response()->json(["message"=>'You have successfully shared this post'],200);
 			}
 			$userToNotif = User::where('email',$userToNotif[0]->email)->get();
 			$userToNotif = User::find($userToNotif[0]->indexUserAuthentication);
