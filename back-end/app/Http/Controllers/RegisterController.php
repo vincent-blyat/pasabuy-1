@@ -48,12 +48,14 @@ class RegisterController extends Controller
             return response()->json($validator->errors(),422);
         }
         
-        // $user = new User();
-        // $user->email = $request->email;
-        // $user->password = $request->password;
-
         $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
         $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
+        //check if there is an existing code
+        if($request->oldEmail === $request->email){
+            $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo];
+            return response()->json($returnValue);
+        }
+        //if not, code will be sent to email or new email
         $code = mt_rand(100000, 999999);
         $data =[
             'name' => $request->firstName,

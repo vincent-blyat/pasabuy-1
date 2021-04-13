@@ -28,7 +28,7 @@
                 lg:flex-row lg:justify-between lg:space-x-6
                  ">
                     <div  class="w-full">
-                        <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" v-model="PersonalInfo.firstName" />
+                        <input name="" type="firstname" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" v-model="PersonalInfo.firstName" />
                     </div>
                     <div  class="w-full">
                         <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" v-model="PersonalInfo.lastName" />
@@ -118,19 +118,18 @@ export default {
                password : null,
                password_confirmation : null
             },
-            errors:null
+            errors:null,
         }
     }, 
     methods:{
         nextPage(){
+          
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
-               
                 if(res!=null){
-                    console.log('sucess, email sent');
-                    console.log(res.data.personalInfo);
-                    localStorage.setItem("code", res.data.code);
                     localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));
                     localStorage.setItem("account",JSON.stringify(res.data.account));
+                    console.log(res.data.personalInfo);
+                    localStorage.setItem("code", res.data.code);
                     this.$router.push({name:"verifyemail"});
                 }
                 else{
@@ -154,5 +153,14 @@ export default {
     created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
+  mounted(){
+      if(localStorage.getItem('personal')!=null && localStorage.getItem('account')!=null ){
+          var dataPersonal = JSON.parse(localStorage.getItem('personal'))
+          this.PersonalInfo.firstName = dataPersonal.firstName
+          this.PersonalInfo.lastName = dataPersonal.lastName
+          this.PersonalInfo.email = dataPersonal.email
+          this.PersonalInfo.phoneNumber = dataPersonal.phoneNumber
+      }
+  }
 }
 </script>
