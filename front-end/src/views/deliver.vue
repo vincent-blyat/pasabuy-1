@@ -3,7 +3,6 @@
 <div class="flex flex-col w-full
 ssm:w-max
 xsm:w-max
-
  justify-center   font-nunito ">
 <div class="w-6/12  
       2xl:block 2xl:mt-24
@@ -37,7 +36,6 @@ xsm:w-max
 2xl:p-0
 xl:p-0
 lg:p-0
-
 ">
  <div class="flex flex-col justify-center self-center 
               2xl:w-6/12 
@@ -154,7 +152,6 @@ export default {
       { text: 'Cancelled', value: 'Cancalled' },
     ]
     
-
 }
 },
 methods:{

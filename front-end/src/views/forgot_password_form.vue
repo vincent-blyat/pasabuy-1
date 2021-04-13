@@ -1,0 +1,107 @@
+<template class=" bg-gray-bgcolor font-nunito">
+
+    <div class="flex items-center ">
+        <router-link to="/">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        </router-link>
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+          
+           ">pasaBUY</h1>
+      </div>
+
+
+    <div id="forgotPassForm" class="flex items-center justify-center   pb-10  px-4">
+      <div class="w-full my-12 overflow-hidden text-center bg-white shadow-md flex-grow-1 rounded-xl
+      xl:w-2/5 lg:w-2/5 2xl:w-2/5 
+      md:w-97 sm:w-97
+      ">
+        <div class="px-10 py-16 ">
+            <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Forgot password form</h1>
+              <div action="#" class="space-y-3">
+                 <p class="mb-5 space-y-1 font-light text-red-700">
+                {{error}}</p>
+               
+                <div class="w-full" >
+                    <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="New Password" v-model="PersonalInfo.password"/>   
+                </div>
+                <div class="w-full" >
+                    <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" v-model="PersonalInfo.password_confirmation" />
+                </div>
+                <div class="flex mb-2 -mx-1 ">
+                    <div class="w-1/2 px-1 mt-6 text-lg font-bold text-left text-grey-dark text-blue">
+                        
+                    </div>
+                    <div class="flex justify-end w-1/2 px-1 mt-3">
+                        <button @click="submit" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">
+                           SUBMIT
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</template>
+
+<style>
+    #journal-scroll::-webkit-scrollbar {
+        width: 5px;
+        cursor: pointer;
+      }
+  
+    #journal-scroll::-webkit-scrollbar-track {
+        background-color: rgba(229, 231, 235, var(--bg-opacity));
+        cursor: pointer;
+    }
+  
+    #journal-scroll::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        background-color: rgba(185, 28, 28)
+    
+    }
+#iCheck{
+  font-size:16px;
+  color:rgb(22, 22, 141);
+}
+#iMessage{
+  font-size:24px;
+  color:rgb(22, 22, 141);
+}
+</style>
+
+<script>
+import api from '../api'
+import VueSimpleAlert from 'vue-simple-alert'
+export default {
+    data(){
+        return{
+            PersonalInfo:{
+               token: null,
+               email: null,
+               password : null,
+               password_confirmation : null
+            },
+            error:null
+        }
+    }, 
+    methods:{
+        submit(){
+            if(this.PersonalInfo.password == this.PersonalInfo.password_confirmation){
+              var params = [];
+              params = this.$route.query.token.split('/?email=')
+              this.PersonalInfo.token = params[0]
+              this.PersonalInfo.email = params[1]
+              api.post('/api/password/reset',this.PersonalInfo).then(()=>{
+                  VueSimpleAlert.alert("Password succesfully changed","Success","success")
+                  this.$router.push({name:"login"});
+              }).catch((errors)=>{
+                this.error = errors.response.data.error;
+              })  
+            }else{
+              this.error = "Password doesn't match."
+            }
+        }
+    },
+}
+</script>

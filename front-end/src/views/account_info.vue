@@ -1,86 +1,75 @@
 <template>
-    <div class="ring-1 ring-gray-300 bg-white p-5 rounded-2xl shadow-sm" >
-        <div class=" flex justify-between">
-            <div class="flex gap-4">
-            <p class="font-bold font-nunito text-sm">Account Info</p>
-            </div>
-           <div>  <label for="sub" id="edt3" @click="edit3=!edit3,Edit('edt3'), show=!show" class="
-               text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label></div>
-        </div> 
-        <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
-                      xl:w-7/12
-                      2xl:w-9/12
-                      lg:w-8/12
-                    ">
-        <span class="  font-raleways font-bold grid grid-cols-2 "> 
-        <p class="text-gray-500">Email</p>
-       <span>
-           <p v-if="show">{{account_info.email}}</p>
-           <input type="email" v-if="edit3"
-        id="input_email" v-model="account_info.email"
-        class="ring-2 ring-gray-400 font-bold w-full">
-       </span>
-        </span>
-        <span class=" font-raleways font-bold  grid grid-cols-2"> 
-        <p  class="text-gray-500">Password</p>
-        <span>
-            <input v-if="show" type="password" v-model="account_info.password" disabled/>
-            <input type="password" v-if="edit3"
-        id="input_password"  v-model="account_info.password" 
-        class="ring-2 ring-gray-400 font-bold w-full">
-        </span>
-        </span>
-        </div>
+  <div class="ring-1 ring-gray-300 bg-white p-5 rounded-2xl shadow-sm">
+    <div class="flex justify-between">
+      <div class="flex gap-4">
+        <p class="font-bold font-nunito text-sm">Account Info</p>
+      </div>
     </div>
+    <div class="text-sm w-full gap-x-10 pt-8 space-y-8">
+      <div class="w-full font-raleways font-bold flex justify-between">
+        <p class="text-gray-500">Email</p>
+        <span>
+          <p>{{ account_info.email }}</p>
+        </span>
+        <button
+          @click="toggle_email = !toggle_email"
+          class="material-icons focus:outline-none"
+        >
+          chevron_right
+        </button>
+      </div>
+      <div class="w-full font-raleways font-bold flex justify-between">
+        <p class="text-gray-500">Password</p>
+        <span>
+          <input
+            type="password"
+            class="bg-transparent"
+            :value="account_info.password"
+            disabled
+          />
+        </span>
+        <button
+          @click="toggle_password = !toggle_password"
+          class="material-icons focus:outline-none"
+        >
+          chevron_right
+        </button>
+      </div>
+    </div>
+    <Email class="hidden" v-if="toggle_email" />
+    <Password class="hidden" v-if="toggle_password" />
+  </div>
 </template>
 <script>
-import api from '../api'
+import Email from "./changeEmail.vue";
+import Password from "./changePassword.vue";
+import api from "../api";
 export default {
-   
-data(){
-    return{
-    disabled: 0,
-    hidden:false,
-    show:true,
-    show2:true,
-    edit3:false,
-    account_info:{
-        email:'',
-        password:'',
-        password_int:'',
-        type:'password',
-    },
-    }
-  
-},
-methods:{
-
-    submit () {
-       
-    },
-     Edit(pars) {
-      let x=document.getElementById(pars).innerHTML;
-      if(x=='Edit'){
-          document.getElementById(pars).innerHTML="Save";
-          
-      }
-      else{
-         document.getElementById(pars).innerHTML="Edit"; 
-         
-      }
-    }
-
-},
-mounted(){
-    //get the user information from the laravel API
-    api.get('/api/user').then((res)=>{
-      console.log('account info ', res.data);
-      this.account_info.email = res.data.email;
-      this.account_info.password = 'password';
-      //this.user = res.data;
-    }).catch(() => {
-      //this.error=error.response.data.errors;
-    })
-  }
-}
+  components: {
+    Email,
+    Password,
+  },
+  data: () => {
+    return {
+      toggle: false,
+      toggle_email: false,
+      toggle_password: false,
+      account_info: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  created() {
+    api
+      .get("api/user")
+      .then((res) => {
+        this.account_info.email = res.data.email;
+        this.account_info.password = "password";
+      })
+      .catch((errors) => {
+        console.log(errors);
+      });
+  },
+};
 </script>

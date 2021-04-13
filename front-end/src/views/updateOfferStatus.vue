@@ -1,5 +1,5 @@
 <template>
-        <div v-on:click.self="close2" class="bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center ssm:px-2 vs:px-2">
+        <div v-on:click.self="close2" class="z-50 bg-black bg-opacity-25 fixed inset-0 flex justify-center items-center ssm:px-2 vs:px-2">
       <div class="inline-flex flex-col bg-white shadow rounded-xl h-auto w-95 ssm:w-full vs:w-full" >
       <div class="flex flex-row w-full justify-center items-center py-3">
        <h1 class="text-gray-900 pr-10 se:pr-6 se:pl-14 ssm:pr-4 ssm:pl-14 pl-20 leading-normal ssm:text-sm vs:text-base lvs:text-xl text-xl font-bold">

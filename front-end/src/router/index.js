@@ -16,7 +16,8 @@ import forgotpassword from '../views/forgotpass.vue'
 import forgotPassVerify from '../views/forgotPassVerify.vue'
 import verifyemail from '../views/verifyemail.vue'
 import Shopping_List from '../views/shopping_list.vue'
-
+import Notifications from '../views/mobile_notification.vue'
+import forgotPasswordForm from '../views/forgot_password_form.vue'
 
 const routes = [
   {
@@ -135,9 +136,23 @@ const routes = [
   {
     path: '/shopping-list',
     name: 'Shopping List',
-    component: Shopping_List
+    component: Shopping_List,
+    meta: {requiresAuth:true}
   },
 
+  {
+    path: '/notification',
+    name: 'Notification',
+    component: Notifications,
+    meta: {requiresAuth:true}
+  },
+
+  {
+    path: '/forgot_password_form',
+    name: 'forgotPasswordForm',
+    component: forgotPasswordForm,
+    meta: {guest:true}
+  },
 
 ]
 
