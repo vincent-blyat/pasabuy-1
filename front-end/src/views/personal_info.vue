@@ -24,7 +24,6 @@
                     ">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
-<<<<<<< HEAD
         <span class="flex justify-between">
         <p v-if="show" id="name">{{personal.firstname + ' ' + personal.lastname}}</p>
         <input type="text" v-if="hidden" 
@@ -34,11 +33,6 @@
         id="input_lname" v-model="personal.lastname" 
         class="ring-2 ring-gray-400 font-bold w-full">
         </span>
-=======
-        <span>
-        <p >{{personal.name}} {{personal.midname}} {{personal.lastname}}</p>
-       </span>
->>>>>>> origin/master
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2 ">
         <p class="text-gray-500">PHONE NUMBER</p>

@@ -18,14 +18,18 @@
               </div>
               
               <div class="w-full">
-                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" v-model="addressInfo.cityMunicipality" >
+                <select  @change="getCityMunCode()" id="cityMun" aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" v-model="addressInfo.cityMunicipality" >
                  <option value="Choose" selected disabled>Choose</option>
-                       <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunDesc"> {{ city.citymunDesc }} </option>
+                       <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
 
               <div class="w-full">
-                   <input aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay" v-model="addressInfo.barangay"/>
+                <select aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" v-model="addressInfo.barangay" >
+                 <option value="Choose" selected disabled>Choose</option>
+                       <option v-for="barangays in barangay" v-bind:key="barangays.id" v-bind:value="barangays.brgyDesc"> {{ barangays.brgyDesc }} </option>
+                   </select>
+                  <!-- <input aria-label="Barangay" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay" v-model="addressInfo.barangay"/>-->
               </div>
               <div class="w-full ">
                 <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number" v-model="addressInfo.houseNumber" />
@@ -42,10 +46,11 @@
                     NEXT</button> <!-- upload id next -->
                 </div>
               </div>
+              </form>
             </div>
           </div>
         </div>
-      </div>
+      
 </template>
 
 <style>
@@ -77,7 +82,6 @@ img{
   width:11%;
  
 }
-<<<<<<< HEAD
 </style>
 
 <script>
@@ -90,7 +94,8 @@ export default {
       provinces: [],
       cityMunicipality: [],
       newcityMunicipality: [],
-      barangays: [],
+      barangay: [],
+      newBarangay: [],
     selectedrefBrgy: null,
 
 
@@ -142,6 +147,20 @@ export default {
       })
         },
 
+        getCityMunCode(){
+           var newBarangays=this.newBarangay;
+          this.barangay=[];
+          var f = document.getElementById("cityMun");
+          var getCityMunCode = f.value;
+          for (var i=0; i < newBarangays.length; i++) {
+                  if (newBarangays[i].citymunCode === getCityMunCode) {
+               this.barangay.splice(i, 1, newBarangays[i]);
+                  }      
+            }
+          console.log(getCityMunCode)
+          console.log(this.barangay)
+        },
+
       refcityMunicipality(){
           api.get('/api/refcityMunicipality').then((res)=>{
         this.cityMunicipality=res.data
@@ -151,7 +170,8 @@ export default {
         },
          refBrgy(){
           api.get('/api/refBrgy').then((res)=>{
-        this.barangays=res.data
+        this.barangay=res.data
+         this.newBarangay=res.data
         
       })
         },
@@ -160,7 +180,7 @@ export default {
     created(){
        this.refProvince();
        this.refcityMunicipality();
-      // this.refBrgy();
+       this.refBrgy();
     },
                
 }
@@ -168,6 +188,3 @@ export default {
 
 
 </script>
-=======
-</style>
->>>>>>> origin/master
