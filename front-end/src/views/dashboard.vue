@@ -9,7 +9,7 @@
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
-    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
+    <div class="inline-flex items-center justify-center p-6 space-x-4 w-608 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
         <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
@@ -20,12 +20,12 @@
 <!--FILTER--->
      <div class="relative flex items-center justify-center pt-3 ssm:justify-around x-v:pt-2  dv:float-right">
     <div class="justify-center h-auto bg-transparent ssm:px-0 dv:space-x-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full dv:w-608 rounded-xl">
-      <div class="flex items-start justify-start dv:flex-wrap vs:space-x-2 ssm:flex-col ssm:justify-start">
-          <button type="button" class=" inline-flex ssm:float-left 2xl:w-50 ssm:px-0 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
+      <div class="flex items-start justify-start dv:flex-wrap ssm:space-x-0 ssm:space-y-2 ssm:flex-col ssm:justify-start">
+          <button type="button" class=" mr-4 vs:mr-2 inline-flex ssm:float-left 2xl:w-50 ssm:px-0 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
                <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
+                 <label for="" class="pt-1 vs:py-1 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Posts</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
@@ -56,17 +56,17 @@
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
+                <button type="button" class="2xl:w-64 inline-flex  px-3 vs:px-0 sm:px-0 mv:right-0 mv:float-right justify-around w-48 lvs:w-48 sm:w-full py-1.5 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
                <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
-                <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
+                 <label for="" class="pt-1 vs:py-1 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                <span class="pt-1 pl-2 vs:pl-0 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
               </button>
               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-52 top-15 left-52 2xl:left-58 2xl:w-60 focus:outline-none vs:left-40 mv:right-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div class="absolute z-20 ssm:float-left ssm:right-0 ssm:left-0 right-60 font-bold origin-top-right lvs:left-48 bg-white rounded-lg shadow-lg w-44 top-15 ssm:top-266 2xl:left-58 2xl:w-60 focus:outline-none mv:right-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
@@ -94,7 +94,7 @@
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
-        <div class="relative flex flex-row justify-between flex-grow w-full">
+        <div class="flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
@@ -112,17 +112,17 @@
             </div>
           </div>
           <div class="vs:mt-1">
-            <button @click="edit1=!edit1" class="absolute right-0 focus:outline-none ">
+            <button @click="edit1=!edit1" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
             <div class="flex w-full ">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl vs:text-sm vs:right-0 top-5 right-8">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
              <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
               <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons vs:md-14">
                 mode
                </span>
-                Edit Post
+                Edit post
               </button>
              <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
               <button  @click="togglePostModal2" class="flex flex-row text-base font-normal vs:text-sm focus:outline-none gap-x-2">
@@ -249,12 +249,12 @@
   <!--end of user post-->
 
   <!--user post-->
-  <div class="relative flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
+  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
     <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
-       <div class="relative flex flex-row justify-between flex-grow w-full">
+       <div class="flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
@@ -272,11 +272,11 @@
             </div>
           </div>
           <div class="vs:mt-1">
-            <button @click="edit2=!edit2" class="absolute right-0 focus:outline-none ">
+            <button @click="edit2=!edit2" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
             <div class="flex w-full ">
-            <div v-if="edit2" class="absolute right-0 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl top-16">
+            <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
             <EditOrderRequest v-if="editOrderRequest" @closeModal2="listener5"/>
               <button  @click="toggleEditOrderRequest" class="flex flex-row text-base x-v:text-sm gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
