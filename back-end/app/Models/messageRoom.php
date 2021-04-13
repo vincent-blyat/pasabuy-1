@@ -24,14 +24,14 @@ class messageRoom extends Model
     {
         # code...
         // return $this->hasManyThrough(Messages::class,userInformation::class,'messageRoomNumber', 'messageSender', 'messageRoomNumber','email');
-        return $this->hasOne(userInformation::class, 'email', 'email1');
+        return $this->hasOne(PasabuyUser::class, 'email', 'email1');
     }
 
     public function getEmail2()
     {
         # code...
         // return $this->hasManyThrough(Messages::class,userInformation::class,'messageRoomNumber', 'messageSender', 'messageRoomNumber','email');
-        return $this->hasOne(userInformation::class, 'email', 'email2');
+        return $this->hasOne(PasabuyUser::class, 'email', 'email2');
     }
     
     

@@ -16,7 +16,7 @@ class Messages extends Model
     public function getMessageSender()
     {
         # code...
-        return $this->hasOne(userInformation::class, 'email', 'messageSender');
+        return $this->hasOne(PasabuyUser::class, 'email', 'messageSender');
     }
 
 }
