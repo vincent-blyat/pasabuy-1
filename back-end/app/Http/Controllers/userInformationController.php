@@ -112,16 +112,19 @@ class userInformationController extends Controller
     public function changePassword(Request $request)
     {
         # code...
-
+        $messages = ['password.regex' => ' Must contain at least one lowercase letter (a – z).
+                        Must contain at least one uppercase letter (A – Z).
+                        Must contain at least one digit (0-9).'
+                    ];
         $validator=Validator::make($request->all(),[
             'currentPassword' => ['required'],
-            'password' => ['required','confirmed','min:8','reges:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/']
-        ],['password.regex'=>'The password contains characters from at least three of the following five categories:
-                              English uppercase characters (A – Z)
-                              English lowercase characters (a – z)
-                              Base 10 digits (0 – 9)
-                              Non-alphanumeric (For example: !, $, #, or %)
-                              Unicode characters']);
+            'password' => ['required',
+                            'confirmed',
+                            'min:8',
+                            'regex:/[a-z]/',      // must contain at least one lowercase letter
+                            'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                            'regex:/[0-9]/',      // must contain at least one digit
+                        ],],$messages);
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
         }
