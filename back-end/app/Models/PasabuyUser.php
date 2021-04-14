@@ -16,4 +16,10 @@ class PasabuyUser extends Model
     public function post() {
     	return $this->hasMany(Post::class, 'email', 'email');
     }
+    public function share() {
+    	return $this->hasOne(Share::class, 'sharerEmail', 'email');
+    }
+    public function messages() {
+    	return $this->hasMany(Messages::class, 'messageSender', 'email');
+    }
 }

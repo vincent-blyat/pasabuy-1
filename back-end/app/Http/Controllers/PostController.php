@@ -7,8 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\OfferPost;
+use App\Models\PasabuyUser;
 use App\Models\RequestPost;
-use App\Models\userAddress;
+
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -137,9 +138,55 @@ class PostController extends Controller
 	public function getAllPosts(Request $request) {
 
 		$user = Auth::user();
-		$data = Post::with('offer_post','request_post','get_user_name')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
+		// $data = PasabuyUser::has('post')->with('post','post.offer_post','post.request_post')->get();
+		$data = Post::with('offer_post','request_post')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
-		return $data;
+		foreach ($data as $convertingImage){ 
+			
+			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
+		}
+
+		return response()->json($data);
+	}
+
+	public function getAllShares(Request $request)
+	{
+		# code...
+		$data = share::with('post','post.offer_post','post.request_post','user')->orderBy('dateCreated','desc')->get();
+		
+		foreach ($data as $convertingImage){ 
+			
+			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
+		}
+
+		return response()->json($data);
+	}
+	
+	public function sharePost(Request $request)
+	{
+		# code...
+		$user = Auth::user();
+		$postNum = $request->postNum;
+
+		$newShare = new share;
+		$newShare->sharerEmail = $user->email;
+		$newShare->shareNumber = share::count()+1;
+		$newShare->postNumber = $postNum;
+		if($newShare->save()){
+			//find the right user to notify, in this case the owner of the post
+			$userToNotif = Post::where('postNumber',$postNum)->get();
+			if($userToNotif[0]->email == $user->email){
+				return response()->json(["message"=>'You have successfully shared this post'],200);
+			}
+			$userToNotif = User::where('email',$userToNotif[0]->email)->get();
+			$userToNotif = User::find($userToNotif[0]->indexUserAuthentication);
+			$userToNotif->notify(new SharedNotification($postNum));
+			return response()->json(['message'=>'You have successfully shared this post'],200);
+		}else{
+			return response()->json(["Error"=>"An error occured"],500);
+		}
+
+		
 	}
 
 

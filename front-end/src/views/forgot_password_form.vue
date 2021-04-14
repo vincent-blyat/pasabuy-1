@@ -23,7 +23,7 @@
                 {{error}}</p>
                
                 <div class="w-full" >
-                    <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="Password" v-model="PersonalInfo.password"/>   
+                    <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="New Password" v-model="PersonalInfo.password"/>   
                 </div>
                 <div class="w-full" >
                     <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" v-model="PersonalInfo.password_confirmation" />
@@ -72,6 +72,7 @@
 
 <script>
 import api from '../api'
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
     data(){
         return{
@@ -92,6 +93,7 @@ export default {
               this.PersonalInfo.token = params[0]
               this.PersonalInfo.email = params[1]
               api.post('/api/password/reset',this.PersonalInfo).then(()=>{
+                  VueSimpleAlert.alert("Password succesfully changed","Success","success")
                   this.$router.push({name:"login"});
               }).catch((errors)=>{
                 this.error = errors.response.data.error;

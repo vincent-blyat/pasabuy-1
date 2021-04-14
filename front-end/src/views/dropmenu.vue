@@ -29,6 +29,9 @@ export default {
     logout(){
         console.log('logout');
           // Login...
+        api.get('api/user').then((res)=>{
+          window.Echo.leave('chat.'+res.data.indexUserAuthentication)
+        })
         api.post('api/logout').then(()=>{
           localStorage.removeItem('isLoggedIn');
           this.$router.push({name:"Home"});

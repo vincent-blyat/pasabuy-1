@@ -97,9 +97,16 @@ export default {
           // Login...
     
            api.post('/api/login', this.dataForm).then(()=>{
-              localStorage.setItem('isLoggedIn', true);
-              console.log('yay logged in');
-              this.$router.push({name:"dashboard"});
+             api.get('api/user').then((res)=>{
+               if(res.data.email != null){
+                  localStorage.setItem('isLoggedIn', true);
+                  console.log('yay logged in');
+                  this.$router.push({name:"dashboard"});
+               }
+             }).catch((errors)=>{
+              this.errors = errors.response.data.errors.invalid.join();
+            })
+             
             }).catch((errors)=>{
               this.errors = errors.response.data.errors.invalid.join();
             })

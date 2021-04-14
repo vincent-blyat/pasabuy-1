@@ -17,14 +17,33 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $chatrooms = messageRoom::with('getMessages', 'getEmail1','getEmail2', 'getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
-        return $chatrooms;
-    }
+        $data = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
 
-    public function getMessages(Request $request)
-    {
-        # code...
-        return Messages::where('messageRoomNumber', '=', $request->roomID)->orderBy('dateCreated', 'ASC')->get();
+        // $data = utf8_encode(json_decode(json_encode($data)));
+        // $data = $data->toArray();
+       // echo "".$data."";
+        // for($i=0;$i<$data->count();$i++){
+        //     // echo "-".json_encode($data[$i]->getEmail1)."-";
+        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
+        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
+        //     for($x=0;$x<$data[$i]->getMessages[$x]->count();$x++)
+        //         $data[$i]->getMessages[$x]->getMessageSender->profilePicture = utf8_encode(  $data[$i]->getMessages[$x]->getMessageSender->profilePicture );
+        // }
+        $x=0;
+		foreach ($data as $convertingImage){ 
+			$convertingImage->getEmail1->profilePicture = utf8_encode($convertingImage->getEmail1->profilePicture);
+            $convertingImage->getEmail2->profilePicture = utf8_encode($convertingImage->getEmail2->profilePicture);
+            foreach($data[$x]->getMessages as $dp)
+                $dp->getMessageSender->profilePicture =  utf8_encode( $dp->getMessageSender->profilePicture);
+            $x++;
+		}
+
+        
+
+		return response()->json($data);
+
+       // $chatrooms = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+   
     }
 
     public function sendMessage(Request $request)

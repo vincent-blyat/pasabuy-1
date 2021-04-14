@@ -41,11 +41,11 @@
       </span>
       <p class=" text-gray-500">Messages</p>
       </div></router-link>
-      <div class="flex gap-x-4 py-4 cursor-pointer  items-center" @click="activeBtn=!activeBtn,show=!show" :class="{active_notif: activeBtn }">
+      <div class="flex gap-x-4 py-4 cursor-pointer  items-center" @click="notif()" :class="{active_notif: activeBtn }">
        <span id="notif" class="text-gray-500 material-icons \">
             notifications
           </span>
-          <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications</span>
+          <span id="btn_notif" class="text-base font-bold leading-none tracking-wide text-gray-500 outline-none ">Notifications </span> <span class="text-red-500">{{unreadNotif}}</span>
               
       </div>
       </div>
@@ -72,7 +72,7 @@
         <div v-if="show" class="fixed hidden xl:block lg:block pb-24 2xl:block overflow-y-auto top-20 h-full right-60 pt-2  bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
                <h1 class="mt-4 mb-4 ml-4 text-black font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
              
-                  <Notification/>
+                  <Notification :notif="userNotif"/>
               
              
             </div> 
@@ -111,7 +111,7 @@
        <span class="material-icons ">
             notifications
           </span>
-      <p class="text-gray-500">Notifications</p>   
+      <p class="text-gray-500">Notifications</p> 
       </div></router-link>
      <router-link to="/edit-profile" class="rounded-2xl">
       <div class="mobile rounded-2xl items-center flex h-10 pl-2 space-x-2 ">
@@ -168,6 +168,7 @@ import { computed } from 'vue';
 import {useRoute} from 'vue-router';
 import Dropdown from './dropmenu.vue';
 import Notification from './Notification.vue'
+import api from "../api"
 export default {
   name:'navBar',
  components:{
@@ -181,6 +182,9 @@ export default {
             isOpen:false,
             show:false,
             activeBtn:false,
+            unreadNotif:null,
+            user:null,
+            userNotif:null
         }
     },
       methods:{
@@ -189,6 +193,15 @@ export default {
 // add our event listener for the click
              sidebar.classList.toggle("-translate-x-full");
         
+            },
+            notif(){
+              this.activeBtn=!this.activeBtn
+              this.show=!this.show
+              api.post('/api/readNotif').then((res)=>{
+                 this.unreadNotif = res.data.length
+              }).catch((errors)=>{
+                console.log(errors)
+              })
             }
         },
     setup() {
@@ -198,7 +211,30 @@ export default {
     return{currentRoute}
     
   },
+  created(){
+    console.log("navbar created")
+   
+    api.get('api/getUnreadNotifications').then((res)=>{
+      console.log(res.data)
+      this.unreadNotif = res.data.length
+    })
+   
+  },
+  mounted(){
+     api.get('api/user').then((res)=>{
+      this.user=res.data;
+      console.log("notifications mounted",this.user)
+      window.Echo.private('App.Models.User.' + this.user.indexUserAuthentication)
+      .notification((notification) => {
+        this.userNotif = notification
+        api.get('api/getUnreadNotifications').then((res)=>{
+        this.unreadNotif = res.data.length
+      })
+    });
+    })
+   
     
+  }
 }
 </script>
 <style scoped>

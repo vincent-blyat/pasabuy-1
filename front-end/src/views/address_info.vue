@@ -55,8 +55,11 @@
               shadow-2xl
               h-auto
           ">
-            <p class="text-lg font-extrabold">Edit Address Information</p>
-            <hr class="mb-5 border-2 border-red-700 bg-red-700">
+            <div class="flex flex-row items-center  justify-between p-3">
+            <p class="hidden lg:block 2xl:block xl:block"></p>
+            <p class="text-lg flex  font-extrabold xl:ml-8 lg:ml-8 2xl:ml-8">Update Address Info</p>
+            <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false"> Close</p>
+          </div>
             
           <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
               <div class="grid grid-cols-2 gap-y-4">
@@ -98,6 +101,7 @@
 </template>
 <script>
 import api from '../api'
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
   
 data(){
@@ -137,9 +141,9 @@ methods:{
       this.address_info.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
       this.address_info.city = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
       this.address_info.barangay = this.selectedBrgy;
-      api.post('/api/editAddress', this.address_info).then(()=>{
+      api.post('/api/editAddress', this.address_info).then((res)=>{
       //this.user = res.data;
-      console.log('Success')
+       VueSimpleAlert.alert(res.data.message,"Success","success")
         }).catch((errors) => {
             console.log(errors)
         })

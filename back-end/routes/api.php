@@ -6,6 +6,7 @@ use App\Http\Controllers\messageController;
 use App\Http\Controllers\userInformationController;
 use App\Http\Controllers\addressController;
 use App\Http\Controllers\forgotPasswordController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
 use Illuminate\Http\Request;
@@ -38,11 +39,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/editAddress', [userInformationController::class, 'editAddress']);
     Route::post('/editAccount', [userInformationController::class, 'editAccount']);
     Route::get('/getValidID', [userInformationController::class, 'getValidID']);
-    Route::get('/getAccount', [userInformationController::class, 'getAccount']);
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
     Route::get('/getMessages', [messageController::class, 'getMessages']);
     Route::post('/sendMessage', [messageController::class, 'sendMessage']);
     Route::get('/getPosts', [PostController::class, 'getAllPosts']);
+    Route::post('/share', [PostController::class, 'sharePost']);
+    Route::get('/getShares', [PostController::class, 'getAllShares']);
+    Route::get('/getNotifications', [NotificationController::class, 'getAll']);
+    Route::get('/getUnreadNotifications', [NotificationController::class, 'getUnread']);
+    Route::post('/readNotif', [NotificationController::class, 'readNotif']);
+    Route::post('/changeEmail', [userInformationController::class, 'changeEmail']);
+    Route::post('/changePassword', [userInformationController::class, 'changePassword']);
+    Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
+    Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
  
     
 });

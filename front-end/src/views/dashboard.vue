@@ -1,5 +1,5 @@
 <template class="bg-gray-bgcolor">
-    <Navbar/>
+    <Navbar  />
 
     <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
@@ -10,7 +10,7 @@
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
     <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -86,23 +86,23 @@
       </div>
     </div>
      </div>
-  
-
+     
   <!--user post-->
   <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
     v-for="(post_info, index) in delivery_info"
     :key="index"
     >
+    
     <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
         <div class="relative flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.get_user_name.firstName}} {{post_info.get_user_name.lastName}}
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.user.firstName}} {{post_info.user.lastName}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
@@ -253,6 +253,8 @@
         <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.request_post != null">
           <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.request_post.caption}}</p>
         </div>
+
+        
         <!--section 4-->
     
         <!--section 5-->
@@ -281,7 +283,7 @@
           </button>
           <div class="flex w-full">
             <div v-show="share2==post_info.postNumber && share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+              <button @click="share(post_info.postNumber)" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
                 share
                </span>
@@ -493,6 +495,7 @@ import SendRequest from "./sendRequest"
 import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
+import VueSimpleAlert from 'vue-simple-alert'
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
 
@@ -510,6 +513,7 @@ export default {
       edit2: false,
       share1: false,
       share2: false,
+      shares:[],
       filter: false,
       filter2: false,
       isOpen:false,
@@ -530,6 +534,7 @@ export default {
       datePosted1: '13 hours ago',
       postStatus: 'posted',
       user_info:[],
+      profilePicture:null,
 
       // delivery_info:{
       //   delivery_area: 'Naga City',
@@ -646,23 +651,57 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
+    share(postNumber){
+      var shareData = {postNum: postNumber}
+      console.log(shareData)
+      api.post('/api/share',shareData).then((res)=>{
+        VueSimpleAlert.alert(res.data.message,"Success","success")
+        console.log(res.data)
+        this.share1 = false;
+      }).catch((error) => {
+        VueSimpleAlert.alert('An error occured',"Error","error")
+        console.log(error)
+      })
+    }
   },
     mounted(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
+    api.get('/api/getPersonal').then((resp)=>{
+      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
     }).catch((error) => {
        console.log(error)
     })
   },
   created(){
+    api.get('/api/user').then((res)=>{
+      this.user = res.data;
+    }).catch((error) => {
+       console.log(error)
+    })
+
+
     api.get('/api/getPosts').then((res)=>{
       console.log(res.data)
+      var i;
+      for(i=0;i<res.data.length;i++){
+        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
+      }
+   
       this.delivery_info=res.data
       console.log(this.delivery_info)
     }).catch((error) => {
       console.log(error)
     })
-  },
-   
+
+     api.get('/api/getShares').then((res)=>{
+      var i;
+      for(i=0;i<res.data.length;i++){
+        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
+      }
+      this.shares=res.data
+      console.log(this.shares)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 }
 </script>
