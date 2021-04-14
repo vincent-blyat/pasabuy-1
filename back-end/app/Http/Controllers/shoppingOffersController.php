@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class shoppingOffersController extends Controller
 {
     function listShoppingOffers(){
-        return shoppingOffers::all();
+        //return shoppingOffers::all();
         //return tbl_shoppingofferposts::All();
+        $data = shoppingOffers::with('posts','posts.user')->get();
+        return $data;
     }
 }

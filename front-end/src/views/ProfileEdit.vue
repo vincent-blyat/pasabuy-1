@@ -10,7 +10,7 @@
         <div class="flex flex-col">
          <div class="flex flex-row ssm:flex-col ssm:space-x-0 vs:flex-col vs:space-x-0  sm:space-x-2 space-x-4">
           <div>
-           <p class="text-3xl ssm:text-base vs:text-xl sm:text-xl font-bold  sm:mt-1 tracking-wide leading-normal text-gray-900">{{personal.firstname}} {{personal.lastname}}
+           <p class="text-3xl ssm:text-base vs:text-xl sm:text-xl font-bold  sm:mt-1 tracking-wide leading-normal text-gray-900">{{account_infos.firstName}} {{account_infos.lastName}}
             <span class="pb-1 text-blue-900 align-middle material-icons md-24">
              verified
             </span>
@@ -42,46 +42,24 @@
                  <span class=" rounded-full material-icons text-black">
               location_on  
               </span>
-                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
+                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{accountaddress.barangay}}, {{accountaddress.cityMunicipality}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               phone_enabled  
               </span>
-                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
+                 <p class="text-sm vs:text-xs leading-none pt-1 text-gray-700">{{account_infos.phoneNumber}}</p>
                 </div>
                 <div class="inline-flex space-x-2">
                  <span class="rounded-full material-icons text-black">
               alternate_email  
               </span>
-                 <p class="text-sm leading-none vs:text-xs pt-1 text-gray-700">{{account_info.email}}</p>
+                 <p class="text-sm leading-none vs:text-xs pt-1 text-gray-700">{{account_infos.email}}</p>
                 </div>
             </div>
             </div>
         </div>
     </div>
-    <div class="hidden vs:flex ssm:flex ssm:pr-0 flex-col pr-60 py-2 sm:pr-10 vs:pr-20 lvs:pr-36">
-            <div class="flex flex-col py-3 space-y-2">
-                <div class="inline-flex space-x-2">
-                 <span class=" rounded-full material-icons text-black">
-              location_on  
-              </span>
-                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{address_info.barangay}}, {{address_info.city}}</p>
-                </div>
-                <div class="inline-flex space-x-2">
-                 <span class="rounded-full material-icons text-black">
-              phone_enabled  
-              </span>
-                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{personal.phone_number}}</p>
-                </div>
-                <div class="inline-flex space-x-2">
-                 <span class="rounded-full material-icons text-black">
-              alternate_email  
-              </span>
-                 <p class="text-sm ssm:text-xs leading-none pt-1 text-gray-700">{{account_info.email}}</p>
-                </div>
-            </div>
-            </div>
              <div class="hidden vs:flex ssm:flex ssm:pr-0 ssm:space-x-4 flex-row  space-x-8 pr-56 sm:pr-4 vs:pr-16 lvs:pr-32">
             <div class="flex space-x-2 ssm:justify-start ssm:items-start vs:justify-start vs:items-start items-center justify-center">
              <p class="text-base ssm:text-sm vs:text-base font-bold leading-none text-gray-900">{{account_info.countFollowing}}</p>
@@ -115,6 +93,7 @@
 </template>
 
 <script>
+import api from '../api'
 import Navbar from './Navbar'
 import ShoppingOffers from './ShoppingOffers'
 import ShoppingOrders from './ShoppingOrders'
@@ -146,7 +125,29 @@ export default {
            countFollowing: '37',
            countFollowers: '29'
           },
+          account_infos: [],
+          accountaddress: [],
         }
+  },
+  mounted(){
+    //get the user information from the laravel API
+    api.get('/api/getPersonal').then((res)=>{
+      
+      this.account_infos = res.data;
+      console.log('account info ', this.account_infos);
+      //this.user = res.data;
+    }).catch(() => {
+      //this.error=error.response.data.errors;
+    });
+
+    api.get('/api/getAddress').then((res)=>{
+      
+      this.accountaddress = res.data;
+      console.log('account address ', this.accountaddress);
+      //this.user = res.data;
+    }).catch(() => {
+      //this.error=error.response.data.errors;
+    });
   },
   
   components: {
@@ -157,6 +158,7 @@ export default {
    ShoppingAbout,
    Followers,
   },
+
   methods: {
     toggle(){
       if(this.component != ShoppingOffers)

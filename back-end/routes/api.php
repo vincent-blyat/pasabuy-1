@@ -9,6 +9,10 @@ use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
+use App\Http\Controllers\shoppingOffersController;
+use App\Http\Controllers\shoppingOrdersController;
+use App\Http\Controllers\reviewsController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -82,3 +86,9 @@ Route::post('post/request', [PostController::class, 'create_request_post']);
 
 Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
+
+Route::get("shoppingoffers",[shoppingOffersController::class, 'listShoppingOffers']);
+//Route::post("shoppingoffers",[shoppingOffersController::class, 'addShoppingOffers']);
+//Route::get("shoppingoffers/{id}",[shoppingOffersController::class, 'editShoppingOffers']);
+Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrders']);
+Route::get("reviews",[reviewsController::class, 'listReviews']);

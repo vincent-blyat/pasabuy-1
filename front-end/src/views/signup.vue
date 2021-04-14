@@ -121,6 +121,7 @@ export default {
     }, 
     methods:{
         nextPage(){
+            api.get('/sanctum/csrf-cookie').then(() => {
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
                
                 if(res!=null){
@@ -134,6 +135,7 @@ export default {
                 else{
                     console.log('error, email not sent');
                 }
+            })
             })
         }
     },

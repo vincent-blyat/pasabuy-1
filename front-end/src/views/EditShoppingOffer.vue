@@ -16,7 +16,7 @@
   <!--User Profile-->
   <div class="inline-flex space-x-2 items-center justify-start p-4">
     <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" src="img/yami.jpg"/>
-    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
+    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{btnText.posts.user.firstName}} {{btnText.posts.user.lastName}}</p>
   </div>
   <!--end-->
 
@@ -32,7 +32,7 @@
              <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                  <p class="text-xs font-semibold leading-none text-gray-500">Delivery Area</p>
                   <span>
-                    <input type="text" id="input_name" v-model="delivery_info.delivery_area" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                    <input type="text" id="input_name" :value="btnText.deliveryArea" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                    </span>
              </div>
          </div>
@@ -48,7 +48,7 @@
              <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                  <p class="text-xs font-semibold leading-none text-gray-500">Shopping Place</p>
                   <span>
-                    <input type="text" id="input_name" v-model="delivery_info.shopping_place" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                    <input type="text" id="input_name" :value="btnText.shoppingPlace" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                    </span>
              </div>
          </div>
@@ -64,7 +64,7 @@
              <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                  <p class="text-xs font-semibold leading-none text-gray-500">Schedule</p>
                   <span>
-                    <input type="text" id="input_name" v-model="delivery_info.schedule" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                    <input type="text" id="input_name" :value="btnText.deliverySchedule" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                    </span>
              </div>
          </div>
@@ -78,7 +78,7 @@
           <div class="inline-flex flex-col items-start justify-start w-full h-full py-1.5 rounded-2xl">
               <p class="text-xs font-semibold leading-none text-gray-500">Public Transit</p>
                <span>
-                <input type="text" id="input_name" v-model="delivery_info.public_transit" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                <input type="text" id="input_name" :value="btnText.transportMode" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                 </span>
           </div>
       </div>
@@ -94,7 +94,7 @@
              <div class="flex flex-col items-start justify-start w-full h-full py-1.5 rounded-2xl">
                  <p class="text-xs font-semibold leading-none text-gray-500">Capacity</p>
                  <span>
-                 <input type="text" id="input_name" v-model="delivery_info.capacity" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                 <input type="text" id="input_name" :value="btnText.capacity" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                  </span>
              </div>
          </div>
@@ -108,7 +108,7 @@
           <div class="inline-flex flex-col items-start justify-start vs:w-full h-full py-1.5 rounded-2xl">
               <p class="text-xs font-semibold leading-none text-gray-500">Payment Method</p>
                <span>
-                <input type="text" id="input_name" v-model="delivery_info.payment_method" class="ssm:text-xs block bg-gray-100 focus:outline-none text-sm leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                <input type="text" id="input_name" :value="btnText.paymentMethod" class="ssm:text-xs block bg-gray-100 focus:outline-none text-sm leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                 </span>
           </div>
       </div>
@@ -119,7 +119,7 @@
 
      <!--Comment section-->
     <div class="justify-center flex  ssm:px-2 mt-3 sm:px-2 vs:px-2">
-     <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..." v-model="delivery_info.comment"></textarea>
+     <textarea id="postMessage" name="postMessage" rows="3" :value="btnText.caption" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..."></textarea>
     </div>
     <!--end-->
 
@@ -139,6 +139,9 @@
 
 <script>
 export default {
+    props: [
+        'btnText'
+    ],
     data(){
         return {
         isVisible: true,
