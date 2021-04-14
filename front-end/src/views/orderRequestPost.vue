@@ -1,8 +1,8 @@
 <template>
              <!--User profile section-->    
          <div class="inline-flex space-x-2 items-center justify-start p-4">
-           <img class="w-14 h-full ssm:w-10 vs:w-12 border rounded-full border-gray-200" src="img/yami.jpg"/>
-           <p class="text-base font-bold ssm:text-sm vs:text-sm lvs:text-base leading-none text-gray-900">Yami Sukehiro</p>
+           <img class="w-14 h-full ssm:w-10 vs:w-12 border rounded-full border-gray-200" :src="avatar"/>
+           <p class="text-base font-bold ssm:text-sm vs:text-sm lvs:text-base leading-none text-gray-900">{{profile}}</p>
          </div>
          <!--end-->
 
@@ -70,6 +70,7 @@
 
 <script>
 export default {
+    props:['profile','avatar'],
     data (){
         return{
             isOpen:false

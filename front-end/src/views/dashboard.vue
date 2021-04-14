@@ -537,17 +537,6 @@ export default {
       profilePicture:null,
       post_filter:"nearby",
       post_type:"all",
-
-      // delivery_info:{
-      //   delivery_area: 'Naga City',
-      //   shopping_place: 'SM City Legazpi',
-      //   schedule: '2021-04-28 13:12:01',
-      //   public_transit: 'Public Transit',
-      //   capacity: '2 Big Plastic Bag',
-      //   payment_method: 'Cash on Delivery',
-      //   comment: 'Let me Know',
-      //   status: 'No Longer Accepting Requests'
-      // },
       delivery_info:[],
    
       activeDeliveries:{
