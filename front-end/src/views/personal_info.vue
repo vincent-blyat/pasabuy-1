@@ -128,6 +128,7 @@
 import api from '../api'
 import Profile from './ProfileEdit.vue'
 import VueSimpleAlert from 'vue-simple-alert'
+import moment from "moment"
 export default {
   name: "personal",
   component: {
@@ -230,7 +231,7 @@ methods:{
           this.personal.lastname = res.data.lastName;
           this.personal.phone_number = res.data.phoneNumber;
           this.personal.gender = res.data.gender;
-          this.personal.birdate = res.data.birthDate;
+          this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
           this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
           //this.user = res.data;
         });
