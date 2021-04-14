@@ -11,11 +11,12 @@ class addressController extends Controller
     function refProvince(){
         return DB::select('SELECT * FROM refprovince ORDER BY  provDesc');
     }
-    function refcityMunicipality(){
-        return DB::select('SELECT * FROM refcitymun ORDER BY  citymunDesc');
+    function refcityMunicipality(Request $request){
+        $data = DB::select('SELECT * FROM refcitymun WHERE provCode = \''.$request->provCode.'\' ORDER BY  citymunDesc');
+        return response()->json($data);
     }
-    function refBrgy(){
-        return DB::select('SELECT * FROM refbrgy ORDER BY brgyDesc');
-        
+    function refBrgy(Request $request){
+        $data = DB::select('SELECT * FROM refbrgy WHERE citymunCode = \''.$request->cityCode.'\'  ORDER BY brgyDesc');
+        return response()->json($data);
     }
 }
