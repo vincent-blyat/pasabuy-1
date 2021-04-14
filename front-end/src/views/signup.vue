@@ -123,7 +123,7 @@ export default {
     }, 
     methods:{
         nextPage(){
-          
+          api.get('/sanctum/csrf-cookie').then(() => {
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
                 if(res!=null){
                     localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));
@@ -148,6 +148,7 @@ export default {
                     errors.response.data.email = "";
                 this.errors =errors.response.data.firstName+' '+ errors.response.data.lastName+' '+errors.response.data.email+' '+errors.response.data.phoneNumber+' '+errors.response.data.password;
             })
+            }
         }
     },
     created: function () {
