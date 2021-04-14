@@ -31,9 +31,9 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 43200),//setting the session liftime to 43200 minuest (30 days)
 
-    'expire_on_close' => false,
+    'expire_on_close' => false,//when the browser is closed, session will not expire.
 
     /*
     |--------------------------------------------------------------------------
