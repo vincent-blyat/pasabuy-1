@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 
@@ -25,10 +26,9 @@ class loginController extends Controller
             return response()->json(Auth::user(),200);
         }
         throw ValidationException::withMessages([
-            'email'=>['The provided credentials are incorrect.']
+            'invalid'=>['The provided credentials are incorrect.']
         ]);
     }
-
 
     public function logout(Request $request)
     {

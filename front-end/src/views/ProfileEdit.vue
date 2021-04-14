@@ -157,7 +157,6 @@ export default {
    ShoppingAbout,
    Followers,
   },
-
   methods: {
     toggle(){
       if(this.component != ShoppingOffers)

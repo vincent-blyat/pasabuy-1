@@ -15,7 +15,7 @@
   <!--end-->
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-6" v-for="shoppingOrder_info in shoppingOrder_infos" v-bind:key="shoppingOrder_info.indexOrderRequestPost">
+  <div class="flex items-center justify-center pt-6">
     <div class="space-x-4 h-auto ssm:p-2 ssm:w-full p-6 vs:p-4 vs:w-full sm:w-full w-608 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -71,39 +71,39 @@
               remove_circle_outline
               </span>
           <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none items-center text-red-600">
-              {{shoppingOrder_info.postStatus}}</p>
+              {{delivery_info.status}}</p>
         </div>
         <!--end-->
 
         <!--section 3-->
         <div class="flex ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start items-center justify-start mt-4 w-full vs:space-x-0 space-x-2">
-          <div class="flex-col items-start pr-12">
+          <div class="flex-col items-start w-full pr-12">
             <div class="flex space-x-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               location_on  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.deliveryAddress}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.delivery_area}}</p>
             </div>
             <div class=" flex space-x-2 py-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               alarm  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.deliverySchedule}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.schedule}}</p>
             </div>
             
           </div>
-          <div class="flex-col vs:py-1">
+          <div class="flex-col vs:py-1 w-full">
             <div class="flex space-x-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               shopping_cart  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.shoppingPlace}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.shopping_place}}</p>
             </div>
             <div class="flex space-x-2 py-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               payments  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.paymentMethod}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.payment_method}}</p>
             </div>
           </div>
         </div>
@@ -133,28 +133,49 @@
         <!--section 4-->
 
         <div class="inline-flex  items-start ssm:px-2 justify-start mt-3 rounded-xl h-auto bg-white w-full">
-            <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-loose w-auto text-gray-900">{{delivery_info.caption}}</p>
+            <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-loose w-auto text-gray-900">{{delivery_info.comment}}</p>
         </div>
 
         <!--section 5-->
         <div class="flex justify-evenly w-full ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:space-x-3 vs:min-w-0 vs:px-2 pr-8 vs:pr-0 mt-4 space-x-6">
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener4"/>
+          <button @click="toggleSendModal" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ">
             send
             </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-600">Send Request</p>
-          </div>
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          </button>
+           <router-link to="/messages">
+          <button class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
            </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-600">Chat</p>
-          </div>
-          <div class="flex items-center space-x-2 ssm:space-x-1">
+          </button>
+          </router-link>
+          <div>
+          <button @click="share=!share" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            share
            </span>
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-500">Share</p>
+          </button>
+          <div class="flex w-full">
+            <div v-if="share" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-56 md:right-24 xl:right-91 h-min w-30">
+              <button class="flex flex-row gap-x-2 text-base focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons">
+                share
+               </span>
+                Share on Feed
+              </button>
+              <button class="flex py-2 flex-row font-normal text-base focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons">
+                link
+               </span>
+                Copy link to this post
+              </button>
+              </div>
+              </div>
           </div>
         </div>
         <!--end-->
@@ -167,17 +188,19 @@
 </template>
 
 <script>
-import api from '../api'
 import PostModal from "./PostModal"
 import EditOrderRequest from './EditOrderRequest'
 import UpdateOrderStatus from './updateOrderStatus'
+import SendRequest from "./sendRequest"
 export default {
     data() {
     return {
       postModalVisible: false,
       postModalVisible2: false,
       postModalVisible3: false,
+      postSendModal: false,
       edit1: false,
+      share: false,
       datePosted: '3 hours ago',
       postStatus: 'posted',
       user_info:{
@@ -203,27 +226,27 @@ export default {
         item7: 'powdered sugar',
         item8: 'cocoa powder',       
       },
-      shoppingOrder_infos: []
     }
   },
   components: {
     PostModal,
     EditOrderRequest,
     UpdateOrderStatus,
+    SendRequest,
   },
   methods:{
      togglePostModal(){
       this.postModalVisible = !this.postModalVisible
     },
-
     togglePostModal2(){
       this.postModalVisible2 = !this.postModalVisible2
     },
-
     togglePostModal3(){
       this.postModalVisible3 = !this.postModalVisible3
     },
-
+    toggleSendModal(){
+      this.postSendModal = !this.postSendModal
+    },
     listener(){
       this.postModalVisible = false;
     },
@@ -233,12 +256,9 @@ export default {
     listener3(){
       this.postModalVisible3 = false;
     },
-    loadShoppingOrder_infos(){
-      api.get("api/shoppingorders").then((data) => {this.shoppingOrder_infos = data.data; console.log("order",this.shoppingOrder_infos)});
+    listener4(){
+      this.postSendModal = false;
     }
-  },
-  created(){
-    this.loadShoppingOrder_infos();
-  },
+  }
 }
 </script>

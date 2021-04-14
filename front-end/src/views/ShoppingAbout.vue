@@ -1,10 +1,10 @@
 <template>
   <!--About-->
   <div class="bg-gray-100 font-nunito w-full">
-  <div class="flex items-center w-full vs:px-1 sm:px-6  ssm:flex-col vs:flex-col sm:flex-col md:flex-col justify-center ssm:space-x-0 vs:space-x-0 sm:space-x-0 space-x-10">
+  <div class="flex  h-auto w-full vs:px-1 sm:px-6  ssm:flex-col vs:flex-col sm:flex-col md:flex-col justify-center ssm:space-x-0 vs:space-x-0 sm:space-x-0 space-x-10">
 
   <!--Section 2-->
-    <div class="flex flex-col h-screen ssm:w-full ssm:px-2 ssm:h-auto md:h-auto vs:h-auto sm:h-auto">
+    <div class="flex flex-col ssm:w-full ssm:px-2 ssm:h-auto md:h-auto vs:h-auto sm:h-auto">
 
     <!--section 2.1-->
     <div class="flex py-6">
@@ -56,7 +56,7 @@
         <div class="flex flex-col">
           <div class="inline-flex justify-between">
             <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Education</p>
-            <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+            <button @click="$router.push('account-settings')" class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
           </div>
           <div class="inline-flex space-x-2 py-4">
             <img class="w-6 h-6 rounded-full" src="img/graduation_cap.svg"/>
@@ -74,7 +74,7 @@
         <div class="flex flex-col">
           <div class="inline-flex justify-between">
             <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Places Lived</p>
-            <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+            <button @click="$router.push('account-settings')" class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
           </div>
           <div class="inline-flex space-x-2 py-4">
            <span class="rounded-full material-icons text-gray-500">
@@ -101,7 +101,7 @@
       <div class="flex flex-col">
         <div class="inline-flex justify-between">
           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Basic Info</p>
-          <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <button @click="$router.push('account-settings')" class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
         </div>
         <div class="flex flex-row space-x-4 py-4">
           <div class="flex flex-col space-y-1.5">
@@ -154,7 +154,7 @@
 <!--section 2 end-->
 
 <!--Section 1-->
-<div class="flex flex-col ssm:px-2 h-screen ssm:h-auto sm:h-auto vs:h-auto ssm:w-full vs:w-full sm:w-full">
+<div class="flex flex-col ssm:px-2 h-auto ssm:h-auto sm:h-auto vs:h-auto ssm:w-full vs:w-full sm:w-full">
 <div class="flex py-6 sm:py-0 ssm:py-0 ssm:pb-6 sm:pb-6 vs:py-0 vs:pb-6">
   <div class="inline-flex space-x-4 items-start justify-start p-6 bg-white shadow rounded-xl h-auto w-608 ssm:w-full vs:w-full sm:w-full">     
     <div class="flex flex-col w-full">
@@ -163,7 +163,10 @@
       <div class="flex flex-col">
         <div class="inline-flex items-start justify-between">
           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Skills</p>
-          <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <button @click="toggleSkillsModal" class="text-sm focus:outline-none ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <!--Modal-->
+          <EditSkillsModal v-if="postModalVisible" @closeEditSkillsModal="listener"/>
+          <!--end-->
         </div>
         <div class="flex-1 space-y-6 items-start justify-start w-full h-auto item-start space-x-4 mb-6">
         <div class="ml-4 inline-flex flex-grow-0 items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
@@ -187,7 +190,10 @@
       <div class="flex flex-col py-6">
         <div class="inline-flex items-start justify-between">
           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Interest</p>
-          <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <button @click="toggleInterestModal1" class="text-sm focus:outline-none ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <!--Modal-->
+          <EditInterestModal v-if="postModalVisible1" @closeEditInterestModal="listener1"/>
+          <!--end-->
         </div>
         <div class="flex-1 space-y-6 flex-row justify-start w-full h-auto item-start space-x-4">
           <div class="ml-4 inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
@@ -223,7 +229,10 @@
       <div class="flex flex-col py-6">
         <div class="inline-flex items-start justify-between">
           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold tracking-wide leading-none text-center text-gray-900 capitalize">Visited Place</p>
-          <button class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <button @click="toggleVisitedPlaceModal2" class="text-sm focus:outline-none ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-center text-indigo-900">Edit</button>
+          <!--Modal-->
+          <EditVisitedPlaceModal v-if="postModalVisible2" @closeEditVisitedPlaceModal="listener2"/>
+          <!--end-->
         </div>
         <div class="flex-1 space-y-6 flex-row justify-start item-start space-x-4">
           <div class="ml-4 inline-flex items-start justify-start px-4 py-1 bg-gray-100 rounded-full">
@@ -264,12 +273,18 @@
 </template>
 
 <script>
+import EditSkillsModal from './profileEditSkillsModal'
+import EditInterestModal from './profileEditInterestModal'
+import EditVisitedPlaceModal from './profileEditVisitedPlaceModal'
 export default {
   data(){
     return{
       rating: '4.9',
       deliveries: '20',
       orders: '13',
+      postModalVisible: false,
+      postModalVisible1: false,
+      postModalVisible2: false,
       education_info:{
             school1: 'Bicol University',
             school2: 'Banquerohan High School'
@@ -285,7 +300,32 @@ export default {
             barangay:'Banquerohan'
           },
     }
+  },
+   components: {
+    EditSkillsModal,
+    EditInterestModal,
+    EditVisitedPlaceModal,
+  },
+  methods:{
+    toggleSkillsModal(){
+      this.postModalVisible = !this.postModalVisible
+    },
+    listener(){
+      this.postModalVisible = false;
+  },
+    toggleInterestModal1(){
+      this.postModalVisible1 = !this.postModalVisible1
+    },
+    listener1(){
+      this.postModalVisible1 = false;
+  },
+   toggleVisitedPlaceModal2(){
+      this.postModalVisible2 = !this.postModalVisible2
+    },
+    listener2(){
+      this.postModalVisible2 = false;
+  },
   }
-
+  
 }
 </script>

@@ -44,7 +44,6 @@
 <script>
 import Nav from '../views/Navbar.vue'
 import editShopListModal from "./editShopListModal"
-
 export default {
   name: 'shopping-list',
   components: {
@@ -72,7 +71,6 @@ methods:{
   }
   
     document.getElementById("select_option").style="hidden";
-
     },
     
     isActive_function(el){
@@ -83,7 +81,6 @@ methods:{
         this.  activeBtn= el;
         }
     },
-
     toggleeditShopList(){
       this.editVisible = !this.editVisible 
     },

@@ -1,26 +1,34 @@
-<template class="bg-gray-bgcolor font-nunito">
-<!---Logo---->
-      <div class="absolute vs:left-5 left-12 top-3">
-        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 "/>
-          <label for="" class="absolute text-xl font-black tracking-widest top-4 left-16 font-raleway text-red-buttons">
-            pasaBUY
-          </label>
-      </div>
-<!---End of Logo---->
+<template class="">
 
-      <div id="login" class="flex items-center justify-center w-full h-screen pt-12 bg-gray-bgcolor">
-        <div class="absolute overflow-hidden font-bold text-center bg-white shadow-md vs:w-10/12 w-97 vs:left-11 left-96.7 rounded-xl">
+      <div class="flex items-center ">
+        <router-link to="/">
+        <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
+        </router-link>
+        <h1 class="absolute text-xl font-black tracking-widest  left-16 font-raleway
+          text-red-buttons block
+          
+           ">pasaBUY</h1>
+      </div>
+
+      <div id="login" class="items-center flex justify-center w-full mt-10  pb-16 bg-transparent px-3 ">
+        <div class=" overflow-hidden font-bold text-center bg-white shadow-md w-full rounded-xl
+        lg:w-97
+        2xl:w-97  
+        xl:w-97 
+        md:w-97
+        sm:w-97
+        ">
           <div class="px-10 py-16">
             <h1 class="space-x-1 space-y-1 text-2xl">Welcome back!</h1>
               <p class="mb-5 space-y-1 font-light text-gray-500">
                 Log in with your email and password</p>
                 <form action="#" @submit.prevent="loginUser">
-                   <p class="w-full text-red-500 " v-text="errors.email" ></p>
+                   <p class="w-full text-red-700 ">{{errors}}</p>
                 <div class=""> 
-                  <input  v-model="dataForm.email"  aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Email" />
+                  <input  v-model="dataForm.email"  aria-label="Email" name="" type="email" required class="relative block w-full h-12 px-3 py-2 mt-8 mb-6 text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email"  />
                 </div>
                 <div class="text-2xl">
-                  <input   v-model="dataForm.password"  aria-label="Password" name="" type="password" required class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-red-600 focus:z-10 focus:text-l" placeholder="Password"  />
+                  <input  v-model="dataForm.password" aria-label="Password" name="" type="password" required class="relative block w-full h-12 px-3 py-2 text-sm placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 focus:text-l" placeholder="Password"/>
                 </div>
                 <div class="mt-6 text-left text-md text-grey-dark">
                   <a class="font-bold underline-none " href="#">
@@ -62,7 +70,6 @@
     
     }
    
-
 #iCheck{
   font-size:16px;
   color:rgb(22, 22, 141);
@@ -70,11 +77,6 @@
 #iMessage{
   font-size:24px;
   color:rgb(22, 22, 141);
-}
-img{ 
-  max-width: 100px;
-  width:11%;
- 
 }
 </style>
 <script>
@@ -86,7 +88,7 @@ export default {
         email: '',
         password: ''
       },
-      errors:[]
+      errors:null,
     }
   },
   methods:{
@@ -95,17 +97,26 @@ export default {
           // Login...
     
            api.post('/api/login', this.dataForm).then(()=>{
-              localStorage.setItem('isLoggedIn', 'true');
-              console.log('yay logged in');
-              this.$router.push({name:"dashboard"});
+             api.get('api/user').then((res)=>{
+               if(res.data.email != null){
+                  localStorage.setItem('isLoggedIn', true);
+                  console.log('yay logged in');
+                  this.$router.push({name:"dashboard"});
+               }
+             }).catch((errors)=>{
+              this.errors = errors.response.data.errors.invalid.join();
+            })
+             
             }).catch((errors)=>{
-              this.errors = errors.response.data.errors;
+              this.errors = errors.response.data.errors.invalid.join();
             })
         
       });
     }
-  }
+  },
+  
+  created: function () {
+    document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
 }
 </script>
-
-
