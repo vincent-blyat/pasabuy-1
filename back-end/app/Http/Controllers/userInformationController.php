@@ -231,6 +231,6 @@ class userInformationController extends Controller
             return response()->json(['error'=>'An error occured'],422);
         }
     }
-  
+
 
 }

@@ -56,8 +56,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
- 
-    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -92,3 +90,4 @@ Route::get("shoppingoffers",[shoppingOffersController::class, 'listShoppingOffer
 //Route::get("shoppingoffers/{id}",[shoppingOffersController::class, 'editShoppingOffers']);
 Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrders']);
 Route::get("reviews",[reviewsController::class, 'listReviews']);
+Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);
