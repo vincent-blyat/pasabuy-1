@@ -5,7 +5,7 @@
             <p class="font-bold font-nunito text-sm">Personal Info</p>
             </div>
            <div> 
-               <label for="sub" id="edt1" @click="setOldData();toggle=!toggle" class="
+               <label for="sub" id="edt1" @click="toggle=!toggle, setOldData()" class="
                text-blue-800 w-min font-bold text-sm cursor-pointer">Edit</label>
            </div>
             
@@ -13,19 +13,19 @@
         <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
-            <img :src="personal.profilePic" class=" w-16 h-16 rounded-full ring-2 ring-gray-500"/>
+           <div class="w-16 h-16 overflow-hidden rounded-full border-2 border-gray-500"> <img :src="personal.profilePic" class=" w-full h-full rounded-full ring-2 ring-gray-500"/></div>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
-          <input id="profile_image" type="file" class="hidden" @change="change_profile">
+          <input id="profile_image" type="file" @change="change_profile" class="hidden">
         <div  class="text-sm w-full gap-x-10 pt-8 space-y-8
-                      xl:w-7/12
-                      2xl:w-9/12
-                      lg:w-8/12
+                      xl:w-97
+                      2xl:w-97
+                      lg:w-97
                     ">
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
         <span>
-        <p >{{personal.firstname}} {{personal.midname}} {{personal.lastname}}</p>
+        <p >{{personal.firstname}} {{personal.lastname}}</p>
        </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2 ">
@@ -67,45 +67,54 @@
         <div class="flex   mt-4 w-full p-3  items-center justify-center
         py-20
         ">
-          <div class=" bg-white ring-1  ring-gray-300 p-5 w-full rounded-md
-             2xl:w-6/12 
-              lg:w-6/12
-              xl:w-6/12 
+          
+          <div class=" bg-white ring-1  ring-gray-300  p-5 w-full rounded-xl
+             2xl:w-97 2xl:ml-5
+              lg:w-97
+              xl:w-97   xl:mr-16
               md:w-8/12
               sm:w-10/12
               shadow-2xl
               h-auto
           ">
-            <p class="text-lg font-extrabold">Edit Personal Information</p>
-            <hr class="mb-5 border-2 border-red-700 bg-red-700">
-           
-          <div class=" 2xl:px-28 xl:px-28 lg:px-28 md:px-10">
-            <div class="relative grid grid-cols-2 gap-y-4
+          <div class="flex flex-row items-center  justify-between p-3">
+            <p class="hidden lg:block 2xl:block xl:block"></p>
+            <p class="text-lg font-extrabold xl:ml-9 lg:ml-9 2xl:ml-9">Update Personal Info</p>
+            <p class="font-bold text-blue-700 cursor-pointer left-10" @click="toggle=false, getOldData()"> Close</p>
+          </div>
+          <p class="text-center text-red-500">{{errors}}</p>
+           <div class=" ">
+            <div class="flex flex-col px-4  space-y-4
             ">
-                <span>Firstname:</span> <input id="f_name"   type="text" v-model="personal.firstname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Middlename:</span> <input type="text" v-model="personal.midname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                 <span>Lastname: </span> <input type="text" v-model="personal.lastname" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Phone number: </span> <input type="number" v-model="personal.phone_number" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Work: </span> <input type="text" v-model="personal.work" class=" pl-2 bg-transparent border-2 border-gray-400"/>
-                <span>Gender</span>
-                <div class=" space-x-4">
+                <div class="flex flex-col"><span class="ml-2">Firstname</span> <input id="f_name"   type="text" v-model="personal.firstname" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                 </div>
+                <div class="flex flex-col"><span class="ml-2">Middlename</span> <input id="m_name" type="text" v-model="personal.midname" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                </div>
+                <div class="flex flex-col"><span class="ml-2">Lastname</span> <input id="l_name" type="text" v-model="personal.lastname" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                </div>
+                <div class="flex flex-col"><span class="ml-2">Phone number </span> <input id="p_number" type="number" v-model="personal.phone_number" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                </div>
+                <div class="flex flex-col"><span class="ml-2">Work </span> <input id="work" type="text" v-model="personal.work" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                </div>
+                <span class="ml-2">Gender</span>
+                <div class=" space-x-4 ml-4">
                   <span class="space-x-2">
-                  <span><input type="radio" id="male" value="Male" name="gender" v-model="personal.gender" :checked="personal.gender=='Male'"/></span>
+                  <span><input type="radio" value="Male" id="male" v-model="personal.gender" name="gender" /></span>
                   <label for="male">Male</label>
                   </span>
                   <span class="space-x-2">
-                  <span><input type="radio" id="female" value="Female" name="gender" v-model="personal.gender" :checked="personal.gender=='Female'"/></span>
+                  <span><input type="radio" value="Female" id="female" v-model="personal.gender" name="gender" /></span>
                   <label for="female">Female</label>
                   </span>
               </div>
-                  <span>Birthday:</span>  <input class=" pl-2 w-full bg-transparent border-2 border-gray-400" @keyup="personal.birdate=$event.target.value" type="date" id="start" name="trip-start"
-                 min="1990-01-01"  v-model="personal.birdate" >
-                <span>Language: </span> <input type="text" v-model="personal.language" class=" pl-2 bg-transparent border-2 border-gray-400"/>
+                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="text" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
+                  ></div> 
+                <div class="flex flex-col"><span class="ml-2">Language: </span> <input type="text" id="language" v-model="personal.language" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/></div>
+             
             </div>
-            <div class="flex justify-end mt-4 space-x-4">
-              <button @click="getOldData(); toggle=false" class="px-3 bg-red-700 text-white rounded-2xl">Cancel</button>
-              <button @click="submit" class="px-5 shadow-xl ring-1 ring-gray-300 bg-white text-red-700 rounded-2xl">Save</button>
-              
+           <div class="flex justify-between mt-10 space-x-4 items-center">
+              <button @click="toggle=false, getOldData()" class="px-3 h-6 w-full bg-white ring-2 ring-black focus:outline-none   rounded-2xl">Cancel</button>
+              <button @click="save_data()" class="px-5 bg-red-buttons text-white focus:outline-none w-full h-7 shadow-xl ring-1 ring-gray-300 rounded-2xl">Save</button>
             </div>
           </div>
           </div>
@@ -153,25 +162,37 @@ data(){
       language:'',
       birdate: ''
     },
+    errors:null
     }
   
 },
 
 methods:{
 
-    submit () {
+    save_data () {
       console.log(this.personal)
       api.post('/api/editPersonal', this.personal).then((res)=>{
          VueSimpleAlert.alert(res.data.message,"Success","success")
+         this.toggle=false
       //this.user = res.data;
+      }).catch((errors)=>{
+        console.log(errors.response.data)
+        if(errors.response.data.firstname == undefined)
+           errors.response.data.firstname =' '
+        if(errors.response.data.lastname == undefined)
+           errors.response.data.lastname =' '
+        if(errors.response.data.phone_number == undefined)
+           errors.response.data.phone_number =' '
+        this.errors = errors.response.data.firstname +' '+ errors.response.data.lastname +' '+errors.response.data.phone_number
+        
       })
-      this.toggle=false;
     },
       handleInput(value) {
       this.name = value;
       alert(this.name)
     },
     setOldData(){
+        this.errors = ''
         this.old.firstname=this.personal.firstname
         this.old.lastname=this.personal.lastname
         this.old.phone_number=this.personal.phone_number
