@@ -115,7 +115,7 @@ class userInformationController extends Controller
 
         $validator=Validator::make($request->all(),[
             'currentPassword' => ['required'],
-            'password' => ['required','confirmed','min:8']
+            'password' => ['required','confirmed','min:8','reges:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/']
         ]);
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
