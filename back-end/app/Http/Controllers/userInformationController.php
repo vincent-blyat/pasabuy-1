@@ -116,7 +116,12 @@ class userInformationController extends Controller
         $validator=Validator::make($request->all(),[
             'currentPassword' => ['required'],
             'password' => ['required','confirmed','min:8','reges:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/']
-        ]);
+        ],['password.regex'=>'The password contains characters from at least three of the following five categories:
+                              English uppercase characters (A – Z)
+                              English lowercase characters (a – z)
+                              Base 10 digits (0 – 9)
+                              Non-alphanumeric (For example: !, $, #, or %)
+                              Unicode characters']);
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
         }

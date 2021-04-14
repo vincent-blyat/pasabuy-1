@@ -9,6 +9,7 @@ use App\Models\userInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -21,31 +22,49 @@ class RegisterController extends Controller
 
     //function to put personal info in $personalInfo and  $accountInfo; 
     function postPersonal(Request $request){
-        // return response()->json("hello");
-        $request->validate([
-            'firstName' => ['required'],
-            'lastName' => ['required'],
-            'email' => ['required'],
-            'phoneNumber' => ['required'],
-            'password' => ['required'],
-            'verificationCode'=> ''
-       ]);
         
-        // $user = new User();
-        // $user->email = $request->email;
-        // $user->password = $request->password;
+        // custom error messages
+       $messages = ['password.regex' => array(' Must contain at least one lowercase letter (a – z)',
+                                            ' Must contain at least one uppercase letter (A – Z)',
+                                            ' Must contain at least one digit (0-9)',
+                                            ' Must contain a special character',
+                     )];
+       $validator=Validator::make($request->all(),[
+            'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'lastName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'email' => ['required','email','unique:tbl_userAuthentication'],
+            'phoneNumber' => ['required','numeric','digits:11'],
+            'password' => ['required',
+                            'min:8',
+                            'confirmed',
+                            'regex:/[a-z]/',      // must contain at least one lowercase letter
+                            'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                            'regex:/[0-9]/',      // must contain at least one digit
+                            'regex:/[@$!%*#?&]/', // must contain a special character
+                        ],
+            ],$messages);
 
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
+        
         $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
         $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
-        $request->verificationCode = mt_rand(100000, 999999);
+        //check if there is an existing code
+        if($request->oldEmail === $request->email){
+            $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo];
+            return response()->json($returnValue);
+        }
+        //if not, code will be sent to email or new email
+        $code = mt_rand(100000, 999999);
         $data =[
             'name' => $request->firstName,
-            'verification_code' => $request->verificationCode
+            'verification_code' => $code
         ];
 
         //return response()->json(trim($request->email));
         $email = trim($request->email);   
-        $code = $request->verificationCode;
+        $code = Hash::make($code);
 
         $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo, 'code'=>$code ];
         if($request != null){
@@ -116,4 +135,15 @@ class RegisterController extends Controller
         }
 
     }
+   
+    public function confirmCode(Request $request)
+    {
+        # code...
+        if(Hash::check($request->textCode, $request->code)){
+            return response()->json(true); 
+        }else{
+            return response()->json(['error'=>'Error, Code doesn\'t match.'], 422); 
+        }
+    }
+  
 }
