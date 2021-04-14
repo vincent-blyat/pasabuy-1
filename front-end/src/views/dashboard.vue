@@ -25,7 +25,7 @@
                <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
+                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> {{post_type}}</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
@@ -38,29 +38,29 @@
                  <label for=""> POST TYPE</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
+                  <a @click="getAll" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
                  <label for="" class="cursor-pointer"> All Posts</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a  @click="getOffer" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
 
-                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a  @click="getRequests" href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
+                <button @click="filter2 =! filter2" type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  >
                <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> {{post_filter}}</label>
                 <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
@@ -70,11 +70,11 @@
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                  <a @click="getFollowing" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <a @click="getNearby" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>
@@ -535,6 +535,8 @@ export default {
       postStatus: 'posted',
       user_info:[],
       profilePicture:null,
+      post_filter:"nearby",
+      post_type:"all",
 
       // delivery_info:{
       //   delivery_area: 'Naga City',
@@ -661,6 +663,36 @@ export default {
       }).catch((error) => {
         VueSimpleAlert.alert('An error occured',"Error","error")
         console.log(error)
+      })
+    },
+    getNearby(){
+      this.post_filter = "nearby"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('nearby', res.data)
+      })
+    },
+    getFollowing(){
+      this.post_filter = "following"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('following', res.data)
+      })
+    },
+    getAll(){
+      this.post_type = "all"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('all', res.data)
+      })
+    },
+    getOffers(){
+      this.post_type = "offers"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('offers', res.data)
+      })
+    },
+     getRequests(){
+      this.post_type = "requests"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('req', res.data)
       })
     }
   },
