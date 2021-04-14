@@ -162,24 +162,23 @@ methods:{
         this.address_info.barangay=this.old.barangay
     },
     getProvCode() {
-      var newCityMun = this.newrefCity;
-      this.refCity = [];
       var getProvCode = document.getElementById("Province").value;
-      for (var i = 0; i < newCityMun.length; i++) {
-        if (newCityMun[i].provCode === getProvCode) {
-          this.refCity.splice(i, 1, newCityMun[i]);
-        }
-      }
+     
+      api.get('api/refcityMunicipality', {params:{provCode: getProvCode}}).then((res)=>{
+        this.refCity = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
     },
     getCityCode() {
-      var newBrgy = this.newrefBaranggay;
-      this.refBaranggay = [];
       var getCityCode = document.getElementById("City").value;
-      for (var i = 0; i < newBrgy.length; i++) {
-        if (newBrgy[i].citymunCode === getCityCode) {
-          this.refBaranggay.splice(i, 1, newBrgy[i]);
-        }
-      }
+      console.log(getCityCode)
+      api.get('api/refBrgy', {params:{cityCode: getCityCode}}).then((res)=>{
+        console.log('brgy', res.data)
+        this.refBaranggay = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
     },
 
 },
@@ -200,17 +199,17 @@ mounted(){
       console.log(error);
     })
    
-    api.get("/api/refcityMunicipality").then((res) => {
-        this.newrefCity = res.data;
-    }).catch((error) => {
-      console.log(error);
-    })
+    // api.get("/api/refcityMunicipality").then((res) => {
+    //     this.newrefCity = res.data;
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
 
-    api.get("/api/refBrgy").then((res) => {
-        this.newrefBaranggay = res.data;
-    }).catch((error) => {
-      console.log(error);
-    })
+    // api.get("/api/refBrgy").then((res) => {
+    //     this.newrefBaranggay = res.data;
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
 
   }
 }
