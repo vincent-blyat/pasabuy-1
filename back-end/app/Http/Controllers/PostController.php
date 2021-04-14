@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\OfferPost;
 use App\Models\PasabuyUser;
 use App\Models\RequestPost;
+use App\Models\userAddress;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -207,8 +208,8 @@ class PostController extends Controller
 		// get url parameters
 		$params = $request->only(['post_filter', 'post_type']);
 
-		// $user = Auth::User();
-		// $user_info = userAddress::where('email', '=', $user->email)->firstOrFail();
+		$user = Auth::User();
+		$user_info = userAddress::where('email', '=', $user->email)->firstOrFail();
 
 		// data
 		$data = [
@@ -248,12 +249,12 @@ class PostController extends Controller
 				switch ($params['post_type']) {
 					
 					case 'all':
-						# code...
+						return  'Hello';
 						break;
 
 					case 'offers':
 						// get nearby offers 
-						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, offer.deliveryArea as delivery_area, offer.shoppingPlace as shopping_place, offer.deliverySchedule as schedule, offer.transportMode as transport_mode, offer.capacity, offer.paymentMethod as payment_method, offer.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_shoppingOfferPost offer ON post.postNumber = offer.postNumber WHERE offer.shoppingPlace = $user_info->cityMunicipality ORDER BY post.dateCreated DESC");
+						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, author.profilePicture as avatar, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, offer.deliveryArea as delivery_area, offer.shoppingPlace as shopping_place, offer.deliverySchedule as schedule, offer.transportMode as transport_mode, offer.capacity, offer.paymentMethod as payment_method, offer.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_shoppingOfferPost offer ON post.postNumber = offer.postNumber WHERE offer.shoppingPlace = $user_info->cityMunicipality ORDER BY post.dateCreated DESC");
 
 						$data['data']['feeds'] = $feeds;
 
@@ -263,7 +264,7 @@ class PostController extends Controller
 
 					case 'requests':
 						//get nearby requests
-						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, request.deliveryAddress as delivery_area, request.shoppingPlace as shopping_place, request.deliverySchedule as schedule, request.shoppingList as shopping_list, request.paymentMethod as payment_method, request.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_orderRequestPost request ON post.postNumber = request.postNumber WHERE request.shoppingPlace = $user_info->cityMunicipality ORDER BY post.dateCreated DESC");
+						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, author.profilePicture as avatar, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, request.deliveryAddress as delivery_area, request.shoppingPlace as shopping_place, request.deliverySchedule as schedule, request.shoppingList as shopping_list, request.paymentMethod as payment_method, request.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_orderRequestPost request ON post.postNumber = request.postNumber WHERE request.shoppingPlace = $user_info->cityMunicipality ORDER BY post.dateCreated DESC");
 						
 						$data['data']['feeds'] = $feeds;
 						
