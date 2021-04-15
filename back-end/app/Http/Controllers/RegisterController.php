@@ -27,7 +27,6 @@ class RegisterController extends Controller
        $messages = ['password.regex' => array(' Must contain at least one lowercase letter (a – z)',
                                             ' Must contain at least one uppercase letter (A – Z)',
                                             ' Must contain at least one digit (0-9)',
-                                            ' Must contain a special character',
                      )];
        $validator=Validator::make($request->all(),[
             'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
@@ -40,7 +39,6 @@ class RegisterController extends Controller
                             'regex:/[a-z]/',      // must contain at least one lowercase letter
                             'regex:/[A-Z]/',      // must contain at least one uppercase letter
                             'regex:/[0-9]/',      // must contain at least one digit
-                            'regex:/[@$!%*#?&]/', // must contain a special character
                         ],
             ],$messages);
 
