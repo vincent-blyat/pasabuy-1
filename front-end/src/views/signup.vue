@@ -148,7 +148,7 @@ export default {
                     errors.response.data.email = "";
                 this.errors =errors.response.data.firstName+' '+ errors.response.data.lastName+' '+errors.response.data.email+' '+errors.response.data.phoneNumber+' '+errors.response.data.password;
             })
-            }
+            })
         }
     },
     created: function () {
