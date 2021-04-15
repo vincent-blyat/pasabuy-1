@@ -260,13 +260,13 @@
         <!--section 5-->
         <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
-          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+          <button v-if="post_info.email != user.email" @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
           </button>
-          <router-link :to="'/messages/?postnum='+post_info.postNumber">
+          <router-link v-if="post_info.email != user.email" :to="'/messages/?ID='+toEncrypt(post_info.user.email)">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
@@ -496,6 +496,7 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import VueSimpleAlert from 'vue-simple-alert'
+ 
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
 
@@ -662,6 +663,9 @@ export default {
         VueSimpleAlert.alert('An error occured',"Error","error")
         console.log(error)
       })
+    },
+    toEncrypt(val){
+      return btoa(val)
     }
   },
     mounted(){

@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
+    Route::post('/createChatRoom', [messageController::class, 'createRoom']);
  
     
 });

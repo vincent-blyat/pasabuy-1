@@ -30,7 +30,7 @@
 
         <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
             
-          <div v-if="searchMessageInactive">
+          <div v-if="searchMessageInactive && activeRoom!=null">
             <button
             v-for="(chatRoom,index) in chatRooms"
             :key="index"
@@ -45,7 +45,7 @@
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
-              <div class="flex flex-col justify-between items-start ml-2">
+              <div class="flex flex-col justify-between items-start ml-2" v-if="chatRoom.get_messages.length !=0">
                 <span class="font-medium text-sm" id="mark">
                   {{ chatRoomNames[index]}}
                   <span class="material-icons pl-2" id="iCheck">
@@ -74,8 +74,16 @@
                     .messageText}}</strong>
                 </span>
               </div>
+               <div class="flex flex-col justify-between items-start ml-2" v-else>
+                 <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+               </div>
             </div>
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start" v-if="chatRoom.get_messages.length !=0">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
@@ -88,7 +96,7 @@
           </button>  
           </div> <!---------------navigation message------------>
 
-          <div v-if="showSearchResults" class="divide-y divide-gray-300">
+          <!-- <div v-if="showSearchResults" class="divide-y divide-gray-300" && activeRoom!=null>
 
             <div class="py-2 flex justify-center font-normal text-xs italic">
               <span>Search Results</span>
@@ -108,7 +116,7 @@
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
-              <div class="flex flex-col justify-between items-start ml-2">
+              <div class="flex flex-col justify-between items-start ml-2" v-if="chatRoom.get_messages.length !=0">>
                 <span class="font-medium text-sm" id="mark">
                   {{ chatRoomNames[index]}}
                   <span class="material-icons pl-2" id="iCheck">
@@ -137,8 +145,16 @@
                     .messageText}}</strong>
                 </span>
               </div>
+                <div class="flex flex-col justify-between items-start ml-2" v-else>
+                 <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+               </div>
             </div>
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start" v-if="chatRoom.get_messages.length !=0">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
@@ -151,14 +167,14 @@
           </button>  
             </div>
             
-          </div> <!---------------search message results------------>
+          </div> -------------search message results---------- -->
         </div>
 
     </div><!--end of left corner-->
       <!------------------------------------------------------>
       <!---Chat Corner-->
-      <div class="vs:w-full mt-20 w-2/5 md:w-4/5 shadow-md relative" style="min-width:400">
-        
+      <div class="vs:w-full mt-20 w-2/5 md:w-4/5 shadow-md relative" style="min-width:400" >
+        <div v-if="activeRoom!=null"> 
         <div class="relative flex justify-items-center md:justify-items-center pt-1 shadow py-2">
               <h4 class="text-base font-semibold pt-2 pl-4 " id="active">{{activeName}}</h4>
               <span class="material-icons pl-3 pt-2" id="iCheck" > check_circle </span>
@@ -168,7 +184,7 @@
       <div class="overflow-auto pb-1 h-4/5 mb-1" id="journal-scroll">
 
        <!--------------U sent a request to Mark Arl------>
-        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+        <div v-if="postNum != null" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span>You sent a request to</span>
               <span class="font-semibold ml-2">{{recipient}}</span>
@@ -182,7 +198,7 @@
             </span>
         </div><!------------------->
         <!--------------Someone sent u a request------>
-        <div v-if="true" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+        <div v-if="postNum != null" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span><span class="font-semibold mr-2 ">{{sender}}</span>request you a request</span>
               <span class="ml-2">for</span>
@@ -195,7 +211,7 @@
             </span>
         </div><!------------------->
         <!--------------transaction details------>
-        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+        <div v-if="postNum != null" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <div class="flex flex-row justify-between">
                 <span>Transaction <span class="font-semibold ml-2">{{postNum2 }} </span> </span>
@@ -211,7 +227,7 @@
         </div>
 
         
-        <div class=" flex justify-end mt-2">
+        <div class=" flex justify-end mt-2" v-if="postNum != null" >
           <div class="ml-32 bg-gray-100 text-sm rounded-lg">
             
             <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
@@ -338,7 +354,8 @@
               </button>
       </div>
       </div>
-    </div><!--end of right corner-->
+      </div><!--end of right corner-->
+    </div>
   </div>
 <!--end of desktop version-->
 
@@ -609,7 +626,7 @@
 
     <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
 
-          <div v-if="searchMessageInactive">
+          <div v-if="searchMessageInactive  && activeRoom!=null" >
             <button
             v-for="(chatRoom,index) in chatRooms"
             :key="index"
@@ -624,7 +641,7 @@
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
-              <div class="flex flex-col justify-between items-start ml-2">
+              <div class="flex flex-col justify-between items-start ml-2"  v-if="chatRoom.get_messages.length !=0">
                 <span class="font-medium text-sm" id="mark">
                   {{ chatRoomNames[index]}}
                   <span class="material-icons pl-2" id="iCheck">
@@ -653,8 +670,16 @@
                     .messageText}}</strong>
                 </span>
               </div>
+                <div class="flex flex-col justify-between items-start ml-2" v-else>
+                 <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+               </div>
             </div>
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start" v-if="chatRoom.get_messages.length !=0">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
@@ -667,7 +692,7 @@
           </button>   
           </div> <!---------------navigation message------------>
 
-          <div v-if="showSearchResults" class="divide-y divide-gray-300">
+          <!-- <div v-if="showSearchResults && activeRoom!=null" class="divide-y divide-gray-300">
 
             <div class="py-2 flex justify-center font-normal text-xs italic">
               <span>Search Results</span>
@@ -687,7 +712,7 @@
                 alt="sunil"
                 class="rounded-lg h-8 w-7 pt-1"
               />
-              <div class="flex flex-col justify-between items-start ml-2">
+              <div class="flex flex-col justify-between items-start ml-2" v-if="chatRoom.get_messages.length !=0">
                 <span class="font-medium text-sm" id="mark">
                   {{ chatRoomNames[index]}}
                   <span class="material-icons pl-2" id="iCheck">
@@ -716,8 +741,16 @@
                     .messageText}}</strong>
                 </span>
               </div>
+                <div class="flex flex-col justify-between items-start ml-2" v-else>
+                 <span class="font-medium text-sm" id="mark">
+                  {{ chatRoomNames[index]}}
+                  <span class="material-icons pl-2" id="iCheck">
+                    check_circle
+                  </span>
+                </span>
+               </div>
             </div>
-            <div class="flex flex-col items-start">
+            <div class="flex flex-col items-start" v-if="chatRoom.get_messages.length !=0">
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
@@ -730,7 +763,7 @@
           </button>  
             </div>
             
-          </div> <!---------------search message results------------>
+          </div> -------------search message results---------- -->
 
     </div>
   </div>
@@ -780,7 +813,7 @@ export default {
       activity: 'You sent a request to to',
       recipient: 'Mark Aral',
       sender: 'Monica Rambeau',
-      postNum: '#2021352',
+      postNum: null,
       postNum2: '#130317',
       placeFrom: 'Banquerohan, Legazpi City',
       destination: 'SM City ',
@@ -796,6 +829,7 @@ export default {
             { items: 'cocoa powder'},
         ],
       shoppingListSize: 8,
+      userQueryID:null,
     };
   },
 
@@ -896,46 +930,67 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
-            console.log(res)
+            
+            //filtering the message room where there are no message and not the active room if there is
+             
+            console.log('before before',res.data)
+            var arry = []
+            for(i=0;i<res.data.length;i++){
+              if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
+                if((this.authUser === res.data[i].email1 || this.authUser === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
+                      // if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
+                      //   this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
+                      //   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
+                      // }
+                      console.log(this.authUser ,'==' ,res.data[i].email1, '||', this.authUser, '==' ,res.data[i].email2 ,'&&', this.userQueryID, '===' ,res.data[i].email1 || this.userQueryID, '===', res.data[i].email2)
+                      // else{
+                      //   this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
+                      //   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
+                      // }
+                      // console.log("set room!!!! = ",this.chatRoomNames[i],' room number!! =',this.chatRooms[i].messageRoomNumber )
+                      // this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
+                      continue
+                  }else{
+                    console.log('before = ',i,'.)',res.data)
+                    console.log('renoving  ','(',i,i,')', res.data[i].email2)
+                    res.data.splice(i,i)
+                    console.log('after = ',i,'.)',res.data)
+                  }
+              }
+            }
+            console.log('chatrooms',res.data)
             this.chatRooms = res.data;
+            console.log('chatrooms new', arry )
             var i;
             var j;
             //var x=0;
             for(i=0; i<this.chatRooms.length; i++){
               if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
-                this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
-                this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
-                
-              }
+                  this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
+                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
+                }
               else{
-                this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
-                this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
-              }
-              for(j=0;j<this.chatRooms[i].get_messages.length;j++){
-                this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
-              }
+                  this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
+                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
+                }
 
-            
-              // for(j=0; j<this.chatRooms[i].get_messages.length; j++){
-              //   if(this.chatRooms[i].get_messages[j].messageSender == this.authUser){
-              //     this.chat[j]=this.chatRooms[i];
-              //     this.out[j]= true;
-              //     this.incoming[j]= false;
-              //   }
-              //   else{
-              //     this.chat[j]=this.chatRooms[i]
-              //     this.out[j]= false;
-              //     this.incoming[j]= true;
-              //   }
-              // //  x++;
-              // }
+              if((this.authUser == this.chatRooms[i].email1 || this.authUser == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2)){//filtering only the user with messages and the active chatroom
+                  console.log('settingroomsaf')
+                  this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
+              }else{
+                for(j=0;j<this.chatRooms[i].get_messages.length;j++){
+                  this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
+                }
+                if(this.activeRoom==null){
+                   console.log('asdasdadlakfmclak')
+                  this.setRoom(this.chatRoomNames[0], 
+                  this.chatRooms[0]
+                  .messageRoomNumber)
+                }
+              }
+              console.log('rooms!!!!! = ',this.chatRooms)
             }
-           console.log('chat-lenght=', this.chat.length)
-            if(this.activeRoom==null){
-              this.setRoom(this.chatRoomNames[0], 
-              this.chatRooms[0]
-              .messageRoomNumber)
-            }
+           
         });
     },
     getAuthUser(){
@@ -945,12 +1000,27 @@ export default {
     },
     timestamp(date) {
       return moment(date).fromNow();
+    },
+    getUrlQuery(){
+       if(this.$route.query.ID!=null){
+        this.userQueryID = atob(this.$route.query.ID)
+        api.get('/sanctum/csrf-cookie').then(() => {
+            let params={userEmail :this.userQueryID}
+            api.post('api/createChatRoom',params).then((res)=>{
+              console.log('new chat room',res.data)
+            })
+        })
+      }else if(this.$route.query.postNum!=null){
+        this.postNum = this.$route.query.postNum
+      }
+      //do nothing
+      return
     }
-
 
   }, //end methods
   created() {
     this.getAuthUser();
+    this.getUrlQuery();
     this.getChatRooms();
   },
 

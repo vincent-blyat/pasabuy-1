@@ -9,8 +9,10 @@ use App\Models\Post;
 use App\Models\OfferPost;
 use App\Models\PasabuyUser;
 use App\Models\RequestPost;
+use App\Models\share;
+use App\Models\User;
 use App\Models\userAddress;
-
+use App\Notifications\SharedNotification;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
