@@ -963,7 +963,8 @@ export default {
 
               if((this.authUser == this.chatRooms[i].email1 || this.authUser == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2)){//filtering only the user with messages and the active chatroom
                   console.log('settingroomsaf')
-                  this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
+                  if(this.activeRoom==null)
+                    this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
               }else{
                 for(j=0;j<this.chatRooms[i].get_messages.length;j++){
                   this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
