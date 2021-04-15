@@ -2,16 +2,17 @@
 <Navbar/>
   <!--Desktop Version-->
 <div class="desktopVersion md:w-full vs:w-full">
-    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
+    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2">
       
       <!--------------------------inbox corner----------------------------->
         <div class="mt-20 md:1/5 shadow-md relative" style="min-width:300px">
         
-        <div class="relative flex justify-items-center md:justify-items-center pb-2 pt-1 shadow">
-              <button class="focus:outline-none pl-5 hover:text-red-700" @click="backbtn();" type="button"><span class="material-icons pt-2" id="iMessage">
+        <div class="relative flex justify-items-center md:justify-items-center shadow pt-3 pb-1">
+              <button class="focus:outline-none pl-5 hover:text-red-700" type="button"><span class="material-icons pt-1" id="iMessage">
                 chat</span></button>
-              <h4 class="text-base font-semibold pt-2 pl-4 ">Message</h4>    
+              <h4 class="text-base font-semibold pl-4 ">Message</h4>   
         </div>
+
         <div v-if="searchMessageInactive" class="flex justify-center w-full relative py-1 pt-2">
             <input type="text" class="h-8 w-11/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Search"/>
             <button  @click="searchBtn" class="align-middle absolute right-8 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
@@ -68,7 +69,7 @@
               <span>Search Results</span>
             </div>
             <div>
-              <button @click ="VOID" type="button" class="focus:bg-gray-200 shadow-md relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+              <button @click ="Void" type="button" class="focus:bg-gray-200 shadow-md relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
                 <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                   <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
                     check_circle
@@ -92,13 +93,13 @@
       <!---Chat Corner-->
       <div class="vs:w-full mt-20 w-2/5 md:w-4/5 shadow-md relative" style="min-width:400">
         
-        <div class="relative flex justify-items-center md:justify-items-center pt-1 shadow py-2">
-              <h4 class="text-base font-semibold pt-2 pl-4 " id="active">{{activeName}}</h4>
+        <div class="relative flex justify-items-center md:justify-items-center shadow py-3">
+              <h4 class="text-base font-semibold pl-4 " id="active">{{activeName}}</h4>
               <span class="material-icons pl-3 pt-2" id="iCheck" > check_circle </span>
           
         </div>
 
-      <div class="overflow-auto pb-1 h-4/5 mb-1" id="journal-scroll">
+      <div class="overflow-auto h-4/5" id="journal-scroll">
 
        <!--------------U sent a request to Mark Arl------>
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
@@ -322,7 +323,7 @@
           </div>
       </div>
        
-      <div class=" w-pl-4 pr-4 mt-1 w-full absolute bottom-1 flex flex-cols justify-between items-center" style="min-width:400">
+      <div class="pr-4 w-full absolute bottom-4 flex flex-cols justify-between items-center" style="min-width:400">
               <button class="h-6 w-6 ml-4 mr-1 bg-gray-400 rounded-full focus:outline-none hover:text-white" @click="attachbtn" type="button">
                <span class="material-icons" id="attach">
                     {{attach}}</span>
@@ -357,8 +358,12 @@
                   more_horiz</span></button>
             </div> 
         </div>
-        <!--------------Someone sent u a request------>
-        <div v-if="true" class="top-0 flex justify items-center shadow-lg bg-white border">
+
+      <!----chat box---->
+      <div class="overflow-auto overflow-x-hidden h-5/6" id="journal-scroll">
+        
+                <!--------------Someone sent u a request------>
+        <div v-if="false" class="top-0 flex justify items-center shadow-md bg-white border">
             <span class="text-sm p-3 w-full">
               <span><span class="font-semibold mr-2 ">{{sender}}</span>request you a request</span>
               <span class="ml-2">for</span>
@@ -370,6 +375,7 @@
               </div>
             </span>
         </div><!------------------->
+
         <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <span>You sent a request to</span>
@@ -382,8 +388,9 @@
               </div>
             </span>
         </div><!------------------->
+
         <!--------------transaction details------>
-        <div v-if="false" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
+        <div v-if="true" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
             <span class="text-sm p-3 w-full">
               <div class="flex flex-row justify-between">
                 <span>Transaction <span class="font-semibold ml-2">{{postNum2 }} </span> </span>
@@ -398,8 +405,8 @@
             </span>
         </div><!------------------->
       <!----chat box---->
-      <div class="overflow-auto overflow-x-hidden px-1 py-1 h-4/6" id="journal-scroll">
-        
+
+
         <div class="p-2 flex justify-end">
           <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-200 rounded-lg">
             <p>{{ chatOutgoing[0].sent}}</p>
@@ -579,7 +586,7 @@
           </div>
       </div>
        
-      <div class=" w-pl-4 pr-4 mt-1 w-full absolute bottom-1 flex flex-cols justify-between items-center" style="min-width:400">
+      <div class="pr-4 mt-1 w-full absolute bottom-3 flex flex-cols justify-between items-center" style="min-width:400">
               <button class="h-6 w-6 ml-4 mr-1 bg-gray-400 rounded-full focus:outline-none hover:text-white" @click="attachbtn" type="button">
                <span class="material-icons" id="attach2">
                     {{attach}}</span>
