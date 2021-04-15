@@ -340,9 +340,9 @@
 <!------------mobile version--------------------->
 <div class="mobileVersion">
 <div v-show="toggleChat">
-    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
+    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 pb-2">
       <!------------------------------------------------------->
-        <div class="vs:w-full mt-20 shadow-md" style="min-width:400">
+        <div class="w-full mt-20">
         
         <div class="flex items-center justify-between md:items-center pt-1 shadow">
             <div class="flex flex-row">
@@ -593,42 +593,38 @@
 </div>
 </div><!-------------end inbox------------->
 <div v-show="toggleInbox">
-    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center divide-x divide-light-gray-700 px-2 pb-2">
+    <div class="bg-gray-50 flex h-full min-h-screen max-h-screen justify-center pb-2">
       
       <!------------------------------------------------------->
-        <div class="vs:w-full mt-20 shadow-md sm:w-10/12">
-        
-        <div class="flex justify-items-center md:justify-items-center pt-1 shadow">
-              <router-link to="/dashboard">
-              <button class="focus:outline-none pl-5 hover:text-red-700" @click="backbtn();" type="button"><span class="material-icons pt-2" id="iMessage">
-                keyboard_backspace</span></button></router-link>
-              <h4 class="text-base font-bold pt-2 pl-4 ">Message</h4>    
-        </div>
-        <div class="w-full flex justify-center">
-          <div v-if="searchMessageInactive" class="border mt-2 border-gray-300 bg-white flex w-10/12 justify-center focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full">
-              <input type="text" class="h-7 w-10/12 pl-3 rounded font-normal text-sm focus:outline-none" placeholder="Search"/>
-              <button  @click="searchBtn" class="align-middle ml-4 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
+        <div class="w-full mt-20">
+
+        <div class="w-full flex justify-center py-5">
+          <div v-if="searchMessageInactive" class="border border-gray-300 bg-white flex w-11/12 justify-center focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full">
+              <input type="text" class="h-7 w-10/12 vs:w-3/4 ssm:ml-4 xsm:ml-4 ssm:pl-1 xsm:pl-1 pl-3 rounded font-normal text-sm focus:outline-none" placeholder="Search"/>
+              <button  @click="searchBtn" class="align-middle ml-4 ssm:ml-0 xsm:ml-0 xsm:mr-1 pt-1 h-7 focus:outline-none hover:text-red-700"><span class="material-icons" style="font-size:22px">
                 search
                 </span></button>
           </div><!---end of search bar-->
-        </div>
-        <button v-if="showSearchResults" class="flex justify-center w-full py-1 pt-2 focus:outline-none">
-            <input type="text" class="h-8 w-9/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Mark" id="search"/>
+
+          <div v-if="showSearchResults" class="flex justify-center w-full focus:outline-none">
+            <input type="text" class="h-8 w-10/12 pl-5 border font-normal text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 rounded-full" placeholder="Mark" id="search"/>
             <button class="align-middle mt-1 ml-1 flex items-center h-6 w-6 rounded-full bg-gray-300 focus:outline-none hover:text-red-700">
               <span  @click="closeSearchResults" class="material-icons pl-1" style="font-size:17px">
               close
               </span></button>
-        </button><!---end of search bar-->
+        </div><!---end of search bar-->
 
-    <div class="overflow-auto px-1 py-1 h-5/6" id="journal-scroll">
+        </div>
+        
+    <div class="overflow-auto px-1 pb-1 h-5/6" id="journal-scroll">
 
           <div v-if="searchMessageInactive">
-            <button @click ="navMark" type="button" class="focus:bg-gray-200 w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+            <button @click ="navMark" type="button" class="focus:bg-gray-200 w-full flex focus:outline-none justify-between items-center py-4 px-2 hover:shadow-lg cursor-pointer transition">
               <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                 <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="mark"> {{ inbox[0].name}} <span class="material-icons pl-2" id="iCheck" >
                   check_circle
                   </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
+                  <span class="text-xs text-gray-400 truncate w-36 lvs:w-64 sm:w-72 ssm:w-24"> {{ inbox[0].message}}
                   </span> 
                 </div>
               </div>
@@ -638,12 +634,12 @@
                 </div>
             </button>
 
-            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200  w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition">
+            <button @click ="messagebtn" type="button" class=" focus:bg-gray-200  w-full flex focus:outline-none justify-between items-center py-4 px-2 hover:shadow-lg cursor-pointer transition">
               <div class="flex ml-2"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" class="rounded-lg h-8 w-7 pt-1"> 
                 <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm" id="gwen">{{ inbox[1].name}}<span class="material-icons pl-2" id="iCheck" >
                   check_circle
                   </span></span> 
-                  <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[1].message}}
+                  <span class="text-xs text-gray-400 truncate w-36 lvs:w-64 sm:w-72 ssm:w-24"> {{ inbox[1].message}}
                   </span> 
                   </div>
                 </div>
@@ -654,7 +650,7 @@
             </button>  
           </div> <!---------------navigation message------------>
 
-          <div v-if="showSearchResults" class="divide-y divide-gray-300">
+          <div v-if="showSearchResults">
 
             <div class="py-2 flex justify-center font-normal text-xs italic">
               <span>Search Results</span>
@@ -665,7 +661,7 @@
                   <div class="flex flex-col justify-between items-start ml-2"> <span class="font-medium text-sm italic" id="mark"> <span class ="text-red-700">Mark</span> Aral <span class="material-icons pl-2" id="iCheck" >
                     check_circle
                     </span></span> 
-                    <span class="text-xs text-gray-400 truncate w-36"> {{ inbox[0].message}}
+                    <span class="text-xs text-gray-400 truncate w-36 lvs:w-64 sm:w-72 ssm:w-24"> {{ inbox[0].message}}
                     </span> 
                   </div>
                 </div>
@@ -709,11 +705,8 @@ export default {
         //inbox
           inbox: [
             { name: 'Mark Aral', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Gwen Lopez', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Monica Rambeau', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-            { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-          
+            { name: 'Gwen Lopez', message: 'No problem. Thanks as well for the handsome pay! No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
+            
           ],
         //chat
           activeName: 'Mark Aral',
