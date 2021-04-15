@@ -930,37 +930,24 @@ export default {
     },
     getChatRooms() {
         api.get('/api/getChatroom').then((res) => {
-            
             //filtering the message room where there are no message and not the active room if there is
-             
             console.log('before before',res.data)
-            var arry = []
+            var z=0;
             for(i=0;i<res.data.length;i++){
               if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
                 if((this.authUser === res.data[i].email1 || this.authUser === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
-                      // if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
-                      //   this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
-                      //   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
-                      // }
-                      console.log(this.authUser ,'==' ,res.data[i].email1, '||', this.authUser, '==' ,res.data[i].email2 ,'&&', this.userQueryID, '===' ,res.data[i].email1 || this.userQueryID, '===', res.data[i].email2)
-                      // else{
-                      //   this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
-                      //   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
-                      // }
-                      // console.log("set room!!!! = ",this.chatRoomNames[i],' room number!! =',this.chatRooms[i].messageRoomNumber )
-                      // this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
+                      this.chatRooms[z]= res.data[i]
+                      z++
                       continue
-                  }else{
-                    console.log('before = ',i,'.)',res.data)
-                    console.log('renoving  ','(',i,i,')', res.data[i].email2)
-                    res.data.splice(i,i)
-                    console.log('after = ',i,'.)',res.data)
                   }
+              }else{
+                this.chatRooms[z]= res.data[i]
+                z++
               }
+              
             }
-            console.log('chatrooms',res.data)
-            this.chatRooms = res.data;
-            console.log('chatrooms new', arry )
+            console.log('chatrooms before', res.data )
+            console.log('chatrooms after', this.chatRooms )
             var i;
             var j;
             //var x=0;

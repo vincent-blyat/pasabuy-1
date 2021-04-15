@@ -1,8 +1,8 @@
 <template>
     <!--User Profile-->
     <div class="inline-flex space-x-2 items-center justify-start p-4 mt-2">
-        <img class="w-14 h-full border rounded-full border-gray-200" src="img/yami.jpg" />
-        <p class="text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
+        <img class="w-14 h-full border rounded-full border-gray-200" :src="avatar" />
+        <p class="text-base font-bold leading-none text-gray-900">{{profile}}</p>
     </div>
     <!--end-->
     <!--Accepting Request Button
@@ -92,6 +92,7 @@
 
 import api from '../api'
 export default {
+    props:['profile','avatar'],
     data() {
         return {
             isOpen: false,
@@ -114,8 +115,9 @@ export default {
     methods: {
         createOfferPost() {
             console.log(this.form_data)
-            api.post('api/post/offer', this.form_data)
-                .then((response) => {
+            api.get('santum/csrf-cookie').then(()=>{
+                api.post('api/post/offer', this.form_data)
+                    .then((response) => {
                     console.log(response.data.message)
                     window.location.reload();
                 })
@@ -123,6 +125,8 @@ export default {
                     console.log(errors)
                 
                 })
+            })
+        
         }
     },
     mounted(){

@@ -24,7 +24,7 @@
              </div>
              <hr>
              <!--end-->
-            <component :is="component"/>   
+            <component :is="component" :profile="user" :avatar="userAvatar"/>   
       </div>
      </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
 import shopOfferPost from  './shopOfferPost'
 import orderRequestPost from './orderRequestPost'
+import api from '../api'
 export default {
     components: {
         shopOfferPost,
@@ -46,6 +47,8 @@ export default {
         isVisible: true,
         activeBtn:0,
         hidden: false,
+        user:null,
+        userAvatar:null
         }
     },
     methods: {
@@ -69,6 +72,12 @@ export default {
         }
         },
     },
+    mounted(){
+        api.get('api/getPersonal').then((res)=>{
+            this.user = res.data.firstName + ' '+ res.data.lastName
+            this.userAvatar = 'data:image/jpeg;base64,'+ btoa(res.data.profilePicture)
+        })
+    }
 }
 </script>
 
