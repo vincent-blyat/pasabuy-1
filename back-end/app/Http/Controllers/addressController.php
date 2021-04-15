@@ -15,7 +15,7 @@ class addressController extends Controller
         return DB::select('SELECT * FROM refcitymun ORDER BY  citymunDesc');
     }
     function refBrgy(){
-        return DB::select('SELECT * FROM refbrgy ORDER BY brgyDesc');
+        return DB::select("SELECT * FROM refbrgy ORDER BY brgyDesc");
         
     }
 }

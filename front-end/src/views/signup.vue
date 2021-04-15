@@ -27,17 +27,17 @@
                 lg:flex-row lg:justify-between lg:space-x-6
                  ">
                     <div  class="w-full">
-                        <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" v-model="PersonalInfo.firstName" />
+                        <input name="" type="firstname"  required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="First Name" v-model="PersonalInfo.firstName" v-on:keypress=isLetter($event) />
                     </div>
                     <div  class="w-full">
-                        <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" v-model="PersonalInfo.lastName" />
+                        <input aria-label="Last Name" name="" type="name" required class="relative block w-full px-3 py-2 mt-4 mb-2 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Last Name" v-model="PersonalInfo.lastName" v-on:keypress=isLetter($event) />
                     </div>
                 </div>
                 <div class="mb-6">
                     <input aria-label="Email" name="" type="email" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Email" v-model="PersonalInfo.email"  />
                 </div>
                 <div class="mb-10">
-                    <input aria-label="Phone Number" name="" type="text" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Phone Number" v-model="PersonalInfo.phoneNumber"  />
+                    <input aria-label="Phone Number" name="" type="text" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Phone Number" v-model="PersonalInfo.phoneNumber" v-on:keypress=isNumber($event) :maxlength="max"/>
                 </div>
                 <div class="flex flex-col  
                 md:flex-row md:justify-between md:space-x-6
@@ -109,6 +109,7 @@ import api from '../api'
 export default {
     data(){
         return{
+            max: 11,
             PersonalInfo:{
                firstName : null,
                lastName : null,
@@ -120,6 +121,17 @@ export default {
         }
     }, 
     methods:{
+
+        isLetter(e) {
+             let char = String.fromCharCode(e.keyCode); // Get the character
+             if(/^[A-Za-z]+$/.test(char)) return true; // Match with regex 
+                 else e.preventDefault(); // If not match, don't add to input text
+        },
+         isNumber(e) {
+             let char = String.fromCharCode(e.keyCode); // Get the character
+             if(/^[0-9]+$/.test(char)) return true; // Match with regex 
+                 else e.preventDefault(); // If not match, don't add to input text
+        },
         nextPage(){
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
                
