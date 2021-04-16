@@ -171,7 +171,7 @@ class PostController extends Controller
 		$user = Auth::user();
 		$postNum = $request->postNum;
 
-		$newShare = new share;
+		$newShare = new share();
 		$newShare->sharerEmail = $user->email;
 		$newShare->shareNumber = share::count()+1;
 		$newShare->postNumber = $postNum;

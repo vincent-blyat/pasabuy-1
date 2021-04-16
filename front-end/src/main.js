@@ -4,8 +4,8 @@ import router from './router'
 import './assets/css/tailwind.css'  
 import api from './api'
 import Echo from 'laravel-echo';
-import axios from 'axios';
 import VueSimpleAlert from 'vue-simple-alert'
+
 
 
 window.Pusher = require('pusher-js');
@@ -32,7 +32,7 @@ window.Echo = new Echo({
     },
 })
 
-axios.interceptors.response.use(
+api.interceptors.response.use(
     function(response) {
         // Call was successful, don't do anything special.
         return response;
