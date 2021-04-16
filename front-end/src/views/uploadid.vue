@@ -183,6 +183,8 @@ methods:{
                      localStorage.removeItem('personal')
                      localStorage.removeItem('account')
                      localStorage.removeItem('address')
+                     localStorage.setItem('isLoggedIn', true);
+                     console.log('welcome use');
                      this.$router.push({name:"accountsettings"});
                  }
                  else{

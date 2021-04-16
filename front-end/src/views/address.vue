@@ -9,23 +9,24 @@
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 ssm:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
+            <p class="text-center text-red-700">{{errors}} </p>
             <div action="#" class="space-y-3">
               <div class="w-full">
-                 <select @change="getProvCode()" class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="selectedProvince"  >
+                 <select @change="getProvCode()" id="Province" class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" v-model="selectedProvince"  >
                         <option value="Province" selected disabled>Choose Province</option>
                     <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
               <div class="w-full">
-                <select  @change="getCityCode()" id="City"   class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10"  v-model="selectedCity" >
+                <select  @change="getCityCode()" id="City"   class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm"  v-model="selectedCity" >
                  <option value="City" selected disabled>Choose City/Municipality</option>
                        <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
 
               <div class="w-full">
-                <select  class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10"  v-model="selectedBrgy">
+                <select  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm"  v-model="selectedBrgy">
                   <option value="Brgy" disabled>Choose Baranggay</option>
                   <option v-for="brgy in barangays" v-bind:key="brgy.id" v-bind:value="brgy.brgyDesc"> {{ brgy.brgyDesc }} </option>
                 </select>
@@ -106,21 +107,35 @@ export default {
         landMark: null,
 
       },
+      errors:null,
     };
   },
   methods: {
     
     nextPage() {
-      var d = document.getElementById("Province");
-      var getProv = d.options[d.selectedIndex].text;
-      this.addressInfo.province = getProv;
-      console.log(this.addressInfo.province);
+
+      this.addressInfo.province = this.selectedProvince;
+      this.addressInfo.cityMunicipality = this.selectedCity;
+      this.addressInfo.barangay = this.selectedBrgy;
+      console.log(this.addressInfo);
 
       api.post("/api/postAddress", this.addressInfo).then((res) => {
         console.log(res.data);
         localStorage.setItem("address", JSON.stringify(res.data));
         this.$router.push({ name: "uploadid" });
-      });
+      }).catch((errors)=>{
+          if(errors.response.data.province == undefined)
+            errors.response.data.province = "";
+          if(errors.response.data.cityMunicipality == undefined)
+            errors.response.data.cityMunicipality = "";
+          if(errors.response.data.barangay == undefined)
+            errors.response.data.barangay = "";
+          if(errors.response.data.houseNumber == undefined)
+            errors.response.data.houseNumber = "";
+          if(errors.response.data.landMark == undefined)
+            errors.response.data.landMark = "";
+          this.errors =errors.response.data.province+' '+ errors.response.data.cityMunicipality+' '+errors.response.data.barangay+' '+errors.response.data.houseNumber+' '+errors.response.data.landMark;
+      })//end catch
     },
 
     getProvCode() {

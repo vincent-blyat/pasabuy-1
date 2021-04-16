@@ -77,13 +77,17 @@ class RegisterController extends Controller
      //function to put personal info in $addressInfo
     function postAddress(Request $request){
 
-        $request->validate([
+        $validator=Validator::make($request->all(),[
             'landMark' => ['required'],
             'houseNumber' => ['required'],
             'province' => ['required'],
             'barangay' => ['required'],
             'cityMunicipality' => ['required'],
-       ]);
+            ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
 
        $this->addressInfo = ['landMark'=> $request -> landMark, 'houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
        
