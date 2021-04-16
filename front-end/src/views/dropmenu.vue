@@ -18,6 +18,7 @@
 
 <script>
 import api from '../api'
+import store from '../store/index'
 export default {
   data() {
     return {
@@ -28,15 +29,18 @@ export default {
   methods:{
     logout(){
         console.log('logout');
-          // Login...
-        api.get('api/user').then((res)=>{
-          window.Echo.leave('chat.'+res.data.indexUserAuthentication)
-        })
+        window.Echo.leave('chat.'+this.user.indexUserAuthentication)
+         window.Echo.leave('App.Modes.User.'+this.user.indexUserAuthentication)
         api.post('api/logout').then(()=>{
-          localStorage.removeItem('isLoggedIn');
+          sessionStorage.clear();
           this.$router.push({name:"Home"});
         })
     }
-  }
+  },
+    computed:{
+    user(){
+      return store.getters.getUser
+    },
+  },
 }
 </script>

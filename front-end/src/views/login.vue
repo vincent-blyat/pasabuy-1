@@ -100,12 +100,13 @@ export default {
            api.post('/api/login', this.dataForm).then(()=>{
              api.get('api/user').then((res)=>{
                if(res.data.email != null){
-                  localStorage.setItem('isLoggedIn', true);
+                  sessionStorage.setItem('isLoggedIn', true);
                   console.log('yay logged in');
                   store.dispatch('getAuthUser')
                   store.dispatch('getPersonal')
                   store.dispatch('getUserAddress')
                   store.dispatch('getPosts')
+                  store.dispatch('getChatRooms')
                   store.dispatch('getUnreadNotifications')
                   store.dispatch('getAllNotifications')
                   this.$router.push({name:"dashboard"});

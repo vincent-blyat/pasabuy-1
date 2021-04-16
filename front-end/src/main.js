@@ -40,8 +40,10 @@ api.interceptors.response.use(
     function (error) {
     switch (error.response.status) {
         case 401: // Not logged in
-            localStorage.removeItem('isLoggedIn');
-            this.$router.push({name:"login"});
+            api.post('api/logout').then(()=>{
+                sessionStorage.clear();
+                this.$router.push({name:"Login"});
+            })
             break;
         case 419: // Session expired
             localStorage.removeItem('isLoggedIn');
