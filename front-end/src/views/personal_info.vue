@@ -129,6 +129,7 @@ import api from '../api'
 import Profile from './ProfileEdit.vue'
 import VueSimpleAlert from 'vue-simple-alert'
 import moment from "moment"
+import store from '../store/index'
 export default {
   name: "personal",
   component: {
@@ -224,33 +225,30 @@ methods:{
         console.log(errors.response)
       })
     },
-     getData(){
-          api.get("/api/getPersonal").then((res) => {
-          console.log("personal info", res.data);
-          this.personal.firstname = res.data.firstName;
-          this.personal.lastname = res.data.lastName;
-          this.personal.phone_number = res.data.phoneNumber;
-          this.personal.gender = res.data.gender;
-          this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
-          this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
-          //this.user = res.data;
-        });
-        api.get("/api/getLanguages").then((res) => {
+},
+mounted(){
+    //get the user information from the laravel API
+    store.dispatch('getPersonal')
+    this.personal.firstname = this.userPersonal.firstName;
+    this.personal.lastname =  this.userPersonal.lastName;
+    this.personal.phone_number =  this.userPersonal.phoneNumber;
+    this.personal.gender =  this.userPersonal.gender;
+    this.personal.birdate = moment( this.userPersonal.birthDate).format("MMMM DD, YYYY");
+    this.personal.profilePic =  this.userPersonal.profilePicture
+    api.get("/api/getLanguages").then((res) => {
           if (res) {
             console.log("language ", res.data);
             this.personal.language = res.data.languages;
           } else {
             console.log("error ");
           }
-
           //this.user = res.data;
-        });
-        }
-
-},
-created(){
-    //get the user information from the laravel API
-       this.getData();
+  });
+  },
+computed:{
+    userPersonal(){
+      return store.getters.getPersonal
+    },
   },
 };
 </script>

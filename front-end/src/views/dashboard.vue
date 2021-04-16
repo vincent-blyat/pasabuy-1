@@ -10,7 +10,7 @@
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
     <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="userPersonal.profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -89,7 +89,7 @@
      
   <!--user post-->
   <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
-    v-for="(post_info, index) in delivery_info"
+    v-for="(post_info, index) in posts"
     :key="index"
     >
     
@@ -496,6 +496,7 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import VueSimpleAlert from 'vue-simple-alert'
+import store from '../store/index'
  
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
@@ -522,7 +523,7 @@ export default {
       isOpen2:false,
       isOpen3:false,
       isOpen4:false,
-      user: null,
+      // user: null,
       list:false,
       editShoppingOffer:false,
       editOrderRequest:false,
@@ -538,7 +539,6 @@ export default {
       profilePicture:null,
       post_filter:"nearby",
       post_type:"all",
-      delivery_info:[],
    
       activeDeliveries:{
         transNo: '61913174',
@@ -689,43 +689,21 @@ export default {
       })
     }
   },
-    mounted(){
-    api.get('/api/getPersonal').then((resp)=>{
-      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
-    }).catch((error) => {
-       console.log(error)
-    })
+  mounted(){
+    store.dispatch('getAuthUser')
+    store.dispatch('getPersonal')
+    store.dispatch('getPosts')
   },
-  created(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
-    }).catch((error) => {
-       console.log(error)
-    })
-
-
-    api.get('/api/getPosts').then((res)=>{
-      console.log(res.data)
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.delivery_info=res.data
-      console.log(this.delivery_info)
-    }).catch((error) => {
-      console.log(error)
-    })
-
-     api.get('/api/getShares').then((res)=>{
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.shares=res.data
-      console.log(this.shares)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+  computed:{
+    user(){
+      return store.getters.getUser
+    },
+    userPersonal(){
+      return store.getters.getPersonal
+    },
+    posts(){
+      return store.getters.getPosts
+    } 
+  },
 }
 </script>

@@ -81,6 +81,7 @@
 </style>
 <script>
 import api from '../api'
+import store from "../store/index"
 export default {
   data(){
     return{
@@ -101,6 +102,8 @@ export default {
                if(res.data.email != null){
                   localStorage.setItem('isLoggedIn', true);
                   console.log('yay logged in');
+                  store.dispatch('getAuthUser')
+                  store.dispatch('getPersonal')
                   this.$router.push({name:"dashboard"});
                }
              }).catch((errors)=>{

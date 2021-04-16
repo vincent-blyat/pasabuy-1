@@ -1,8 +1,8 @@
 <template>
     <!--User Profile-->
     <div class="inline-flex space-x-2 items-center justify-start p-4 mt-2">
-        <img class="w-14 h-full border rounded-full border-gray-200" :src="avatar" />
-        <p class="text-base font-bold leading-none text-gray-900">{{profile}}</p>
+        <img class="w-14 h-full border rounded-full border-gray-200" :src="profile.profilePicture" />
+        <p class="text-base font-bold leading-none text-gray-900">{{profile.firstName}} {{profile.lastName}}</p>
     </div>
     <!--end-->
     <!--Accepting Request Button
@@ -92,7 +92,7 @@
 
 import api from '../api'
 export default {
-    props:['profile','avatar'],
+    props:['profile'],
     data() {
         return {
             isOpen: false,
@@ -128,11 +128,5 @@ export default {
             })
         }
     },
-    mounted(){
-        api.get('api/user')
-            .then((response)=>{
-               this.form_data.email = response.data.email;
-            })
-    }
 }
 </script>

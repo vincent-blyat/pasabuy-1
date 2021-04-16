@@ -72,7 +72,7 @@
         <div v-if="show" class="fixed hidden xl:block lg:block pb-24 2xl:block overflow-y-auto top-20 h-full right-60 pt-2  bg-white rounded-lg shadow-lg left--1" style="min-width:370px;">
                <h1 class="mt-4 mb-4 ml-4 text-black font-bold border-b align-text-leftCorner cursor-pointer">Notifications</h1>
              
-                  <Notification :notif="userNotif"/>
+                  <Notification/>
               
              
             </div> 
@@ -169,6 +169,7 @@ import {useRoute} from 'vue-router';
 import Dropdown from './dropmenu.vue';
 import Notification from './Notification.vue'
 import api from "../api"
+import store from "../store/index"
 export default {
   name:'navBar',
  components:{
@@ -182,9 +183,6 @@ export default {
             isOpen:false,
             show:false,
             activeBtn:false,
-            unreadNotif:null,
-            user:null,
-            userNotif:null
         }
     },
       methods:{
@@ -209,32 +207,23 @@ export default {
       return useRoute().name
     })
     return{currentRoute}
-    
-  },
-  created(){
-    console.log("navbar created")
-   
-    api.get('api/getUnreadNotifications').then((res)=>{
-      console.log(res.data)
-      this.unreadNotif = res.data.length
-    })
-   
   },
   mounted(){
-     api.get('api/user').then((res)=>{
-      this.user=res.data;
-      console.log("notifications mounted",this.user)
-      window.Echo.private('App.Models.User.' + this.user.indexUserAuthentication)
-      .notification((notification) => {
-        this.userNotif = notification
-        api.get('api/getUnreadNotifications').then((res)=>{
-        this.unreadNotif = res.data.length
+    store.dispatch('getUnreadNotifications')
+    api.get('api/user').then((res)=>{
+    console.log("uesr id", res.data.indexUserAuthentication)
+        window.Echo.private('App.Models.User.' + res.data.indexUserAuthentication)
+                  .notification((notification) => {
+                    console.log("notif", notification)
+                    store.dispatch('getUnreadNotifications')
+        });
       })
-    });
-    })
-   
-    
-  }
+  },
+  computed:{
+    unreadNotif(){
+      return store.getters.getUnreadNotif.length
+    },
+  },
 }
 </script>
 <style scoped>
