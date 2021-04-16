@@ -12,14 +12,14 @@
             <form action="#" class="space-y-3">
               <div class="w-full">
                  <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" v-model="addressInfo.province"  >
-                        <option value="Choose" selected disabled>Choose</option>
+                        <option value="Choose" selected disabled>Choose Province</option>
                     <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
               <div class="w-full">
                 <select  @change="getCityCode()" id="City" aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" placeholder="City/Municipality" v-model="addressInfo.cityMunicipality" >
-                 <option value="Choose" selected disabled>Choose</option>
+                 <option value="Choose" selected disabled>Choose City/Municipality</option>
                        <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
@@ -35,7 +35,7 @@
                 <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number"  v-model="addressInfo.houseNumber"/>
               </div>
               <div class="w-full ">
-                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark"  v-model="addressInfo.Landmark" />
+                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark"  v-model="addressInfo.landMark" />
               </div>
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
@@ -100,6 +100,8 @@ export default {
         barangay: null,
         cityMunicipality: null,
         province: null,
+        landMark: null,
+
       },
     };
   },
@@ -119,26 +121,24 @@ export default {
     },
 
     getProvCode() {
-      var newCityMun = this.newcityMunicipality;
-      this.cityMunicipality = [];
       var getProvCode = document.getElementById("Province").value;
-      for (var i = 0; i < newCityMun.length; i++) {
-        if (newCityMun[i].provCode === getProvCode) {
-          this.cityMunicipality.splice(i, 1, newCityMun[i]);
-        }
-      }
+      api.get('api/refcityMunicipality', {params:{provCode: getProvCode}}).then((res)=>{
+        this.cityMunicipality = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
       console.log(getProvCode);
       console.log(this.cityMunicipality);
     },
     getCityCode() {
-     var newBrgy = this.newrefBaranggay;
-      this.barangays = [];
-      var getCityCode = document.getElementById("City").value;
-      for (var i = 0; i < newBrgy.length; i++) {
-        if (newBrgy[i].citymunCode === getCityCode) {
-          this.barangays.splice(i, 1, newBrgy[i]);
-        }
-      }
+     var getCityCode = document.getElementById("City").value;
+      console.log(getCityCode)
+      api.get('api/refBrgy', {params:{cityCode: getCityCode}}).then((res)=>{
+        console.log('brgy', res.data)
+        this.barangays = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
        console.log(this.citymunCode);
        console.log(getCityCode);
     },
@@ -171,7 +171,7 @@ export default {
   },
   created() {
     this.refProvince();
-    this.refcityMunicipality();
+    //this.refcityMunicipality();
     //this.refBrgy();
   },
 

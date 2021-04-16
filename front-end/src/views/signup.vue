@@ -143,10 +143,10 @@ export default {
                     console.log(res.data.personalInfo);
                     localStorage.setItem("code", res.data.code);
                     this.$router.push({name:"verifyemail"});
-                }
+                }// end if
                 else{
                     console.log('error, email not sent');
-                }
+                }//end else
             }).catch((errors)=>{
                 if(errors.response.data.firstName == undefined)
                     errors.response.data.firstName = "";
@@ -159,9 +159,8 @@ export default {
                 if(errors.response.data.email == undefined)
                     errors.response.data.email = "";
                 this.errors =errors.response.data.firstName+' '+ errors.response.data.lastName+' '+errors.response.data.email+' '+errors.response.data.phoneNumber+' '+errors.response.data.password;
+            })//end catch
             })
-            }
-        }
     },
     created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
@@ -175,5 +174,6 @@ export default {
           this.PersonalInfo.phoneNumber = dataPersonal.phoneNumber
       }
   }
+}
 }
 </script>

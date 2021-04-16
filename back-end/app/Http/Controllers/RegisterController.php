@@ -77,13 +77,14 @@ class RegisterController extends Controller
     function postAddress(Request $request){
 
         $request->validate([
+            'landMark' => ['required'],
             'houseNumber' => ['required'],
             'province' => ['required'],
             'barangay' => ['required'],
             'cityMunicipality' => ['required'],
        ]);
 
-       $this->addressInfo = ['houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
+       $this->addressInfo = ['landMark'=> $request -> landMark, 'houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
        
         
         return response()->json( $this->addressInfo);
@@ -115,6 +116,7 @@ class RegisterController extends Controller
             if($userAuth->save()){
                 $userAddress = new userAddress();
                 $userAddress->email = $request->email;
+                $userAddress->landMark = $request->landMark;
                 $userAddress->houseNumber = $request->houseNumber;
                 $userAddress->province = $request->province;
                 $userAddress->barangay = $request->barangay;
