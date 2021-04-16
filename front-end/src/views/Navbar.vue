@@ -209,8 +209,6 @@ export default {
     return{currentRoute}
   },
   mounted(){
-    store.dispatch('getUnreadNotifications')
-    store.dispatch('getAllNotifications')
     console.log("uesr id", this.user.indexUserAuthentication)
         window.Echo.private('App.Models.User.' + this.user.indexUserAuthentication)
                   .notification((notification) => {

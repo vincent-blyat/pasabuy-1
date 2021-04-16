@@ -39,13 +39,13 @@ const store =  new Vuex.Store({
         setUserAddress(state,payload){
             state.userAddress = payload;
          },
-        setChatRoom(state,payload){
+        setChatRooms(state,payload){
             state.chatRooms = payload;
          }
     },
     actions:{
         async getAuthUser(state){
-            api
+            return api
             .get('api/user')
             .then((res)=>{
                 let user = res.data
@@ -56,7 +56,7 @@ const store =  new Vuex.Store({
             })
         },
         async getPersonal(state){
-            api
+            return api
             .get('api/getPersonal')
             .then((res)=>{
                 res.data.profilePicture = 'data:image/jpeg;base64,'+ btoa(res.data.profilePicture)
@@ -68,7 +68,7 @@ const store =  new Vuex.Store({
             })
         },
         async getPosts(state){
-            api
+            return api
             .get('api/getPosts')
             .then((res)=>{
                 var i;
@@ -83,7 +83,7 @@ const store =  new Vuex.Store({
             })
         },
         async getAllNotifications(state){
-            api
+            return api
             .get('api/getNotifications')
             .then((res)=>{
                 let notif = res.data
@@ -94,7 +94,7 @@ const store =  new Vuex.Store({
             })
         },
         async getUnreadNotifications(state){
-            api
+            return api
             .get('api/getUnreadNotifications')
             .then((res)=>{
                 let unreadenotif = res.data
@@ -105,7 +105,7 @@ const store =  new Vuex.Store({
             })
         },
         async getUserAddress(state){
-            api
+            return api
             .get('api/getAddress')
             .then((res)=>{
                 let address = res.data
@@ -116,11 +116,11 @@ const store =  new Vuex.Store({
             })
         },
         async getChatRooms(state){
-            api
+            return api
             .get('api/getChatroom')
             .then((res)=>{
                 let room = res.data
-                state.commit('setChatRoom',room)
+                state.commit('setChatRooms',room)
             })
             .catch((error)=>{
                 console.log(error)

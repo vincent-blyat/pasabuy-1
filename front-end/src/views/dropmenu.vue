@@ -30,7 +30,7 @@ export default {
     logout(){
         console.log('logout');
         window.Echo.leave('chat.'+this.user.indexUserAuthentication)
-         window.Echo.leave('App.Modes.User.'+this.user.indexUserAuthentication)
+         window.Echo.leave('App.Models.User.'+this.user.indexUserAuthentication)
         api.post('api/logout').then(()=>{
           sessionStorage.clear();
           this.$router.push({name:"Home"});

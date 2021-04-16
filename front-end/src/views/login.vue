@@ -98,33 +98,36 @@ export default {
           // Login...
     
            api.post('/api/login', this.dataForm).then(()=>{
-             api.get('api/user').then((res)=>{
-               if(res.data.email != null){
-                  sessionStorage.setItem('isLoggedIn', true);
-                  console.log('yay logged in');
-                  store.dispatch('getAuthUser')
-                  store.dispatch('getPersonal')
-                  store.dispatch('getUserAddress')
-                  store.dispatch('getPosts')
-                  store.dispatch('getChatRooms')
-                  store.dispatch('getUnreadNotifications')
-                  store.dispatch('getAllNotifications')
+                sessionStorage.setItem('isLoggedIn', true);
+                console.log('yay logged in');
+                this.dispatches().then(()=>{//wait for the dispatches to finish
+                  console.log('user logged in', this.user)
                   this.$router.push({name:"dashboard"});
-               }
-             }).catch((errors)=>{
-              this.errors = errors.response.data.errors.invalid.join();
-            })
-             
+                })
             }).catch((errors)=>{
               this.errors = errors.response.data.errors.invalid.join();
             })
         
       });
+    },
+    async dispatches(){
+      await store.dispatch('getAuthUser')
+      await store.dispatch('getPersonal')
+      await store.dispatch('getUserAddress')
+      await store.dispatch('getPosts')
+      await store.dispatch('getChatRooms')
+      await store.dispatch('getUnreadNotifications')
+      await store.dispatch('getAllNotifications')
     }
   },
   
   created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
+  },
+   computed:{
+    user(){
+      return store.getters.getUser
+    },
   },
 }
 </script>
