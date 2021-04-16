@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getAddress', [userInformationController::class, 'getAddress']);
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
     Route::post('/editPersonal', [userInformationController::class, 'editPersonal']);
-    Route::post('/editAddress', [userInformationController::class, 'editAddress']);
+    Route::post('/editAddress', [addressController::class, 'editAddress']);
     Route::post('/editAccount', [userInformationController::class, 'editAccount']);
     Route::get('/getValidID', [userInformationController::class, 'getValidID']);
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
@@ -52,8 +52,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
- 
-    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -82,3 +80,5 @@ Route::post('post/request', [PostController::class, 'create_request_post']);
 
 Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
+
+Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);

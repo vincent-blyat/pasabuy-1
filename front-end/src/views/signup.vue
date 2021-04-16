@@ -19,6 +19,7 @@
         <div class="px-10 py-16 ">
             <h1 class="pb-5 space-x-1 space-y-1 text-2xl font-bold">Create an account</h1>
               <div action="#" class="space-y-3">
+                <p class="text-center text-red-500">{{errors}}</p>
                <div class="flex flex-col 
                 md:flex-row md:justify-between md:space-x-6
                 sm:flex-row sm:justify-between sm:space-x-6
@@ -50,7 +51,7 @@
                         <input aria-label="Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:z-10 focus:border-blue-300 " placeholder="Password" v-model="PersonalInfo.password"/>   
                     </div>
                     <div class="w-full" >
-                        <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" v-model="PersonalInfo.confirmPassword" />
+                        <input aria-label="Confirm Password" name="" type="password" required class="relative block w-full px-3 py-2 mb-6 font-semibold tracking-wide text-gray-900 placeholder-gray-500 bg-gray-200 border rounded-lg appearance-none h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Confirm Password" v-model="PersonalInfo.password_confirmation" />
                     </div>
                 </div>
                 <div class="flex mb-2 -mx-1 ">
@@ -116,8 +117,9 @@ export default {
                email :  null,
                phoneNumber : null,
                password : null,
-               confirmPassword : null
-            }
+               password_confirmation : null
+            },
+            errors:null,
         }
     }, 
     methods:{
@@ -133,24 +135,45 @@ export default {
                  else e.preventDefault(); // If not match, don't add to input text
         },
         nextPage(){
+          api.get('/sanctum/csrf-cookie').then(() => {
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
-               
                 if(res!=null){
-                    console.log('sucess, email sent');
-                    console.log(res.data.personalInfo);
-                    localStorage.setItem("code", res.data.code);
                     localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));
                     localStorage.setItem("account",JSON.stringify(res.data.account));
+                    console.log(res.data.personalInfo);
+                    localStorage.setItem("code", res.data.code);
                     this.$router.push({name:"verifyemail"});
                 }
                 else{
                     console.log('error, email not sent');
                 }
+            }).catch((errors)=>{
+                if(errors.response.data.firstName == undefined)
+                    errors.response.data.firstName = "";
+                if(errors.response.data.lastName == undefined)
+                    errors.response.data.lastName = "";
+                if(errors.response.data.phoneNumber == undefined)
+                    errors.response.data.phoneNumber = "";
+                if(errors.response.data.password == undefined)
+                    errors.response.data.password = "";
+                if(errors.response.data.email == undefined)
+                    errors.response.data.email = "";
+                this.errors =errors.response.data.firstName+' '+ errors.response.data.lastName+' '+errors.response.data.email+' '+errors.response.data.phoneNumber+' '+errors.response.data.password;
             })
+            }
         }
     },
     created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
+  mounted(){
+      if(localStorage.getItem('personal')!=null && localStorage.getItem('account')!=null ){
+          var dataPersonal = JSON.parse(localStorage.getItem('personal'))
+          this.PersonalInfo.firstName = dataPersonal.firstName
+          this.PersonalInfo.lastName = dataPersonal.lastName
+          this.PersonalInfo.email = dataPersonal.email
+          this.PersonalInfo.phoneNumber = dataPersonal.phoneNumber
+      }
+  }
 }
 </script>

@@ -39,7 +39,7 @@
               </div>
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
-                  <router-link to="/verify-email" class="font-bold underline-none text-blue" >Back</router-link>
+                  <router-link to="/sign-up" class="font-bold underline-none text-blue" >Back</router-link>
                 </div>
                 <div class="flex justify-end w-1/2 px-1 mt-3">
                   <button @click="nextPage" class="h-10 m-2 text-white transition-colors duration-150 bg-red-buttons px-7 rounded-3xl focus:outline-none">

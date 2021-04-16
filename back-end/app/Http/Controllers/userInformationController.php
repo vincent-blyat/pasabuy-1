@@ -112,11 +112,19 @@ class userInformationController extends Controller
     public function changePassword(Request $request)
     {
         # code...
-
+        $messages = ['password.regex' => ' Must contain at least one lowercase letter (a – z).
+                        Must contain at least one uppercase letter (A – Z).
+                        Must contain at least one digit (0-9).'
+                    ];
         $validator=Validator::make($request->all(),[
             'currentPassword' => ['required'],
-            'password' => ['required','confirmed','min:8']
-        ]);
+            'password' => ['required',
+                            'confirmed',
+                            'min:8',
+                            'regex:/[a-z]/',      // must contain at least one lowercase letter
+                            'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                            'regex:/[0-9]/',      // must contain at least one digit
+                        ],],$messages);
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
         }
@@ -158,16 +166,14 @@ class userInformationController extends Controller
     public function editPersonal(Request $request)
     {
         # code...
-      
-        $request->validate([
-             'firstname' => ['required'],
-             'lastname' => ['required'],
-             'phone_number' => ['required'],
-             'gender' => '',
-             'birdate' => ['required'],
-             'language' => ['required']
+        $validator=Validator::make($request->all(),[
+            'firstname' => ['required','regex:/^[\pL\s\-]+$/u','max:255'],
+             'lastname' => ['required','regex:/^[\pL\s\-]+$/u','max:255'],
+             'phone_number' => ['required','numeric','digits:11'],
         ]);
-        
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
         //updating userinfo table
         $userEmail = Auth::User()->email;
         $user = userInformation::where('email',$userEmail)->first();
@@ -200,36 +206,6 @@ class userInformationController extends Controller
             return response()->json('error, information not saved');
         }
 
-    }
-
-    public function editAddress(Request $request)
-    {
-        # code...
-      
-        $request->validate([
-             'house_number' => ['required'],
-             'province' => ['required'],
-             'city' => ['required'],
-             'barangay' => ['required']
-        ]);
-        //updating userinfo table
-        $userEmail = Auth::User()->email;
-        $user = userAddress::where('email',$userEmail)->first();
-        if($user==null){
-            $user = new userAddress();
-            $user->email = $userEmail;
-        }
-        $user->houseNumber = $request->house_number;
-        $user->province = $request->province;
-        $user->cityMunicipality = $request->city;
-        $user->barangay = $request->barangay;
-       
-        if($user->save()){
-            return response()->json(['message'=>'Success, Information saved'],200);
-        }
-        else{
-            return response()->json(['error'=>'An error occured'],422);
-        }
     }
   
 
