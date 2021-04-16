@@ -107,7 +107,7 @@
                   <label for="female">Female</label>
                   </span>
               </div>
-                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="text" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
+                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="date" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
                   ></div> 
                 <div class="flex flex-col"><span class="ml-2">Language: </span> <input type="text" id="language" v-model="personal.language" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/></div>
              
@@ -175,6 +175,7 @@ methods:{
       api.post('/api/editPersonal', this.personal).then((res)=>{
          VueSimpleAlert.alert(res.data.message,"Success","success")
          this.toggle=false
+         this.getData();
       //this.user = res.data;
       }).catch((errors)=>{
         console.log(errors.response.data)
@@ -231,7 +232,11 @@ methods:{
           this.personal.lastname = res.data.lastName;
           this.personal.phone_number = res.data.phoneNumber;
           this.personal.gender = res.data.gender;
-          this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
+          if(res.data.birdate ==null){
+            this.personal.birdate = '';
+          }else{
+            this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
+          }
           this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
           //this.user = res.data;
         });
