@@ -106,6 +106,8 @@ export default {
                   store.dispatch('getPersonal')
                   store.dispatch('getUserAddress')
                   store.dispatch('getPosts')
+                  store.dispatch('getUnreadNotifications')
+                  store.dispatch('getAllNotifications')
                   this.$router.push({name:"dashboard"});
                }
              }).catch((errors)=>{

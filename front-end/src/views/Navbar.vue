@@ -211,19 +211,21 @@ export default {
   mounted(){
     store.dispatch('getUnreadNotifications')
     store.dispatch('getAllNotifications')
-    api.get('api/user').then((res)=>{
-    console.log("uesr id", res.data.indexUserAuthentication)
-        window.Echo.private('App.Models.User.' + res.data.indexUserAuthentication)
+    console.log("uesr id", this.user.indexUserAuthentication)
+        window.Echo.private('App.Models.User.' + this.user.indexUserAuthentication)
                   .notification((notification) => {
-                    console.log("notif", notification)
+                    console.log("listening to notif", notification.type)
                     store.dispatch('getUnreadNotifications')
                     store.dispatch('getAllNotifications')
         });
-      })
+     
   },
   computed:{
     unreadNotif(){
       return store.getters.getUnreadNotif.length
+    },
+    user(){
+      return store.getters.getUser
     },
   },
 }
