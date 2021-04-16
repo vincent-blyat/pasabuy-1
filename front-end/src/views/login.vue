@@ -104,6 +104,8 @@ export default {
                   console.log('yay logged in');
                   store.dispatch('getAuthUser')
                   store.dispatch('getPersonal')
+                  store.dispatch('getUserAddress')
+                  store.dispatch('getPosts')
                   this.$router.push({name:"dashboard"});
                }
              }).catch((errors)=>{

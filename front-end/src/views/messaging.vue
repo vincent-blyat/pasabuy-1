@@ -180,8 +180,8 @@
               <span class="material-icons pl-3 pt-2" id="iCheck" > check_circle </span>
           
         </div>
-
-      <div class="overflow-auto pb-1 h-4/5 mb-1" id="journal-scroll">
+        </div>
+       <div class="overflow-auto h-4/5" id="journal-scroll">
 
        <!--------------U sent a request to Mark Arl------>
         <div v-if="postNum != null" class="sticky top-0 flex justify items-center shadow-lg bg-white border">
@@ -225,9 +225,8 @@
               </div>
             </span>
         </div>
-
         
-        <div class=" flex justify-end mt-2" v-if="postNum != null" >
+        <div v-if="postNum != null"  class=" flex justify-end mt-2" >
           <div class="ml-32 bg-gray-100 text-sm rounded-lg">
             
             <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
@@ -281,18 +280,74 @@
             </div>
           </div>
         </div><!----------------------------------------->
-              
-      <div class="p-1 pl-2"
+        <!-- <div class="p-1 ml-12">
+         <div class="flex items-end pr-10 mt-1">
+            <div class="flex flex-col bg-gray-100 py-2 rounded-lg">
+              <div>
+              <div class="mx-4 mb-2 text-sm font-semibold">
+                <span>Order Details</span>
+              </div>
+              <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
+                <div class="flex flex-col px-2">
+                  
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:18px">place</span>
+                    <span class="pl-2 pb-1">{{placeFrom}}</span>
+                  </div>
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:18px">shopping_cart</span>
+                    <span class="pl-2 pb-1">{{destination}}</span>
+                  </div>
+                  <div class="flex items-start">
+                    <span class="text-red-700 material-icons" style="font-size:16px">watch_later</span>
+                    <span class="pl-2 pb-1">{{timeAlloted}}</span>
+                  </div>
+                  <div class="flex items-start">
+                    <span class=" text-red-700 material-icons" style="font-size:16px">payments</span>
+                    <span class="pl-2">{{paymentMethod}}</span>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="mx-4 p-2 bg-white rounded-lg text-sm">
+                <div>
+                  <span class="font-semibold">Shopping List<span class="ml-3 text-gray-500">8 items</span></span>
+                </div>
+                <div>
+                    <ul class="text-gray-600 list-disc list-inside pl-4 ">
+                      <li v-for="items in shoppingList" :key="items.ShoppingList">
+                        <span>
+                          {{ items.items}}
+                        </span>
+                      </li>
+                    </ul>
+                </div>
+                <div></div>
+              </div>
+            </div>
+            </div>
+         </div>
+        </div> -->
+        <div class="p-1 pl-2"
             v-for="(chat, index) in chatRooms"
             :key="index"
             >
-      <div v-if="chat.messageRoomNumber===activeRoom">
-      <div class="p-1 pl-2"
-            v-for="(msg, index) in chat.get_messages"
+        <div v-if="chat.messageRoomNumber===activeRoom">
+        <div  v-for="(msg, index) in chat.get_messages"
             :key="index"
             >
-            <div v-if="msg.messageSender === authUser">
-             <div class="flex justify-end pr-10 mt-1">
+        <div v-if="msg.messageSender != authUser">
+         <div class="flex items-end pr-10 mt-1"> 
+           <img :src="msg.get_message_sender.profilePicture" class="rounded-lg h-8 w-8 "> 
+           <div class="rounded-lg ">
+            <div class="ml-4 mr-10 p-3 bg-gray-100 text-sm rounded-lg">
+              <p>{{ msg.messageText}}</p>
+              <span class="text-gray-500 pl-1" style="font-size: 10.5px;">{{ timestamp(msg.dateCreated)}}</span></div>
+          </div>
+         </div>
+        </div>
+        <div v-else>
+          <div class="flex justify-end pr-10 mt-1">
               <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
                 <p>{{ msg.messageText }}</p>
                
@@ -301,27 +356,14 @@
                 </span>
               </div>
             </div>
-            </div>
-             <div v-else>
-            
-             <div class="flex items-end pr-10 mt-1">
-              <img :src="msg.get_message_sender.profilePicture" alt="sunil" class="rounded-lg h-8 w-8 "> 
-              <div class="rounded-lg ">
-              <div class="ml-4 mr-10 p-3 bg-gray-200 text-sm rounded-lg ">
-                <p>{{ msg.messageText }}</p>
-               
-                <span class="time_date text-gray-500 pl-1" style="font-size: 10.5px">
-                  {{ timestamp(msg.dateCreated) }}  
-                </span>
-              </div>
-              </div>
-            </div>
-            </div>
-      </div>
-      </div>
-      </div>
+        </div>
+        </div>
+        </div>
+        </div>
         <div id="chatmsg"></div>
       </div>
+
+
       <div v-if="attachment" class="sticky bottom-11">
           <div class="w-full bg-white bg-opacity-100 flex justify-start pt-2">
             
@@ -356,7 +398,6 @@
       </div>
       </div><!--end of right corner-->
     </div>
-  </div>
 <!--end of desktop version-->
 
 
@@ -771,151 +812,122 @@
 
 </div>
 </div>
-
 </template>
 <script>
 import Navbar from "./Navbar";
 import api from "../api";
-import moment from 'moment'
+import moment from "moment";
 export default {
   components: {
     Navbar,
   },
-    //message: String
+  //message: String
   data() {
     return {
       //buttons
       searchMessageInactive: true,
       showSearchResults: false,
-      attachment:false,
-      attach:'add',
+      attachment: false,
+      attach: "add",
       toggle: false,
       attachtoggle: false,
       toggleInbox: true,
       toggleChat: false,
       chatRooms: [],
-      chatRoomNames:[],
-      chatRoomPic:[],
+      chatRoomNames: [],
+      chatRoomPic: [],
       //inbox
       inbox: [],
       //chat
       activeName: null,
       activeRoom: null,
-      authUser:null,
+      authUser: null,
       chatIncoming: [],
       chatOutgoing: [],
-      message:null,
-      out :[],
-      incoming:[],
+      message: null,
+      out: [],
+      incoming: [],
       chat: [],
       //sent a request
-       //sent a request
-      activity: 'You sent a request to to',
-      recipient: 'Mark Aral',
-      sender: 'Monica Rambeau',
+      //sent a request
+      activity: "You sent a request to to",
+      recipient: "Mark Aral",
+      sender: "Monica Rambeau",
       postNum: null,
-      postNum2: '#130317',
-      placeFrom: 'Banquerohan, Legazpi City',
-      destination: 'SM City ',
-      timeAlloted: 'Tomorrow, 5 PM',
-      paymentMethod: 'Payment First via GCash transfer',
-        //shoppingList
+      postNum2: "#130317",
+      placeFrom: "Banquerohan, Legazpi City",
+      destination: "SM City ",
+      timeAlloted: "Tomorrow, 5 PM",
+      paymentMethod: "Payment First via GCash transfer",
+      //shoppingList
       shoppingList: [
-            { items: 'Baking Soda'},
-            { items: 'Choco Syrup'},
-            { items: 'cocoa powder'},
-            { items: 'flour 1 kg'},
-            { items: 'brown sugar'},
-            { items: 'cocoa powder'},
-        ],
+        { items: "Baking Soda" },
+        { items: "Choco Syrup" },
+        { items: "cocoa powder" },
+        { items: "flour 1 kg" },
+        { items: "brown sugar" },
+        { items: "cocoa powder" },
+      ],
       shoppingListSize: 8,
-      userQueryID:null,
+      userQueryID: null,
     };
   },
 
-  watch:{
-    activeRoom(val,oldval){
-      if(oldval){      
-        this.disconnect(oldval)
+  watch: {
+    activeRoom(val, oldval) {
+      if (oldval) {
+        this.disconnect(oldval);
       }
-      this.connect()
-    }
+      this.connect();
+    },
   },
 
   methods: {
-
-    connect(){
-      console.log("connect")
-      if(this.activeRoom !=null){
-        let vm =this;
+    connect() {
+      console.log("connect");
+      if (this.activeRoom != null) {
+        let vm = this;
         vm.getChatRooms();
-        window.Echo.private("chat."+this.activeRoom).listen('.message.new',()=>{
-          console.log('listening...')
-          vm.getChatRooms();
-        })
+        window.Echo.private("chat." + this.activeRoom).listen(
+          ".message.new",
+          () => {
+            console.log("listening...");
+            vm.getChatRooms();
+          }
+        );
       }
     },
-    disconnect(oldval){
-      window.Echo.leave('chat.'+oldval)
+    disconnect(oldval) {
+      window.Echo.leave("chat." + oldval);
     },
 
     sendbtn() {
       if (this.message != "") {
-        var dataMessage = {roomID:this.activeRoom, message: this.message}
-        api.get('/sanctum/csrf-cookie').then(() => {
-          api.post('/api/sendMessage', dataMessage).then((res)=>{
-            console.log('success, message sent.  ', res.data)
+        var dataMessage = { roomID: this.activeRoom, message: this.message };
+        api.get("/sanctum/csrf-cookie").then(() => {
+          api.post("/api/sendMessage", dataMessage).then((res) => {
+            console.log("success, message sent.  ", res.data);
             this.getChatRooms();
-            // var printnow =
-            // '<div class="flex justify-end pr-10 mt-1">' +
-            // '<div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">' +
-            // copiedtext +
-            // '<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >' +
-            // "<br>" +
-            // this.timestamp +
-            // "</span>" +
-            // "</div> ";
-            // printtext.insertAdjacentHTML("beforeend", printnow);
+          
             this.message = "";
             var box = document.getElementById("journal-scroll");
             box.scrollIntoView();
-          })
-        })
-      }else{
+          });
+        });
+      } else {
         return;
       }
     }, //end sendbtn
 
-    setRoom(name,room_ID) {
+    setRoom(name, room_ID) {
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
       this.activeRoom = room_ID;
       this.recipient = name;
-      console.log('setroom')
+      console.log("setroom");
     },
-    // getMessages(){
-    //   if(this.activeRoom!=null){
-    //     console.log('active room number: ',this.activeRoom);
-    //     api.get("/api/getMessages", {params: {roomID:this.activeRoom}}).then((response)=>{
-    //       var i;
-    //       for(i=0;i<response.data.length;i++){
-    //         if(response.data[i].messageSender == this.authUser){
-    //           this.chat[i] = response.data[i];
-    //           this.out[i]= true;
-    //           this.incoming[i]= false;
-    //         }
-    //         else{
-    //           this.chat[i] = response.data[i];
-    //           this.out[i]= false;
-    //           this.incoming[i]= true;
-    //         }
-    //       }
-    //     })
-    //   }else{
-    //     console.log('not found')
-    //   }
-    // },
+ 
 
     backChat() {
       this.toggleInbox = !this.toggleInbox;
@@ -929,281 +941,126 @@ export default {
       this.attachtoggle = !this.attachtoggle;
     },
     getChatRooms() {
-        api.get('/api/getChatroom').then((res) => {
-            //filtering the message room where there are no message and not the active room if there is
-            console.log('before before',res.data)
-            var z=0;
-            for(i=0;i<res.data.length;i++){
-              if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
-                if((this.authUser === res.data[i].email1 || this.authUser === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
-                      this.chatRooms[z]= res.data[i]
-                      z++
-                      continue
-                  }
-              }else{
-                this.chatRooms[z]= res.data[i]
-                z++
-              }
-              
+      api.get("/api/getChatroom").then((res) => {
+        //filtering the message room where there are no message and not the active room if there is
+        console.log("before before", res.data);
+        var z = 0;
+        for (i = 0; i < res.data.length; i++) {
+          if (res.data[i].get_messages.length == 0) {
+            //means epmty messages on room
+            if (
+              (this.authUser === res.data[i].email1 ||
+                this.authUser === res.data[i].email2) &&
+              (this.userQueryID === res.data[i].email1 ||
+                this.userQueryID === res.data[i].email2)
+            ) {
+              //filtering only the user with messages and the active chatroom
+              this.chatRooms[z] = res.data[i];
+              z++;
+              continue;
             }
-            console.log('chatrooms before', res.data )
-            console.log('chatrooms after', this.chatRooms )
-            var i;
-            var j;
-            //var x=0;
-            for(i=0; i<this.chatRooms.length; i++){
-              if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
-                  this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
-                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
-                }
-              else{
-                  this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
-                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
-                }
+          } else {
+            this.chatRooms[z] = res.data[i];
+            z++;
+          }
+        }
+        console.log("chatrooms before", res.data);
+        console.log("chatrooms after", this.chatRooms);
+        var i;
+        var j;
+        //var x=0;
+        for (i = 0; i < this.chatRooms.length; i++) {
+          if (this.chatRooms[i].email1.localeCompare(this.authUser) == 0) {
+            this.chatRoomNames[i] =
+              this.chatRooms[i].get_email2.firstName +
+              " " +
+              this.chatRooms[i].get_email2.lastName;
+            this.chatRoomPic[i] =
+              "data:image/jpeg;base64," +
+              btoa(this.chatRooms[i].get_email2.profilePicture);
+          } else {
+            this.chatRoomNames[i] =
+              this.chatRooms[i].get_email1.firstName +
+              " " +
+              this.chatRooms[i].get_email1.lastName;
+            this.chatRoomPic[i] =
+              "data:image/jpeg;base64," +
+              btoa(this.chatRooms[i].get_email1.profilePicture);
+          }
 
-              if((this.authUser == this.chatRooms[i].email1 || this.authUser == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2)){//filtering only the user with messages and the active chatroom
-                  console.log('settingroomsaf')
-                  if(this.activeRoom==null)
-                    this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
-              }else{
-                for(j=0;j<this.chatRooms[i].get_messages.length;j++){
-                  this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
-                }
-                if(this.activeRoom==null){
-                   console.log('asdasdadlakfmclak')
-                  this.setRoom(this.chatRoomNames[0], 
-                  this.chatRooms[0]
-                  .messageRoomNumber)
-                }
-              }
-              console.log('rooms!!!!! = ',this.chatRooms)
+          if (
+            (this.authUser == this.chatRooms[i].email1 ||
+              this.authUser == this.chatRooms[i].email2) &&
+            (this.userQueryID === this.chatRooms[i].email1 ||
+              this.userQueryID === this.chatRooms[i].email2)
+          ) {
+            //filtering only the user with messages and the active chatroom
+            console.log("settingroomsaf");
+            if (this.activeRoom == null)
+              this.setRoom(
+                this.chatRoomNames[i],
+                this.chatRooms[i].messageRoomNumber
+              );
+          } else {
+            for (j = 0; j < this.chatRooms[i].get_messages.length; j++) {
+              this.chatRooms[i].get_messages[
+                j
+              ].get_message_sender.profilePicture =
+                "data:image/jpeg;base64," +
+                btoa(
+                  this.chatRooms[i].get_messages[j].get_message_sender
+                    .profilePicture
+                );
             }
-           
-        });
+            if (this.activeRoom == null) {
+              console.log("asdasdadlakfmclak");
+              this.setRoom(
+                this.chatRoomNames[0],
+                this.chatRooms[0].messageRoomNumber
+              );
+            }
+          }
+          console.log("rooms!!!!! = ", this.chatRooms);
+        }
+      });
     },
-    getAuthUser(){
-      api.get('api/user').then((res)=>{
+    getAuthUser() {
+      api.get("api/user").then((res) => {
         this.authUser = res.data.email;
-      })
+      });
     },
     timestamp(date) {
       return moment(date).fromNow();
     },
-    getUrlQuery(){
-       if(this.$route.query.ID!=null){
-        this.userQueryID = atob(this.$route.query.ID)
-        api.get('/sanctum/csrf-cookie').then(() => {
-            let params={userEmail :this.userQueryID}
-            api.post('api/createChatRoom',params).then((res)=>{
-              console.log('new chat room',res.data)
-            })
-        })
-      }else if(this.$route.query.postNum!=null){
-        this.postNum = this.$route.query.postNum
+    getUrlQuery() {
+      if (this.$route.query.ID != null) {
+        this.userQueryID = atob(this.$route.query.ID);
+        api.get("/sanctum/csrf-cookie").then(() => {
+          let params = { userEmail: this.userQueryID };
+          api.post("api/createChatRoom", params).then((res) => {
+            console.log("new chat room", res.data);
+          });
+        });
+      } else if (this.$route.query.postNum != null) {
+        this.postNum = this.$route.query.postNum;
       }
       //do nothing
-      return
-    }
-
+      return;
+    },
   }, //end methods
   created() {
     this.getAuthUser();
     this.getUrlQuery();
     this.getChatRooms();
   },
-
 }; //end export default
-
 const add = document.querySelector("#add");
 const del = document.querySelector("#del");
-
-document.addEventListener("click", function (event) {
-  if (event.target.closest(".add")) return add.classList.add("hide");
-
-  if (event.target.closest(".del")) return del.classList.add("hide");
+document.addEventListener("click", function(event) { 
+    if(event.target.closest(".add")) return add.classList.add("hide");
+    if(event.target.closest(".del")) return del.classList.add("hide");
 });
-
-
-// import Navbar from './Navbar'
-// export default {
-//     components:{
-//       Navbar,
-//     },
-//     props:{
-//       //message: String 
-//     },
-//     data() {
-//       return{
-//         //buttons
-//           toggle:false,
-//           toggleInbox:true,
-//           toggleChat: false,
-//           searchMessageInactive: true,
-//           showSearchResults: false,
-//           attachment:false,
-//           attach:'add',
-//         //inbox
-//           inbox: [
-//             { name: 'Mark Aral', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-//             { name: 'Gwen Lopez', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-//             { name: 'Monica Rambeau', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-//             { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-//             { name: 'Wanda Maximoff', message: 'No problem. Thanks as well for the handsome pay!', time: '21 mins ago'},
-          
-//           ],
-//         //chat
-//           activeName: 'Mark Aral',
-//           chatIncoming: [
-//             { received: 'Yeah, sure! No problem. I am already on my way to SM City Legazpi.', timeReceived:'1:26 PM    |    Today'},
-//             { received: 'Sorry, it took me a while. I had to shop for three orders. Anyway, I am already in my car. I will deliver these two orders first here in Legazpi.', timeReceived:'2:40 PM    |    Today'},
-//             { received: 'I am two mins away from your house. ', timeReceived:'3:12 PM    |    Today'},
-//             { received: 'No problem. Thanks as well for the handsome pay!', timeReceived:'3:39 PM    |    Today'},
-//           ],
-//           chatOutgoing:[
-//             { sent: 'Do you think you can do it in time? I need it before 4 pm so I hope you can deliver it in time.', timeSent:'1:24 PM    |    Today'},
-//             { sent: 'Thank you so much! Let me know when you are on your way.', timeSent:'1:31 PM    |    Today'},
-//             { sent: 'No problem, chat me when you are near my house already', timeSent:'2:45 PM    |    Today'},
-//             { sent: 'Thanks for help', timeSent: '3:36  | Today'},
-//           ],
-//           //sent a request
-//           activity: 'You sent a request to to',
-//           recipient: 'Mark Aral',
-//           sender: 'Monica Rambeau',
-//           postNum: '#2021352',
-//           postNum2: '#130317',
-//           placeFrom: 'Banquerohan, Legazpi City',
-//           destination: 'SM City ',
-//           timeAlloted: 'Tomorrow, 5 PM',
-//           paymentMethod: 'Payment First via GCash transfer',
-//           //shoppingList
-//           shoppingList: [
-//             { items: 'Baking Soda'},
-//             { items: 'Choco Syrup'},
-//             { items: 'cocoa powder'},
-//             { items: 'flour 1 kg'},
-//             { items: 'brown sugar'},
-//             { items: 'cocoa powder'},
-//           ],
-//           shoppingListSize: 8,
-//       }
-//     },
-//     methods: {
-//       sendbtn(){
-//         const fileInputBtn = document.getElementById('fileInput');
-//         var printtext = document.getElementById('chatmsg');
-//         var copytext = document.getElementById('typemsg');
-//         var copiedtext = copytext.value;
-//         if (fileInputBtn.value){
-//           var fileText = fileInputBtn.value;
-//           var printFile = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+fileText+'</div> '  
-//           printtext.insertAdjacentHTML('beforeend', printFile);
-//           document.getElementById('typemsg').value = '';
-//           this.attachment = !this.attachment;
-//           if( this.attachment == true){
-//           document.getElementById("attach").innerHTML="close";
-//           } 
-//           else if(this.attachment ==false){
-//             document.getElementById("attach").innerHTML="add";
-//           }
-//         }
-//         if(copiedtext!=='' ){
-//           var printnow = '<div class="p-2 flex justify-end ">'+'<div class="ml-32 pt-2 pl-4 pb-3 pr-4 bg-gray-100 text-sm rounded-lg">'+copiedtext+'<span class="time_date text-gray-500 pl-1" style="font-size: 10.5px;" >'+'<br>'+'3:45 PM'+' | '+'Today'+'</span>'+'</div> '
-              
-//           printtext.insertAdjacentHTML('beforeend', printnow);
-//           document.getElementById('typemsg').value = '';
-//           var box = document.getElementById('journal-scroll');
-//           box.scrollIntoView();
-//         }
-//       },//end sendbtn
-//       searchBtn(){
-//         this.showSearchResults=!this.showSearchResults;
-//         this.searchMessageInactive=!this.searchMessageInactive;
-//         document.getElementByID('search').value ='Mark';
-//       },
-//       alert(){
-//         alert('called');
-//       },
-//       closeSearchResults(){
-//         if(this.searchMessageInactive==false){
-//           this.searchMessageInactive=!this.searchMessageInactive;
-//           this.showSearchResults=!this.showSearchResults
-//         }
-//       },
-//       searchBackBtn(){
-//         this.showSearchResults=!this.showSearchResults;
-//         this.searchMessageInactive=!this.searchMessageInactive;
-//       },
-//       attachbtn(){
-//         this.attachment = !this.attachment;
-//         if( this.attachment == true){
-//           document.getElementById("attach").innerHTML="close";
-//           document.getElementById("attach2").innerHTML="close";
-//         } 
-//         else if(this.attachment ==false){
-//           document.getElementById("attach").innerHTML="add";
-//           document.getElementById("attach2").innerHTML="add";
-//         }
-//       },
-//       messagebtn(){
-//         this.toggleInbox=!this.toggleInbox;
-//         this.toggleChat=!this.toggleChat;
-//         var b = document.getElementById('gwen');
-//         var bText = b.textContent;
-//         var bLen = bText.length;
-//         var res = bText.substring(0, bLen-13);
-//         document.getElementById("active").innerHTML = res;
-//       },
-//        navMark(){
-//         this.toggleInbox=!this.toggleInbox;
-//         this.toggleChat=!this.toggleChat;
-//         var b = document.getElementById('mark');
-//         var bText = b.textContent;
-//         var bLen = bText.length;
-//         var res = bText.substring(0, bLen-13);
-//         document.getElementById("active").innerHTML = res;
-//       },
-//       backChat(){
-//         this.toggleInbox=!this.toggleInbox;
-//         this.toggleChat=!this.toggleChat;
-//       },
-//       threedots(){
-//         this.toggle = !this.toggle;
-        
-//       },//end threedots
-//       attachPhoto(){
-//         const fileInputBtn = document.getElementById('photoInput');
-//         const fileholder = document.getElementById('photo');
-//         fileInputBtn.click();
-//         fileInputBtn.addEventListener("change", function(){
-//         if (fileInputBtn.value){
-//            fileholder.innerHTML = fileInputBtn.value;
-//         } else {
-//         fileholder.innerhtml = "";
-//         }
-//         })
-//       },
-//       attachFile(){
-//         const fileInputBtn = document.getElementById('fileInput');
-//         const fileholder = document.getElementById('file');
-//         fileInputBtn.click();
-//         fileInputBtn.addEventListener("change", function(){
-//         if (fileInputBtn.value){
-//            fileholder.innerHTML = fileInputBtn.value;
-//         } else {
-//         fileholder.innerhtml = "";
-//         }
-//         })
-//       }
-//     }//end methods
-//   }//end export default
-// const add = document.querySelector("#add");
-// const del = document.querySelector("#del");
-// document.addEventListener("click", function(event) { 
-//     if(event.target.closest(".add")) return add.classList.add("hide");
-//     if(event.target.closest(".del")) return del.classList.add("hide");
-// })
 </script>
-
 
 <style>
     .hide{
