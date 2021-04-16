@@ -12,14 +12,28 @@ class addressController extends Controller
 {
     //
     function refProvince(){
-        return DB::select('SELECT * FROM refprovince ORDER BY  provDesc');
+        $provinces = DB::select('SELECT * FROM refprovince ORDER BY  provDesc');
+        for ( $i=0; $i < sizeof($provinces);$i++){
+            $provinces[$i]->provDesc=strtolower($provinces[$i]->provDesc);
+            $provinces[$i]->provDesc=ucfirst($provinces[$i]->provDesc);
+        }
+        return $provinces;
     }
     function refcityMunicipality(Request $request){
         $data = DB::select('SELECT * FROM refcitymun WHERE provCode = \''.$request->provCode.'\' ORDER BY  citymunDesc');
+        for ( $i=0; $i < sizeof($data);$i++){
+            $data[$i]->citymunDesc=strtolower($data[$i]->citymunDesc);
+            $data[$i]->citymunDesc=ucfirst($data[$i]->citymunDesc);
+        }
+
         return response()->json($data);
     }
     function refBrgy(Request $request){
         $data = DB::select('SELECT * FROM refbrgy WHERE citymunCode = \''.$request->cityCode.'\'  ORDER BY brgyDesc');
+        for ( $i=0; $i < sizeof($data);$i++){
+            $data[$i]->brgyDesc=strtolower($data[$i]->brgyDesc);
+            $data[$i]->brgyDesc=ucfirst($data[$i]->brgyDesc);
+        }
         return response()->json($data);
     }
 
