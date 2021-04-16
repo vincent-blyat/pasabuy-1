@@ -195,8 +195,8 @@ export default {
             notif(){
               this.activeBtn=!this.activeBtn
               this.show=!this.show
-              api.post('/api/readNotif').then((res)=>{
-                 this.unreadNotif = res.data.length
+              api.post('/api/readNotif').then(()=>{
+                 store.dispatch('getUnreadNotifications')
               }).catch((errors)=>{
                 console.log(errors)
               })
