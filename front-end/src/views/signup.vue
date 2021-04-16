@@ -161,19 +161,18 @@ export default {
                 this.errors =errors.response.data.firstName+' '+ errors.response.data.lastName+' '+errors.response.data.email+' '+errors.response.data.phoneNumber+' '+errors.response.data.password;
             })//end catch
             })
+        },
     },
-    created: function () {
+    created () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
-  },
-  mounted(){
-      if(localStorage.getItem('personal')!=null && localStorage.getItem('account')!=null ){
+     if(localStorage.getItem('personal')!=null && localStorage.getItem('account')!=null ){
+          console.log('has value')
           var dataPersonal = JSON.parse(localStorage.getItem('personal'))
           this.PersonalInfo.firstName = dataPersonal.firstName
           this.PersonalInfo.lastName = dataPersonal.lastName
           this.PersonalInfo.email = dataPersonal.email
           this.PersonalInfo.phoneNumber = dataPersonal.phoneNumber
       }
-  }
-}
+    },
 }
 </script>

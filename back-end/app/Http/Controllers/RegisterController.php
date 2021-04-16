@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -24,9 +25,9 @@ class RegisterController extends Controller
     function postPersonal(Request $request){
         
         // custom error messages
-       $messages = ['password.regex' => array(' Must contain at least one lowercase letter (a – z)',
-                                            ' Must contain at least one uppercase letter (A – Z)',
-                                            ' Must contain at least one digit (0-9)',
+       $messages = ['password.regex' => array(' Password must contain at least one lowercase letter (a – z)',
+                                            ' Password must contain at least one uppercase letter (A – Z)',
+                                            ' Password must contain at least one digit (0-9)',
                      )];
        $validator=Validator::make($request->all(),[
             'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
@@ -47,7 +48,7 @@ class RegisterController extends Controller
         }
         
         $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
-        $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
+        $this->accountInfo = ['email'=> $request->email, 'password' => Hash::make($request->password)];
         //check if there is an existing code
         if($request->oldEmail === $request->email){
             $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo];
@@ -111,7 +112,7 @@ class RegisterController extends Controller
         if($userInfo->save()){
             $userAuth = new user();
             $userAuth->email = $request->email;
-            $userAuth->password = Hash::make($request->password);
+            $userAuth->password = $request->password;
             
             if($userAuth->save()){
                 $userAddress = new userAddress();
@@ -123,6 +124,8 @@ class RegisterController extends Controller
                 $userAddress->cityMunicipality = $request->cityMunicipality;
                 
                 $userAddress->save();
+
+                Auth::login($userAuth);
                 
                 return true; 
             }

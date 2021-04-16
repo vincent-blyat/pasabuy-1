@@ -12,14 +12,14 @@
             <form action="#" class="space-y-3">
               <div class="w-full">
                  <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" v-model="addressInfo.province"  >
-                        <option value="Choose" selected disabled>Choose Province</option>
+                        <option value="Province" selected disabled>Choose Province</option>
                     <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
               <div class="w-full">
                 <select  @change="getCityCode()" id="City" aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" placeholder="City/Municipality" v-model="addressInfo.cityMunicipality" >
-                 <option value="Choose" selected disabled>Choose City/Municipality</option>
+                 <option value="City" selected disabled>Choose City/Municipality</option>
                        <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
@@ -94,6 +94,9 @@ export default {
       barangays: [],
       newrefBaranggay: [],
       selectedrefBrgy: null,
+      selectedProvince:'Province',
+      selectedCity:'City',
+      selectedBrgy:'Brgy',
 
       addressInfo: {
         houseNumber: null,
@@ -130,7 +133,7 @@ export default {
       console.log(getProvCode);
       console.log(this.cityMunicipality);
     },
-    getCityCode() {
+  getCityCode() {
      var getCityCode = document.getElementById("City").value;
       console.log(getCityCode)
       api.get('api/refBrgy', {params:{cityCode: getCityCode}}).then((res)=>{
@@ -155,19 +158,7 @@ export default {
       });
     },
 
-    refcityMunicipality() {
-      api.get("/api/refcityMunicipality").then((res) => {
-        this.cityMunicipality = res.data;
-        this.newcityMunicipality = res.data;
-      });
-    },
-    refBrgy() {
-      
-      api.get("/api/refBrgy").then((res) => {
-        this.barangays = res.data;
-        this.newrefBaranggay = res.data;
-      });
-    },
+
   },
   created() {
     this.refProvince();
