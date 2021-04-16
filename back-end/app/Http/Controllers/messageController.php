@@ -38,7 +38,7 @@ class messageController extends Controller
             $newdata->messageRoomNumber = (new messageRoom)->count()+1;
             $newdata->email1 = Auth::user()->email;
             $newdata->email2 = $request->userEmail;
-            $newdata->dateModified =  Carbon::now();
+            $newdata->dateModified = Carbon::now();
             $newdata->save();
         }
         return response()->json("ok");

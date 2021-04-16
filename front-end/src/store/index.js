@@ -12,7 +12,7 @@ const store =  new Vuex.Store({
         }
     },
     actions:{
-        getAuthUser()
+        getAuthUser(){}
     },
     modules:{},
     getters:{
