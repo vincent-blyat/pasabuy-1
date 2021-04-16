@@ -995,8 +995,8 @@ export default {
               this.userQueryID === this.chatRooms[i].email2)
           ) {
             //filtering only the user with messages and the active chatroom
-            console.log("settingroomsaf");
             if (this.activeRoom == null)
+              console.log("active room null 0");
               this.setRoom(
                 this.chatRoomNames[i],
                 this.chatRooms[i].messageRoomNumber
@@ -1013,7 +1013,7 @@ export default {
                 );
             }
             if (this.activeRoom == null) {
-              console.log("asdasdadlakfmclak");
+              console.log("active room null 1");
               this.setRoom(
                 this.chatRoomNames[0],
                 this.chatRooms[0].messageRoomNumber
