@@ -9,23 +9,23 @@
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 ssm:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
-            <form action="#" class="space-y-3">
+            <div action="#" class="space-y-3">
               <div class="w-full">
-                 <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" v-model="addressInfo.province"  >
+                 <select @change="getProvCode()" class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="selectedProvince"  >
                         <option value="Province" selected disabled>Choose Province</option>
                     <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
               <div class="w-full">
-                <select  @change="getCityCode()" id="City" aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" placeholder="City/Municipality" v-model="addressInfo.cityMunicipality" >
+                <select  @change="getCityCode()" id="City"   class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10"  v-model="selectedCity" >
                  <option value="City" selected disabled>Choose City/Municipality</option>
                        <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
 
               <div class="w-full">
-                <select  aria-label="Barangay" name="" type="text" required  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay"   v-model="addressInfo.barangay">
+                <select  class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10"  v-model="selectedBrgy">
                   <option value="Brgy" disabled>Choose Baranggay</option>
                   <option v-for="brgy in barangays" v-bind:key="brgy.id" v-bind:value="brgy.brgyDesc"> {{ brgy.brgyDesc }} </option>
                 </select>
@@ -46,7 +46,7 @@
                     NEXT</button> <!-- upload id next -->
                 </div>
               </div>
-            </form>
+            </div>
             </div>
           </div>
         </div>
@@ -125,6 +125,7 @@ export default {
 
     getProvCode() {
       var getProvCode = document.getElementById("Province").value;
+      console.log(getProvCode)
       api.get('api/refcityMunicipality', {params:{provCode: getProvCode}}).then((res)=>{
         this.cityMunicipality = res.data
       }).catch((errors)=>{
@@ -133,7 +134,7 @@ export default {
       console.log(getProvCode);
       console.log(this.cityMunicipality);
     },
-  getCityCode() {
+    getCityCode() {
      var getCityCode = document.getElementById("City").value;
       console.log(getCityCode)
       api.get('api/refBrgy', {params:{cityCode: getCityCode}}).then((res)=>{
@@ -157,8 +158,6 @@ export default {
         console.log('Provinces: ', this.provinces);
       });
     },
-
-
   },
   created() {
     this.refProvince();
