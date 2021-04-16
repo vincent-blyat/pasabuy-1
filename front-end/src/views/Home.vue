@@ -22,7 +22,7 @@
         <div class="flex items-center h-full xl:px-10 xl:ml-56 lg:ml-56 md:ml-28 2xl:pl-60 2xl:leading-loose">
             <section class="w-full ml-3 xl:w-6/12 md:w-7/12 lg:w-5/12 2xl:w-6/12 ">
                 <p class="mb-4 text-3xl font-bold tracking-wide xl:text-5xl 2xl:text-6xl ">
-                    {{joke}}</p>
+                    Need someone to do your groceries?</p>
                 <p class="text-lg leading-loose text-left 2xl:text-2xl">
                Let your shopping list be taken care of while staying within the comforts of your home </p>
                 <button class="items-center px-4 m-1 mt-3 font-semibold tracking-wide text-white transition-colors duration-150 rounded-full 2xl:mt-7 lg:h-10 ssm:ml-8 sm:mt-8 vs:mt-7 md:mt-6 xl:mb-4 bg-red-buttons h-9 2xl:ml-0 hover:bg-red-800 2xl:text-xl">
@@ -153,14 +153,12 @@
 </style>
 
 <script>
-import store from "../store/index"
 export default {
 
   name: "Header",
       data(){
           return{
-                scrollPosition: null,
-                joke:null
+                scrollPosition: null
           }
       },
 
@@ -174,7 +172,6 @@ export default {
 
         mounted() {
             window.addEventListener('scroll', this.updateScroll);
-            this.joke = store.getters.getCurrentJoke
   },
 
         destroy() {

@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import api from '../api';
 
 const store =  new Vuex.Store({
     state:{
@@ -12,7 +13,17 @@ const store =  new Vuex.Store({
         }
     },
     actions:{
-        getAuthUser()
+        getAuthUser(){
+            api
+            .get('api/user')
+            .then((res)=>{
+                console.log(res)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+
+        }
     },
     modules:{},
     getters:{
