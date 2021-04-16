@@ -940,89 +940,49 @@ export default {
     attachbtn() {
       this.attachtoggle = !this.attachtoggle;
     },
-    getChatRooms() {
-      api.get("/api/getChatroom").then((res) => {
-        //filtering the message room where there are no message and not the active room if there is
-        console.log("before before", res.data);
-        var z = 0;
-        for (i = 0; i < res.data.length; i++) {
-          if (res.data[i].get_messages.length == 0) {
-            //means epmty messages on room
-            if (
-              (this.authUser === res.data[i].email1 ||
-                this.authUser === res.data[i].email2) &&
-              (this.userQueryID === res.data[i].email1 ||
-                this.userQueryID === res.data[i].email2)
-            ) {
-              //filtering only the user with messages and the active chatroom
-              this.chatRooms[z] = res.data[i];
-              z++;
-              continue;
+     getChatRooms() {
+        api.get('/api/getChatroom').then((res) => {
+            //filtering the message room where there are no message and not the active room if there is
+            var z=0;
+            for(i=0;i<res.data.length;i++){
+              if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
+                if((this.authUser === res.data[i].email1 || this.authUser === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
+                      this.chatRooms[z]= res.data[i]
+                      z++
+                      continue
+                  }
+              }else{
+                this.chatRooms[z]= res.data[i]
+                z++
+              }
+              
             }
-          } else {
-            this.chatRooms[z] = res.data[i];
-            z++;
-          }
-        }
-        console.log("chatrooms before", res.data);
-        console.log("chatrooms after", this.chatRooms);
-        var i;
-        var j;
-        //var x=0;
-        for (i = 0; i < this.chatRooms.length; i++) {
-          if (this.chatRooms[i].email1.localeCompare(this.authUser) == 0) {
-            this.chatRoomNames[i] =
-              this.chatRooms[i].get_email2.firstName +
-              " " +
-              this.chatRooms[i].get_email2.lastName;
-            this.chatRoomPic[i] =
-              "data:image/jpeg;base64," +
-              btoa(this.chatRooms[i].get_email2.profilePicture);
-          } else {
-            this.chatRoomNames[i] =
-              this.chatRooms[i].get_email1.firstName +
-              " " +
-              this.chatRooms[i].get_email1.lastName;
-            this.chatRoomPic[i] =
-              "data:image/jpeg;base64," +
-              btoa(this.chatRooms[i].get_email1.profilePicture);
-          }
+            var i;
+            var j;
+            //var x=0;
+            for(i=0; i<this.chatRooms.length; i++){
+              //setting the picture and name of the chatrooms
+              if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
+                  this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
+                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
+                }
+              else{
+                  this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
+                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
+                }
 
-          if (
-            (this.authUser == this.chatRooms[i].email1 ||
-              this.authUser == this.chatRooms[i].email2) &&
-            (this.userQueryID === this.chatRooms[i].email1 ||
-              this.userQueryID === this.chatRooms[i].email2)
-          ) {
-            //filtering only the user with messages and the active chatroom
-            if (this.activeRoom == null)
-              console.log("active room null 0");
-              this.setRoom(
-                this.chatRoomNames[i],
-                this.chatRooms[i].messageRoomNumber
-              );
-          } else {
-            for (j = 0; j < this.chatRooms[i].get_messages.length; j++) {
-              this.chatRooms[i].get_messages[
-                j
-              ].get_message_sender.profilePicture =
-                "data:image/jpeg;base64," +
-                btoa(
-                  this.chatRooms[i].get_messages[j].get_message_sender
-                    .profilePicture
-                );
+              //check if the auth user and passed email is on the list   
+              if((this.authUser == this.chatRooms[i].email1 || this.authUser == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2))//filtering only the user with messages and the active chatroom
+                  if(this.activeRoom==null)
+                    this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
+              
+              if(this.chatRooms[i].get_messages.length !=0)
+                for(j=0;j<this.chatRooms[i].get_messages.length;j++)
+                  this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
             }
-            if (this.activeRoom == null) {
-              console.log("active room null 1");
-              this.setRoom(
-                this.chatRoomNames[0],
-                this.chatRooms[0].messageRoomNumber
-              );
-            }
-          }
-          console.log("rooms!!!!! = ", this.chatRooms);
-        }
-      });
+            if(this.activeRoom==null)
+                this.setRoom(this.chatRoomNames[0], this.chatRooms[0].messageRoomNumber)
+        });
     },
     getAuthUser() {
       api.get("api/user").then((res) => {
@@ -1049,8 +1009,8 @@ export default {
     },
   }, //end methods
   created() {
-    this.getAuthUser();
     this.getUrlQuery();
+    this.getAuthUser();
     this.getChatRooms();
   },
 }; //end export default

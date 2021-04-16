@@ -32,15 +32,20 @@ class messageController extends Controller
     public function createRoom(Request $request)
     {
         $data = DB::select('SELECT * FROM tbl_messageRoom WHERE  (email1 = \''.$request->userEmail.'\' OR email2 = \''.$request->userEmail.'\') AND (email1 = \''.Auth::user()->email.'\' OR email2 = \''.Auth::user()->email.'\') ');
-        
+
         if(empty($data)){
             $newdata = new messageRoom;
             $newdata->messageRoomNumber = (new messageRoom)->count()+1;
             $newdata->email1 = Auth::user()->email;
             $newdata->email2 = $request->userEmail;
-            $newdata->dateModified =  Carbon::now();
+            $newdata->dateModified = Carbon::now('Asia/Manila');
             $newdata->save();
+            return response()->json("ok");
         }
+        $msgRoom = messageRoom::find($data[0]->messageRoomNumber);
+        $msgRoom = messageRoom::where('messageRoomNumber',$data[0]->messageRoomNumber)->first();
+        $msgRoom->dateModified = Carbon::now('Asia/Manila');
+        $msgRoom->save();
         return response()->json("ok");
     }
 
@@ -56,7 +61,7 @@ class messageController extends Controller
         if($newMessage->save()){
             $msgRoom = messageRoom::find($request->roomID);
             $msgRoom = messageRoom::where('messageRoomNumber',$request->roomID)->first();
-            $msgRoom->dateModified = Carbon::now();
+            $msgRoom->dateModified = Carbon::now('Asia/Manila');
             $msgRoom->save();
         }
         
