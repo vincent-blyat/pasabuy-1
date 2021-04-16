@@ -53,7 +53,7 @@
                   </span>
                 </span>
                <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
-                                                                        .get_messages.length-1].messageSender === authUser.email">
+                                                                        .get_messages.length-1].messageSender === authUser">
                   You : 
                   <strong>{{  chatRoom
                     .get_messages[chatRoom
@@ -291,7 +291,7 @@
             v-for="(msg, index) in chat.get_messages"
             :key="index"
             >
-            <div v-if="msg.messageSender === authUser.email">
+            <div v-if="msg.messageSender === authUser">
              <div class="flex justify-end pr-10 mt-1">
               <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
                 <p>{{ msg.messageText }}</p>
@@ -535,7 +535,7 @@
             v-for="(msg, index) in chat.get_messages"
             :key="index"
             >
-            <div v-if="msg.messageSender === authUser.email">
+            <div v-if="msg.messageSender === authUser">
              <div class="flex justify-end pr-10 mt-1">
               <div class="ml-32 pt-2 pl-4 pb-3 pr-4 text-sm bg-gray-100 rounded-lg">
                 <p>{{ msg.messageText }}</p>
@@ -649,7 +649,7 @@
                   </span>
                 </span>
                 <span class="text-xs text-gray-400 truncate w-36" v-if="chatRoom.get_messages[chatRoom
-                                                                        .get_messages.length-1].messageSender === authUser.email">
+                                                                        .get_messages.length-1].messageSender === authUser">
                   You : 
                   <strong>{{  chatRoom
                     .get_messages[chatRoom
@@ -777,7 +777,6 @@
 import Navbar from "./Navbar";
 import api from "../api";
 import moment from 'moment'
-import store from '../store/index'
 export default {
   components: {
     Navbar,
@@ -802,7 +801,7 @@ export default {
       //chat
       activeName: null,
       activeRoom: null,
-      // authUser:null,
+      authUser:null,
       chatIncoming: [],
       chatOutgoing: [],
       message:null,
@@ -936,7 +935,7 @@ export default {
             var z=0;
             for(i=0;i<res.data.length;i++){
               if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
-                if((this.authUser.email === res.data[i].email1 || this.authUser.email === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
+                if((this.authUser === res.data[i].email1 || this.authUser === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
                       this.chatRooms[z]= res.data[i]
                       z++
                       continue
@@ -953,7 +952,7 @@ export default {
             var j;
             //var x=0;
             for(i=0; i<this.chatRooms.length; i++){
-              if(this.chatRooms[i].email1.localeCompare(this.authUser.email)==0){
+              if(this.chatRooms[i].email1.localeCompare(this.authUser)==0){
                   this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
                   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
                 }
@@ -962,7 +961,7 @@ export default {
                   this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
                 }
 
-              if((this.authUser.email == this.chatRooms[i].email1 || this.authUser.email == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2)){//filtering only the user with messages and the active chatroom
+              if((this.authUser == this.chatRooms[i].email1 || this.authUser == this.chatRooms[i].email2) && (this.userQueryID === this.chatRooms[i].email1 || this.userQueryID === this.chatRooms[i].email2)){//filtering only the user with messages and the active chatroom
                   console.log('settingroomsaf')
                   if(this.activeRoom==null)
                     this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
@@ -981,6 +980,11 @@ export default {
             }
            
         });
+    },
+    getAuthUser(){
+      api.get('api/user').then((res)=>{
+        this.authUser = res.data.email;
+      })
     },
     timestamp(date) {
       return moment(date).fromNow();
@@ -1003,13 +1007,9 @@ export default {
 
   }, //end methods
   created() {
+    this.getAuthUser();
     this.getUrlQuery();
     this.getChatRooms();
-  },
-  computed:{
-    authUser(){
-      return store.getters.getUser
-    } 
   },
 
 }; //end export default
