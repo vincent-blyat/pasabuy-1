@@ -232,7 +232,7 @@ methods:{
           this.personal.lastname = res.data.lastName;
           this.personal.phone_number = res.data.phoneNumber;
           this.personal.gender = res.data.gender;
-          if(res.data.birdate ==null){
+          if(res.data.birthDate ==null){
             this.personal.birdate = '';
           }else{
             this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
