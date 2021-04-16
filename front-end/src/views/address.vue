@@ -114,8 +114,8 @@ export default {
     
     nextPage() {
 
-      this.addressInfo.province = this.selectedProvince;
-      this.addressInfo.cityMunicipality = this.selectedCity;
+      this.addressInfo.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
+      this.addressInfo.cityMunicipality = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
       this.addressInfo.barangay = this.selectedBrgy;
       console.log(this.addressInfo);
 
