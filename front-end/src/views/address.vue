@@ -9,29 +9,34 @@
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 ssm:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">
           <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
-            <form action="#" class="space-y-3">
+            <p class="text-center text-red-700">{{errors}} </p>
+            <div action="#" class="space-y-3">
               <div class="w-full">
-                 <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="addressInfo.province"  >
-                        <option value="Choose" selected disabled>Choose</option>
-                       <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
+                 <select @change="getProvCode()" id="Province" class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" v-model="selectedProvince"  >
+                        <option value="Province" selected disabled>Choose Province</option>
+                    <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
               <div class="w-full">
-                <select aria-label="City" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 text-gray-500 border appearance-none bg-gray-bgcolor h-14 rounded-xl focus:outline-none focus:z-10" v-model="addressInfo.cityMunicipality" >
-                 <option value="Choose" selected disabled>Choose</option>
-                       <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunDesc"> {{ city.citymunDesc }} </option>
+                <select  @change="getCityCode()" id="City"   class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm"  v-model="selectedCity" >
+                 <option value="City" selected disabled>Choose City/Municipality</option>
+                       <option v-for="city in cityMunicipality" v-bind:key="city.id" v-bind:value="city.citymunCode"> {{ city.citymunDesc }} </option>
                    </select>
               </div>
 
               <div class="w-full">
-                <input aria-label="Barangay" name="" type="text" required  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay"   v-model="addressInfo.barangay"/>
+                <select  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm"  v-model="selectedBrgy">
+                  <option value="Brgy" disabled>Choose Baranggay</option>
+                  <option v-for="brgy in barangays" v-bind:key="brgy.id" v-bind:value="brgy.brgyDesc"> {{ brgy.brgyDesc }} </option>
+                </select>
+               <!-- <input aria-label="Barangay" name="" type="text" required  class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Baranggay"   v-model="addressInfo.barangay"/>-->
               </div>
               <div class="w-full ">
                 <input aria-label="House Number" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="House Number"  v-model="addressInfo.houseNumber"/>
               </div>
               <div class="w-full ">
-                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark"  v-model="addressInfo.Landmark" />
+                <input aria-label="Landmark" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold tracking-wide placeholder-gray-500 border appearance-none focus:outline-none bg-gray-bgcolor rounded-xl h-14 focus:border-red-600 focus:z-10 sm:text-sm" placeholder="Landmark"  v-model="addressInfo.landMark" />
               </div>
               <div class="flex mb-2 -mx-1">
                 <div class="w-1/2 px-1 mt-6 text-left text-grey-dark">
@@ -42,7 +47,7 @@
                     NEXT</button> <!-- upload id next -->
                 </div>
               </div>
-            </form>
+            </div>
             </div>
           </div>
         </div>
@@ -76,6 +81,7 @@ img {
   max-width: 100px;
   width: 11%;
 }
+
 </style>
 
 <script>
@@ -87,65 +93,92 @@ export default {
       cityMunicipality: [],
       newcityMunicipality: [],
       barangays: [],
+      newrefBaranggay: [],
       selectedrefBrgy: null,
+      selectedProvince:'Province',
+      selectedCity:'City',
+      selectedBrgy:'Brgy',
 
       addressInfo: {
         houseNumber: null,
         barangay: null,
         cityMunicipality: null,
         province: null,
+        landMark: null,
+
       },
+      errors:null,
     };
   },
   methods: {
+    
     nextPage() {
-      var d = document.getElementById("Province");
-      var getProv = d.options[d.selectedIndex].text;
-      this.addressInfo.province = getProv;
-      console.log(this.addressInfo.province);
+
+      this.addressInfo.province = document.getElementById("Province").options[document.getElementById("Province").selectedIndex].text;
+      this.addressInfo.cityMunicipality = document.getElementById("City").options[document.getElementById("City").selectedIndex].text;
+      this.addressInfo.barangay = this.selectedBrgy;
+      console.log(this.addressInfo);
 
       api.post("/api/postAddress", this.addressInfo).then((res) => {
         console.log(res.data);
         localStorage.setItem("address", JSON.stringify(res.data));
         this.$router.push({ name: "uploadid" });
-      });
+      }).catch((errors)=>{
+          if(errors.response.data.province == undefined)
+            errors.response.data.province = "";
+          if(errors.response.data.cityMunicipality == undefined)
+            errors.response.data.cityMunicipality = "";
+          if(errors.response.data.barangay == undefined)
+            errors.response.data.barangay = "";
+          if(errors.response.data.houseNumber == undefined)
+            errors.response.data.houseNumber = "";
+          if(errors.response.data.landMark == undefined)
+            errors.response.data.landMark = "";
+          this.errors =errors.response.data.province+' '+ errors.response.data.cityMunicipality+' '+errors.response.data.barangay+' '+errors.response.data.houseNumber+' '+errors.response.data.landMark;
+      })//end catch
     },
 
     getProvCode() {
-      var newCityMun = this.newcityMunicipality;
-      this.cityMunicipality = [];
-      var e = document.getElementById("Province");
-      var getProvCode = e.value;
-      for (var i = 0; i < newCityMun.length; i++) {
-        if (newCityMun[i].provCode === getProvCode) {
-          this.cityMunicipality.splice(i, 1, newCityMun[i]);
-        }
-      }
+      var getProvCode = document.getElementById("Province").value;
+      console.log(getProvCode)
+      api.get('api/refcityMunicipality', {params:{provCode: getProvCode}}).then((res)=>{
+        this.cityMunicipality = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
       console.log(getProvCode);
       console.log(this.cityMunicipality);
+    },
+    getCityCode() {
+     var getCityCode = document.getElementById("City").value;
+      console.log(getCityCode)
+      api.get('api/refBrgy', {params:{cityCode: getCityCode}}).then((res)=>{
+        console.log('brgy', res.data)
+        this.barangays = res.data
+      }).catch((errors)=>{
+        console.log(errors)
+      })
+       console.log(this.citymunCode);
+       console.log(getCityCode);
     },
     refProvince() {
       api.get("/api/refProvince").then((res) => {
         this.provinces = res.data;
-      });
-    },
-
-    refcityMunicipality() {
-      api.get("/api/refcityMunicipality").then((res) => {
-        this.cityMunicipality = res.data;
-        this.newcityMunicipality = res.data;
-      });
-    },
-    refBrgy() {
-      api.get("/api/refBrgy").then((res) => {
-        this.barangays = res.data;
+        // for (var i=0;i < this.provinces.length;i++){
+        //  // this.provinces[i] = JSON.stringify(this.provinces[i].provDesc); 
+        //   this.provinces[i].provDesc=this.provinces[i].provDesc.toString();
+        //   this.provinces[i].provDesc=(this.provinces[i].provDesc).charAt(0).toUpperCase() + (this.provinces[i].provDesc).slice(1);
+        // }
+        
+        console.log('Provinces: ', this.provinces);
       });
     },
   },
   created() {
     this.refProvince();
-    this.refcityMunicipality();
-    // this.refBrgy();
+    //this.refcityMunicipality();
+    //this.refBrgy();
   },
+
 };
 </script>
