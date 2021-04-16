@@ -163,7 +163,7 @@ export default {
   created() {
     this.refProvince();
     this.refcityMunicipality();
-    //this.refBrgy();
+    this.refBrgy();
   },
 };
 </script>
