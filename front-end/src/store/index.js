@@ -1,13 +1,20 @@
 import Vuex from 'vuex'
-import api from '../api';
+import api from '../api'
+import createPersistedState from 'vuex-persistedstate'
+
 
 const store =  new Vuex.Store({
+    plugins: [createPersistedState({
+        storage: window.sessionStorage,
+    })],
     state:{
         authUser:[],
         authUserPersonal:[],
         posts:[],
         allNotif:[],
-        unreadNotif:[]
+        unreadNotif:[],
+        userAddress:[],
+        // userEducation:[],
 
     },
     mutations:{
@@ -27,7 +34,10 @@ const store =  new Vuex.Store({
         },
         setUnreadNotifications(state,payload){
            state.unreadNotif = payload;
-        }
+        },
+        setUserAddress(state,payload){
+            state.userAddress = payload;
+         }
     },
     actions:{
         async getAuthUser(state){
@@ -89,6 +99,17 @@ const store =  new Vuex.Store({
             .catch((error)=>{
                 console.log(error)
             })
+        },
+        async getUserAddress(state){
+            api
+            .get('api/getAddress')
+            .then((res)=>{
+                let address = res.data
+                state.commit('setUserAddress',address)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
         }
     },
     modules:{},
@@ -97,7 +118,8 @@ const store =  new Vuex.Store({
         getPersonal:(state) => state.authUserPersonal,
         getPosts:(state) => state.posts,
         getAllNotif:(state) => state.allNotif,
-        getUnreadNotif:(state) => state.unreadNotif
+        getUnreadNotif:(state) => state.unreadNotif,
+        getAddress:(state) => state.userAddress
     }
 })
 

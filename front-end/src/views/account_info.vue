@@ -24,7 +24,7 @@
           <input
             type="password"
             class="bg-transparent"
-            :value="account_info.password"
+            value="12345678"
             disabled
           />
         </span>
@@ -43,7 +43,7 @@
 <script>
 import Email from "./changeEmail.vue";
 import Password from "./changePassword.vue";
-import api from "../api";
+import store from '../store/index'
 export default {
   components: {
     Email,
@@ -54,22 +54,13 @@ export default {
       toggle: false,
       toggle_email: false,
       toggle_password: false,
-      account_info: {
-        email: "",
-        password: "",
-      },
     };
   },
-  created() {
-    api
-      .get("api/user")
-      .then((res) => {
-        this.account_info.email = res.data.email;
-        this.account_info.password = "password";
-      })
-      .catch((errors) => {
-        console.log(errors);
-      });
+  computed:{
+    account_info(){
+      return store.getters.getUser
+    },
   },
+
 };
 </script>

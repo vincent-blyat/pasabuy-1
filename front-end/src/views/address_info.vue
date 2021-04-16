@@ -112,6 +112,7 @@
 <script>
 import api from '../api'
 import VueSimpleAlert from 'vue-simple-alert'
+import store from "../store/index"
 export default {
   
 data(){
@@ -193,33 +194,20 @@ methods:{
 },
 mounted(){
     //get the user information from the laravel API
-    api.get('/api/getAddress').then((res)=>{
-      this.address_info.house_number = res.data.houseNumber;
-      this.address_info.province = res.data.province;
-      this.address_info.city = res.data.cityMunicipality;
-      this.address_info.barangay = res.data.barangay;
-      //this.user = res.data;
-    }).catch((error) => {
-      console.log(error);
-    })
+    this.address_info.province = this.addressInfo.province;
+    this.address_info.city =  this.addressInfo.cityMunicipality;
+    this.address_info.barangay =  this.addressInfo.barangay;
+    this.address_info.house_number =  this.addressInfo.houseNumber;
     api.get("/api/refProvince").then((res) => {
         this.refProvince = res.data;
     }).catch((error) => {
       console.log(error);
     })
-   
-    // api.get("/api/refcityMunicipality").then((res) => {
-    //     this.newrefCity = res.data;
-    // }).catch((error) => {
-    //   console.log(error);
-    // })
-
-    // api.get("/api/refBrgy").then((res) => {
-    //     this.newrefBaranggay = res.data;
-    // }).catch((error) => {
-    //   console.log(error);
-    // })
-
-  }
+  },
+  computed:{
+    addressInfo(){
+      return store.getters.getAddress
+    },
+  },
 }
 </script>

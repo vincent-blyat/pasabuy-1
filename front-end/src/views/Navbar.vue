@@ -210,12 +210,14 @@ export default {
   },
   mounted(){
     store.dispatch('getUnreadNotifications')
+    store.dispatch('getAllNotifications')
     api.get('api/user').then((res)=>{
     console.log("uesr id", res.data.indexUserAuthentication)
         window.Echo.private('App.Models.User.' + res.data.indexUserAuthentication)
                   .notification((notification) => {
                     console.log("notif", notification)
                     store.dispatch('getUnreadNotifications')
+                    store.dispatch('getAllNotifications')
         });
       })
   },

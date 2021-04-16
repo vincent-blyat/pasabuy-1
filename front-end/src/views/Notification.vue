@@ -32,9 +32,6 @@ export default {
       return moment(date).fromNow();
     }
   },
-  mounted(){
-    store.dispatch('getAllNotifications')
-  },
   computed:{
     allNotifications(){
       return store.getters.getAllNotif

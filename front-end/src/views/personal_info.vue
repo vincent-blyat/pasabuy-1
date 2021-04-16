@@ -49,7 +49,7 @@
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p class="text-gray-500">BIRTHDAY</p>
         <span>
-        <p>{{personal.birdate}}</p>
+        <p>{{personal.bday}}</p>
         </span>
         </span>
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -107,7 +107,7 @@
                   <label for="female">Female</label>
                   </span>
               </div>
-                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="text" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
+                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="date" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
                   ></div> 
                 <div class="flex flex-col"><span class="ml-2">Language: </span> <input type="text" id="language" v-model="personal.language" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/></div>
              
@@ -153,6 +153,7 @@ data(){
       gender:'',
       language:'',
       birdate: '',
+      bday:'',
       profilePic:null
     },
     old:  {
@@ -218,32 +219,43 @@ methods:{
       const data = new FormData();
       data.append('photo', file);
       api.post('/api/updateProfilePic',data).then((res)=>{
-        this.getData()
+        // this.getData()
         VueSimpleAlert.alert(res.data.message,"Success","success")
       }).catch((errors)=>{
         VueSimpleAlert.alert("Something went wrong.","Error","error")
         console.log(errors.response)
       })
     },
-},
-mounted(){
+    getData(){
     //get the user information from the laravel API
-    store.dispatch('getPersonal')
-    this.personal.firstname = this.userPersonal.firstName;
-    this.personal.lastname =  this.userPersonal.lastName;
-    this.personal.phone_number =  this.userPersonal.phoneNumber;
-    this.personal.gender =  this.userPersonal.gender;
-    this.personal.birdate = moment( this.userPersonal.birthDate).format("MMMM DD, YYYY");
-    this.personal.profilePic =  this.userPersonal.profilePicture
-    api.get("/api/getLanguages").then((res) => {
-          if (res) {
-            console.log("language ", res.data);
-            this.personal.language = res.data.languages;
-          } else {
-            console.log("error ");
-          }
-          //this.user = res.data;
-  });
+        this.personal.firstname = this.userPersonal.firstName;
+        this.personal.lastname =  this.userPersonal.lastName;
+        this.personal.phone_number =  this.userPersonal.phoneNumber;
+        this.personal.gender =  this.userPersonal.gender;
+        if(this.userPersonal.birthDate==null){
+          this.personal.bday = "";
+
+        }else{
+          this.personal.bday = moment( this.userPersonal.birthDate).format("MMMM DD, YYYY");
+        }
+        this.personal.birdate = this.userPersonal.birthDate
+        this.personal.profilePic =  this.userPersonal.profilePicture
+        api.get("/api/getLanguages").then((res) => {
+              if (res) {
+                console.log("language ", res.data);
+                this.personal.language = res.data.languages;
+              } else {
+                console.log("error ");
+              }
+              //this.user = res.data;
+      });
+    }
+},
+// created(){
+//   this.getData()
+//   },
+mounted(){
+    this.getData()
   },
 computed:{
     userPersonal(){
