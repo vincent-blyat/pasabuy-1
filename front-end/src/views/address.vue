@@ -13,7 +13,7 @@
               <div class="w-full">
                  <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" placeholder="Province" v-model="addressInfo.province"  >
                         <option value="Choose" selected disabled>Choose</option>
-                       <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
+                    <option v-for="province in provinces" v-bind:key="province.id" v-bind:value="province.provCode"> {{ province.provDesc }} </option>
                 </select>
               </div>
               
@@ -80,6 +80,7 @@ img {
   max-width: 100px;
   width: 11%;
 }
+
 </style>
 
 <script>
@@ -103,6 +104,7 @@ export default {
     };
   },
   methods: {
+    
     nextPage() {
       var d = document.getElementById("Province");
       var getProv = d.options[d.selectedIndex].text;
@@ -143,6 +145,13 @@ export default {
     refProvince() {
       api.get("/api/refProvince").then((res) => {
         this.provinces = res.data;
+        // for (var i=0;i < this.provinces.length;i++){
+        //  // this.provinces[i] = JSON.stringify(this.provinces[i].provDesc); 
+        //   this.provinces[i].provDesc=this.provinces[i].provDesc.toString();
+        //   this.provinces[i].provDesc=(this.provinces[i].provDesc).charAt(0).toUpperCase() + (this.provinces[i].provDesc).slice(1);
+        // }
+        
+        console.log('Provinces: ', this.provinces);
       });
     },
 
@@ -163,7 +172,8 @@ export default {
   created() {
     this.refProvince();
     this.refcityMunicipality();
-    this.refBrgy();
+    //this.refBrgy();
   },
+
 };
 </script>

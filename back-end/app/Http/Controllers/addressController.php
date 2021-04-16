@@ -9,7 +9,12 @@ class addressController extends Controller
 {
     //
     function refProvince(){
-        return DB::select('SELECT * FROM refprovince ORDER BY  provDesc');
+        $provinces = DB::select('SELECT * FROM refprovince ORDER BY  provDesc');
+        for ( $i=0; $i < sizeof($provinces);$i++){
+            $provinces[i]=strtolower($provinces[i].provDesc);
+            $provinces[i]=ucfirst($provinces[i].provDesc);
+        }
+        return $provinces;
     }
     function refcityMunicipality(){
         return DB::select('SELECT * FROM refcitymun ORDER BY  citymunDesc');
