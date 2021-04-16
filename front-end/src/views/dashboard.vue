@@ -689,11 +689,6 @@ export default {
       })
     }
   },
-  mounted(){
-    store.dispatch('getAuthUser')
-    store.dispatch('getPersonal')
-    store.dispatch('getPosts')
-  },
   computed:{
     user(){
       return store.getters.getUser

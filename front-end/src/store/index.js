@@ -14,6 +14,7 @@ const store =  new Vuex.Store({
         allNotif:[],
         unreadNotif:[],
         userAddress:[],
+        chatRooms:[],
         // userEducation:[],
 
     },
@@ -37,6 +38,9 @@ const store =  new Vuex.Store({
         },
         setUserAddress(state,payload){
             state.userAddress = payload;
+         },
+        setChatRoom(state,payload){
+            state.chatRooms = payload;
          }
     },
     actions:{
@@ -110,6 +114,17 @@ const store =  new Vuex.Store({
             .catch((error)=>{
                 console.log(error)
             })
+        },
+        async getChatRooms(state){
+            api
+            .get('api/getChatroom')
+            .then((res)=>{
+                let room = res.data
+                state.commit('setChatRoom',room)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
         }
     },
     modules:{},
@@ -119,7 +134,8 @@ const store =  new Vuex.Store({
         getPosts:(state) => state.posts,
         getAllNotif:(state) => state.allNotif,
         getUnreadNotif:(state) => state.unreadNotif,
-        getAddress:(state) => state.userAddress
+        getAddress:(state) => state.userAddress,
+        getChatRooms:(state) => state.chatRooms
     }
 })
 
