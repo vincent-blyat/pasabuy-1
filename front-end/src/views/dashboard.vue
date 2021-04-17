@@ -706,7 +706,6 @@ export default {
       var dateToday = new Date()
       var dateDiff = schedDate.getTime() - dateToday.getTime()
       dateDiff = dateDiff/(1000 * 3600 * 24)
-      console.log('diff date sched = ', dateDiff)
       if(dateDiff<1)
         return moment(datetime).format("[Today at] h:mm a");
       else if(dateDiff>=1 &&  dateDiff <2)

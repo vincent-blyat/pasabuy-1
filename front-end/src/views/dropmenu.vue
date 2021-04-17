@@ -1,7 +1,7 @@
 <template>
     <div class="border-black ">
         <button @click="isOpen=!isOpen" class="  h-10 w-10 border-2 rounded-full border-red-700">
-        <img class="h-9.7 w-10 rounded-full" src="/img/yami.jpg">
+        <img class="h-9.7 w-10 rounded-full" :src="userPersonal.profilePicture">
         </button>
       </div>
     <div class="w-full ">  
@@ -29,10 +29,10 @@ export default {
   methods:{
     logout(){
         console.log('logout');
-        window.Echo.leave('chat.'+this.user.indexUserAuthentication)
          window.Echo.leave('App.Models.User.'+this.user.indexUserAuthentication)
         api.post('api/logout').then(()=>{
-          sessionStorage.clear();
+          sessionStorage.removeItem('vuex');
+          sessionStorage.removeItem('isLoggedIn');
           this.$router.push({name:"Home"});
         })
     }
@@ -40,6 +40,9 @@ export default {
     computed:{
     user(){
       return store.getters.getUser
+    },
+    userPersonal(){
+      return store.getters.getPersonal
     },
   },
 }

@@ -15,6 +15,7 @@ const store =  new Vuex.Store({
         allNotif:[],
         unreadNotif:[],
         userAddress:[],
+        userChatRooms:[]
   
         // userEducation:[],
 
@@ -42,6 +43,12 @@ const store =  new Vuex.Store({
         },
         FETCH_POSTS(state,post){
             state.posts = post
+        },
+        FETCH_ROOMS(state,rooms){
+            state.userChatRooms = rooms
+        },
+        CREATE_MESSAGES(state,rooms){
+            state.userChatRooms.unshift(rooms)
         },
     },
     actions:{
@@ -127,6 +134,17 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getChatRoom(state){
+            return api
+            .get('api/getChatroom')
+            .then((res)=>{
+                let room = res.data
+                state.commit('FETCH_ROOMS',room)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -136,6 +154,7 @@ const store =  new Vuex.Store({
         getAllNotif:(state) => state.allNotif,
         getUnreadNotif:(state) => state.unreadNotif,
         getAddress:(state) => state.userAddress,
+        getRooms:(state) => state.userChatRooms,
     }
 })
 

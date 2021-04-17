@@ -87,7 +87,7 @@
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
-                  {{  timestamp(chatRoom
+                  {{  timestampRoom(chatRoom
                   .get_messages[chatRoom
                   .get_messages.length-1].dateCreated)}}
                   </span
@@ -724,7 +724,7 @@
               <span class="text-gray-700 text-xs">
                 <span class="font-bold pl-1 pr-1">·
                   </span>
-                  {{  timestamp(chatRoom
+                  {{  timestampRoom(chatRoom
                   .get_messages[chatRoom
                   .get_messages.length-1].dateCreated)}}
                   </span
@@ -887,12 +887,16 @@ export default {
       console.log("connect");
       if (this.activeRoom != null) {
         let vm = this;
-        vm.getChatRooms();
+        store.dispatch('getChatRoom').then(()=>{
+          vm.getChatRooms();
+        })
         window.Echo.private("chat." + this.activeRoom).listen(
           ".message.new",
           () => {
             console.log("listening...");
-            vm.getChatRooms();
+            store.dispatch('getChatRoom').then(()=>{
+              vm.getChatRooms();
+            })
           }
         );
       }
@@ -941,18 +945,18 @@ export default {
       this.attachtoggle = !this.attachtoggle;
     },
      getChatRooms() {
-        api.get('/api/getChatroom').then((res) => {
             //filtering the message room where there are no message and not the active room if there is
             var z=0;
-            for(i=0;i<res.data.length;i++){
-              if(res.data[i].get_messages.length == 0 ){//means epmty messages on room
-                if((this.authUser.email === res.data[i].email1 || this.authUser.email === res.data[i].email2) && (this.userQueryID === res.data[i].email1 || this.userQueryID === res.data[i].email2)){//filtering only the user with messages and the active chatroom
-                      this.chatRooms[z]= res.data[i]
+            console.log("this room in store", this.room)
+            for(i=0;i<this.room.length;i++){
+              if(this.room[i].get_messages.length == 0 ){//means epmty messages on room
+                if((this.authUser.email === this.room[i].email1 || this.authUser.email === this.room[i].email2) && (this.userQueryID ===this.room[i].email1 || this.userQueryID === this.room[i].email2)){//filtering only the user with messages and the active chatroom
+                      this.chatRooms[z]= this.room[i]
                       z++
                       continue
                   }
               }else{
-                this.chatRooms[z]= res.data[i]
+                this.chatRooms[z]= this.room[i]
                 z++
               }
               
@@ -977,15 +981,38 @@ export default {
                     this.setRoom(this.chatRoomNames[i],this.chatRooms[i].messageRoomNumber)
               
               if(this.chatRooms[i].get_messages.length !=0)
-                for(j=0;j<this.chatRooms[i].get_messages.length;j++)
+                for(j=0;j<this.chatRooms[i].get_messages.length;j++){
                   this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
+                  console.log("get chat room")
+                }
             }
             if(this.activeRoom==null)
                 this.setRoom(this.chatRoomNames[0], this.chatRooms[0].messageRoomNumber)
-        });
+                
     },
-    timestamp(date) {
-      return moment(date).fromNow();
+    timestampRoom(datetime){
+      var postedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = dateToday.getTime() - postedDate.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).fromNow()
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Yesterday at]");
+      else
+        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
+    },
+    timestamp(datetime){
+      var postedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = dateToday.getTime() - postedDate.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Yesterday at] h:mm a");
+      else
+        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
     },
     getUrlQuery() {
       if (this.$route.query.ID != null) {
@@ -1010,6 +1037,9 @@ export default {
   computed:{
     authUser(){
       return store.getters.getUser
+    },
+    room(){
+      return store.getters.getRooms
     },
   },
 }; //end export default
