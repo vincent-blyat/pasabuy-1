@@ -116,6 +116,7 @@
 </style>
 <script>
 import api from '../api'
+import store from "../store/index"
 export default {
  
   created: function () {
@@ -180,12 +181,13 @@ methods:{
             api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, landMark:dataform.address.landMark, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
                  console.log(res.data);
                  if(res){
-                     localStorage.removeItem('personal')
-                     localStorage.removeItem('account')
-                     localStorage.removeItem('address')
-                     localStorage.setItem('isLoggedIn', true);
-                     console.log('welcome use');
-                     this.$router.push({name:"accountsettings"});
+                     this.dispatches().then(()=>{//wait for the dispatches to finish
+                        localStorage.removeItem('personal')
+                        localStorage.removeItem('account')
+                        localStorage.removeItem('address')
+                        sessionStorage.setItem('isLoggedIn', true);
+                        this.$router.push({name:"accountsettings"});
+                    })
                  }
                  else{
                      console.log('informmation not saved')
@@ -193,7 +195,15 @@ methods:{
                 
              
             })
-        }
+        },
+         async dispatches(){
+            await store.dispatch('getAuthUser')
+            await store.dispatch('getPersonal')
+            await store.dispatch('getUserAddress')
+            await store.dispatch('getPosts')
+            await store.dispatch('getUnreadNotifications')
+            await store.dispatch('getAllNotifications')
+            }
 
 },
 

@@ -78,7 +78,9 @@ const store =  new Vuex.Store({
             return api
             .get('api/getPersonal')
             .then((res)=>{
-                res.data.profilePicture = 'data:image/jpeg;base64,'+ btoa(res.data.profilePicture)
+                res.data.profilePicture = 'http://localhost:8000/public/storage/images/'+res.data.profilePicture
+                // res.data.profilePicture = '../../../back-end/public/storage/images/'+res.data.profilePicture
+                console.log(res.data.profilePicture)
                 let user = res.data
                 state.commit('setCurrentPersonal',user)
             })

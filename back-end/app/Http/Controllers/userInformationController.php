@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class userInformationController extends Controller
 {
@@ -25,7 +27,7 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userInformation WHERE  email = \''.$user->email.'\'');
-        $data[0]->profilePicture= utf8_encode($data[0]->profilePicture);
+        // $data[0]->profilePicture= Storage::url($data[0]->profilePicture);
         return response()->json($data[0]);
     }
 
@@ -153,14 +155,28 @@ class userInformationController extends Controller
             return response()->json($validator->errors(),422);
         }
 
-        $contents = file_get_contents($request->photo->path());
+        $image = $request->file('photo');
+        $file_name = $request->file('photo')->hashName();
+        $image_resize = Image::make($image->getRealPath());              
+        $image_resize->save(public_path('storage\images\\' .$file_name))->fit(300,300);
+        
         $user = userInformation::where('email',Auth::user()->email)->first();
-        $user->profilePicture = $contents;
+        // //accessbile in public/storage/images
+        // $imagePath = $request->file('photo')->store('public/images');
+        // $file_name = $request->file('photo')->hashName();
+        // $image = Image::make(public_path("storage/{$imagePath}/".$file_name))->fit(500, 500);
+        // $image->save();
+        // ensure every image has a different name
+        
+        // save new image $file_name to database
+        //$user->update(['image' => $file_name]);
+        $user->profilePicture = $file_name;
         if($user->save()){
             return response()->json(['message'=>'Profilce Picture successfully changed.'],200);
         }else{
             return response()->json(['error'=>'Something went wrong'],422);
         }
+        
     }
 
     public function editPersonal(Request $request)

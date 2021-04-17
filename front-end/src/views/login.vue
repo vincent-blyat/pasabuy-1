@@ -98,9 +98,9 @@ export default {
           // Login...
     
            api.post('/api/login', this.dataForm).then(()=>{
-                sessionStorage.setItem('isLoggedIn', true);
-                console.log('yay logged in');
                 this.dispatches().then(()=>{//wait for the dispatches to finish
+                  sessionStorage.setItem('isLoggedIn', true);
+                  console.log('yay logged in');
                   console.log('user logged in', this.user)
                   this.$router.push({name:"dashboard"});
                 })
