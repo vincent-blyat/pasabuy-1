@@ -3,6 +3,7 @@ import api from '../api'
 import createPersistedState from 'vuex-persistedstate'
 
 
+
 const store =  new Vuex.Store({
     plugins: [createPersistedState({
         storage: window.sessionStorage,
@@ -14,7 +15,7 @@ const store =  new Vuex.Store({
         allNotif:[],
         unreadNotif:[],
         userAddress:[],
-        chatRooms:[],
+  
         // userEducation:[],
 
     },
@@ -27,9 +28,6 @@ const store =  new Vuex.Store({
         setCurrentPersonal(state,payload){
             state.authUserPersonal = payload;
         },
-        setPosts(state,payload){
-            state.posts = payload;
-        },
         setNotifications(state,payload){
             state.allNotif = payload;
         },
@@ -39,11 +37,25 @@ const store =  new Vuex.Store({
         setUserAddress(state,payload){
             state.userAddress = payload;
          },
-        setChatRooms(state,payload){
-            state.chatRooms = payload;
-         }
+        CREATE_POSTS(state,post){
+            state.posts.unshift(post)
+        },
+        FETCH_POSTS(state,post){
+            state.posts = post
+        },
     },
     actions:{
+        async createPostOffer(state,post){
+            return api
+            .post('api/post/offer',post)
+            .then((res)=>{
+                let post = res.data
+                state.commit('CREATE_POSTS',post)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
         async getAuthUser(state){
             return api
             .get('api/user')
@@ -76,7 +88,7 @@ const store =  new Vuex.Store({
                   res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
                 }
                 let posts = res.data
-                state.commit('setPosts',posts)
+                state.commit('FETCH_POSTS',posts)
             })
             .catch((error)=>{
                 console.log(error)
@@ -115,17 +127,6 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
-        async getChatRooms(state){
-            return api
-            .get('api/getChatroom')
-            .then((res)=>{
-                let room = res.data
-                state.commit('setChatRooms',room)
-            })
-            .catch((error)=>{
-                console.log(error)
-            })
-        }
     },
     modules:{},
     getters:{
@@ -135,7 +136,6 @@ const store =  new Vuex.Store({
         getAllNotif:(state) => state.allNotif,
         getUnreadNotif:(state) => state.unreadNotif,
         getAddress:(state) => state.userAddress,
-        getChatRooms:(state) => state.chatRooms
     }
 })
 

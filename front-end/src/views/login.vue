@@ -115,7 +115,6 @@ export default {
       await store.dispatch('getPersonal')
       await store.dispatch('getUserAddress')
       await store.dispatch('getPosts')
-      await store.dispatch('getChatRooms')
       await store.dispatch('getUnreadNotifications')
       await store.dispatch('getAllNotifications')
     }

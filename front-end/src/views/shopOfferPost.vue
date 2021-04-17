@@ -90,7 +90,8 @@
 </template>
 <script>
 
-import api from '../api'
+// import api from '../api'
+import store from "../store/index"
 export default {
     props:['profile'],
     data() {
@@ -105,7 +106,7 @@ export default {
                 paymentMethod: '',
                 caption: '',
                 isLoggedIn: true,
-                email: '',
+                email: store.getters.getUser.email,
                 postIdentity: 'offer_post',
                 postStatus: 'foo bar'     
             },
@@ -115,17 +116,10 @@ export default {
     methods: {
         createOfferPost() {
             console.log(this.form_data)
-            api.get('santum/csrf-cookie').then(()=>{
-                api.post('api/post/offer', this.form_data)
-                    .then((response) => {
-                    console.log(response.data.message)
-                    window.location.reload();
-                })
-                .catch((errors) => {
-                    console.log(errors)
-                
-                })
+            store.dispatch('createPostOffer',this.form_data).then(()=>{
+                store.dispatch('getPosts')
             })
+            
         }
     },
 }
