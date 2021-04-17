@@ -11,6 +11,7 @@ use App\Models\PasabuyUser;
 use App\Models\RequestPost;
 use App\Models\share;
 use App\Models\User;
+use App\Models\userAddress;
 use App\Notifications\SharedNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -170,7 +171,7 @@ class PostController extends Controller
 		$user = Auth::user();
 		$postNum = $request->postNum;
 
-		$newShare = new share;
+		$newShare = new share();
 		$newShare->sharerEmail = $user->email;
 		$newShare->shareNumber = share::count()+1;
 		$newShare->postNumber = $postNum;
@@ -189,6 +190,118 @@ class PostController extends Controller
 		}
 
 		
+	}
+
+
+	/**
+	 *    [getFeed description]
+	 *    @author Al Vincent Musa
+	 *    @param  Request $request [description]
+	 *    @return [type]           [description]
+	 */
+	public function getFeeds(Request $request) {
+
+		// validate $request
+		$request->validate([
+			'post_filter' => 'required|string|nullable',
+			'post_type' => 'required|string|nullable'
+		]);
+
+		// get url parameters
+		$params = $request->only(['post_filter', 'post_type']);
+
+		$user = Auth::User();
+		$user_info = userAddress::where('email', '=', $user->email)->firstOrFail();
+
+		// data
+		$data = [
+			'data' => [
+				'feeds' => ''
+			]
+		];
+
+		switch ($params['post_filter']) {
+
+			case 'following':
+				
+				switch ($params['post_type']) {
+					
+					case 'all':
+						# code...
+						break;
+
+					case 'offers':
+						# code...
+						break;
+
+					case 'requests':
+						# code...
+						break;
+
+					
+					default:
+						# code...
+						break;
+				}
+
+				break;
+
+			case 'nearby':
+
+				switch ($params['post_type']) {
+					
+					case 'all':
+						
+						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, author.profilePicture as avatar, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, offer.deliveryArea as delivery_area, offer.shoppingPlace as shopping_place, offer.deliverySchedule as delivery_schedule, offer.transportMode as transport_mode, offer.capacity, offer.paymentMethod as payment_method, offer.caption, request.shoppingPlace as shopping_place, request.deliverySchedule as schedule, request.shoppingList as shopping_list, request.paymentMethod as payment_method, request.caption  FROM tbl_post post INNER JOIN tbl_userInformation author ON author.email = post.email LEFT JOIN tbl_shoppingOfferPost offer ON post.postNumber = offer.postNumber LEFT JOIN tbl_orderRequestPost request ON post.postNumber = request.postNumber WHERE offer.shoppingPlace = '$user_info->cityMunicipality' OR request.shoppingPlace = '$user_info->cityMunicipality' ORDER BY post.dateCreated DESC");
+
+						foreach($feeds as $feed) {
+							$feed->avatar = utf8_encode($feed->avatar);
+						}
+
+						$data['data']['feeds'] = $feeds;
+
+						return response()->json($data, 200);
+						break;
+
+					case 'offers':
+						// get nearby offers 
+						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, author.profilePicture as avatar, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, offer.deliveryArea as delivery_area, offer.shoppingPlace as shopping_place, offer.deliverySchedule as schedule, offer.transportMode as transport_mode, offer.capacity, offer.paymentMethod as payment_method, offer.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_shoppingOfferPost offer ON post.postNumber = offer.postNumber WHERE offer.shoppingPlace = '$user_info->cityMunicipality' ORDER BY post.dateCreated DESC");
+
+						foreach($feeds as $feed) {
+							$feed->avatar = utf8_encode($feed->avatar);
+						}
+
+						$data['data']['feeds'] = $feeds;
+
+						return response()->json($data, 200);
+
+						break;
+
+					case 'requests':
+						//get nearby requests
+						$feeds = DB::select("SELECT author.email, author.firstName as first_name, author.lastName as last_name, author.profilePicture as avatar, post.postNumber as id, post.postStatus as status, post.postIdentity as identity, request.deliveryAddress as delivery_area, request.shoppingPlace as shopping_place, request.deliverySchedule as schedule, request.shoppingList as shopping_list, request.paymentMethod as payment_method, request.caption FROM tbl_userInformation author INNER JOIN tbl_post post ON author.email = post.email INNER JOIN tbl_orderRequestPost request ON post.postNumber = request.postNumber WHERE request.shoppingPlace = '$user_info->cityMunicipality' ORDER BY post.dateCreated DESC");
+
+						foreach($feeds as $feed) {
+							$feed->avatar = utf8_encode($feed->avatar);
+						}
+						
+						$data['data']['feeds'] = $feeds;
+						
+						return response()->json($data, 200);
+						break;
+
+					
+					default:
+						# code...
+						break;
+				}
+
+				break;
+			
+			default:
+				# code...
+				break;
+		}
 	}
     
 }

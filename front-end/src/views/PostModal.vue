@@ -24,7 +24,7 @@
              </div>
              <hr>
              <!--end-->
-            <component :is="component"/>   
+            <component :is="component" :profile="user"/>   
       </div>
      </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
 import shopOfferPost from  './shopOfferPost'
 import orderRequestPost from './orderRequestPost'
+import store from '../store/index'
 export default {
     components: {
         shopOfferPost,
@@ -68,6 +69,12 @@ export default {
         this.activeBtn= el;
         }
         },
+    },
+    computed:{
+        user(){
+            console.log('user personal',store.getters.getPersonal )
+            return store.getters.getPersonal
+        } 
     },
 }
 </script>

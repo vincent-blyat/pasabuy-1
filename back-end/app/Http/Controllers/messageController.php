@@ -17,18 +17,8 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $data = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
-
-        // $data = utf8_encode(json_decode(json_encode($data)));
-        // $data = $data->toArray();
-       // echo "".$data."";
-        // for($i=0;$i<$data->count();$i++){
-        //     // echo "-".json_encode($data[$i]->getEmail1)."-";
-        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
-        //     $data[$i]->getEmail1->profilePicture = utf8_encode( $data[$i]->getEmail1->profilePicture );
-        //     for($x=0;$x<$data[$i]->getMessages[$x]->count();$x++)
-        //         $data[$i]->getMessages[$x]->getMessageSender->profilePicture = utf8_encode(  $data[$i]->getMessages[$x]->getMessageSender->profilePicture );
-        // }
+        $data = messageRoom::with('getEmail1','getEmail2','getMessages')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+        
         $x=0;
 		foreach ($data as $convertingImage){ 
 			$convertingImage->getEmail1->profilePicture = utf8_encode($convertingImage->getEmail1->profilePicture);
@@ -37,13 +27,26 @@ class messageController extends Controller
                 $dp->getMessageSender->profilePicture =  utf8_encode( $dp->getMessageSender->profilePicture);
             $x++;
 		}
-
-        
-
 		return response()->json($data);
+    }
+    public function createRoom(Request $request)
+    {
+        $data = DB::select('SELECT * FROM tbl_messageRoom WHERE  (email1 = \''.$request->userEmail.'\' OR email2 = \''.$request->userEmail.'\') AND (email1 = \''.Auth::user()->email.'\' OR email2 = \''.Auth::user()->email.'\') ');
 
-       // $chatrooms = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
-   
+        if(empty($data)){
+            $newdata = new messageRoom;
+            $newdata->messageRoomNumber = (new messageRoom)->count()+1;
+            $newdata->email1 = Auth::user()->email;
+            $newdata->email2 = $request->userEmail;
+            $newdata->dateModified = Carbon::now('Asia/Manila');
+            $newdata->save();
+            return response()->json("ok");
+        }
+        $msgRoom = messageRoom::find($data[0]->messageRoomNumber);
+        $msgRoom = messageRoom::where('messageRoomNumber',$data[0]->messageRoomNumber)->first();
+        $msgRoom->dateModified = Carbon::now('Asia/Manila');
+        $msgRoom->save();
+        return response()->json("ok");
     }
 
     public function sendMessage(Request $request)
@@ -58,7 +61,7 @@ class messageController extends Controller
         if($newMessage->save()){
             $msgRoom = messageRoom::find($request->roomID);
             $msgRoom = messageRoom::where('messageRoomNumber',$request->roomID)->first();
-            $msgRoom->dateModified = Carbon::now();
+            $msgRoom->dateModified = Carbon::now('Asia/Manila');
             $msgRoom->save();
         }
         

@@ -1,8 +1,8 @@
 <template>
     <!--User Profile-->
     <div class="inline-flex space-x-2 items-center justify-start p-4 mt-2">
-        <img class="w-14 h-full border rounded-full border-gray-200" src="img/yami.jpg" />
-        <p class="text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
+        <img class="w-14 h-full border rounded-full border-gray-200" :src="profile.profilePicture" />
+        <p class="text-base font-bold leading-none text-gray-900">{{profile.firstName}} {{profile.lastName}}</p>
     </div>
     <!--end-->
     <!--Accepting Request Button
@@ -90,8 +90,10 @@
 </template>
 <script>
 
-import api from '../api'
+// import api from '../api'
+import store from "../store/index"
 export default {
+    props:['profile'],
     data() {
         return {
             isOpen: false,
@@ -104,7 +106,7 @@ export default {
                 paymentMethod: '',
                 caption: '',
                 isLoggedIn: true,
-                email: '',
+                email: store.getters.getUser.email,
                 postIdentity: 'offer_post',
                 postStatus: 'foo bar'     
             },
@@ -114,22 +116,11 @@ export default {
     methods: {
         createOfferPost() {
             console.log(this.form_data)
-            api.post('api/post/offer', this.form_data)
-                .then((response) => {
-                    console.log(response.data.message)
-                    window.location.reload();
-                })
-                .catch((errors) => {
-                    console.log(errors)
-                
-                })
+            store.dispatch('createPostOffer',this.form_data).then(()=>{
+                store.dispatch('getPosts')
+            })
+            
         }
     },
-    mounted(){
-        api.get('api/user')
-            .then((response)=>{
-               this.form_data.email = response.data.email;
-            })
-    }
 }
 </script>

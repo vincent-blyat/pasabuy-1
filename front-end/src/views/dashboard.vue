@@ -10,7 +10,7 @@
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
     <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="userPersonal.profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -25,7 +25,7 @@
                <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
+                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> {{post_type}}</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
@@ -38,29 +38,29 @@
                  <label for=""> POST TYPE</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
+                  <a @click="getAll" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
                  <label for="" class="cursor-pointer"> All Posts</label>
                 </a>
 
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a  @click="getOffer" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
 
-                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a  @click="getRequests" href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
+                <button @click="filter2 =! filter2" type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  >
                <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> {{post_filter}}</label>
                 <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
@@ -70,11 +70,11 @@
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                  <a @click="getFollowing" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <a @click="getNearby" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>
@@ -89,7 +89,7 @@
      
   <!--user post-->
   <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
-    v-for="(post_info, index) in delivery_info"
+    v-for="(post_info, index) in posts"
     :key="index"
     >
     
@@ -110,7 +110,7 @@
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.dateCreated}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{timestamp(post_info.dateCreated)}}</span>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.offer_post.deliverySchedule)}}</p>
             </div>
             <div class="flex space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
@@ -212,7 +212,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.request_post.deliverySchedule)}}</p>
             </div>
           </div>
           <div class="flex-col w-full ">
@@ -260,13 +260,13 @@
         <!--section 5-->
         <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
-          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+          <button v-if="post_info.email != user.email" @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
           </button>
-          <router-link :to="'/messages/?postnum='+post_info.postNumber">
+          <router-link v-if="post_info.email != user.email" :to="'/messages/?ID='+toEncrypt(post_info.user.email)">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
@@ -496,6 +496,9 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import VueSimpleAlert from 'vue-simple-alert'
+import store from '../store/index'
+import moment from "moment"
+ 
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
 
@@ -521,7 +524,7 @@ export default {
       isOpen2:false,
       isOpen3:false,
       isOpen4:false,
-      user: null,
+      // user: null,
       list:false,
       editShoppingOffer:false,
       editOrderRequest:false,
@@ -535,18 +538,8 @@ export default {
       postStatus: 'posted',
       user_info:[],
       profilePicture:null,
-
-      // delivery_info:{
-      //   delivery_area: 'Naga City',
-      //   shopping_place: 'SM City Legazpi',
-      //   schedule: '2021-04-28 13:12:01',
-      //   public_transit: 'Public Transit',
-      //   capacity: '2 Big Plastic Bag',
-      //   payment_method: 'Cash on Delivery',
-      //   comment: 'Let me Know',
-      //   status: 'No Longer Accepting Requests'
-      // },
-      delivery_info:[],
+      post_filter:"nearby",
+      post_type:"all",
    
       activeDeliveries:{
         transNo: '61913174',
@@ -662,46 +655,76 @@ export default {
         VueSimpleAlert.alert('An error occured',"Error","error")
         console.log(error)
       })
+    },
+    toEncrypt(val){
+      return btoa(val)
+    },
+    getNearby(){
+      this.post_filter = "nearby"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('nearby', res.data)
+      })
+    },
+    getFollowing(){
+      this.post_filter = "following"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('following', res.data)
+      })
+    },
+    getAll(){
+      this.post_type = "all"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('all', res.data)
+      })
+    },
+    getOffers(){
+      this.post_type = "offers"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('offers', res.data)
+      })
+    },
+     getRequests(){
+      this.post_type = "requests"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('req', res.data)
+      })
+    },
+    timestamp(datetime){
+      var postedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = dateToday.getTime() - postedDate.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Yesterday at] h:mm a");
+      else
+        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
+    },
+    timestampSched(datetime){
+      var schedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = schedDate.getTime() - dateToday.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Tommorow at] h:mm a");
+      else
+        return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
     }
   },
-    mounted(){
-    api.get('/api/getPersonal').then((resp)=>{
-      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
-    }).catch((error) => {
-       console.log(error)
-    })
+  computed:{
+    user(){
+      return store.getters.getUser
+    },
+    userPersonal(){
+      return store.getters.getPersonal
+    },
+    posts(){
+      return store.getters.getPosts
+    },
+    
   },
-  created(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
-    }).catch((error) => {
-       console.log(error)
-    })
-
-
-    api.get('/api/getPosts').then((res)=>{
-      console.log(res.data)
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-   
-      this.delivery_info=res.data
-      console.log(this.delivery_info)
-    }).catch((error) => {
-      console.log(error)
-    })
-
-     api.get('/api/getShares').then((res)=>{
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.shares=res.data
-      console.log(this.shares)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
 }
 </script>

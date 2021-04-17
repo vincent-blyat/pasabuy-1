@@ -49,7 +49,7 @@
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p class="text-gray-500">BIRTHDAY</p>
         <span>
-        <p>{{personal.birdate}}</p>
+        <p>{{personal.bday}}</p>
         </span>
         </span>
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -129,6 +129,7 @@ import api from '../api'
 import Profile from './ProfileEdit.vue'
 import VueSimpleAlert from 'vue-simple-alert'
 import moment from "moment"
+import store from '../store/index'
 export default {
   name: "personal",
   component: {
@@ -152,6 +153,7 @@ data(){
       gender:'',
       language:'',
       birdate: '',
+      bday:'',
       profilePic:null
     },
     old:  {
@@ -218,44 +220,48 @@ methods:{
       const data = new FormData();
       data.append('photo', file);
       api.post('/api/updateProfilePic',data).then((res)=>{
-        this.getData()
+        // this.getData()
         VueSimpleAlert.alert(res.data.message,"Success","success")
       }).catch((errors)=>{
         VueSimpleAlert.alert("Something went wrong.","Error","error")
         console.log(errors.response)
       })
     },
-     getData(){
-          api.get("/api/getPersonal").then((res) => {
-          console.log("personal info", res.data);
-          this.personal.firstname = res.data.firstName;
-          this.personal.lastname = res.data.lastName;
-          this.personal.phone_number = res.data.phoneNumber;
-          this.personal.gender = res.data.gender;
-          if(res.data.birthDate ==null){
-            this.personal.birdate = '';
-          }else{
-            this.personal.birdate = moment(res.data.birthDate).format("MMMM DD, YYYY");
-          }
-          this.personal.profilePic = 'data:image/jpeg;base64,' + btoa(res.data.profilePicture);
-          //this.user = res.data;
-        });
-        api.get("/api/getLanguages").then((res) => {
-          if (res) {
-            console.log("language ", res.data);
-            this.personal.language = res.data.languages;
-          } else {
-            console.log("error ");
-          }
-
-          //this.user = res.data;
-        });
-        }
-
-},
-created(){
+    getData(){
     //get the user information from the laravel API
-       this.getData();
+        this.personal.firstname = this.userPersonal.firstName;
+        this.personal.lastname =  this.userPersonal.lastName;
+        this.personal.phone_number =  this.userPersonal.phoneNumber;
+        this.personal.gender =  this.userPersonal.gender;
+        if(this.userPersonal.birthDate==null){
+          this.personal.bday = "";
+
+        }else{
+          this.personal.bday = moment( this.userPersonal.birthDate).format("MMMM DD, YYYY");
+        }
+        this.personal.birdate = this.userPersonal.birthDate
+        this.personal.profilePic =  this.userPersonal.profilePicture
+        api.get("/api/getLanguages").then((res) => {
+              if (res) {
+                console.log("language ", res.data);
+                this.personal.language = res.data.languages;
+              } else {
+                console.log("error ");
+              }
+              //this.user = res.data;
+      });
+    }
+},
+// created(){
+//   this.getData()
+//   },
+mounted(){
+    this.getData()
+  },
+computed:{
+    userPersonal(){
+      return store.getters.getPersonal
+    },
   },
 };
 </script>

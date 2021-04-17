@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import api from "../api"
+// import api from "../api"
 import moment from "moment"
+import store from '../store/index'
 export default {
   data(){
     return{
-      allNotifications:null,
      
       sharedNotif: "App\\Notifications\\SharedNotification",
     }
@@ -32,10 +32,10 @@ export default {
       return moment(date).fromNow();
     }
   },
-  mounted(){
-    api.get('api/getNotifications').then((res)=>{
-      this.allNotifications = res.data
-    })
+  computed:{
+    allNotifications(){
+      return store.getters.getAllNotif
+    },
   },
 }
 

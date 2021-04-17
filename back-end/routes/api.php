@@ -52,6 +52,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
+    Route::post('/createChatRoom', [messageController::class, 'createRoom']);
+ 
+    
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -74,11 +77,8 @@ Route::get('refProvince',[addressController::class, 'refProvince'] );
 Route::get('refcityMunicipality',[addressController::class, 'refcityMunicipality'] );
 Route::get('refBrgy',[addressController::class, 'refBrgy'] );
 
-Route::post('post/offer', [PostController::class, 'create_offer_post'])->name('create_offer_post');
-Route::post('post/request', [PostController::class, 'create_request_post']);
-
-
 Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
 
 Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);
+Route::get('user/feed', [PostController::class, 'getFeeds']);
