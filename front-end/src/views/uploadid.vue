@@ -1,5 +1,10 @@
 <template class="bg-gray-00 font-nunito">
-
+ <loading
+     :show="show"
+     :label="label"
+     event-show="show-my-full-loading"
+     event-hide="hide-my-full-loading">
+ </loading>
   <div class="flex items-center ">
       <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
@@ -117,8 +122,11 @@
 <script>
 import api from '../api'
 import store from "../store/index"
+import loading from 'vue-full-loading'
 export default {
- 
+ components: {
+    loading,
+  },
   created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
@@ -175,6 +183,7 @@ methods:{
         this.edit2=null;
     },
         saveUser(){
+            this.show = !this.show
             var dataform = {personal:JSON.parse(localStorage.getItem('personal')), account:JSON.parse(localStorage.getItem('account')), address: JSON.parse(localStorage.getItem('address')) }
 
             console.log('mail=',dataform.personal.email)
@@ -185,6 +194,7 @@ methods:{
                         localStorage.removeItem('personal')
                         localStorage.removeItem('account')
                         localStorage.removeItem('address')
+                        this.show = !this.show
                         sessionStorage.setItem('isLoggedIn', true);
                         this.$router.push({name:"accountsettings"});
                     })
@@ -194,6 +204,8 @@ methods:{
                  }
                 
              
+            }).catch(()=>{
+                this.show = !this.show
             })
         },
          async dispatches(){
