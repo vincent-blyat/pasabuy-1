@@ -15,7 +15,8 @@ const store =  new Vuex.Store({
         allNotif:[],
         unreadNotif:[],
         userAddress:[],
-        userChatRooms:[]
+        userChatRooms:[],
+        userLang:[]
   
         // userEducation:[],
 
@@ -50,6 +51,9 @@ const store =  new Vuex.Store({
         CREATE_MESSAGES(state,rooms){
             state.userChatRooms.unshift(rooms)
         },
+        setUserLang(state,lang){
+            state.userLang = lang
+        },
     },
     actions:{
         async createPostOffer(state,post){
@@ -79,8 +83,6 @@ const store =  new Vuex.Store({
             .get('api/getPersonal')
             .then((res)=>{
                 res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
-                // res.data.profilePicture = 'C:\\xampp\\htdocs\\pasaBUY_SE\\back-end\\public\\storage\\images\\'+res.data.profilePicture
-                console.log(res.data.profilePicture)
                 let user = res.data
                 state.commit('setCurrentPersonal',user)
             })
@@ -147,6 +149,18 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getUserLang(state){
+            return api
+            .get('api/getLanguages')
+            .then((res)=>{
+                let lang = res.data
+                console.log(lang)
+                state.commit('setUserLang',lang)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -157,6 +171,7 @@ const store =  new Vuex.Store({
         getUnreadNotif:(state) => state.unreadNotif,
         getAddress:(state) => state.userAddress,
         getRooms:(state) => state.userChatRooms,
+        getUserLang:(state) => state.userLang,
     }
 })
 

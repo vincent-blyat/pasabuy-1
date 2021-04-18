@@ -13,7 +13,7 @@
         <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
-           <div class="w-16 h-16 overflow-hidden rounded-full border-2 border-gray-500"> <img :src="personal.profilePic" class=" w-full h-full rounded-full ring-2 ring-gray-100" style="object-fit:cover; vertical-align:middle"/></div>
+           <div class="w-16 h-16 overflow-hidden rounded-full border-2 border-gray-500"> <img :src="userPersonal.profilePicture" class=" w-full h-full rounded-full ring-2 ring-gray-100" style="object-fit:cover; vertical-align:middle"/></div>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
           <input id="profile_image" type="file" @change="change_profile" class="hidden">
@@ -25,13 +25,13 @@
              <span class="  font-raleways font-bold grid grid-cols-2 "> 
         <p class="text-gray-500">NAME</p>
         <span>
-        <p >{{personal.firstname}} {{personal.lastname}}</p>
+        <p >{{userPersonal.firstName}} {{userPersonal.lastName}}</p>
        </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2 ">
         <p class="text-gray-500">PHONE NUMBER</p>
         <span>
-        <p>{{personal.phone_number}}</p>
+        <p>{{userPersonal.phoneNumber}}</p>
         </span>
         </span>
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -43,7 +43,7 @@
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p class="text-gray-500">GENDER</p>
         <span>
-        <p>{{personal.gender}}</p>
+        <p>{{userPersonal.gender}}</p>
         </span>
         </span>
         <span class=" font-raleways font-bold  grid grid-cols-2"> 
@@ -55,7 +55,7 @@
          <span class=" font-raleways font-bold  grid grid-cols-2"> 
         <p class="text-gray-500">Language</p>
         <span>
-        <p>{{personal.language}}</p>
+        <p>{{userLang.languages}}</p>
         </span>
          </span>
           </div>
@@ -86,30 +86,30 @@
            <div class=" ">
             <div class="flex flex-col px-4  space-y-4
             ">
-                <div class="flex flex-col"><span class="ml-2">Firstname</span> <input id="f_name"   type="text" v-model="personal.firstname" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                <div class="flex flex-col"><span class="ml-2">Firstname</span> <input id="f_name"   type="text" v-model="userPersonal.firstName" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                  </div>
                 <div class="flex flex-col"><span class="ml-2">Middlename</span> <input id="m_name" type="text" v-model="personal.midname" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                 </div>
-                <div class="flex flex-col"><span class="ml-2">Lastname</span> <input id="l_name" type="text" v-model="personal.lastname" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                <div class="flex flex-col"><span class="ml-2">Lastname</span> <input id="l_name" type="text" v-model="userPersonal.lastName" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                 </div>
-                <div class="flex flex-col"><span class="ml-2">Phone number </span> <input id="p_number" type="number" v-model="personal.phone_number" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                <div class="flex flex-col"><span class="ml-2">Phone number </span> <input id="p_number" type="number" v-model="userPersonal.phoneNumber" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                 </div>
                 <div class="flex flex-col"><span class="ml-2">Work </span> <input id="work" type="text" v-model="personal.work" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                 </div>
                 <span class="ml-2">Gender</span>
                 <div class=" space-x-4 ml-4">
                   <span class="space-x-2">
-                  <span><input type="radio" value="Male" id="male" v-model="personal.gender" name="gender" /></span>
+                  <span><input type="radio" value="Male" id="male" v-model="userPersonal.gender" name="gender" /></span>
                   <label for="male">Male</label>
                   </span>
                   <span class="space-x-2">
-                  <span><input type="radio" value="Female" id="female" v-model="personal.gender" name="gender" /></span>
+                  <span><input type="radio" value="Female" id="female" v-model="userPersonal.gender" name="gender" /></span>
                   <label for="female">Female</label>
                   </span>
               </div>
-                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="date" id="b_date"  v-model="personal.birdate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
+                 <div class="flex flex-col "><span class="ml-2">Birthday</span>  <input  type="date" id="b_date"  v-model="userPersonal.birthDate"   class="focus:outline-none rounded-xl w-full h-10 pl-2 bg-transparent bg-gray-200" 
                   ></div> 
-                <div class="flex flex-col"><span class="ml-2">Language: </span> <input type="text" id="language" v-model="personal.language" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/></div>
+                <div class="flex flex-col"><span class="ml-2">Language: </span> <input type="text" id="language" v-model="userLang.languages" class=" focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/></div>
              
             </div>
            <div class="flex justify-between mt-10 space-x-4 items-center">
@@ -173,11 +173,21 @@ data(){
 methods:{
 
     save_data () {
-      console.log(this.personal)
-      api.post('/api/editPersonal', this.personal).then((res)=>{
-         VueSimpleAlert.alert(res.data.message,"Success","success")
-         this.toggle=false
-         this.getData();
+       
+      var personal=  {
+        firstname:this.userPersonal.firstName,
+        lastname:this.userPersonal.lastName,
+        phone_number:this.userPersonal.phoneNumber,
+        gender:this.userPersonal.gender,
+        language:this.userLang.languages,
+        birdate: this.userPersonal.birthDate,
+      };
+      api.post('/api/editPersonal', personal).then((res)=>{
+          this.dispatchThis().then(()=>{
+            this.setBday()
+            VueSimpleAlert.alert(res.data.message,"Success","success")
+            this.toggle=false
+          })
       //this.user = res.data;
       }).catch((errors)=>{
         console.log(errors.response.data)
@@ -197,22 +207,22 @@ methods:{
     },
     setOldData(){
         this.errors = ''
-        this.old.firstname=this.personal.firstname
-        this.old.lastname=this.personal.lastname
-        this.old.phone_number=this.personal.phone_number
+        this.old.firstname=this.userPersonal.firstName
+        this.old.lastname=this.userPersonal.lastName
+        this.old.phone_number=this.userPersonal.phoneNumber
         this.old.work=this.personal.work
-        this.old.gender=this.personal.gender
-        this.old.language=this.personal.language
-        this.old.birdate=this.personal.birdate
+        this.old.gender=this.userPersonal.gender
+        this.old.language=this.userLang.languages
+        this.old.birdate=this.userPersonal.birthDate
     },
     getOldData(){
-        this.personal.firstname=this.old.firstname
-        this.personal.lastname=this.old.lastname
-        this.personal.phone_number=this.old.phone_number
+        this.userPersonal.firstName=this.old.firstname
+        this.userPersonal.lastName=this.old.lastname
+        this.userPersonal.phoneNumber=this.old.phone_number
         this.personal.work=this.old.work
-        this.personal.gender=this.old.gender
-        this.personal.language=this.old.language
-        this.personal.birdate=this.old.birdate
+        this.userPersonal.gender=this.old.gender
+        this.userLang.languages=this.old.language
+        this.userPersonal.birthDate=this.old.birdate
     },
     change_profile(e){
       const file=e.target.files[0]
@@ -220,47 +230,36 @@ methods:{
       const data = new FormData();
       data.append('photo', file);
       api.post('/api/updateProfilePic',data).then((res)=>{
-        // this.getData()
-        VueSimpleAlert.alert(res.data.message,"Success","success")
+        this.dispatchThis().then(()=>{
+          VueSimpleAlert.alert(res.data.message,"Success","success")
+        })
       }).catch((errors)=>{
         VueSimpleAlert.alert("Something went wrong.","Error","error")
         console.log(errors.response)
       })
     },
-    getData(){
+    async dispatchThis(){
+      await store.dispatch('getPersonal')
+    },
+    setBday(){
     //get the user information from the laravel API
-        this.personal.firstname = this.userPersonal.firstName;
-        this.personal.lastname =  this.userPersonal.lastName;
-        this.personal.phone_number =  this.userPersonal.phoneNumber;
-        this.personal.gender =  this.userPersonal.gender;
         if(this.userPersonal.birthDate==null){
           this.personal.bday = "";
 
         }else{
           this.personal.bday = moment( this.userPersonal.birthDate).format("MMMM DD, YYYY");
         }
-        this.personal.birdate = this.userPersonal.birthDate
-        this.personal.profilePic =  this.userPersonal.profilePicture
-        api.get("/api/getLanguages").then((res) => {
-              if (res) {
-                console.log("language ", res.data);
-                this.personal.language = res.data.languages;
-              } else {
-                console.log("error ");
-              }
-              //this.user = res.data;
-      });
     }
 },
-// created(){
-//   this.getData()
-//   },
 mounted(){
-    this.getData()
+    this.setBday()
   },
 computed:{
     userPersonal(){
       return store.getters.getPersonal
+    },
+    userLang(){
+      return store.getters.getUserLang
     },
   },
 };
