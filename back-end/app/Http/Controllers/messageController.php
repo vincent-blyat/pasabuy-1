@@ -19,14 +19,6 @@ class messageController extends Controller
     {
         $data = messageRoom::with('getEmail1','getEmail2','getMessages')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
         
-        $x=0;
-		foreach ($data as $convertingImage){ 
-			$convertingImage->getEmail1->profilePicture = utf8_encode($convertingImage->getEmail1->profilePicture);
-            $convertingImage->getEmail2->profilePicture = utf8_encode($convertingImage->getEmail2->profilePicture);
-            foreach($data[$x]->getMessages as $dp)
-                $dp->getMessageSender->profilePicture =  utf8_encode( $dp->getMessageSender->profilePicture);
-            $x++;
-		}
 		return response()->json($data);
     }
     public function createRoom(Request $request)

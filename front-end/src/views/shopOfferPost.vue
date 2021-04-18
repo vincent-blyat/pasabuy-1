@@ -118,6 +118,7 @@ export default {
             console.log(this.form_data)
             store.dispatch('createPostOffer',this.form_data).then(()=>{
                 store.dispatch('getPosts')
+                this.$parent.$emit('closeModal')
             })
             
         }

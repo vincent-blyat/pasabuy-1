@@ -94,7 +94,7 @@ const store =  new Vuex.Store({
             .then((res)=>{
                 var i;
                 for(i=0;i<res.data.length;i++){
-                  res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
+                  res.data[i].user.profilePicture ='http://localhost:8000/storage/images/'+ res.data[i].user.profilePicture
                 }
                 let posts = res.data
                 state.commit('FETCH_POSTS',posts)

@@ -968,11 +968,11 @@ export default {
               //setting the picture and name of the chatrooms
               if(this.chatRooms[i].email1.localeCompare(this.authUser.email)==0){
                   this.chatRoomNames[i]= this.chatRooms[i].get_email2.firstName + ' '+this.chatRooms[i].get_email2.lastName
-                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email2.profilePicture);
+                  this.chatRoomPic[i]= 'http://localhost:8000/storage/images/'+ this.chatRooms[i].get_email2.profilePicture
                 }
               else{
                   this.chatRoomNames[i]=this.chatRooms[i].get_email1.firstName + ' '+this.chatRooms[i].get_email1.lastName
-                  this.chatRoomPic[i]= 'data:image/jpeg;base64,'+ btoa(this.chatRooms[i].get_email1.profilePicture);
+                  this.chatRoomPic[i]= 'http://localhost:8000/storage/images/'+ this.chatRooms[i].get_email1.profilePicture
                 }
 
               //check if the auth user and passed email is on the list   
@@ -982,7 +982,7 @@ export default {
               
               if(this.chatRooms[i].get_messages.length !=0)
                 for(j=0;j<this.chatRooms[i].get_messages.length;j++){
-                  this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'data:image/jpeg;base64,' + btoa(this.chatRooms[i].get_messages[j].get_message_sender.profilePicture)
+                  this.chatRooms[i].get_messages[j].get_message_sender.profilePicture =  'http://localhost:8000/storage/images/' + this.chatRooms[i].get_messages[j].get_message_sender.profilePicture
                   console.log("get chat room")
                 }
             }
