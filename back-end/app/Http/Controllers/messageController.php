@@ -17,7 +17,7 @@ class messageController extends Controller
     //
     public function getChatroom()
     {
-        $data = messageRoom::with('getEmail1','getEmail2','getMessages')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
+        $data = messageRoom::with('getEmail1','getEmail2','getMessages','getMessages.getMessageSender')->orderBy('dateModified', 'desc')->where('email1','=',Auth::user()->email)->orWhere('email2','=',Auth::user()->email)->get();
         
 		return response()->json($data);
     }

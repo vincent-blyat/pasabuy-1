@@ -959,7 +959,6 @@ export default {
                 this.chatRooms[z]= this.room[i]
                 z++
               }
-              
             }
             var i;
             var j;
@@ -986,7 +985,7 @@ export default {
                   console.log("get chat room")
                 }
             }
-            if(this.activeRoom==null)
+            if(this.activeRoom==null && this.chatRooms.length!=0)
                 this.setRoom(this.chatRoomNames[0], this.chatRooms[0].messageRoomNumber)
                 
     },
@@ -1019,8 +1018,10 @@ export default {
         this.userQueryID = atob(this.$route.query.ID);
         api.get("/sanctum/csrf-cookie").then(() => {
           let params = { userEmail: this.userQueryID };
-          api.post("api/createChatRoom", params).then((res) => {
-            console.log("new chat room", res.data);
+          api.post("api/createChatRoom", params).then(() => {
+            store.dispatch('getChatRoom').then(()=>{
+              this.getChatRooms();
+            })
           });
         });
       } else if (this.$route.query.postNum != null) {
