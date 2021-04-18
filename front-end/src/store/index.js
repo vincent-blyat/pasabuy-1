@@ -154,7 +154,6 @@ const store =  new Vuex.Store({
             .get('api/getLanguages')
             .then((res)=>{
                 let lang = res.data
-                console.log(lang)
                 state.commit('setUserLang',lang)
             })
             .catch((error)=>{

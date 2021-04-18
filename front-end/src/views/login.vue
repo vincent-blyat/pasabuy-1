@@ -118,6 +118,7 @@ export default {
       await store.dispatch('getUnreadNotifications')
       await store.dispatch('getAllNotifications')
       await store.dispatch('getUserLang')
+      await store.dispatch('getChatRoom')
     }
   },
   

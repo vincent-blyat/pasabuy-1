@@ -49,7 +49,7 @@ class userInformationController extends Controller
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
 
         if($data == null)
-            return response()->json('');
+            return response()->json([]);
         return response()->json($data[0]);
     }
 
