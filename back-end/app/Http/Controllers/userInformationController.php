@@ -49,7 +49,7 @@ class userInformationController extends Controller
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
 
         if($data == null)
-            return response()->json('');
+            return response()->json([]);
         return response()->json($data[0]);
     }
 
@@ -205,7 +205,6 @@ class userInformationController extends Controller
             if($userLang == null){
                 $userLang= new userLanguages();
                 $userLang->email = Auth::User()->email;
-                $userLang->userLanguageNumber = userLanguages::count()+1;
                 $userLang->languages = $request->language;
                 $userLang->save();
                 return response()->json(['message'=>'Success, Information saved.'],200);
