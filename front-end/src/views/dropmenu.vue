@@ -1,7 +1,7 @@
 <template>
     <div class="border-black ">
         <button @click="isOpen=!isOpen" class="  h-10 w-10 border-2 rounded-full border-red-700">
-        <img class="h-9.7 w-10 rounded-full" :src="userPersonal.profilePicture" style="object-fit:cover; vertical-align:middle"/>
+        <img class="h-9.7 w-10 rounded-full" :src="userPersonal.profilePicture" style="object-fit:cover; vertical-align:middle">
         </button>
       </div>
     <div class="w-full ">  
