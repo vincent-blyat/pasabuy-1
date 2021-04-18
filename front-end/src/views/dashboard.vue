@@ -10,7 +10,7 @@
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
     <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="userPersonal.profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -89,7 +89,7 @@
      
   <!--user post-->
   <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
-    v-for="(post_info, index) in delivery_info"
+    v-for="(post_info, index) in posts"
     :key="index"
     >
     
@@ -110,7 +110,7 @@
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.dateCreated}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{timestamp(post_info.dateCreated)}}</span>
               </div>
             </div>
           </div>
@@ -166,7 +166,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.offer_post.deliverySchedule)}}</p>
             </div>
             <div class="flex space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
@@ -212,7 +212,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.request_post.deliverySchedule)}}</p>
             </div>
           </div>
           <div class="flex-col w-full ">
@@ -496,6 +496,8 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import VueSimpleAlert from 'vue-simple-alert'
+import store from '../store/index'
+import moment from "moment"
  
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
@@ -522,7 +524,7 @@ export default {
       isOpen2:false,
       isOpen3:false,
       isOpen4:false,
-      user: null,
+      // user: null,
       list:false,
       editShoppingOffer:false,
       editOrderRequest:false,
@@ -538,7 +540,6 @@ export default {
       profilePicture:null,
       post_filter:"nearby",
       post_type:"all",
-      delivery_info:[],
    
       activeDeliveries:{
         transNo: '61913174',
@@ -687,45 +688,43 @@ export default {
       api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
         console.log('req', res.data)
       })
+    },
+    timestamp(datetime){
+      var postedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = dateToday.getTime() - postedDate.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Yesterday at] h:mm a");
+      else
+        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
+    },
+    timestampSched(datetime){
+      var schedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = schedDate.getTime() - dateToday.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Tommorow at] h:mm a");
+      else
+        return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
     }
   },
-    mounted(){
-    api.get('/api/getPersonal').then((resp)=>{
-      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
-    }).catch((error) => {
-       console.log(error)
-    })
+  computed:{
+    user(){
+      return store.getters.getUser
+    },
+    userPersonal(){
+      return store.getters.getPersonal
+    },
+    posts(){
+      return store.getters.getPosts
+    },
+    
   },
-  created(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
-    }).catch((error) => {
-       console.log(error)
-    })
-
-
-    api.get('/api/getPosts').then((res)=>{
-      console.log(res.data)
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.delivery_info=res.data
-      console.log(this.delivery_info)
-    }).catch((error) => {
-      console.log(error)
-    })
-
-     api.get('/api/getShares').then((res)=>{
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.shares=res.data
-      console.log(this.shares)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
 }
 </script>

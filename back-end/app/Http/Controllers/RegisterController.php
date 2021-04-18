@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\userAddress;
 use App\Models\userInformation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -24,13 +25,13 @@ class RegisterController extends Controller
     function postPersonal(Request $request){
         
         // custom error messages
-       $messages = ['password.regex' => array(' Must contain at least one lowercase letter (a – z)',
-                                            ' Must contain at least one uppercase letter (A – Z)',
-                                            ' Must contain at least one digit (0-9)',
+       $messages = ['password.regex' => array(' Password must contain at least one lowercase letter (a – z)',
+                                            ' Password must contain at least one uppercase letter (A – Z)',
+                                            ' Password must contain at least one digit (0-9)',
                      )];
        $validator=Validator::make($request->all(),[
-            'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
-            'lastName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'firstName' => ['required','regex:/^[a-zA-Z ]+$/'],
+            'lastName' => ['required','regex:/^[a-zA-Z ]+$/'],
             'email' => ['required','email','unique:tbl_userAuthentication'],
             'phoneNumber' => ['required','numeric','digits:11'],
             'password' => ['required',
@@ -47,7 +48,7 @@ class RegisterController extends Controller
         }
         
         $this->personalInfo = ['email'=> $request->email, 'firstName' => $request->firstName, 'lastName' => $request->lastName,'phoneNumber'=> $request->phoneNumber];
-        $this->accountInfo = ['email'=> $request->email, 'password' => $request->password];
+        $this->accountInfo = ['email'=> $request->email, 'password' => Hash::make($request->password)];
         //check if there is an existing code
         if($request->oldEmail === $request->email){
             $returnValue = ['personalInfo'=>  $this->personalInfo,'account'=>  $this->accountInfo];
@@ -76,13 +77,17 @@ class RegisterController extends Controller
      //function to put personal info in $addressInfo
     function postAddress(Request $request){
 
-        $request->validate([
+        $validator=Validator::make($request->all(),[
             'landMark' => ['required'],
             'houseNumber' => ['required'],
             'province' => ['required'],
             'barangay' => ['required'],
             'cityMunicipality' => ['required'],
-       ]);
+            ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
 
        $this->addressInfo = ['landMark'=> $request -> landMark, 'houseNumber'=> $request->houseNumber, 'province'=> $request->province,'barangay'=> $request->barangay,'cityMunicipality'=> $request->cityMunicipality];
        
@@ -107,11 +112,12 @@ class RegisterController extends Controller
         $userInfo->firstName = $request->firstName;
         $userInfo->lastName = $request->lastName;
         $userInfo->phoneNumber = $request->phoneNumber;
+        $userInfo->profilePicture = "defaultImage.png";
 
         if($userInfo->save()){
             $userAuth = new user();
             $userAuth->email = $request->email;
-            $userAuth->password = Hash::make($request->password);
+            $userAuth->password = $request->password;
             
             if($userAuth->save()){
                 $userAddress = new userAddress();
@@ -123,6 +129,8 @@ class RegisterController extends Controller
                 $userAddress->cityMunicipality = $request->cityMunicipality;
                 
                 $userAddress->save();
+
+                Auth::login($userAuth);
                 
                 return true; 
             }

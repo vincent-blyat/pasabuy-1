@@ -92,6 +92,9 @@ export default {
     },
     created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
+    if(localStorage.getItem("code")==null){
+      this.$router.push({name:"signup"});
+    }
   },
 }
 </script>

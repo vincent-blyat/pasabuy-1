@@ -162,7 +162,7 @@ const router = createRouter({
 })
 
 function isLoggedIn(){
-  return localStorage.getItem('isLoggedIn');
+  return sessionStorage.getItem('isLoggedIn');
 }
 
 router.beforeEach((to, from, next) => {

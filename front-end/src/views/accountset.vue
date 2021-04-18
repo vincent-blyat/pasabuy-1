@@ -66,6 +66,7 @@ import Address from "../views/address_info.vue";
 import InfoAccount from "../views/account_info.vue";
 import Education from './education'
 import api from "../api";
+import store from '../store/index'
 export default {
   name: "Account",
   components: {
@@ -100,6 +101,9 @@ export default {
     },
   },
   mounted() {
+    store.dispatch('getPersonal')
+    store.dispatch('getUserAddress')
+    store.dispatch('getAuthUser')
     //get the user information from the laravel API
     api
       .get('/api/getValidID')
