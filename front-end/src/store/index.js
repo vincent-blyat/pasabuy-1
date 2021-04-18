@@ -78,8 +78,8 @@ const store =  new Vuex.Store({
             return api
             .get('api/getPersonal')
             .then((res)=>{
-                res.data.profilePicture = 'http://localhost:8000/public/storage/images/'+res.data.profilePicture
-                // res.data.profilePicture = '../../../back-end/public/storage/images/'+res.data.profilePicture
+                res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
+                // res.data.profilePicture = 'C:\\xampp\\htdocs\\pasaBUY_SE\\back-end\\public\\storage\\images\\'+res.data.profilePicture
                 console.log(res.data.profilePicture)
                 let user = res.data
                 state.commit('setCurrentPersonal',user)

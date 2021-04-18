@@ -13,7 +13,7 @@
         <div id="personal_info" class="text-sm  gap-x-10 pt-8  w-full">
         <form id="myForm" class=" ">
           <div class="flex flex-col items-center gap-y-3 justify-center">
-           <div class="w-16 h-16 overflow-hidden rounded-full border-2 border-gray-500"> <img :src="personal.profilePicture" class=" w-full h-full rounded-full ring-2 ring-gray-500"/></div>
+           <div class="w-16 h-16 overflow-hidden rounded-full border-2 border-gray-500"> <img :src="personal.profilePic" class=" w-full h-full rounded-full ring-2 ring-gray-500"/></div>
             <label for="profile_image" class="font-extrabold cursor-pointer text-blue-800">Change Profile Photo</label>
           </div>
           <input id="profile_image" type="file" @change="change_profile" class="hidden">
