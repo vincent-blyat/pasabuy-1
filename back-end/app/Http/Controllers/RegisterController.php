@@ -30,8 +30,8 @@ class RegisterController extends Controller
                                             ' Password must contain at least one digit (0-9)',
                      )];
        $validator=Validator::make($request->all(),[
-            'firstName' => ['required','regex:/^[a-zA-Z]+$/'],
-            'lastName' => ['required','regex:/^[a-zA-Z]+$/'],
+            'firstName' => ['required','regex:/^[a-zA-Z ]+$/'],
+            'lastName' => ['required','regex:/^[a-zA-Z ]+$/'],
             'email' => ['required','email','unique:tbl_userAuthentication'],
             'phoneNumber' => ['required','numeric','digits:11'],
             'password' => ['required',
@@ -112,6 +112,7 @@ class RegisterController extends Controller
         $userInfo->firstName = $request->firstName;
         $userInfo->lastName = $request->lastName;
         $userInfo->phoneNumber = $request->phoneNumber;
+        $userInfo->profilePicture = "defaultImage.png";
 
         if($userInfo->save()){
             $userAuth = new user();
