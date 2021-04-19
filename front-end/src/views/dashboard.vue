@@ -89,7 +89,7 @@
   
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right ">
+  <div class="shopOffer-UserPost flex items-center justify-center pt-3 x-v:pt-2 dv:float-right ">
     <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -225,8 +225,8 @@
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+            <div v-if="share1" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
+              <button @click="showOfferShareModal" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
                 share
                </span>
@@ -249,7 +249,7 @@
   <!--end of user post-->
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
+  <div class="shopOrder-UserPost flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
     <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -263,7 +263,7 @@
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
-                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
@@ -394,8 +394,8 @@
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share2" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button class="flex flex-row text-base gap-x-2 focus:outline-none">
+            <div v-if="share2" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
+              <button @click="showOrderShareModal" class="flex flex-row text-base gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:text-sm">
                 share
                </span>
@@ -415,6 +415,31 @@
       </div>
     </div>
   </div>
+
+   <!--Share Modal-->
+    <div @click.self="hideShareModal" id="modal-background" class="bg-opacity-25 z-50">
+<div id="modal-content" class="flex-col w-608 space-y-4 bg-white h-auto rounded-lg">
+      <div id="modal-header" class="flex flex-row pt-4 space-x-4 px-2 justify-between items-center">
+        <button @click="$router.push('edit-profile')" class="focus:outline-none flex items-center space-x-4">
+          <img class="w-12 h-12 rounded-full" src="img/asta.jpeg"/>
+        <p class="text-base font-bold leading-none text-gray-900">Asta Staria</p>
+        </button>
+      <button @click="hideShareModal" class="focus:outline-none flex items-center">
+        <span class="text-gray-500 material-icons allign-middle" style="font-size: 36px">
+        cancel
+        </span>
+      </button>
+      </div>
+     <div id="fkmouse" class="modal-body cursor-not-allowed px-2"></div>
+     <div id="modal-footer" class="flex px-2 pt-4 pb-4 items-center justify-center ssm:px-2 vs:px-2">
+        <button class="focus:outline-none inline-flex items-center justify-center px-4 py-2 bg-red-700 rounded-full w-full ssm:h-8 ssm:w-full vs:w-full">
+          <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-normal text-center text-white">Share Post</p>
+      </button>
+      </div>
+</div>
+</div>
+<!--end-->
+
    </div>
    </div>
         </div>
@@ -607,6 +632,7 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import EditOrderRequest from "./EditOrderRequest"
+import $ from 'jquery'
 
 export default {
     el:'#shop-list',
@@ -764,7 +790,42 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
+    showOfferShareModal(){
+      $('.shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share1 = !this.share1
+    },
+    showOrderShareModal(){
+      $('.shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share2 = !this.share2
+    },
+    hideShareModal(){
+      $('#modal-background').css({display: 'none'});
+      $('#modal-background').find('.modal-body').empty();
+    },
   }
   
 }
 </script>
+
+<style scoped>
+#fkmouse{
+  pointer-events: none
+}
+
+#modal-background{
+  display:none;
+  position:fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    
+}
+</style>
