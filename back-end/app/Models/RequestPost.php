@@ -33,4 +33,8 @@ class RequestPost extends Model
     public function post() {
 		return $this->belongsTo(Post::class, 'postNUmber', 'postNumber');    	
     }
+
+    public function shoppingList(){
+      return $this->hasOne(shoppingList::class, 'shoppingListNumber', 'shoppingListNumber');
+    }
 }

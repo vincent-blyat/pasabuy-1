@@ -67,6 +67,17 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async createPostRequest(state,post){
+            return api
+            .post('api/post/request',post)
+            .then((res)=>{
+                let post = res.data
+                state.commit('CREATE_POSTS',post)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
         async getAuthUser(state){
             return api
             .get('api/user')

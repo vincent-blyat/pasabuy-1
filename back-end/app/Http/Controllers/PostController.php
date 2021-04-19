@@ -80,7 +80,7 @@ class PostController extends Controller
 			'email' => 'required|email',
 			'postIdentity' => 'required|string|max:100',
 			'postStatus' => 'required|string|max:50',
-			'deliveryAddress' => 'required|string|max:500',
+			'deliveryArea' => 'required|string|max:500',
 			'shoppingPlace' => 'required|string|max:500',
 			'deliverySchedule' => 'required|date',
 			'paymentMethod' => 'required|string|max:200',
@@ -99,11 +99,11 @@ class PostController extends Controller
 		// request post model
 		$request_post = new RequestPost;
 		$request_post->postStatus = $request->postStatus;
-		$request_post->deliveryAddress = $request->deliveryAddress;
+		$request_post->deliveryAddress = $request->deliveryArea;
 		$request_post->shoppingPlace = $request->shoppingPlace;
 		$request_post->deliverySchedule = $request->deliverySchedule;
 		$request_post->paymentMethod = $request->paymentMethod;
-		$request_post->shoppingList = $request->shoppingList;
+		$request_post->shoppingListNumber = $request->shoppingList;
 		$request_post->caption = $request->caption;
 
 			// save to database
@@ -142,12 +142,7 @@ class PostController extends Controller
 
 		$user = Auth::user();
 		// $data = PasabuyUser::has('post')->with('post','post.offer_post','post.request_post')->get();
-		$data = Post::with('offer_post','request_post')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
-
-		foreach ($data as $convertingImage){ 
-			
-			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
-		}
+		$data = Post::with('offer_post','request_post','user','request_post.shoppingList')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
 		return response()->json($data);
 	}

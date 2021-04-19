@@ -236,11 +236,11 @@
         <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0" v-if="post_info.request_post != null">
           <div class="flex-col items-start w-full">
           <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
-            <label class="pl-3 text-gray-500">{{post_info.request_post.shoppingList.split(',').length}} items</label>
+            <label class="pl-3 text-gray-500">{{post_info.request_post.shopping_list.text.split(',').length}} items</label>
           </span>
           <div class="flex-col">
             <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
-              <li v-for="(shoppingList,index ) in post_info.request_post.shoppingList.split(',')" :key="index" >{{ shoppingList }}</li>
+              <li v-for="(shoppingList,index ) in post_info.request_post.shopping_list.text.split(',')" :key="index" >{{ shoppingList }}</li>
             </ul>
           </div>
           </div>

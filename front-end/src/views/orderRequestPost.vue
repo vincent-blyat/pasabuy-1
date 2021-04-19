@@ -7,20 +7,21 @@
          <!--end-->
 
         <!--Delivery Information List-->
+
          <div class="flex flex-col mt-1 ssm:px-2 sm:px-2 justify-center items-center vs:px-2">
              <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               delivery_dining 
               </span>
-                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Delivery Address">
+                    <input v-model='form_data.deliveryArea' class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Delivery Address">
                 </div>
                  
                 <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               shopping_cart
               </span>
-                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Shopping Place">
+                    <input v-model='form_data.shoppingPlace' class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Shopping Place">
                 </div>
              </div>
 
@@ -29,14 +30,14 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               alarm
               </span>
-                    <input class="w-44 focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 flex vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Schedule">
+                    <input v-model='form_data.deliverySchedule' type="datetime-local" class="w-44 focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 flex vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Schedule">
                 </div>
                  
                <div class="flex space-x-2">
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               payments
               </span>
-                    <input class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Payment Method">
+                    <input v-model='form_data.paymentMethod' class="w-44 focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Payment Method">
                 </div>
              </div>
             </div>
@@ -55,26 +56,50 @@
            
             <!--Comment Section-->
            <div class="justify-center flex mt-3 ssm:px-2 vs:px-2 sm:px-2">
-            <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..."></textarea>
+            <textarea id="postMessage" v-model='form_data.caption' name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..."></textarea>
            </div>
            <!--end-->
 
            <!--Post button-->
            <div class="justify-center flex mt-3 pb-3 ssm:px-2 vs:px-2 sm:px-2">
-            <button class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 ssm:w-full vs:w-full h-10">
+            <button @click='createPostRequest' class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 ssm:w-full vs:w-full h-10">
                 <p class="text-base ssm:text-sm vs:text-sm sm:text-sm font-bold leading-normal text-center text-white">Post</p>
             </button>
            </div>
            <!--end-->
+        
 </template>
 
 <script>
+import store from "../store/index"
 export default {
     props:['profile'],
     data (){
         return{
-            isOpen:false
+            isOpen:false,
+            form_data: {
+                deliveryArea: '',
+                shoppingPlace: '',
+                deliverySchedule: '',
+                paymentMethod: '',
+                caption: '',
+                email: store.getters.getUser.email,
+                postIdentity: 'offer_post',
+                postStatus: 'foo bar' ,
+                shoppingList: '1' 
+            },
+            errors: null
         }
-    }
+    },
+    methods: {
+        createPostRequest() {
+            console.log(this.form_data)
+            store.dispatch('createPostRequest',this.form_data).then(()=>{
+                store.dispatch('getPosts')
+                this.$parent.$emit('closeModal')
+            })
+            
+        }
+    },
 }
 </script>
