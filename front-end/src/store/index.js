@@ -56,6 +56,7 @@ const store =  new Vuex.Store({
             state.userLang = lang
         },
         setUserTransactions(state,trans){
+            state.userTransactions = []
             state.userTransactions = trans
         },
     },

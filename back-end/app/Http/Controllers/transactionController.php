@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\transaction;
+use App\Models\User;
 use App\Models\userInformation;
+use App\Notifications\cancelledRequestNotification;
+use App\Notifications\declinedRequestNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class transactionController extends Controller
 {
@@ -37,5 +41,40 @@ class transactionController extends Controller
         // $transaction = Post::has('transaction')->where('email',Auth::user()->email)->orWhere('email','hokage.igneel@gmail.com')->join('tbl_transaction.emailCustomerShopper','=','tbl_post.email')->where('tbl_transaction.emailCustomerShopper',Auth::user()->email)->orWhere('tbl_transaction.emailCustomerShopper','hokage.igneel@gmail.com')->where('tbl_transaction.transactionStatus','pending')->orderBy('tbl_transaction.dateCreated','desc')->get();
 
         return response()->json($transaction);
+    }
+    public function cancelRequest(Request $request)
+    {
+          # code...
+ 
+        $transaction = transaction::find($request->ID);
+        $transaction->transactionStatus = "cancelled";
+        if($transaction->save()){
+            //find the right user to notify, in this case the owner of the post
+			$userToNotif = Post::where('postNumber',$request->postNumber)->get();
+			$userToNotif = User::where('email',$userToNotif[0]->email)->get();
+			$userToNotif = User::find($userToNotif[0]->indexUserAuthentication);
+			$userToNotif->notify(new cancelledRequestNotification($request->postNumber));
+            return response()->json('ok');
+        }
+        else 
+            return response()->json('not ok');
+            
+    }
+    public function declineRequest(Request $request)
+    {
+          # code...
+ 
+        $transaction = transaction::find($request->ID);
+        $transaction->transactionStatus = "declined";
+        if($transaction->save()){
+            //find the right user to notify, in this case the owner of the post
+			$userToNotif = User::where('email',$request->userNotif)->get();
+			$userToNotif = User::find($userToNotif[0]->indexUserAuthentication);
+			$userToNotif->notify(new declinedRequestNotification($request->postNumber));
+            return response()->json('ok');
+        }
+        else 
+            return response()->json('not ok');
+            
     }
 }

@@ -216,6 +216,7 @@ export default {
                     console.log("listening to notif", notification.type)
                     store.dispatch('getUnreadNotifications')
                     store.dispatch('getAllNotifications')
+                    store.dispatch('getUserTransactions')
         });
      
   },

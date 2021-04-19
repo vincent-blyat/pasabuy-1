@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/createChatRoom', [messageController::class, 'createRoom']);
     Route::post('/createTransaction', [transactionController::class, 'createTransaction']);
     Route::get('/getTransaction', [transactionController::class, 'getTransaction']);
+    Route::post('/cancelRequest', [transactionController::class, 'cancelRequest']);
+    Route::post('/declineRequest', [transactionController::class, 'declineRequest']);
  
  
     

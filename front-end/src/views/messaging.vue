@@ -240,7 +240,7 @@
           <!--------------U sent a request to Mark Arl------>
           <div v-for="transaction in transactions" :key="transaction.postNumber">
           <div
-            v-if="transaction.emailCustomerShopper == authUser.email && (transaction.transactionReceiver==activeEmail1 || transaction.transactionReceiver==activeEmail1)"
+            v-if="transaction.emailCustomerShopper == authUser.email && (transaction.transactionReceiver==activeEmail1 || transaction.transactionReceiver==activeEmail2)"
             class="sticky top-0 flex justify items-center shadow-lg bg-white border"
           >
             <span class="text-sm p-3 w-full">
@@ -250,12 +250,12 @@
               <span class="font-semibold ml-2">Post {{ transaction.postNumber }} </span>
 
               <div class="flex justify-end relative">
-                <button
+                <button @click="cancelRequest(transaction.postNumber,transaction.indexTransactionPost)"
                   class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
                 >
                   <span>Cancel Request</span>
                 </button>
-                <button
+                <button 
                   class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"
                 >
                   <span>View Post</span>
@@ -266,7 +266,7 @@
 
            <!--------------Someone sent u a request------>
           <div
-            v-if="transaction.transactionReceiver== authUser.email && (transaction.emailCustomerShopper==activeEmail1 || transaction.emailCustomerShopper==activeEmail1)"
+            v-if="transaction.transactionReceiver== authUser.email && (transaction.emailCustomerShopper==activeEmail1 || transaction.emailCustomerShopper==activeEmail2)"
             class="sticky top-0 flex justify items-center shadow-lg bg-white border"
           >
             <span class="text-sm p-3 w-full">
@@ -278,7 +278,7 @@
               <span class="font-semibold ml-2">Post {{ transaction.postNumber }} </span>
 
               <div class="flex justify-end relative">
-                <button
+                <button  @click="declineOffer(transaction.postNumber,transaction.indexTransactionPost,transaction.emailCustomerShopper)"
                   class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
                 >
                   <span>Decline</span>
@@ -1333,6 +1333,11 @@ export default {
           ".message.new",
           () => {
             console.log("listening...");
+            store.dispatch("getUserTransactions").then(() => {
+              store.dispatch("getChatRoom").then(() => {
+                vm.getChatRooms();
+              });
+            });
             store.dispatch("getChatRoom").then(() => {
               vm.getChatRooms();
             });
@@ -1579,10 +1584,61 @@ export default {
       data[0] = JSON.parse(string);
       return data;
     },
+    cancelRequest(postNum,indexTransactionPost){
+      api.post('api/cancelRequest',{postNumber:postNum,ID:indexTransactionPost}).then((res)=>{
+        console.log(res)
+        store.dispatch("getUserTransactions").then(() => {
+        });
+      })
+    },
+    declineOffer(postNum,indexTransactionPost,user){
+      console.log("asdfaf",postNum,indexTransactionPost)
+      api.post('api/declineRequest',{postNumber:postNum,ID:indexTransactionPost,userNotif:user}).then((res)=>{
+        console.log(res)
+        store.dispatch("getUserTransactions").then(() => {
+        });
+      })
+    },
+    // search(receiver,sender, myArray){
+    //   for (var i=0; i < myArray.length; i++) {
+    //       console.log(myArray[i].emailCustomerShopper ,'===' ,receiver, '&&',myArray[i].transactionReceiver,'===', sender )
+    //       if (myArray[i].emailCustomerShopper === receiver && myArray[i].transactionReceiver === sender ) {
+    //           return myArray[i];
+    //       }
+    //     }
+    // },
+    //  filteredTransactions(){
+    //   var i,j;
+    //   var rows=this.transactions
+    
+    //   // for(i=0;i<this.transactions.length;i++){
+    //   //   rows[i] = this.search(this.transactions[i].transactionReceiver,this.transactions[i].emailCustomerShopper,this.transactions)
+    //   // }
+    //   // for(j=0;j<rows.length;j++){
+    //   //   var  
+    //   //   if(rows[i])
+    //   // }
+    //   rows = rows.filter(function (el) {
+    //             var  val1 =  
+    //             return el.transactionNumber.search('084'+val1+val2,'084'+val2+val1);
+    //           });
+    //   // rows=this.transactions
+    //   console.log('brows = ',rows)
+    //   rows = rows.sort(function (a, b) {
+    //               var dateA = new Date(a.dateCreated), dateB = new Date(b.dateCreated)
+    //               return dateA - dateB
+    //           });
+
+    //   console.log('arows = ', rows)
+      
+      
+    //   // return filtered
+    // }
   }, //end methods
   created() {
     this.getUrlQuery();
     this.getChatRooms();
+
   },
   computed: {
     authUser() {
@@ -1597,6 +1653,7 @@ export default {
     transactions() {
       return store.getters.getUserTransactions;
     },
+   
   },
 }; //end export default
 const add = document.querySelector("#add");
