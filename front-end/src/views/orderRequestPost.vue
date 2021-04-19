@@ -84,7 +84,7 @@ export default {
                 paymentMethod: '',
                 caption: '',
                 email: store.getters.getUser.email,
-                postIdentity: 'offer_post',
+                postIdentity: 'request_post',
                 postStatus: 'foo bar' ,
                 shoppingList: '1' 
             },

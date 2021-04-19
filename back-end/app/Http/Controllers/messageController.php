@@ -32,13 +32,13 @@ class messageController extends Controller
             $newdata->email2 = $request->userEmail;
             $newdata->dateModified = Carbon::now('Asia/Manila');
             $newdata->save();
-            return response()->json("ok");
+            return response()->json($newdata);
         }
         $msgRoom = messageRoom::find($data[0]->messageRoomNumber);
         $msgRoom = messageRoom::where('messageRoomNumber',$data[0]->messageRoomNumber)->first();
         $msgRoom->dateModified = Carbon::now('Asia/Manila');
         $msgRoom->save();
-        return response()->json("ok");
+        return response()->json($msgRoom);
     }
 
     public function sendMessage(Request $request)

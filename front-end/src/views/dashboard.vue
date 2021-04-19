@@ -106,7 +106,8 @@
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
-                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                  <label v-if="post_info.offer_post != null" class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                  <label v-if="post_info.request_post != null"  class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
@@ -259,12 +260,23 @@
     
         <!--section 5-->
         <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
-          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
-          <button v-if="post_info.email != user.email" @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+          <div v-if="post_info.email != user.email && post_info.offer_post != null"  >
+            <SendRequest v-if="postSendModal && sendOfferOrRequestpostNum== post_info.offer_post.indexShoppingOfferPost" @closeSendRequest="listener3" :post="post_info"/>
+          </div>
+          <div v-if="post_info.email != user.email && post_info.request_post != null" >
+            <SendOffer v-if="postSendModal && sendOfferOrRequestpostNum== post_info.request_post.indexOrderRequestPost" @closeSendOffer="listener3" :post="post_info"/>
+          </div>
+          <button v-if="post_info.email != user.email && post_info.offer_post != null" @click="toggleSendModal();sendOfferOrRequestpost = post_info.postIdentity;sendOfferOrRequestpostNum=post_info.offer_post.indexShoppingOfferPost " class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
+          </button>
+          <button v-if="post_info.email != user.email && post_info.request_post != null" @click="toggleSendModal(); sendOfferOrRequestpost = post_info.postIdentity; sendOfferOrRequestpostNum=post_info.request_post.indexOrderRequestPost" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+            send
+            </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Offer</p>
           </button>
           <router-link v-if="post_info.email != user.email" :to="'/messages/?ID='+toEncrypt(post_info.user.email)">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
@@ -501,6 +513,7 @@ import moment from "moment"
  
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
+import SendOffer from './sendOffer.vue'
 
 export default {
     el:'#shop-list',
@@ -537,7 +550,6 @@ export default {
       datePosted1: '13 hours ago',
       postStatus: 'posted',
       user_info:[],
-      profilePicture:null,
       post_filter:"nearby",
       post_type:"all",
    
@@ -580,6 +592,8 @@ export default {
       { items: 'powdered sugar' },
       { items: 'cocoa powder' },
     ],
+    sendOfferOrRequestpost:null,
+    sendOfferOrRequestpostNum:null
     }
   },
   components: {
@@ -591,6 +605,7 @@ export default {
     createShopList,
     ShoppingList,
     editShopListModal,
+    SendOffer
     // EditOrderRequest,
     
   },
@@ -706,7 +721,8 @@ export default {
       var dateToday = new Date()
       var dateDiff = schedDate.getTime() - dateToday.getTime()
       dateDiff = dateDiff/(1000 * 3600 * 24)
-      if(dateDiff<1)
+      console.log(dateDiff)
+      if(dateDiff<1 && dateDiff>0)
         return moment(datetime).format("[Today at] h:mm a");
       else if(dateDiff>=1 &&  dateDiff <2)
         return moment(datetime).format("[Tommorow at] h:mm a");
