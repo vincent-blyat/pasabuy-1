@@ -16,7 +16,8 @@ const store =  new Vuex.Store({
         unreadNotif:[],
         userAddress:[],
         userChatRooms:[],
-        userLang:[]
+        userLang:[],
+        userTransactions:[]
   
         // userEducation:[],
 
@@ -53,6 +54,9 @@ const store =  new Vuex.Store({
         },
         setUserLang(state,lang){
             state.userLang = lang
+        },
+        setUserTransactions(state,trans){
+            state.userTransactions = trans
         },
     },
     actions:{
@@ -171,6 +175,18 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getUserTransactions(state){
+            return api
+            .get('api/getTransaction')
+            .then((res)=>{
+                let transactions = res.data
+                console.log('your transactions', transactions)
+                state.commit('setUserTransactions',transactions)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -182,6 +198,7 @@ const store =  new Vuex.Store({
         getAddress:(state) => state.userAddress,
         getRooms:(state) => state.userChatRooms,
         getUserLang:(state) => state.userLang,
+        getUserTransactions:(state) => state.userTransactions,
     }
 })
 

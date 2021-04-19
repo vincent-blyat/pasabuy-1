@@ -45,4 +45,10 @@ class Post extends Model
         # code...
         return $this->hasMany(share::class,'postNumber','postNumber');
     }
+
+    public function transaction()
+    {
+        # code...
+        return $this->hasMany(transaction::class,'postNumber','postNumber');
+    }
 }

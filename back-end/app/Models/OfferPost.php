@@ -19,4 +19,5 @@ class OfferPost extends Model
     public function post() {
     	return $this->belongsTo(Post::class, 'postNumber', 'postNumber');
     }
+
 }

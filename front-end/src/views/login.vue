@@ -164,6 +164,7 @@ export default {
       await store.dispatch("getAllNotifications");
       await store.dispatch("getUserLang");
       await store.dispatch("getChatRoom");
+      await store.dispatch("getUserTransactions");
     },
   },
 

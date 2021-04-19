@@ -9,6 +9,7 @@ use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
+use App\Http\Controllers\transactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
     Route::post('/createChatRoom', [messageController::class, 'createRoom']);
+    Route::post('/createTransaction', [transactionController::class, 'createTransaction']);
+    Route::get('/getTransaction', [transactionController::class, 'getTransaction']);
+ 
  
     
 });
