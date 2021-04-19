@@ -29,7 +29,7 @@
                     <span class=" mt-1.5 rounded-full material-icons text-red-600">
               alarm
               </span>
-                    <input class="w-44 focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 flex vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Schedule">
+                    <input type="datetime-local" class="w-44 focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 flex vs:w-full w-52 h-11 py-2.5 pl-4 items-center pr-16 vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500" placeholder="Schedule">
                 </div>
                  
                <div class="flex space-x-2">

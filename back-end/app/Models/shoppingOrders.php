@@ -11,4 +11,8 @@ class shoppingOrders extends Model
     protected $table = 'tbl_orderrequestpost';
     protected $primaryKey = 'indexOrderRequestPost';
     public $timestamps = false;
+
+    public function posts(){
+        return $this->hasOne(Post::class, 'postNumber', 'postNumber');
+    }
 }

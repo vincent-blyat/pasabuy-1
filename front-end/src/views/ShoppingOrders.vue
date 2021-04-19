@@ -15,7 +15,7 @@
   <!--end-->
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-6">
+  <div v-for="shoppingOrder_info in shoppingOrder_infos" v-bind:key="shoppingOrder_info.indexOrderRequestPost " class="flex items-center justify-center pt-6">
     <div class="space-x-4 h-auto ssm:p-2 ssm:w-full p-6 vs:p-4 vs:w-full sm:w-full w-608 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -33,7 +33,7 @@
                 <p class="ssm:text-xs vs:text-xs lvs:text-sm text-base leading-none text-gray-500">{{postStatus}} an order request</p>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2">
-                <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-500">{{datePosted}}</span>
+                <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-500">{{timestamp(shoppingOrder_info.posts.dateCreated).fromNow()}}</span>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
               remove_circle_outline
               </span>
           <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none items-center text-red-600">
-              {{delivery_info.status}}</p>
+              {{shoppingOrder_info.postStatus}}</p>
         </div>
         <!--end-->
 
@@ -82,13 +82,13 @@
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               location_on  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.delivery_area}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.deliveryAddress}}</p>
             </div>
             <div class=" flex space-x-2 py-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               alarm  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.schedule}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{timestamp(shoppingOrder_info.deliverySchedule).format('LLL')}}</p>
             </div>
             
           </div>
@@ -97,13 +97,13 @@
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               shopping_cart  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.shopping_place}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.shoppingPlace}}</p>
             </div>
             <div class="flex space-x-2 py-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               payments  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{delivery_info.payment_method}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOrder_info.paymentMethod}}</p>
             </div>
           </div>
         </div>
@@ -133,11 +133,11 @@
         <!--section 4-->
 
         <div class="inline-flex  items-start ssm:px-2 justify-start mt-3 rounded-xl h-auto bg-white w-full">
-            <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-loose w-auto text-gray-900">{{delivery_info.comment}}</p>
+            <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-loose w-auto text-gray-900">{{shoppingOrder_info.caption}}</p>
         </div>
 
         <!--section 5-->
-        <div class="flex justify-evenly w-full ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:space-x-3 vs:min-w-0 vs:px-2 pr-8 vs:pr-0 mt-4 space-x-6">
+        <div v-if="shoppingOrder_info.posts.email !== shoppingOrder_info.posts.user.email" class="flex justify-evenly w-full ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:space-x-3 vs:min-w-0 vs:px-2 pr-8 vs:pr-0 mt-4 space-x-6">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener4"/>
           <button @click="toggleSendModal" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ">
@@ -188,10 +188,12 @@
 </template>
 
 <script>
+import api from '../api'
 import PostModal from "./PostModal"
 import EditOrderRequest from './EditOrderRequest'
 import UpdateOrderStatus from './updateOrderStatus'
 import SendRequest from "./sendRequest"
+import moment from 'moment'
 export default {
     data() {
     return {
@@ -226,6 +228,7 @@ export default {
         item7: 'powdered sugar',
         item8: 'cocoa powder',       
       },
+      shoppingOrder_infos: []
     }
   },
   components: {
@@ -258,7 +261,17 @@ export default {
     },
     listener4(){
       this.postSendModal = false;
+    },
+    loadShoppingOrder_infos(){
+      api.get("api/shoppingorders").then((data) => {this.shoppingOrder_infos = data.data; console.log("order",this.shoppingOrder_infos)});
+    },
+    timestamp(date){
+      return moment(date);
     }
-  }
+  },
+  created(){
+    this.loadShoppingOrder_infos();
+    //api.get("api/user").then((data) => {this.user_email = data.data.email; console.log("email",this.user_email)});
+  },
 }
 </script>

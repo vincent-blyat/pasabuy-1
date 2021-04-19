@@ -25,7 +25,7 @@
             <img class="w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10 rounded-full" src="img/yami.jpg"/>
             <div class="flex flex-col items-start w-full vs:px-1 se:px-2 ssm:px-2 px-4">
               <div class="space-x-4 ssm:space-x-0 se:flex-col se:space-x-0 ssm:flex-col vs:space-x-1 sm:space-x-2 flex flex-row mt-1">
-                <p class="ssm:text-xs vs:text-xs lvs:text-sm text-base font-bold leading-none text-gray-900">{{shoppingOffer_info.posts.user.firstName}} {{shoppingOffer_info.posts.user.lastName}}
+                <p class="ssm:text-xs vs:text-xs lvs:text-sm text-base font-bold leading-none text-gray-900"><router-link to="/edit-profile" >{{shoppingOffer_info.posts.user.firstName}} {{shoppingOffer_info.posts.user.lastName}}</router-link>
                   <span class="text-blue-900 align-middle material-icons md-18 ">
                   verified
                 </span>
@@ -33,7 +33,7 @@
                 <p class="ssm:text-xs vs:text-xs lvs:text-sm text-base leading-none text-gray-500">posted a shopping offer</p>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2">
-                <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-500">{{timestamp(shoppingOffer_info.posts.dateCreated)}}</span>
+                <span class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-500">{{timestamp(shoppingOffer_info.posts.dateCreated).fromNow()}}</span>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
               alarm  
               </span>
-              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{shoppingOffer_info.deliverySchedule	}}</p>
+              <p class="text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-none text-gray-900 py-1">{{timestamp(shoppingOffer_info.deliverySchedule).format('LLL')}}</p>
             </div>
             <div class=" flex space-x-2">
               <span class=" w-6 h-6 rounded-full material-icons text-red-600">
@@ -134,7 +134,7 @@
         <!--section 4-->
 
         <!--section 5-->
-        <div class="flex justify-evenly w-full vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 pr-8 ssm:pr-0 vs:pr-0 mt-4 space-x-6">
+        <div v-if="shoppingOffer_info.posts.email !== shoppingOffer_info.posts.user.email" class="flex justify-evenly w-full vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 pr-8 ssm:pr-0 vs:pr-0 mt-4 space-x-6">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
           <button @click="toggleSendModal" class="flex focus:outline-none items-center space-x-2 ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ">
@@ -221,6 +221,8 @@ export default {
       shoppingOffer_postNumber: null,
 
       shoppingOffer_infos: [],
+
+      user_email: null,
     }
   },
   components: {
@@ -265,20 +267,38 @@ export default {
       api.get("api/shoppingoffers").then((data) => {this.shoppingOffer_infos = data.data; console.log("offer",this.shoppingOffer_infos)});
     },
     timestamp(date){
-      return moment(date).fromNow();
+      return moment(date);
     }
+    
   },
-  mounted(){
+  created(){
     this.loadShoppingOffer_infos();
+    //api.get("api/user").then((data) => {this.user_email = data.data.email; console.log("email",this.user_email)});
   },
-  computed: {
-     filterOffers: function() {
-       return this.shoppingOffer_infos.user.filter(function(value) {
-         if (value.postStatus == 'Accepting Request') {
-           return value.postStatus
-         }
-      })
-    },
- }
+//   computed: {
+//     //  filterOffers: function() {
+//     //    return this.shoppingOffer_infos.filter(function(value) {
+//     //      if (value.posts.email == this.user_email) {
+//     //        return value
+//     //      }
+//     //   })
+//       filterOffers: function() {
+//        api.get("api/user").then((data) => {this.shoppingOffer_infos = data.data; console.log("offer",this.shoppingOffer_infos)});
+//        return this.shoppingOffer_infos.user.filter(function(value) {
+//          if (value.postStatus == 'Accepting Request') {
+//            return value.postStatus
+//          }
+//       })
+//     },
+//  }
+// computed: {
+//      filterOffers: function() {
+//        return this.shoppingOffer_infos.filter(function(value) {
+//          if (value.postStatus == 'Accepting Request') {
+//            return value.postStatus
+//          }
+//       })
+//     }
+//  }
 }
 </script>

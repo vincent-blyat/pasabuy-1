@@ -87,7 +87,8 @@ Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
 
 Route::get("shoppingoffers",[shoppingOffersController::class, 'listShoppingOffers']);
 //Route::post("shoppingoffers",[shoppingOffersController::class, 'addShoppingOffers']);
-//Route::get("shoppingoffers/{id}",[shoppingOffersController::class, 'editShoppingOffers']);
+Route::post("/editshoppingoffers",[shoppingOffersController::class, 'editshoppingoffers']);
 Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrders']);
+//Route::put("editShoppingOffers",[shoppingOffersController::class, 'update']);
 Route::get("reviews",[reviewsController::class, 'listReviews']);
 Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);

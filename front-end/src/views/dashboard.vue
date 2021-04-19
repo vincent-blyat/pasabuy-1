@@ -102,7 +102,7 @@
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.user.firstName}} {{post_info.user.lastName}}
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"><router-link to="/edit-profile" >{{post_info.user.firstName}} {{post_info.user.lastName}}</router-link>
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
@@ -110,7 +110,7 @@
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.dateCreated}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{timestamp(post_info.dateCreated).fromNow()}}</span>
               </div>
             </div>
           </div>
@@ -496,6 +496,7 @@ import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import VueSimpleAlert from 'vue-simple-alert'
+import moment from 'moment'
 // import EditOrderRequest from "./EditOrderRequest"
 import api from '../api'
 
@@ -662,6 +663,9 @@ export default {
         VueSimpleAlert.alert('An error occured',"Error","error")
         console.log(error)
       })
+    },
+    timestamp(date){
+      return moment(date);
     }
   },
     mounted(){

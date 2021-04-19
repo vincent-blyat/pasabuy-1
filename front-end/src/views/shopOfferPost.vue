@@ -106,7 +106,7 @@ export default {
                 isLoggedIn: true,
                 email: '',
                 postIdentity: 'offer_post',
-                postStatus: 'foo bar'     
+                postStatus: 'Accepting Request'     
             },
             errors: null
         }
@@ -121,7 +121,6 @@ export default {
                 })
                 .catch((errors) => {
                     console.log(errors)
-                
                 })
         }
     },
