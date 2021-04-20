@@ -65,7 +65,14 @@
             <button
               v-for="(chatRoom, index) in chatRooms"
               :key="index"
-              @click="setRoom(chatRoomNames[index], chatRoom.messageRoomNumber, chatRoom.email1,chatRoom.email2)"
+              @click="
+                setRoom(
+                  chatRoomNames[index],
+                  chatRoom.messageRoomNumber,
+                  chatRoom.email1,
+                  chatRoom.email2
+                )
+              "
               type="button"
               class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
             >
@@ -238,62 +245,92 @@
         </div>
         <div class="overflow-auto h-4/5" id="journal-scroll">
           <!--------------U sent a request to Mark Arl------>
-          <div v-for="transaction in transactions" :key="transaction.postNumber">
           <div
-            v-if="transaction.emailCustomerShopper == authUser.email && (transaction.transactionReceiver==activeEmail1 || transaction.transactionReceiver==activeEmail2)"
-            class="sticky top-0 flex justify items-center shadow-lg bg-white border"
+            v-for="transaction in transactions"
+            :key="transaction.postNumber"
           >
-            <span class="text-sm p-3 w-full">
-              <span>You sent a request to</span>
-              <span class="font-semibold ml-2">{{ recipient }}</span>
-              <span class="ml-2">for</span>
-              <span class="font-semibold ml-2">Post {{ transaction.postNumber }} </span>
+            <div
+              v-if="
+                transaction.emailCustomerShopper == authUser.email &&
+                (transaction.transactionReceiver == activeEmail1 ||
+                  transaction.transactionReceiver == activeEmail2)
+              "
+              class="sticky top-0 flex justify items-center shadow-lg bg-white border"
+            >
+              <span class="text-sm p-3 w-full">
+                <span>You sent a request to</span>
+                <span class="font-semibold ml-2">{{ recipient }}</span>
+                <span class="ml-2">for</span>
+                <span class="font-semibold ml-2"
+                  >Post {{ transaction.postNumber }}
+                </span>
 
-              <div class="flex justify-end relative">
-                <button @click="cancelRequest(transaction.postNumber,transaction.indexTransactionPost)"
-                  class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
+                <div class="flex justify-end relative">
+                  <button
+                    @click="
+                      cancelRequest(
+                        transaction.postNumber,
+                        transaction.indexTransactionPost
+                      )
+                    "
+                    class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
+                  >
+                    <span>Cancel Request</span>
+                  </button>
+                  <button
+                    class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"
+                  >
+                    <span>View Post</span>
+                  </button>
+                </div>
+              </span>
+            </div>
+
+            <!--------------Someone sent u a request------>
+            <div
+              v-if="
+                transaction.transactionReceiver == authUser.email &&
+                (transaction.emailCustomerShopper == activeEmail1 ||
+                  transaction.emailCustomerShopper == activeEmail2)
+              "
+              class="sticky top-0 flex justify items-center shadow-lg bg-white border"
+            >
+              <span class="text-sm p-3 w-full">
+                <span
+                  ><span class="font-semibold mr-2"
+                    >{{ transaction.transaction_sender.firstName }}
+                    {{ transaction.transaction_sender.lastName }}</span
+                  >sent you a request</span
                 >
-                  <span>Cancel Request</span>
-                </button>
-                <button 
-                  class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"
-                >
-                  <span>View Post</span>
-                </button>
-              </div>
-            </span>
+                <span class="ml-2">for</span>
+                <span class="font-semibold ml-2"
+                  >Post {{ transaction.postNumber }}
+                </span>
+
+                <div class="flex justify-end relative">
+                  <button
+                    @click="
+                      declineOffer(
+                        transaction.postNumber,
+                        transaction.indexTransactionPost,
+                        transaction.emailCustomerShopper
+                      )
+                    "
+                    class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
+                  >
+                    <span>Decline</span>
+                  </button>
+                  <button
+                    class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"
+                  >
+                    <span>Accept</span>
+                  </button>
+                </div>
+              </span>
+            </div>
           </div>
-
-           <!--------------Someone sent u a request------>
-          <div
-            v-if="transaction.transactionReceiver== authUser.email && (transaction.emailCustomerShopper==activeEmail1 || transaction.emailCustomerShopper==activeEmail2)"
-            class="sticky top-0 flex justify items-center shadow-lg bg-white border"
-          >
-            <span class="text-sm p-3 w-full">
-              <span
-                ><span class="font-semibold mr-2">{{ transaction.transaction_sender.firstName }} {{ transaction.transaction_sender.lastName }}</span
-                >sent you a request</span
-              >
-              <span class="ml-2">for</span>
-              <span class="font-semibold ml-2">Post {{ transaction.postNumber }} </span>
-
-              <div class="flex justify-end relative">
-                <button  @click="declineOffer(transaction.postNumber,transaction.indexTransactionPost,transaction.emailCustomerShopper)"
-                  class="mx-2 mt-2 h-7 px-2 hover:text-white hover:bg-gray-300 focus:outline-none rounded-full border border-gray-700"
-                >
-                  <span>Decline</span>
-                </button>
-                <button
-                  class="mx-2 mt-2 h-7 px-2 hover:bg-gray-300 rounded-full focus:outline-none bg-red-700 text-white"
-                >
-                  <span>Accept</span>
-                </button>
-              </div>
-            </span>
-          </div>
-        </div>
           <!------------------->
-         
+
           <!------------------->
           <!--------------transaction details------>
           <!-- <div
@@ -325,7 +362,7 @@
               </div>
             </span>
           </div> -->
-          <div class="p-1 pl-2"  v-for="(chat, index) in chatRooms" :key="index">
+          <div class="p-1 pl-2" v-for="(chat, index) in chatRooms" :key="index">
             <div v-if="chat.messageRoomNumber === activeRoom">
               <div v-for="(msg, index) in chat.get_messages" :key="index">
                 <div v-if="msg.messageSender != authUser.email">
@@ -354,101 +391,99 @@
                   <div v-else>
                     <!-- if the message is a post--->
                     <!----------------------------------------->
-                    
+
                     <div
                       v-for="(msgPost, index) in parseString(msg.messageText)"
                       :key="index"
                     >
-                        <div class="flex items-end pr-10 mt-1 ">
-                          <img
-                            :src="msg.get_message_sender.profilePicture"
-                            class="rounded-lg h-8 w-8"
-                          />
-                          <div
-                            class="flex ml-4 mr-10 p-3 flex-col bg-gray-100 py-2 rounded-lg"
-                          >
-                              <div class="mx-4 mb-2 text-sm font-semibold">
-                                <span>Order Details</span>
-                              </div>
-                              <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
-                                <div class="flex flex-col px-2">
-                                  <div class="flex items-start">
-                                    <span
-                                      class="text-red-700 material-icons"
-                                      style="font-size: 18px"
-                                      >place</span
-                                    >
-                                    <span class="pl-2 pb-1">{{
-                                      msgPost.deliveryArea
-                                    }}</span>
-                                  </div>
-                                  <div class="flex items-start">
-                                    <span
-                                      class="text-red-700 material-icons"
-                                      style="font-size: 18px"
-                                      >shopping_cart</span
-                                    >
-                                    <span class="pl-2 pb-1">{{
-                                      msgPost.shoppingPlace
-                                    }}</span>
-                                  </div>
-                                  <div class="flex items-start">
-                                    <span
-                                      class="text-red-700 material-icons"
-                                      style="font-size: 16px"
-                                      >watch_later</span
-                                    >
-                                    <span class="pl-2 pb-1">{{
-                                      timestampSched(msgPost.deliverySchedule)
-                                    }}</span>
-                                  </div>
-                                  <div class="flex items-start">
-                                    <span
-                                      class="text-red-700 material-icons"
-                                      style="font-size: 16px"
-                                      >payments</span
-                                    >
-                                    <span class="pl-2">{{
-                                      msgPost.paymentMethod
-                                    }}</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mx-4 p-2 bg-white rounded-lg text-sm">
-                                <div>
-                                  <span class="font-semibold"
-                                    >Shopping List<span
-                                      class="ml-3 text-gray-500"
-                                      >8 items</span
-                                    ></span
-                                  >
-                                </div>
-                                <div>
-                                  <ul
-                                    class="text-gray-600 list-disc list-inside pl-4"
-                                  >
-                                    <li
-                                      v-for="items in shoppingList"
-                                      :key="items.ShoppingList"
-                                    >
-                                      <span>
-                                        {{ items.items }}
-                                      </span>
-                                    </li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="ml-0 mr-10 pb-1">
+                      <div class="flex items-end pr-10 mt-1">
+                        <img
+                          :src="msg.get_message_sender.profilePicture"
+                          class="rounded-lg h-8 w-8"
+                        />
+                        <div
+                          class="flex ml-4 mr-10 p-3 flex-col bg-gray-100 py-2 rounded-lg"
+                        >
+                          <div class="mx-4 mb-2 text-sm font-semibold">
+                            <span>Order Details</span>
+                          </div>
+                          <div class="mx-4 pr-2 pt-3 pb-3 text-sm">
+                            <div class="flex flex-col px-2">
+                              <div class="flex items-start">
                                 <span
-                                  class="time_date text-gray-500"
-                                  style="font-size: 10.5px"
+                                  class="text-red-700 material-icons"
+                                  style="font-size: 18px"
+                                  >place</span
                                 >
-                                  {{ timestamp(msg.dateCreated) }}
-                                </span>
+                                <span class="pl-2 pb-1">{{
+                                  msgPost.deliveryArea
+                                }}</span>
                               </div>
-                          
+                              <div class="flex items-start">
+                                <span
+                                  class="text-red-700 material-icons"
+                                  style="font-size: 18px"
+                                  >shopping_cart</span
+                                >
+                                <span class="pl-2 pb-1">{{
+                                  msgPost.shoppingPlace
+                                }}</span>
+                              </div>
+                              <div class="flex items-start">
+                                <span
+                                  class="text-red-700 material-icons"
+                                  style="font-size: 16px"
+                                  >watch_later</span
+                                >
+                                <span class="pl-2 pb-1">{{
+                                  timestampSched(msgPost.deliverySchedule)
+                                }}</span>
+                              </div>
+                              <div class="flex items-start">
+                                <span
+                                  class="text-red-700 material-icons"
+                                  style="font-size: 16px"
+                                  >payments</span
+                                >
+                                <span class="pl-2">{{
+                                  msgPost.paymentMethod
+                                }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mx-4 p-2 bg-white rounded-lg text-sm">
+                            <div>
+                              <span class="font-semibold"
+                                >Shopping List<span class="ml-3 text-gray-500"
+                                  >8 items</span
+                                ></span
+                              >
+                            </div>
+                            <div>
+                              <ul
+                                class="text-gray-600 list-disc list-inside pl-4"
+                              >
+                                <li
+                                  v-for="items in shoppingList"
+                                  :key="items.ShoppingList"
+                                >
+                                  <span>
+                                    {{ items.items }}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="ml-0 mr-10 pb-1">
+                            <span
+                              class="time_date text-gray-500"
+                              style="font-size: 10.5px"
+                            >
+                              {{ timestamp(msg.dateCreated) }}
+                            </span>
                           </div>
                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -492,10 +527,16 @@
                                     style="font-size: 18px"
                                     >place</span
                                   >
-                                  <span class="pl-2 pb-1" v-if="msgPost.deliveryArea == null">
+                                  <span
+                                    class="pl-2 pb-1"
+                                    v-if="msgPost.deliveryArea == null"
+                                  >
                                     {{ msgPost.deliveryAddress }}</span
                                   >
-                                  <span class="pl-2 pb-1" v-if="msgPost.deliveryAddress == null">
+                                  <span
+                                    class="pl-2 pb-1"
+                                    v-if="msgPost.deliveryAddress == null"
+                                  >
                                     {{ msgPost.deliveryArea }}</span
                                   >
                                 </div>
@@ -635,7 +676,7 @@
           </button>
         </div>
       </div>
-    <!--end of right corner-->
+      <!--end of right corner-->
     </div>
   </div>
   <!--end of desktop version-->
@@ -1093,7 +1134,12 @@
                 v-for="(chatRoom, index) in chatRooms"
                 :key="index"
                 @click="
-                  setRoom(chatRoomNames[index], chatRoom.messageRoomNumber,chatRoom.email1,chatRoom.email2)
+                  setRoom(
+                    chatRoomNames[index],
+                    chatRoom.messageRoomNumber,
+                    chatRoom.email1,
+                    chatRoom.email2
+                  )
                 "
                 type="button"
                 class="focus:bg-gray-200 relative w-full flex focus:outline-none justify-between items-center mt-2 p-2 hover:shadow-lg cursor-pointer transition"
@@ -1255,6 +1301,7 @@ import Navbar from "./Navbar";
 import api from "../api";
 import moment from "moment";
 import store from "../store/index";
+import Axios from 'axios';
 export default {
   components: {
     Navbar,
@@ -1285,8 +1332,8 @@ export default {
       out: [],
       incoming: [],
       chat: [],
-      activeEmail1:null,
-      activeEmail2:null,
+      activeEmail1: null,
+      activeEmail2: null,
       //sent a request
       //sent a request
       activity: "You sent a request to to",
@@ -1338,9 +1385,6 @@ export default {
                 vm.getChatRooms();
               });
             });
-            store.dispatch("getChatRoom").then(() => {
-              vm.getChatRooms();
-            });
           }
         );
       }
@@ -1367,7 +1411,7 @@ export default {
       }
     }, //end sendbtn
 
-    setRoom(name, room_ID,email1,email2) {
+    setRoom(name, room_ID, email1, email2) {
       this.toggleInbox = !this.toggleInbox;
       this.toggleChat = !this.toggleChat;
       this.activeName = name;
@@ -1446,7 +1490,9 @@ export default {
             //filtering only the user with messages and the active chatroom
             this.setRoom(
               this.chatRoomNames[i],
-              this.chatRooms[i].messageRoomNumber,this.chatRooms[i].email1,this.chatRooms[i].email2
+              this.chatRooms[i].messageRoomNumber,
+              this.chatRooms[i].email1,
+              this.chatRooms[i].email2
             );
 
         if (this.chatRooms[i].get_messages.length != 0)
@@ -1463,7 +1509,9 @@ export default {
       if (this.activeRoom == null && this.chatRooms.length != 0)
         this.setRoom(
           this.chatRoomNames[0],
-          this.chatRooms[0].messageRoomNumber,this.chatRooms[0].email1,this.chatRooms[0].email2
+          this.chatRooms[0].messageRoomNumber,
+          this.chatRooms[0].email1,
+          this.chatRooms[0].email2
         );
     },
     timestampRoom(datetime) {
@@ -1489,80 +1537,73 @@ export default {
     getUrlQuery() {
       if (this.$route.query.ID != null) {
         this.userQueryID = atob(this.$route.query.ID);
-        api.get("/sanctum/csrf-cookie").then(() => {
-          let params = { userEmail: this.userQueryID };
-          api.post("api/createChatRoom", params).then(() => {
-            store.dispatch("getChatRoom").then(() => {
-              this.getChatRooms();
-            });
+        let params = { userEmail: this.userQueryID };
+        Axios
+          .all([
+            api.get("/sanctum/csrf-cookie"),
+            api.post("api/createChatRoom", params),
+            api.get("api/getChatroom"),
+          ])
+          .then((responseArr) => {
+            store.commit("FETCH_ROOMS", responseArr[2]);
+            this.getChatRooms();
           });
-        });
       } else if (this.$route.query.postNum != null) {
         var params = [];
         params = this.$route.query.postNum.split("/?p=");
         var postNum = atob(params[0]);
         var email = atob(params[1]);
         var message = atob(params[2]);
+        params = { userEmail: email };
+        var transactionDetails = {
+                  email: email,
+                  postNumber: postNum,
+                };
 
-        console.log(
-          "post number=",
-          postNum,
-          " email = ",
-          email,
-          "message = ",
-          message
-        );
-        api.get("/sanctum/csrf-cookie").then(() => {
-          let params = { userEmail: email };
-          api.post("api/createChatRoom", params).then((res) => {
+        Axios
+          .all([
+            api.get("/sanctum/csrf-cookie"),
+            api.post("api/createChatRoom", params),
+          ])
+          .then((responseArr) => {
             var dataMessage = [];
             var dataMessage1 = {
-              roomID: res.data.messageRoomNumber,
+              roomID: responseArr[1].data.messageRoomNumber,
               message: message,
             };
-            var foundPost = this.posts.find(
-              (x) => x.postNumber === postNum
-            ); //find the passed post in the stored objects in vuex
+            var foundPost = this.posts.find((x) => x.postNumber === postNum); //find the passed post in the stored objects in vuex
 
             if (foundPost.offer_post != null) {
               dataMessage = {
-                roomID: res.data.messageRoomNumber,
+                roomID: responseArr[1].data.messageRoomNumber,
                 message: JSON.stringify(foundPost.offer_post),
               };
               console.log(dataMessage);
             } else {
               dataMessage = {
-                roomID: res.data.messageRoomNumber,
+                roomID: responseArr[1].data.messageRoomNumber,
                 message: JSON.stringify(foundPost.request_post),
               };
               console.log(dataMessage);
             }
-            api.post("/api/sendMessage", dataMessage).then((res) => {
-              console.log("success, message post sent.  ", res.data);
-              api.post("/api/sendMessage", dataMessage1).then((res) => {
-                console.log("success, message message sent.  ", res.data);
+
+             Axios.all([
+                api.post("/api/sendMessage", dataMessage),
+                api.post("/api/sendMessage", dataMessage1),
+                api.post("/api/createTransaction", transactionDetails),
+                api.get("/api/getTransaction"),
+                api.get("/api/getChatroom")
+
+             ]).then(responseArr=>{
+                console.log('transactions', responseArr[3].data)
+                store.commit('setUserTransactions',responseArr[3].data)
+                store.commit('FETCH_ROOMS',responseArr[4].data)
                 var box = document.getElementById("journal-scroll");
                 box.scrollIntoView();
-                var transactionDetails= {
-                  email :email,
-                  postNumber : postNum
-                }
-                api.post("/api/createTransaction", transactionDetails).then((res) => {
-                  console.log("success, transaction Added.  ", res.data);
-                  store.dispatch("getUserTransactions").then(() => {
-                     store.dispatch("getChatRoom").then(() => {
-                      this.getChatRooms();
-                    });
-                  });
-                });
-              });
-            });
-            
+             })
           });
-        });
       }
-      //do nothing
-      return;
+
     },
     hasPostNum(text) {
       return text.search("postNumber");
@@ -1584,20 +1625,27 @@ export default {
       data[0] = JSON.parse(string);
       return data;
     },
-    cancelRequest(postNum,indexTransactionPost){
-      api.post('api/cancelRequest',{postNumber:postNum,ID:indexTransactionPost}).then((res)=>{
-        console.log(res)
-        store.dispatch("getUserTransactions").then(() => {
-        });
+    cancelRequest(postNum, indexTransactionPost) {
+
+      Axios.all([
+        api.post("api/cancelRequest", {postNumber: postNum,ID: indexTransactionPost}),
+        api.get("/api/getTransaction"),
+      ]).then(resArr=>{
+        store.commit('setUserTransactions',resArr[1].data)
       })
     },
-    declineOffer(postNum,indexTransactionPost,user){
-      console.log("asdfaf",postNum,indexTransactionPost)
-      api.post('api/declineRequest',{postNumber:postNum,ID:indexTransactionPost,userNotif:user}).then((res)=>{
-        console.log(res)
-        store.dispatch("getUserTransactions").then(() => {
+    declineOffer(postNum, indexTransactionPost, user) {
+      console.log("asdfaf", postNum, indexTransactionPost);
+      api
+        .post("api/declineRequest", {
+          postNumber: postNum,
+          ID: indexTransactionPost,
+          userNotif: user,
+        })
+        .then((res) => {
+          console.log(res);
+          store.dispatch("getUserTransactions").then(() => {});
         });
-      })
     },
     // search(receiver,sender, myArray){
     //   for (var i=0; i < myArray.length; i++) {
@@ -1610,16 +1658,16 @@ export default {
     //  filteredTransactions(){
     //   var i,j;
     //   var rows=this.transactions
-    
+
     //   // for(i=0;i<this.transactions.length;i++){
     //   //   rows[i] = this.search(this.transactions[i].transactionReceiver,this.transactions[i].emailCustomerShopper,this.transactions)
     //   // }
     //   // for(j=0;j<rows.length;j++){
-    //   //   var  
+    //   //   var
     //   //   if(rows[i])
     //   // }
     //   rows = rows.filter(function (el) {
-    //             var  val1 =  
+    //             var  val1 =
     //             return el.transactionNumber.search('084'+val1+val2,'084'+val2+val1);
     //           });
     //   // rows=this.transactions
@@ -1630,15 +1678,13 @@ export default {
     //           });
 
     //   console.log('arows = ', rows)
-      
-      
+
     //   // return filtered
     // }
   }, //end methods
   created() {
     this.getUrlQuery();
     this.getChatRooms();
-
   },
   computed: {
     authUser() {
@@ -1653,7 +1699,6 @@ export default {
     transactions() {
       return store.getters.getUserTransactions;
     },
-   
   },
 }; //end export default
 const add = document.querySelector("#add");

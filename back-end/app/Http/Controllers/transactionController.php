@@ -36,10 +36,19 @@ class transactionController extends Controller
     }
     public function getTransaction(Request $request)
     {
-        # code...
-        $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')->where('emailCustomerShopper',Auth::user()->email)->orWhere('transactionReceiver',Auth::user()->email)->where('transactionStatus','pending')->orderBy('dateCreated','desc')->get();
-        // $transaction = Post::has('transaction')->where('email',Auth::user()->email)->orWhere('email','hokage.igneel@gmail.com')->join('tbl_transaction.emailCustomerShopper','=','tbl_post.email')->where('tbl_transaction.emailCustomerShopper',Auth::user()->email)->orWhere('tbl_transaction.emailCustomerShopper','hokage.igneel@gmail.com')->where('tbl_transaction.transactionStatus','pending')->orderBy('tbl_transaction.dateCreated','desc')->get();
 
+        # code...
+        $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')
+            ->where(function($query) {
+                $query->where('emailCustomerShopper', Auth::user()->email)
+                ->orWhere('transactionReceiver', Auth::user()->email);
+            })->where('transactionStatus','pending')
+              ->orderBy('dateCreated','desc')
+              ->get();
+        // $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')->orWhere([['emailCustomerShopper','\''.Auth::user()->email.'\''],['transactionReceiversss','\''.Auth::user()->email.'\'']])->where('transactionStatus','\'pending\'')->orderBy('dateCreated','desc')->get();
+        // $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')->where('emailCustomerShoppeasr',Auth::user()->email)->orWhere('transactionReceiver',Auth::user()->email)->where('transactionStatus','=','pending')->orderBy('dateCreated','desc')->get();
+        // $transaction = Post::has('transaction')->where('email',Auth::user()->email)->orWhere('email','hokage.igneel@gmail.com')->join('tbl_transaction.emailCustomerShopper','=','tbl_post.email')->where('tbl_transaction.emailCustomerShopper',Auth::user()->email)->orWhere('tbl_transaction.emailCustomerShopper','hokage.igneel@gmail.com')->where('tbl_transaction.transactionStatus','pending')->orderBy('tbl_transaction.dateCreated','desc')->get();
+        
         return response()->json($transaction);
     }
     public function cancelRequest(Request $request)
