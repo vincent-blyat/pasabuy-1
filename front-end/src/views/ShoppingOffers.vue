@@ -15,7 +15,7 @@
   <!--end-->
 
   <!--user post-->
-  <div v-for="shoppingOffer_info in shoppingOffer_infos" v-bind:key="shoppingOffer_info.indexShoppingOfferPost" class="flex items-center justify-center pt-6">
+  <div v-for="shoppingOffer_info in shoppingOffer_infos" v-bind:key="shoppingOffer_info.offer_post.indexShoppingOfferPost" class="flex items-center justify-center pt-6">
     <div class="space-x-4 h-auto p-6 vs:p-4 ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
