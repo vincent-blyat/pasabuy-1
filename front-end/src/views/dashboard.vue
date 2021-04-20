@@ -1,7 +1,7 @@
 <template class="bg-gray-bgcolor">
     <Navbar/>
 
-    <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
+    <div class="flex pb-24 flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
         <div class="pt-5 bg-gray-100 mv:pt-1 font-nunito rounded-xl llg:pl-5">
    <div class="w-full min-w-0 px-2 ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 rounded-xl">
@@ -18,7 +18,7 @@
   <!--end-->
 
 <!--FILTER--->
-     <div class="relative flex items-center justify-center pt-3 ssm:justify-around x-v:pt-2  dv:float-right">
+     <div class="relative flex items-center justify-center pt-6 ssm:justify-around x-v:pt-2  dv:float-right">
     <div class="justify-center h-auto bg-transparent ssm:px-0 dv:space-x-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full dv:w-608 rounded-xl">
       <div class="flex items-start justify-start dv:flex-wrap ssm:space-x-0 ssm:space-y-2 ssm:flex-col ssm:justify-start">
           <button type="button" class=" mr-4 vs:mr-2 inline-flex ssm:float-left 2xl:w-50 ssm:px-0 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
@@ -89,8 +89,8 @@
   
 
   <!--user post-->
-  <div class="shopOffer-UserPost flex items-center justify-center pt-3 x-v:pt-2 dv:float-right ">
-    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+  <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right ">
+    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
@@ -111,7 +111,7 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1">
+          <div id="3dotmenu" class="vs:mt-1">
             <button @click="edit1=!edit1" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
@@ -201,7 +201,7 @@
         <!--section 4-->
 
         <!--section 5-->
-        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
           <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
@@ -225,8 +225,8 @@
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share1" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button @click="showOfferShareModal" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+            <div v-if="share1" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
+              <button @click="showShareDisplay" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
                 share
                </span>
@@ -249,8 +249,8 @@
   <!--end of user post-->
 
   <!--user post-->
-  <div class="shopOrder-UserPost flex items-center justify-center pt-3 x-v:pt-2 dv:float-right">
-    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+  <div id="shopOrder-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right">
+    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
@@ -271,7 +271,7 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1">
+          <div id="3dotmenu" class="vs:mt-1">
             <button @click="edit2=!edit2" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
@@ -370,7 +370,7 @@
         <!--section 4-->
 
         <!--section 5-->
-        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
           <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ">
@@ -394,7 +394,7 @@
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share2" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
+            <div v-if="share2" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
               <button @click="showOrderShareModal" class="flex flex-row text-base gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:text-sm">
                 share
@@ -431,11 +431,24 @@
       </button>
       </div>
      <div id="fkmouse" class="modal-body cursor-not-allowed px-2"></div>
-     <div id="modal-footer" class="flex px-2 pt-4 pb-4 items-center justify-center ssm:px-2 vs:px-2">
+     <div id="modal-footer" class="flex px-2 pb-4 items-center justify-center ssm:px-2 vs:px-2">
         <button class="focus:outline-none inline-flex items-center justify-center px-4 py-2 bg-red-700 rounded-full w-full ssm:h-8 ssm:w-full vs:w-full">
           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-normal text-center text-white">Share Post</p>
       </button>
       </div>
+</div>
+</div>
+<!--end-->
+
+    <!--Display Shared Post-->
+    <div id="display-sharedPost" class="pt-6 flex-col dv:float-right justify-center items-center">
+<div id="display-content" class="flex-col w-608 space-y-4 bg-white h-auto rounded-lg">
+      <div id="display-header" class="flex pt-4 px-2 justify-between items-center">
+        <div class="focus:outline-none flex items-center space-x-4">
+        <p @click="$router.push('edit-profile')" class="text-base italic leading-none text-gray-900"><span class="font-bold ">Asta Staria</span> shared this post</p>
+        </div>
+      </div>
+     <div id="fkmouse" class="display-body cursor-not-allowed"></div>
 </div>
 </div>
 <!--end-->
@@ -447,7 +460,7 @@
    <!----------------------------START OF SHOPPING LISTS--------------------->
         <div class="w-2/5 pt-20 overflow-hidden llg:w-35 pl-7 vs:hidden ssm:hidden md:hidden sm:hidden xsm:hidden">
           <!-----------ACTIVE ORDERS---------------------->
-            <div class="mb-3 bg-white shadow-md w-72 rounded-2xl">
+            <div class="mb-6 bg-white shadow-md w-72 rounded-2xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE ORDERS
                   <span class="inline-flex pl-20 pr-3 align-bottom material-icons-round md-18">
@@ -513,7 +526,7 @@
             <!-----------END OF ACTIVE ORDERS---------------->
           
             <!-----------ACTIVE DELIVERIES---------------------->
-            <div class="z-0 mb-3 bg-white w-72 rounded-xl vs:hidden xsm:hidden ssm:hidden">
+            <div class="z-0 mb-6 bg-white w-72 rounded-xl vs:hidden xsm:hidden ssm:hidden">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE DELIVERIES
                   <span class="inline-flex pl-16 pr-3 align-bottom material-icons-round md-18">
@@ -584,7 +597,7 @@
           
 
           <div class="flex flex-wrap float-left font-nunito md:block vs:hidden xsm:hidden ssm:hidden">
-            <div class="mb-3 bg-white w-72 rounded-xl">
+            <div class="mb-6 bg-white w-72 rounded-xl">
                <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 SHOPPING LIST
                   <span class="inline-flex pl-24 pr-3 align-bottom material-icons-round md-18">
@@ -791,13 +804,29 @@ export default {
       this.editOrderRequest = false;
     },
     showOfferShareModal(){
-      $('.shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      ////without 3 dot menu when share post modal is open
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+      
+      ////with 3 dot menu when share post modal is open
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      
       $('#modal-background').css({display: 'flex'});
       $(".target").hide();
       this.share1 = !this.share1
     },
     showOrderShareModal(){
-      $('.shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      //without 3 dot menu when share post modal is open
+      var container = $('#shopOrder-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+
+      //with 3 dot menu when share post modal is open
+      //$('#shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+
       $('#modal-background').css({display: 'flex'});
       $(".target").hide();
       this.share2 = !this.share2
@@ -806,6 +835,28 @@ export default {
       $('#modal-background').css({display: 'none'});
       $('#modal-background').find('.modal-body').empty();
     },
+    showShareDisplay(){
+      //without 3dot menu when shared
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"});
+      $('display-header').find('#closeButton').remove();
+      $('#display-footer').css({padding: '0'}).remove();
+      clonedContainer.appendTo('.display-body')
+      $('#display-sharedPost').css({display: 'flex'});
+
+      //with 3dot menu when shared
+      //$('#shopOffer-UserPost').find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"})
+      //$('#shopOffer-UserPost').find('#3dotmenu').remove()
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.display-body');
+      //$('display-header').find('#closeButton').empty();
+      //$('#display-footer').css({padding: '0'}).empty();
+
+      $(".target").hide();
+      this.share1 = !this.share1
+      
+    },
   }
   
 }
@@ -813,7 +864,7 @@ export default {
 
 <style scoped>
 #fkmouse{
-  pointer-events: none
+  pointer-events: none;
 }
 
 #modal-background{
@@ -826,6 +877,9 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    
+}
+
+#display-sharedPost{
+  display:none;
 }
 </style>

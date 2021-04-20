@@ -210,7 +210,7 @@ export default {
             dropdown2: false,
             dropdown3: false,
             dropdown4: false,
-            deliveryAddress: "Delivery Address",
+            deliveryAddress: "Delivery Area",
             address1: "Banquerohan,Legazpi City",
             address2: "Buraguis Legazpi City",
             address3: "United State of Bicol",

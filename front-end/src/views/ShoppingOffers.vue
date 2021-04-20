@@ -15,7 +15,7 @@
   <!--end-->
 
   <!--user post-->
-  <div class=" shopOffer-UserPost flex items-center justify-center pt-6">
+  <div id="shopOffer-UserPost" class="flex items-center justify-center pt-6">
     <div class="space-x-4 h-auto p-6 vs:p-4 ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1">
+          <div id="3dotmenu" class="vs:mt-1">
             <button @click="edit1=!edit1" class="focus:outline-none">
               <img class="w-6 vs:w-4 lvs:w-5 ssm:w-4 h-auto" src="img/3dot.svg"/>
             </button>
@@ -285,10 +285,18 @@ export default {
     },
 
     showShareModal(){
-      $('.shopOffer-UserPost').clone().css({padding: '0'}).appendTo('.modal-body');
+      ////without 3 dot menu when share post modal is open
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+      
+      ////with 3 dot menu when share post modal is open
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      
       $('#modal-background').css({display: 'flex'});
       $(".target").hide();
-              this.share = !this.share
+      this.share = !this.share
     },
 
     hideShareModal(){
