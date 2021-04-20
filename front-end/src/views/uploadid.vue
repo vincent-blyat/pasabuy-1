@@ -1,5 +1,10 @@
 <template class="bg-gray-00 font-nunito">
-
+ <loading
+     :show="show"
+     :label="label"
+     event-show="show-my-full-loading"
+     event-hide="hide-my-full-loading">
+ </loading>
   <div class="flex items-center ">
       <router-link to="/">
         <img src="/img/pasaBUYLogoOnly.png" class="w-20 h-16 block">
@@ -116,8 +121,12 @@
 </style>
 <script>
 import api from '../api'
+import store from "../store/index"
+import loading from 'vue-full-loading'
 export default {
- 
+ components: {
+    loading,
+  },
   created: function () {
     document.body.style.backgroundColor = "rgb(235,235,235)";
   },
@@ -174,24 +183,39 @@ methods:{
         this.edit2=null;
     },
         saveUser(){
+            this.show = !this.show
             var dataform = {personal:JSON.parse(localStorage.getItem('personal')), account:JSON.parse(localStorage.getItem('account')), address: JSON.parse(localStorage.getItem('address')) }
 
             console.log('mail=',dataform.personal.email)
-            api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
+            api.post('/api/register', {email:dataform.personal.email, password:dataform.account.password, firstName:dataform.personal.firstName, lastName:dataform.personal.lastName, phoneNumber:dataform.personal.phoneNumber, landMark:dataform.address.landMark, houseNumber:dataform.address.houseNumber, province:dataform.address.province,barangay:dataform.address.barangay, cityMunicipality:dataform.address.cityMunicipality}).then((res)=>{
                  console.log(res.data);
                  if(res){
-                     localStorage.removeItem('personal')
-                     localStorage.removeItem('account')
-                     localStorage.removeItem('address')
-                     this.$router.push({name:"accountsettings"});
+                     this.dispatches().then(()=>{//wait for the dispatches to finish
+                        localStorage.removeItem('personal')
+                        localStorage.removeItem('account')
+                        localStorage.removeItem('address')
+                        this.show = !this.show
+                        sessionStorage.setItem('isLoggedIn', true);
+                        this.$router.push({name:"accountsettings"});
+                    })
                  }
                  else{
                      console.log('informmation not saved')
                  }
                 
              
+            }).catch(()=>{
+                this.show = !this.show
             })
-        }
+        },
+         async dispatches(){
+            await store.dispatch('getAuthUser')
+            await store.dispatch('getPersonal')
+            await store.dispatch('getUserAddress')
+            await store.dispatch('getPosts')
+            await store.dispatch('getUnreadNotifications')
+            await store.dispatch('getAllNotifications')
+            }
 
 },
 

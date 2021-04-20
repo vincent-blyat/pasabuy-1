@@ -1,7 +1,7 @@
 <template>
     <div class="border-black ">
-        <button @click="isOpen=!isOpen" class=" focus:outline-none h-10 w-10 border-2 rounded-full border-red-700">
-        <img class="h-9.7 w-10 rounded-full" src="/img/yami.jpg">
+        <button @click="isOpen=!isOpen" class="  h-10 w-10 border-2 rounded-full border-red-700">
+        <img class="h-9.7 w-10 rounded-full" :src="userPersonal.profilePicture" style="object-fit:cover; vertical-align:middle">
         </button>
       </div>
     <div class="w-full ">  
@@ -22,14 +22,33 @@
 </template>
 
 <script>
+import api from '../api'
+import store from '../store/index'
 export default {
-    data(){
-        return{
-            isOpen:false
-        }
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+  components: {}, 
+  methods:{
+    logout(){
+        console.log('logout');
+         window.Echo.leave('App.Models.User.'+this.user.indexUserAuthentication)
+        api.post('api/logout').then(()=>{
+          sessionStorage.removeItem('vuex');
+          sessionStorage.removeItem('isLoggedIn');
+          this.$router.push({name:"Home"});
+        })
+    }
+  },
+    computed:{
+    user(){
+      return store.getters.getUser
     },
-     components:{
-    
-  }
+    userPersonal(){
+      return store.getters.getPersonal
+    },
+  },
 }
 </script>

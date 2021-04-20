@@ -68,15 +68,16 @@ data(){
 },
 methods:{
   save(){
+    this.errors = ''
     var params = {password:this.password,currentPassword:this.currentPassword,password_confirmation:this.password_confirmation}
     api.post('/api/changePassword',params).then((res)=>{
       VueSimpleAlert.alert(res.data.message,"Success","success")
       this.toggle=false
     }).catch((errors)=>{
       if(errors.response.data.currentPassword == undefined)
-        this.errors=errors.response.data.password+' '
-      else if(errors.response.data.password == undefined)
-        this.errors=errors.response.data.currentPassword+' '
+         errors.response.data.currentPassword= '' 
+      if(errors.response.data.password == undefined)
+         errors.response.data.password= '' 
       else
         this.errors=errors.response.data.currentPassword+' '+errors.response.data.password
     })

@@ -10,7 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
-class SharedNotification extends Notification
+class cancelledRequestNotification extends Notification
 {
     use Queueable;
 
@@ -26,20 +26,31 @@ class SharedNotification extends Notification
         $this->postNumber = $postNumber;
     }
 
- 
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
     public function via($notifiable)
     {
         return ['database','broadcast'];
     }
 
 
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
     public function toDatabase($notifiable)
     {
         $user = userInformation::where('email',Auth::user()->email)->get();
         return [
-            'sharer' => $user[0]->firstName.' '.$user[0]->lastName,
+            'canceller' => $user[0]->firstName.' '.$user[0]->lastName,
             'postNumber' => $this->postNumber,
-            'sharerPic' =>  "http://localhost:8000/storage/images/".$user[0]->profilePicture,
+            'cancellerPic' =>  "http://localhost:8000/storage/images/".$user[0]->profilePicture,
         ];
     }
 
@@ -47,18 +58,11 @@ class SharedNotification extends Notification
     {
         $user = userInformation::where('email',Auth::user()->email)->get();
         return new BroadcastMessage([
-            'sharer' => $user[0]->firstName.' '.$user[0]->lastName,
+            'canceller' => $user[0]->firstName.' '.$user[0]->lastName,
             'postNumber' => $this->postNumber,
-            'sharerPic' =>  "http://localhost:8000/storage/images/".$user[0]->profilePicture,
+            'cancellerPic' =>  "http://localhost:8000/storage/images/".$user[0]->profilePicture,
+
         ]);
     }
-
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
 
 }

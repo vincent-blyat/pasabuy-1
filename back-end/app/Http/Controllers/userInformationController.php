@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class userInformationController extends Controller
 {
@@ -25,7 +27,7 @@ class userInformationController extends Controller
         # code...
         $user = Auth::user();
         $data = DB::select('SELECT * FROM tbl_userInformation WHERE  email = \''.$user->email.'\'');
-        $data[0]->profilePicture= utf8_encode($data[0]->profilePicture);
+        // $data[0]->profilePicture= Storage::url($data[0]->profilePicture);
         return response()->json($data[0]);
     }
 
@@ -47,7 +49,7 @@ class userInformationController extends Controller
         $data = DB::select('SELECT * FROM tbl_userLanguages WHERE email = \''.$user->email.'\'');
 
         if($data == null)
-            return response()->json('');
+            return response()->json([]);
         return response()->json($data[0]);
     }
 
@@ -112,11 +114,19 @@ class userInformationController extends Controller
     public function changePassword(Request $request)
     {
         # code...
-
+        $messages = ['password.regex' => ' Must contain at least one lowercase letter (a – z).
+                        Must contain at least one uppercase letter (A – Z).
+                        Must contain at least one digit (0-9).'
+                    ];
         $validator=Validator::make($request->all(),[
             'currentPassword' => ['required'],
-            'password' => ['required','confirmed','min:8']
-        ]);
+            'password' => ['required',
+                            'confirmed',
+                            'min:8',
+                            'regex:/[a-z]/',      // must contain at least one lowercase letter
+                            'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                            'regex:/[0-9]/',      // must contain at least one digit
+                        ],],$messages);
         if($validator->fails()) {
             return response()->json($validator->errors(),422);
         }
@@ -145,29 +155,41 @@ class userInformationController extends Controller
             return response()->json($validator->errors(),422);
         }
 
-        $contents = file_get_contents($request->photo->path());
+        $image = $request->file('photo');
+        $file_name = $request->file('photo')->hashName();
+        $image_resize = Image::make($image->getRealPath());              
+        $image_resize->save(public_path('storage\images\\' .$file_name))->fit(500,500);
+        
         $user = userInformation::where('email',Auth::user()->email)->first();
-        $user->profilePicture = $contents;
+        // //accessbile in public/storage/images
+        // $request->file('photo')->store('public/images');
+        // $file_name = $request->file('photo')->hashName();
+        // $image = Image::make(public_path("storage/{$imagePath}/".$file_name))->fit(500, 500);
+        //$image->save();
+        // ensure every image has a different name
+        
+        // save new image $file_name to database
+        //$user->update(['image' => $file_name]);
+        $user->profilePicture = $file_name;
         if($user->save()){
             return response()->json(['message'=>'Profilce Picture successfully changed.'],200);
         }else{
             return response()->json(['error'=>'Something went wrong'],422);
         }
+        
     }
 
     public function editPersonal(Request $request)
     {
         # code...
-      
-        $request->validate([
-             'firstname' => ['required'],
-             'lastname' => ['required'],
-             'phone_number' => ['required'],
-             'gender' => '',
-             'birdate' => ['required'],
-             'language' => ['required']
+        $validator=Validator::make($request->all(),[
+            'firstname' => ['required','regex:/^[\pL\s\-]+$/u','max:255'],
+             'lastname' => ['required','regex:/^[\pL\s\-]+$/u','max:255'],
+             'phone_number' => ['required','numeric','digits:11'],
         ]);
-        
+        if($validator->fails()) {
+            return response()->json($validator->errors(),422);
+        }
         //updating userinfo table
         $userEmail = Auth::User()->email;
         $user = userInformation::where('email',$userEmail)->first();
@@ -183,7 +205,6 @@ class userInformationController extends Controller
             if($userLang == null){
                 $userLang= new userLanguages();
                 $userLang->email = Auth::User()->email;
-                $userLang->userLanguageNumber = userLanguages::count()+1;
                 $userLang->languages = $request->language;
                 $userLang->save();
                 return response()->json(['message'=>'Success, Information saved.'],200);
@@ -200,36 +221,6 @@ class userInformationController extends Controller
             return response()->json('error, information not saved');
         }
 
-    }
-
-    public function editAddress(Request $request)
-    {
-        # code...
-      
-        $request->validate([
-             'house_number' => ['required'],
-             'province' => ['required'],
-             'city' => ['required'],
-             'barangay' => ['required']
-        ]);
-        //updating userinfo table
-        $userEmail = Auth::User()->email;
-        $user = userAddress::where('email',$userEmail)->first();
-        if($user==null){
-            $user = new userAddress();
-            $user->email = $userEmail;
-        }
-        $user->houseNumber = $request->house_number;
-        $user->province = $request->province;
-        $user->cityMunicipality = $request->city;
-        $user->barangay = $request->barangay;
-       
-        if($user->save()){
-            return response()->json(['message'=>'Success, Information saved'],200);
-        }
-        else{
-            return response()->json(['error'=>'An error occured'],422);
-        }
     }
   
 

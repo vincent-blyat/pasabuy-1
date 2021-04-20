@@ -1,12 +1,30 @@
 <template>
-    
-         <!--User Profile-->
-         <div class="inline-flex space-x-2 items-center justify-start p-4 ssm:mt-0 vs:mt-1">
-           <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" src="img/yami.jpg"/>
-           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
-         </div>
-         <!--end-->
-
+    <!--User Profile-->
+    <div class="inline-flex space-x-2 items-center justify-start p-4 mt-2">
+        <img class="w-14 h-full border rounded-full border-gray-200" :src="profile.profilePicture" />
+        <p class="text-base font-bold leading-none text-gray-900">{{profile.firstName}} {{profile.lastName}}</p>
+    </div>
+    <!--end-->
+    <!--Accepting Request Button
+         <div class="inline-flex flex-col items-start justify-start pl-5 mt-2">
+            <div class="inline-flex space-x-2 items-center justify-start px-2 py-1 border rounded-full border-gray-500">
+                <img class="w-6 h-full rounded-full" src="img/checkcircle.svg"/>
+                <p class="text-sm font-bold leading-none text-indigo-900">Accepting Requests</p>
+                <button @click="isOpen=!isOpen" >
+                    <img class="w-6 h-full rounded-full" src="img/arrowdown (1).svg"/>
+                </button>
+                
+                <div class="w-full">
+                      <div v-if="isOpen" class="shadow-xl fixed bg-white rounded-lg py-2 pl-2 pr-4 pt-2 ">
+                        <router-link to="#"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">mode</span>Accepting Request</router-link>
+                        <router-link to="#" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">delete</span>Accepting Offers</router-link>
+                    </div>
+                    </div>
+                    
+            </div>
+        </div>-->
+    <!--end-->
+    <form @submit.prevent='createOfferPost'>
         <!--Delivery information list-->
          <div class="flex flex-col mt-1 vs:mt-1 ssm:px-2 vs:px-2 sm:px-2 justify-center items-center">
              <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
@@ -200,99 +218,38 @@
            <!--end-->
 </template>
 
-<script>
+// import api from '../api'
+import store from "../store/index"
 export default {
-    data (){
-        return{
-            isOpen:false,
-            addAddress: false,
-            dropdown1: false,
-            dropdown2: false,
-            dropdown3: false,
-            dropdown4: false,
-            deliveryAddress: "Delivery Area",
-            address1: "Banquerohan,Legazpi City",
-            address2: "Buraguis Legazpi City",
-            address3: "United State of Bicol",
-            address4: "Maski Sain City"
+    props:['profile'],
+    data() {
+        return {
+            isOpen: false,
+            form_data: {
+                deliveryArea: '',
+                shoppingPlace: '',
+                deliverySchedule: '',
+                transportMode: '',
+                capacity: '',
+                paymentMethod: '',
+                caption: '',
+                isLoggedIn: true,
+                email: store.getters.getUser.email,
+                postIdentity: 'offer_post',
+                postStatus: 'Accepting Request'     
+            },
+            errors: null
         }
     },
-    methods:{
-        openAddModal(){
-            this.addAddress = !this.addAddress
-        },
-        
-        getAddressValue(){
-          this.deliveryAddress = this.address1 
-        },
-        myFunction() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } 
-            else {
-                li[i].style.display = "none";
-            }
-          }
-        },
-},
-}
-</script>
-
-<style scoped>
-#scroll1::-webkit-scrollbar-track
-{
-	
-	border-radius: none;
-	
-}
-#scroll1::-webkit-scrollbar
-{
-	width: 6px;
-	
-}
-#scroll1::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: grey;
-}
-#button1{
-    padding:0;
-    margin:0;
-}
-#myUL {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-#myUL li a {
-  margin-top: -1px; /* Prevent double borders */
-  text-decoration: none;
-  color: black;
-  display: block
-}
-#myUL li a:hover:not(.header) {
-  background-color: #eee;
-}
-#myInput {
-  background-image: url('/img/search.svg');
-  background-position: 8px 4px;
-  background-repeat: no-repeat;
-  background-size: 24px;
-  width: 100%;
-  padding: 4px 0px 4px 35px;
-  border: 1px solid #ddd;
-  margin-bottom: 6px;
-}
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
- --tw-text-opacity: 1;
-color: rgba(107, 114, 128, var(--tw-text-opacity));
+    methods: {
+        createOfferPost() {
+            console.log(this.form_data)
+            store.dispatch('createPostOffer',this.form_data).then(()=>{
+                store.dispatch('getPosts')
+                this.$parent.$emit('closeModal')
+            })
+            
+        }
+    },
 }
 </style>

@@ -9,6 +9,11 @@ use App\Http\Controllers\forgotPasswordController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
+use App\Http\Controllers\transactionController;
+use App\Http\Controllers\shoppingOffersController;
+use App\Http\Controllers\shoppingOrdersController;
+use App\Http\Controllers\reviewsController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +41,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getAddress', [userInformationController::class, 'getAddress']);
     Route::get('/getLanguages', [userInformationController::class, 'getLanguages']);
     Route::post('/editPersonal', [userInformationController::class, 'editPersonal']);
-    Route::post('/editAddress', [userInformationController::class, 'editAddress']);
+    Route::post('/editAddress', [addressController::class, 'editAddress']);
     Route::post('/editAccount', [userInformationController::class, 'editAccount']);
     Route::get('/getValidID', [userInformationController::class, 'getValidID']);
     Route::get('/getChatroom', [messageController::class, 'getChatroom']);
@@ -52,6 +57,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/changePassword', [userInformationController::class, 'changePassword']);
     Route::post('/confirmUser', [userInformationController::class, 'confirmUser']);
     Route::post('/updateProfilePic', [userInformationController::class, 'updateProfilePic']);
+    Route::post('/createChatRoom', [messageController::class, 'createRoom']);
+    Route::post('/createTransaction', [transactionController::class, 'createTransaction']);
+    Route::get('/getTransaction', [transactionController::class, 'getTransaction']);
+    Route::post('/cancelRequest', [transactionController::class, 'cancelRequest']);
+    Route::post('/declineRequest', [transactionController::class, 'declineRequest']);
+ 
  
     
 });
@@ -76,9 +87,15 @@ Route::get('refProvince',[addressController::class, 'refProvince'] );
 Route::get('refcityMunicipality',[addressController::class, 'refcityMunicipality'] );
 Route::get('refBrgy',[addressController::class, 'refBrgy'] );
 
-Route::post('post/offer', [PostController::class, 'create_offer_post'])->name('create_offer_post');
-Route::post('post/request', [PostController::class, 'create_request_post']);
-
-
 Route::post('/password/email',[forgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
+
+Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);
+Route::get('user/feed', [PostController::class, 'getFeeds']);
+Route::get("shoppingoffers",[shoppingOffersController::class, 'listShoppingOffers']);
+//Route::post("shoppingoffers",[shoppingOffersController::class, 'addShoppingOffers']);
+Route::post("/editshoppingoffers",[shoppingOffersController::class, 'editshoppingoffers']);
+Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrders']);
+//Route::put("editShoppingOffers",[shoppingOffersController::class, 'update']);
+Route::get("reviews",[reviewsController::class, 'listReviews']);
+Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);

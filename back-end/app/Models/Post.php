@@ -27,10 +27,6 @@ class Post extends Model
     });
 	}
 
-    // public function pasabuy_user() {
-    // 	$this->belongsTo(PasabuyUser::class, 'email', 'email');
-    // }
-
     public function offer_post() {
     	return $this->hasOne(OfferPost::class, 'postNumber', 'postNumber');
     }
@@ -48,5 +44,11 @@ class Post extends Model
     {
         # code...
         return $this->hasMany(share::class,'postNumber','postNumber');
+    }
+
+    public function transaction()
+    {
+        # code...
+        return $this->hasMany(transaction::class,'postNumber','postNumber');
     }
 }
