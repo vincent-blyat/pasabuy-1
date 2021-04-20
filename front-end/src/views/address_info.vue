@@ -295,7 +295,7 @@
           </div>
          <hr>
           <div class=" ">
-           <div class="flex justify-between mt-4 px-5 text-2xl space-x-4 items-center">
+           <div class="flex justify-between mt-4 px-5 space-x-4 items-center">
              <button @click="toggle_delete=false" class="px-4 bg-white text-black focus:outline-none w-full h-7 shadow-xl ring-1 ring-gray-300 rounded-2xl">Cancel</button>
              
              <button @click="toggle_delete=false,delete_shippingAdd()" class="px-4 bg-red-buttons text-white focus:outline-none w-full h-7 shadow-xl ring-1 ring-gray-300 rounded-2xl">Delete</button>
