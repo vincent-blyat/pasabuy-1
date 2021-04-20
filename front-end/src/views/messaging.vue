@@ -1380,11 +1380,12 @@ export default {
           ".message.new",
           () => {
             console.log("listening...");
-            store.dispatch("getUserTransactions").then(() => {
-              store.dispatch("getChatRoom").then(() => {
-                vm.getChatRooms();
-              });
-            });
+            Axios.all([
+              api.get('api/getTransaction'),
+              api.get('api/getChatroom')
+            ]).then(()=>{
+              vm.getChatRooms();
+            }) 
           }
         );
       }
@@ -1613,7 +1614,6 @@ export default {
       var dateToday = new Date();
       var dateDiff = schedDate.getTime() - dateToday.getTime();
       dateDiff = dateDiff / (1000 * 3600 * 24);
-      console.log(dateDiff);
       if (dateDiff < 1 && dateDiff > 0)
         return moment(datetime).format("[Today at] h:mm a");
       else if (dateDiff >= 1 && dateDiff < 2)
@@ -1626,7 +1626,6 @@ export default {
       return data;
     },
     cancelRequest(postNum, indexTransactionPost) {
-
       Axios.all([
         api.post("api/cancelRequest", {postNumber: postNum,ID: indexTransactionPost}),
         api.get("/api/getTransaction"),
@@ -1635,17 +1634,12 @@ export default {
       })
     },
     declineOffer(postNum, indexTransactionPost, user) {
-      console.log("asdfaf", postNum, indexTransactionPost);
-      api
-        .post("api/declineRequest", {
-          postNumber: postNum,
-          ID: indexTransactionPost,
-          userNotif: user,
-        })
-        .then((res) => {
-          console.log(res);
-          store.dispatch("getUserTransactions").then(() => {});
-        });
+      Axios.all([
+        api.post("api/declineRequest", {postNumber: postNum,ID: indexTransactionPost,userNotif: user}),
+        api.get("/api/getTransaction"),
+      ]).then(resArr=>{
+        store.commit('setUserTransactions',resArr[1].data)
+      })
     },
     // search(receiver,sender, myArray){
     //   for (var i=0; i < myArray.length; i++) {
