@@ -1,7 +1,7 @@
 <template class="bg-gray-bgcolor">
     <Navbar  />
 
-    <div class="flex flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
+    <div class="flex pb-24 flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
         <div class="pt-5 bg-gray-100 mv:pt-1 font-nunito rounded-xl llg:pl-5">
    <div class="w-full min-w-0 px-2 ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 rounded-xl">
@@ -9,8 +9,8 @@
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
-    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
-        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="profilePicture"/>
+    <div class="inline-flex items-center justify-center p-6 space-x-4 w-608 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
+        <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
     </div>
@@ -18,14 +18,14 @@
   <!--end-->
 
 <!--FILTER--->
-     <div class="relative flex items-center justify-center pt-3 ssm:justify-around x-v:pt-2  dv:float-right">
+     <div class="relative flex items-center justify-center pt-6 ssm:justify-around x-v:pt-2  dv:float-right">
     <div class="justify-center h-auto bg-transparent ssm:px-0 dv:space-x-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full dv:w-608 rounded-xl">
-      <div class="flex items-start justify-start dv:flex-wrap vs:space-x-2 ssm:flex-col ssm:justify-start">
-          <button type="button" class=" inline-flex ssm:float-left 2xl:w-50 ssm:px-0 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
+      <div class="flex items-start justify-start dv:flex-wrap ssm:space-x-0 ssm:space-y-2 ssm:flex-col ssm:justify-start">
+          <button type="button" class=" mr-4 vs:mr-2 inline-flex ssm:float-left 2xl:w-50 ssm:px-0 justify-around px-3 py-1.5 text-sm font-bold text-black align-bottom bg-white vsv:text-xs vs:text-xs ssm:text-xs font-nunito border border-gray-300 rounded-full shadow-sm w-44 sm:w-full mv-filterbutton1 hover:bg-gray-50 focus:outline-none" id="options-menu x-v:text-sm"  @click="filter =! filter">
                <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Postss</label>
+                 <label for="" class="pt-1 vs:py-1 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Posts</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
@@ -56,17 +56,17 @@
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
+                <button type="button" class="2xl:w-64 inline-flex  px-3 vs:px-0 sm:px-0 mv:right-0 mv:float-right justify-around w-48 lvs:w-48 sm:w-full py-1.5 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
                <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
-                <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
+                 <label for="" class="pt-1 vs:py-1 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                <span class="pt-1 pl-2 vs:pl-0 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
               </button>
               <!---------OPTIONS----------->
-              <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg w-52 top-15 left-52 2xl:left-58 2xl:w-60 focus:outline-none vs:left-40 mv:right-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+              <div class="absolute z-20 ssm:float-left ssm:right-0 ssm:left-0 right-60 font-bold origin-top-right lvs:left-48 bg-white rounded-lg shadow-lg w-44 top-15 ssm:top-266 2xl:left-58 2xl:w-60 focus:outline-none mv:right-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
@@ -88,16 +88,12 @@
      </div>
      
   <!--user post-->
-  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
-    v-for="(post_info, index) in delivery_info"
-    :key="index"
-    >
-    
-    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+  <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right ">
+    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
-        <div class="relative flex flex-row justify-between flex-grow w-full">
+        <div class="flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
@@ -114,18 +110,18 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1" v-if="post_info.email == user.email">
-            <button @click="edit1=!edit1; edit2=post_info.postNumber" class="absolute right-0 focus:outline-none ">
+          <div id="3dotmenu" class="vs:mt-1">
+            <button @click="edit1=!edit1" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
             <div class="flex w-full ">
-            <div v-if="edit1 && edit2==post_info.postNumber" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl vs:text-sm vs:right-0 top-5 right-8">
+            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
              <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
               <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons vs:md-14">
                 mode
                </span>
-                Edit Post
+                Edit post
               </button>
              <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
               <button  @click="togglePostModal2" class="flex flex-row text-base font-normal vs:text-sm focus:outline-none gap-x-2">
@@ -198,6 +194,121 @@
         </div>
         <!--end-->
 
+        <!--section 4-->
+        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl">
+          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{delivery_info.comment}}</p>
+        </div>
+        <!--section 4-->
+
+        <!--section 5-->
+        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
+          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+            send
+            </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
+          </button>
+          <router-link to="/messages">
+          <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
+           forum
+           </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Chat</p>
+          </button>
+          </router-link>
+          <div>
+          <button @click="share1=!share1" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 x-v:pr-1 ssm:pr-0 material-icons md-24 x-v:md-16">
+           share
+           </span>
+            <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
+          </button>
+          <div class="flex w-full">
+            <div v-if="share1" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
+              <button @click="showShareDisplay" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+                share
+               </span>
+                Share on Feed
+              </button>
+              <button class="flex flex-row py-2 text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:md-16 x-v:inline-block x-v:align-top">
+                link
+               </span>
+                Copy link to this post
+              </button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!--end-->
+      </div>
+    </div>
+  </div>
+  <!--end of user post-->
+
+  <!--user post-->
+  <div id="shopOrder-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right">
+    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+      <div class="flex flex-col items-start justify-start">
+
+        <!--section 1-->
+       <div class="flex flex-row justify-between flex-grow w-full">
+          <div class="inline-flex">
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
+              <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info1.firstname}} {{user_info1.lastname}}
+                  <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
+                    verified
+                  </span>
+                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
+                </h5>
+              </div>
+              <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted1}}</span>
+              </div>
+            </div>
+          </div>
+          <div id="3dotmenu" class="vs:mt-1">
+            <button @click="edit2=!edit2" class="focus:outline-none ">
+              <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
+            </button>
+            <div class="flex w-full ">
+            <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
+            <EditOrderRequest v-if="editOrderRequest" @closeModal2="listener5"/>
+              <button  @click="toggleEditOrderRequest" class="flex flex-row text-base x-v:text-sm gap-x-2 focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+                mode
+               </span>
+                Edit Post
+              </button>
+             <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
+              <button  @click="togglePostModal2" class="flex flex-row text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:md-16">
+                autorenew
+               </span>
+                Update Status
+              </button>
+              <button class="flex flex-row text-base gap-x-2 x-v:text-sm"> 
+                <span class="text-gray-500 material-icons x-v:md-16">delete</span>Delete</button>
+              </div>
+              </div>
+          </div>
+        </div>
+        <!--end-->
+
+        <!--section 2-->
+        <div class="inline-flex items-center justify-start px-2 py-1 mt-4 space-x-2 bg-gray-100 rounded-full">
+          <span class="text-red-600 rounded-full material-icons">
+              remove_circle_outline
+              </span>
+          <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
+              {{delivery_info1.status}}</p>
+        </div>
+        <!--end-->
+
         <!--section 3-->
         <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
           v-if="post_info.request_post != null">
@@ -258,7 +369,7 @@
         <!--section 4-->
     
         <!--section 5-->
-        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
           <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
@@ -282,9 +393,9 @@
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-show="share2==post_info.postNumber && share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
-              <button @click="share(post_info.postNumber)" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
-               <span class="font-medium text-gray-500 material-icons x-v:md-16">
+            <div v-if="share2" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
+              <button @click="showOrderShareModal" class="flex flex-row text-base gap-x-2 focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons x-v:text-sm">
                 share
                </span>
                 Share on Feed
@@ -303,7 +414,44 @@
       </div>
     </div>
   </div>
-  <!--end of user post-->
+
+   <!--Share Modal-->
+    <div @click.self="hideShareModal" id="modal-background" class="bg-opacity-25 z-50">
+<div id="modal-content" class="flex-col w-608 space-y-4 bg-white h-auto rounded-lg">
+      <div id="modal-header" class="flex flex-row pt-4 space-x-4 px-2 justify-between items-center">
+        <button @click="$router.push('edit-profile')" class="focus:outline-none flex items-center space-x-4">
+          <img class="w-12 h-12 rounded-full" src="img/asta.jpeg"/>
+        <p class="text-base font-bold leading-none text-gray-900">Asta Staria</p>
+        </button>
+      <button @click="hideShareModal" class="focus:outline-none flex items-center">
+        <span class="text-gray-500 material-icons allign-middle" style="font-size: 36px">
+        cancel
+        </span>
+      </button>
+      </div>
+     <div id="fkmouse" class="modal-body cursor-not-allowed px-2"></div>
+     <div id="modal-footer" class="flex px-2 pb-4 items-center justify-center ssm:px-2 vs:px-2">
+        <button class="focus:outline-none inline-flex items-center justify-center px-4 py-2 bg-red-700 rounded-full w-full ssm:h-8 ssm:w-full vs:w-full">
+          <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-normal text-center text-white">Share Post</p>
+      </button>
+      </div>
+</div>
+</div>
+<!--end-->
+
+    <!--Display Shared Post-->
+    <div id="display-sharedPost" class="pt-6 flex-col dv:float-right justify-center items-center">
+<div id="display-content" class="flex-col w-608 space-y-4 bg-white h-auto rounded-lg">
+      <div id="display-header" class="flex pt-4 px-2 justify-between items-center">
+        <div class="focus:outline-none flex items-center space-x-4">
+        <p @click="$router.push('edit-profile')" class="text-base italic leading-none text-gray-900"><span class="font-bold ">Asta Staria</span> shared this post</p>
+        </div>
+      </div>
+     <div id="fkmouse" class="display-body cursor-not-allowed"></div>
+</div>
+</div>
+<!--end-->
+
    </div>
    </div>
         </div>
@@ -311,7 +459,7 @@
    <!----------------------------START OF SHOPPING LISTS--------------------->
         <div class="w-2/5 pt-20 overflow-hidden llg:w-35 pl-7 vs:hidden ssm:hidden md:hidden sm:hidden xsm:hidden">
           <!-----------ACTIVE ORDERS---------------------->
-            <div class="mb-3 bg-white shadow-md w-72 rounded-2xl">
+            <div class="mb-6 bg-white shadow-md w-72 rounded-2xl">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE ORDERS
                   <span class="inline-flex pl-20 pr-3 align-bottom material-icons-round md-18">
@@ -377,7 +525,7 @@
             <!-----------END OF ACTIVE ORDERS---------------->
           
             <!-----------ACTIVE DELIVERIES---------------------->
-            <div class="z-0 mb-3 bg-white w-72 rounded-xl vs:hidden xsm:hidden ssm:hidden">
+            <div class="z-0 mb-6 bg-white w-72 rounded-xl vs:hidden xsm:hidden ssm:hidden">
               <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 ACTIVE DELIVERIES
                   <span class="inline-flex pl-16 pr-3 align-bottom material-icons-round md-18">
@@ -448,7 +596,7 @@
           
 
           <div class="flex flex-wrap float-left font-nunito md:block vs:hidden xsm:hidden ssm:hidden">
-            <div class="mb-3 bg-white w-72 rounded-xl">
+            <div class="mb-6 bg-white w-72 rounded-xl">
                <header class="py-3 pl-4 text-sm font-semibold tracking-wide text-gray-500">
                 SHOPPING LIST
                   <span class="inline-flex pl-24 pr-3 align-bottom material-icons-round md-18">
@@ -495,9 +643,8 @@ import SendRequest from "./sendRequest"
 import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
-import VueSimpleAlert from 'vue-simple-alert'
-// import EditOrderRequest from "./EditOrderRequest"
-import api from '../api'
+import EditOrderRequest from "./EditOrderRequest"
+import $ from 'jquery'
 
 export default {
     el:'#shop-list',
@@ -651,57 +798,82 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
-    share(postNumber){
-      var shareData = {postNum: postNumber}
-      console.log(shareData)
-      api.post('/api/share',shareData).then((res)=>{
-        VueSimpleAlert.alert(res.data.message,"Success","success")
-        console.log(res.data)
-        this.share1 = false;
-      }).catch((error) => {
-        VueSimpleAlert.alert('An error occured',"Error","error")
-        console.log(error)
-      })
-    }
-  },
-    mounted(){
-    api.get('/api/getPersonal').then((resp)=>{
-      this.profilePicture ='data:image/jpeg;base64,' + btoa(resp.data.profilePicture)
-    }).catch((error) => {
-       console.log(error)
-    })
-  },
-  created(){
-    api.get('/api/user').then((res)=>{
-      this.user = res.data;
-    }).catch((error) => {
-       console.log(error)
-    })
+    showOfferShareModal(){
+      ////without 3 dot menu when share post modal is open
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+      
+      ////with 3 dot menu when share post modal is open
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share1 = !this.share1
+    },
+    showOrderShareModal(){
+      //without 3 dot menu when share post modal is open
+      var container = $('#shopOrder-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
 
+      //with 3 dot menu when share post modal is open
+      //$('#shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
 
-    api.get('/api/getPosts').then((res)=>{
-      console.log(res.data)
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-   
-      this.delivery_info=res.data
-      console.log(this.delivery_info)
-    }).catch((error) => {
-      console.log(error)
-    })
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share2 = !this.share2
+    },
+    hideShareModal(){
+      $('#modal-background').css({display: 'none'});
+      $('#modal-background').find('.modal-body').empty();
+    },
+    showShareDisplay(){
+      //without 3dot menu when shared
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"});
+      $('display-header').find('#closeButton').remove();
+      $('#display-footer').css({padding: '0'}).remove();
+      clonedContainer.appendTo('.display-body')
+      $('#display-sharedPost').css({display: 'flex'});
 
-     api.get('/api/getShares').then((res)=>{
-      var i;
-      for(i=0;i<res.data.length;i++){
-        res.data[i].user.profilePicture = 'data:image/jpeg;base64,' + btoa(res.data[i].user.profilePicture)
-      }
-      this.shares=res.data
-      console.log(this.shares)
-    }).catch((error) => {
-      console.log(error)
-    })
+      //with 3dot menu when shared
+      //$('#shopOffer-UserPost').find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"})
+      //$('#shopOffer-UserPost').find('#3dotmenu').remove()
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.display-body');
+      //$('display-header').find('#closeButton').empty();
+      //$('#display-footer').css({padding: '0'}).empty();
+
+      $(".target").hide();
+      this.share1 = !this.share1
+      
+    },
   }
 }
 </script>
+
+<style scoped>
+#fkmouse{
+  pointer-events: none;
+}
+
+#modal-background{
+  display:none;
+  position:fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#display-sharedPost{
+  display:none;
+}
+</style>

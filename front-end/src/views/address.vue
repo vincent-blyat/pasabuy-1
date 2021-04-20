@@ -8,7 +8,7 @@
     <div id="address" class="flex items-center justify-center w-full h-screen pt-16 pb-10 bg-gray-bgcolor">
       <div class="w-2/5 my-12 overflow-hidden text-center bg-white shadow-md vs:w-10/12 lg:w-6/12 md:w-7/12 sm:w-9/12 ssm:w-10/12 flex-grow-1 rounded-xl">
         <div class="px-10 py-16">
-          <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your shipping address</h1>
+          <h1 class="space-x-1 space-y-1 text-2xl font-bold">Add your home address</h1>
             <form action="#" class="space-y-3">
               <div class="w-full">
                  <select @change="getProvCode()" id="Province" aria-label="Province" name="" type="text" required class="relative block w-full px-3 py-2 mt-4 mb-4 font-semibold text-gray-500 border appearance-none bg-gray-bgcolor rounded-xl h-14 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm" v-model="addressInfo.province"  >

@@ -15,7 +15,7 @@
   <!--end-->
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-6">
+  <div id="shopOrder-UserPost" class="flex items-center justify-center pt-6">
     <div class="space-x-4 h-auto ssm:p-2 ssm:w-full p-6 vs:p-4 vs:w-full sm:w-full w-608 bg-white shadow rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
@@ -37,7 +37,7 @@
               </div>
             </div>
           </div>
-          <div class="vs:mt-1">
+          <div id="3dotmenu" class="vs:mt-1">
             <button @click="edit1=!edit1" class="focus:outline-none">
               <img class="w-6 vs:w-4 lvs:w-5 ssm:w-4 h-auto" src="img/3dot.svg"/>
             </button>
@@ -161,8 +161,8 @@
             <p class="text-base ssm:text-xs vs:text-xs lvs:text-sm font-bold leading-none text-gray-500">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-56 md:right-24 xl:right-91 h-min w-30">
-              <button class="flex flex-row gap-x-2 text-base focus:outline-none">
+            <div v-if="share" class="target absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-56 md:right-24 xl:right-91 h-min w-30">
+              <button @click="showShareModal" class="flex flex-row gap-x-2 text-base focus:outline-none">
                <span class="font-medium text-gray-500 material-icons">
                 share
                </span>
@@ -183,6 +183,31 @@
     </div>
   </div>
   <!--end of user post-->
+
+  <!--Share Modal-->
+    <div @click.self="hideShareModal" id="modal-background" class="bg-opacity-25 z-50">
+<div id="modal-content" class="flex-col w-608 space-y-4 px-2 bg-white h-auto rounded-lg">
+      <div id="modal-header" class="flex flex-row pt-4 space-x-4 px-2 justify-between items-center">
+        <button @click="$router.push('edit-profile')" class="focus:outline-none flex items-center space-x-4">
+          <img class="w-12 h-12 rounded-full" src="img/asta.jpeg"/>
+        <p class="text-base font-bold leading-none text-gray-900">Asta Staria</p>
+        </button>
+      <button @click="hideShareModal" class="focus:outline-none flex items-center">
+        <span class="text-gray-500 material-icons allign-middle" style="font-size: 36px">
+        cancel
+        </span>
+      </button>
+      </div>
+     <div id="fkmouse" class="modal-body cursor-not-allowed"></div>
+     <div id="modal-footer" class="flex px-2  pb-4 items-center justify-center ssm:px-2 vs:px-2">
+        <button class="focus:outline-none inline-flex items-center justify-center px-4 py-2 bg-red-700 rounded-full w-full ssm:h-8 ssm:w-full vs:w-full">
+          <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-normal text-center text-white">Share Post</p>
+      </button>
+      </div>
+</div>
+</div>
+<!--end-->
+
   </div>
   </div>
 </template>
@@ -192,6 +217,7 @@ import PostModal from "./PostModal"
 import EditOrderRequest from './EditOrderRequest'
 import UpdateOrderStatus from './updateOrderStatus'
 import SendRequest from "./sendRequest"
+import $ from 'jquery'
 export default {
     data() {
     return {
@@ -258,7 +284,43 @@ export default {
     },
     listener4(){
       this.postSendModal = false;
-    }
+    },
+    showShareModal(){
+      //without 3 dot menu when share post modal is open
+      var container = $('#shopOrder-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+
+      //with 3 dot menu when share post modal is open
+      //$('#shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share = !this.share
+    },
+    hideShareModal(){
+      $('#modal-background').css({display: 'none'});
+      $('#modal-background').find('.modal-body').empty();
+    },
   }
 }
 </script>
+
+<style scoped>
+#fkmouse{
+  pointer-events: none
+}
+
+#modal-background{
+  display:none;
+  position:fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;   
+}
+</style>

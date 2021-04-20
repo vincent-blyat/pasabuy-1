@@ -3,7 +3,7 @@
 <div class="max-h-screen min-h-screen vs:pt-20 pt-16 shadow-md flex flex-col flex justify-center items-center bg-gray-100">
 
 <!---------------------------------------------------------->
-<div class="h-26 vs:w-full xl:w-1/2 w-full bg-gray-100 rounded" style="max-width:608px">
+<div class="fixed top-16 h-26 vs:w-full xl:w-1/2 w-full h-full bg-gray-100 rounded" style="max-width:608px">
 
     <div class="mt-5 h-10 vs:px-3 xsm:px-2 vs:max-w-full mt-2 flex justify-between">
        <div class="flex justify-center pt-1 pb-1 w-full bg-white border border-gray-300 focus:outline-none focus:ring-1 focus:ring-red-700 rounded-full">
@@ -47,9 +47,9 @@
 </div><!-------------------------->
 
 <!---------------------------------------------------------->
-  <div class="overflow-auto flex flex-col items-center w-full vs:w-11/12" style="max-width:608px" id="scroll_content">
+  <div class=" h-full flex flex-col items-center w-full vs:w-11/12" style="max-width:608px" id="scroll_content">
 
-    <div class="w-full h-min mt-4">
+    <div class="w-full h-full">
        <div class="vs:px-3 vs:max-w-full px-4 py-3 mb-3 bg-white rounded-lg flex justify-between items-center">
           <div class="flex ml-1 xsm:items-center"> <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="sunil" class="rounded-full h-11 w-10 pt-1"> 
             <div class="flex flex-col justify-between items-start ml-2 pt-1 align-middle"> 
@@ -297,7 +297,7 @@
     
     }
 #scroll_content::-webkit-scrollbar {
-        width: 0px;
+        width: 5px;
         cursor: pointer;
       }
   

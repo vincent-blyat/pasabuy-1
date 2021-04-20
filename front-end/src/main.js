@@ -53,4 +53,6 @@ window.Echo = new Echo({
 //     cluster: 'ap1',
 //     client: client
 // });
+import './assets/css/tailwind.css'
+window.$ = window.jQuery = require('jquery');
 createApp(App).use(router).mount('#app')
