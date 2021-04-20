@@ -14,16 +14,16 @@
 
                 <!--User Profile-->
                 <div class="inline-flex space-x-2 items-center justify-start p-4">
-                    <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" src="img/yami.jpg"/>
-                    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{btnText.posts.user.firstName}} {{btnText.posts.user.lastName}}</p>
+                    <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" :src="btnText.user.profilePicture"/>
+                    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{btnText.user.firstName}} {{btnText.user.lastName}}</p>
                 </div>
                 <!--end-->
 
                 <!--Delivery information list-->
                 <!--<form @submit.prevent='createOfferPost'>-->
-                <input v-model="shop_info.indexShoppingOfferPost" type="hidden" name="indexShoppingOfferPost">
-                <input v-model="shop_info.postNumber" type="hidden" name="postNumber">
-                <input v-model="shop_info.postStatus" type="hidden" name="postStatus">
+                <input v-model="shop_info.offer_post.indexShoppingOfferPost" type="hidden" name="indexShoppingOfferPost">
+                <input v-model="shop_info.offer_postpostNumber" type="hidden" name="postNumber">
+                <input v-model="shop_info.offer_post.postStatus" type="hidden" name="postStatus">
                     <div class="flex flex-col mt-1  sm:px-2 ssm:px-2 vs:px-2 justify-center items-center">
                         <div class="flex flex-row ssm:flex-col ssm:space-x-0 se:space-x-1 ssm:space-y-2 space-x-4 w-full justify-center">
                             <div class="flex flex-row space-x-2 sm:w-full ">
@@ -34,7 +34,7 @@
                                     <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Delivery Area</p>
                                         <span>
-                                            <input type="text" v-model="shop_info.deliveryArea" name="deliveryArea" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                            <input type="text" v-model="shop_info.offer_post.deliveryArea" name="deliveryArea" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                         </span>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                     <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Shopping Place</p>
                                         <span>
-                                            <input type="text" v-model="shop_info.shoppingPlace" name="shoppingPlace" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                            <input type="text" v-model="shop_info.offer_post.shoppingPlace" name="shoppingPlace" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                         </span>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                     <div class="flex flex-col items-start justify-start h-full py-1.5 vs:w-full rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Schedule</p>
                                         <span>
-                                            <input v-model="shop_info.deliverySchedule" name="deliverySchedule" type="datetime-local" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                            <input v-model="shop_info.offer_post.deliverySchedule" name="deliverySchedule" type="datetime-local" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                         </span>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                     <div class="inline-flex flex-col items-start justify-start w-full h-full py-1.5 rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Public Transit</p>
                                         <span>
-                                            <input type="text" v-model="shop_info.transportMode" name="transportMode" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                            <input type="text" v-model="shop_info.offer_post.transportMode" name="transportMode" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-loose text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                             </span>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                     <div class="flex flex-col items-start justify-start w-full h-full py-1.5 rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Capacity</p>
                                         <span>
-                                        <input type="text" v-model="shop_info.capacity" name="capacity" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                        <input type="text" v-model="shop_info.offer_post.capacity" name="capacity" class="ssm:text-xs block bg-gray-100 text-sm focus:outline-none leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                         </span>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                     <div class="inline-flex flex-col items-start justify-start vs:w-full h-full py-1.5 rounded-2xl">
                                         <p class="text-xs font-semibold leading-none text-gray-500">Payment Method</p>
                                         <span>
-                                            <input type="text" v-model="shop_info.paymentMethod" name="paymentMethod" class="ssm:text-xs block bg-gray-100 focus:outline-none text-sm leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
+                                            <input type="text" v-model="shop_info.offer_post.paymentMethod" name="paymentMethod" class="ssm:text-xs block bg-gray-100 focus:outline-none text-sm leading-7 text-gray-900 w-44 sm:w-full vs:w-full h-auto">            
                                             </span>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
 
                     <!--Comment section-->
                     <div class="justify-center flex  ssm:px-2 mt-3 sm:px-2 vs:px-2">
-                        <textarea rows="3" v-model="shop_info.caption" name="caption" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..."></textarea>
+                        <textarea rows="3" v-model="shop_info.offer_post.caption" name="caption" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full" placeholder = "Enter your post message here..."></textarea>
                     </div>
                     <!--end-->
 
@@ -141,10 +141,16 @@
 
 <script>
 import api from '../api'
+import store from '../store/index'
+import moment from 'moment'
 export default {    
     props: [
         'btnText'
     ],
+    created(){
+        console.log(this.shop_info.offer_post.deliverySchedule)
+        this.shop_info.offer_post.deliverySchedule = moment(this.shop_info.offer_post.deliverySchedule).format('YYYY-MM-DDThh:mm')
+    },
     data(){
         return {
             isVisible: true,
@@ -191,12 +197,26 @@ export default {
         //         })
         // },
         submit () {
-            console.log(this.shop_info)
-            api.post('/api/editshoppingoffers', this.shop_info).then((res)=>{
+          
+            var info = {
+                indexShoppingOfferPost:this.shop_info.offer_post.indexShoppingOfferPost,
+                postNumber:this.shop_info.offer_post.postNumber,
+                postStatus:this.shop_info.offer_post.postStatus,
+                deliveryArea:this.shop_info.offer_post.deliveryArea,
+                shoppingPlace:this.shop_info.offer_post.shoppingPlace,
+                deliverySchedule:this.shop_info.offer_post.deliverySchedule,
+                transportMode:this.shop_info.offer_post.transportMode,
+                capacity:this.shop_info.offer_post.capacity,
+                paymentMethod:this.shop_info.offer_post.paymentMethod,
+                caption:this.shop_info.offer_post.caption,
+
+            }
+            api.post('/api/editshoppingoffers', info).then(()=>{
             //this.user = res.data;
             //VueSimpleAlert.alert(res.data.message,"Success","success")
-            console.log(res.data.message)
-            window.location.reload();
+            store.dispatch('getPosts')//this will get the updated version of posts state from the states
+            this.$emit('closeModal1')
+            // window.location.reload();
             }).catch((errors) => {
                 console.log(errors)
             })
