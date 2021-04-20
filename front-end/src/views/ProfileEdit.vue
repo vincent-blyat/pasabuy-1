@@ -5,7 +5,7 @@
    <div class="flex flex-col justify-center items-center bg-white h-auto pt-10 ">
    <div class="flex flex-row ssm:space-x-2 vs:space-x-4 md:space-x-10 sm:space-x-6 space-x-16 ssm:pr-0 vs:pr-12 lvs:pr-24 sm:pr-0 md:pr-12 pr-48">
     <div class="flex">
-        <img class="w-40 h-40 vs:w-20 vs:h-20 ssm:w-16 ssm:h-16 sm:w-20 sm:h-20 border rounded-full border-gray-700 shadow-md" src="img/yami.jpg"/>
+        <img class="w-40 h-40 vs:w-20 vs:h-20 ssm:w-16 ssm:h-16 sm:w-20 sm:h-20 border rounded-full border-gray-700 shadow-md" :src="account_infos.profilePicture"/>
       </div>
         <div class="flex flex-col">
          <div class="flex flex-row ssm:flex-col ssm:space-x-0 vs:flex-col vs:space-x-0  sm:space-x-2 space-x-4">
@@ -93,13 +93,13 @@
 </template>
 
 <script>
-import api from '../api'
 import Navbar from './Navbar'
 import ShoppingOffers from './ShoppingOffers'
 import ShoppingOrders from './ShoppingOrders'
 import ShoppingReviews from './ShoppingReviews'
 import ShoppingAbout from './ShoppingAbout'
 import Followers from './followersModal'
+import store from "../store/index"
 export default {
   data(){
         return{
@@ -111,43 +111,19 @@ export default {
             hide: false,
             available: false,
             activeBtn:0,
-            personal:  {
-              firstname:'Yami',
-              lastname:'Sukehiro',
-              phone_number:'+63 912 345 6789',
-          },
-          address_info:{
-            city:'Legaspi City',
-            barangay:'Banquerohan'
-          },
           account_info:{
-           email:'sarah_panadero@gmail.com',
            countFollowing: '37',
            countFollowers: '29'
           },
-          account_infos: [],
-          accountaddress: [],
         }
   },
-  mounted(){
-    //get the user information from the laravel API
-    api.get('/api/getPersonal').then((res)=>{
-      
-      this.account_infos = res.data;
-      console.log('account info ', this.account_infos);
-      //this.user = res.data;
-    }).catch(() => {
-      //this.error=error.response.data.errors;
-    });
-
-    api.get('/api/getAddress').then((res)=>{
-      
-      this.accountaddress = res.data;
-      console.log('account address ', this.accountaddress);
-      //this.user = res.data;
-    }).catch(() => {
-      //this.error=error.response.data.errors;
-    });
+  computed:{
+    account_infos(){
+      return store.getters.getPersonal
+    },
+    accountaddress(){
+      return store.getters.getAddress
+    },
   },
   
   components: {
