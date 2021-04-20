@@ -165,6 +165,11 @@ export default {
       await store.dispatch("getUserLang");
       await store.dispatch("getChatRoom");
       await store.dispatch("getUserTransactions");
+      await store.dispatch("getUserShippingAddress");
+      await store.dispatch("getTransportModes");
+      await store.dispatch("getShoppingPlaces");
+
+
     },
   },
 

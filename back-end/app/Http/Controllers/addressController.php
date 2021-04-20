@@ -66,4 +66,27 @@ class addressController extends Controller
             return response()->json(['error'=>'An error occured'],422);
         }
     }
+    public function getShippingAddress()
+
+    {
+        # code...
+        $data = DB::select('SELECT * FROM tbl_usershippingAddress WHERE email = \''.Auth::user()->email.'\'');
+        return $data;
+    }
+
+    public function getTransportModes()
+
+    {
+        # code...
+        return DB::select('SELECT * FROM tbl_transportmode WHERE 1 ');
+
+    }
+    
+    public function getShoppingPlaces()
+
+    {
+        # code...
+        return DB::select('SELECT * FROM tbl_shoppingplace WHERE 1 ');
+
+    }
 }

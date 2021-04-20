@@ -204,7 +204,9 @@
     </div>
     <!--End Change Password-->
     </div>
-  
+        </div>
+        </div>
+    </div>
 
 </template>
 <script>

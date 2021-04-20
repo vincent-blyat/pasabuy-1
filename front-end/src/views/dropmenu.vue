@@ -11,7 +11,7 @@
     <router-link to="/deliver" class="flex flex-row gap-x-2 text-black"><span class="material-icons text-gray-500">delivery_dining</span>Deliveries</router-link>
     <router-link to="/shopping-list" class="flex flex-row gap-x-2 text-black"><span class="material-icons text-gray-500">list</span>Shopping Lists</router-link>
     <router-link to="/account-settings" class="flex flex-row gap-x-2 text-black"><span class="material-icons text-gray-500">manage_accounts</span>Account Setting</router-link>
-    <router-link to="/" class="flex flex-row gap-x-2 text-black"><span class="material-icons text-gray-500 ">logout</span>Log out</router-link>
+    <button @click="logout" class="flex flex-row gap-x-2 text-black"><span class="material-icons text-gray-500 ">logout</span>Log out</button>
      <p class="text-gray-500 text-sm">
         Privacy Policy-Cookies Policy-Terms and Conditions<br>
         Return and Refund Policy-PasaBuy   2021

@@ -9,7 +9,7 @@
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center pt-16 dv:float-right">
-    <div class="inline-flex items-center justify-center p-6 space-x-4 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
+    <div class="inline-flex items-center justify-center p-6 space-x-4 w-608 bg-white shadow rounded-xl ssm:space-x-2 vs:w-full sm:w-full ssm:w-full ssm:p-2 vs:p-4 rounded-x md:w-full mv:w-screen">
         <img class="rounded-full w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="userPersonal.profilePicture"/>
         <button @click="togglePostModal" class="flex items-center justify-start py-5 pl-6 text-base leading-none text-gray-500 bg-gray-100 rounded-full outline-none md:w-full focus:outline-none lvs:text-sm vs:text-xs ssm:text-xs vs:h-12 ssm:h-10 h-14 w-448 vs:w-full ssm:w-full x-v:text-sm">
         Post a shopping offer <span class="vs:hidden ssm:hidden sm:hidden xsm:hidden lg:mx-0 vsv:hidden"> or an order request</span></button>
@@ -25,7 +25,7 @@
                <span class="pr-1 mt-0.5 ssm:pr-0  x-v:mt-0 align-bottom material-icons-round md-24 vsv:pr-0.5">
                   view_stream
                 </span>
-                 <label for="" class="pt-1 vs:py-2 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> {{post_type}}</label>
+                 <label for="" class="pt-1 vs:py-1 se:py-1.5 cursor-pointer se:text-xs x-v:text-sm "> All Posts</label>
                 <span class="pt-1 x-v:pt-0.5 ssm:pl-0 vsv:pl-1 pl-2 text-gray-500 align-middle md-24 material-icons">
                   arrow_drop_down
                 </span>
@@ -36,31 +36,28 @@
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST TYPE</label>
                 </a>
-
-                  <a @click="getAll" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
                  <label for="" class="cursor-pointer"> All Posts</label>
                 </a>
-
-                  <a  @click="getOffer" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
-
-                  <a  @click="getRequests" href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
               </div>
               <!---------END OF OPTIONS---------->
 
-                <button @click="filter2 =! filter2" type="button" class="2xl:w-64 inline-flex mv:absolute  mv:right-0 mv:float-right justify-around w-56 px-3 py-1.5 ml-6 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  >
+                <button type="button" class="2xl:w-64 inline-flex  px-3 vs:px-0 sm:px-0 mv:right-0 mv:float-right justify-around w-48 lvs:w-48 sm:w-full py-1.5 text-sm font-bold text-black bg-white s-sm:float-right border-gray-300 vs:w-56 mv-filterbutton1 rounded-full vs:ml-0 shadow-sm align-bottom x-v:text-sm hover:bg-gray-50  vvs:px-0 vvs:w-44 focus:outline-none vsv:text-xs" id="options-menu x-v:text-sm"  @click="filter2 =! filter2">
                <span class="pt-1 pr-2 lvs:pr-1 se:pt-0.5 se:pl-1 se:pr-0 vs:pl-2 align-middle vvs:pr-1 material-icons x-v:pt-0">
                   people_alt
                 </span>
-                 <label for="" class="pt-1 vs:py-1.5 cursor-pointer se:text-xs vs:text-sm"> {{post_filter}}</label>
-                <span class="pt-1 pl-2 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
+                 <label for="" class="pt-1 vs:py-1 cursor-pointer se:text-xs vs:text-sm"> Following Only</label>
+                <span class="pt-1 pl-2 vs:pl-0 se:pt-0.5 x-v:pt-0.5 text-gray-500 align-middle vvs:pl-1 md-24 x-v:md-18 material-icons">
                   arrow_drop_down
                 </span>
               </button>
@@ -69,11 +66,11 @@
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
-                  <a @click="getFollowing" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a @click="getNearby" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>
@@ -88,12 +85,8 @@
   
 
   <!--user post-->
-  <div class="flex items-center justify-center pt-3 x-v:pt-2 dv:float-right "
-    v-for="(post_info, index) in posts"
-    :key="index"
-    >
-    
-    <div class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
+  <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right ">
+    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
@@ -102,16 +95,15 @@
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"><router-link to="/edit-profile" >{{post_info.user.firstName}} {{post_info.user.lastName}}</router-link>
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info.firstname}} {{user_info.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
-                  <label v-if="post_info.offer_post != null" class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
-                  <label v-if="post_info.request_post != null"  class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
+                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{timestamp(post_info.dateCreated)}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted}}</span>
               </div>
             </div>
           </div>
@@ -166,7 +158,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.offer_post.deliverySchedule)}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.schedule}}</p>
             </div>
             <div class="flex space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
@@ -326,7 +318,7 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.request_post.deliverySchedule)}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.schedule}}</p>
             </div>
           </div>
           <div class="flex-col w-full ">
@@ -350,11 +342,11 @@
         <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
           <div class="flex-col items-start w-full">
           <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
-            <label class="pl-3 text-gray-500">{{post_info.request_post.shopping_list.text.split(',').length}} items</label>
+            <label class="pl-3 text-gray-500">8 items</label>
           </span>
           <div class="flex-col">
             <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
-              <li v-for="(shoppingList,index ) in post_info.request_post.shopping_list.text.split(',')" :key="index" >{{ shoppingList }}</li>
+              <li v-for="shopListRequest1 in shopListRequest1" :key="shopListRequest1.items" >{{ shopListRequest1.items }}</li>
             </ul>
           </div>
           </div>
@@ -374,26 +366,15 @@
         <!--section 4-->
 
         <!--section 5-->
-        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
-          <div v-if="post_info.email != user.email && post_info.offer_post != null"  >
-            <SendRequest v-if="postSendModal && sendOfferOrRequestpostNum== post_info.offer_post.indexShoppingOfferPost" @closeSendRequest="listener3" :post="post_info"/>
-          </div>
-          <div v-if="post_info.email != user.email && post_info.request_post != null" >
-            <SendOffer v-if="postSendModal && sendOfferOrRequestpostNum== post_info.request_post.indexOrderRequestPost" @closeSendOffer="listener3" :post="post_info"/>
-          </div>
-          <button v-if="post_info.email != user.email && post_info.offer_post != null" @click="toggleSendModal();sendOfferOrRequestpost = post_info.postIdentity;sendOfferOrRequestpostNum=post_info.offer_post.indexShoppingOfferPost " class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
+          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
           </button>
-          <button v-if="post_info.email != user.email && post_info.request_post != null" @click="toggleSendModal(); sendOfferOrRequestpost = post_info.postIdentity; sendOfferOrRequestpostNum=post_info.request_post.indexOrderRequestPost" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
-            send
-            </span>
-            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Offer</p>
-          </button>
-          <router-link v-if="post_info.email != user.email" :to="'/messages/?ID='+toEncrypt(post_info.user.email)">
+          <router-link to="/messages">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
@@ -659,14 +640,9 @@ import SendRequest from "./sendRequest"
 import editShopListModal from "./editShopListModal"
 import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
-import VueSimpleAlert from 'vue-simple-alert'
-import store from '../store/index'
-import moment from "moment"
- 
-// import EditOrderRequest from "./EditOrderRequest"
-import api from '../api'
-import SendOffer from './sendOffer.vue'
-
+import EditOrderRequest from "./EditOrderRequest"
+import $ from 'jquery'
+import store from "../store/index"
 export default {
     el:'#shop-list',
   data() {
@@ -683,27 +659,39 @@ export default {
       share2: false,
       filter: false,
       filter2: false,
-      isOpen:false,
-      isOpen1:false,
-      isOpen2:false,
-      isOpen3:false,
-      isOpen4:false,
-      // user: null,
-      list:false,
-      editShoppingOffer:false,
-      editOrderRequest:false,
-      updateOrderStatus:false,
-      createShopList:false,
-      updateOfferStatus:false,
-      sendrequest:false,
-      filterAddress: "Bonot, Legazpi City",
+    createShopList:false,
+    editOrderRequest:false,
       datePosted: '3 hours ago',
       datePosted1: '13 hours ago',
       postStatus: 'posted',
-      user_info:[],
-      post_filter:"nearby",
-      post_type:"all",
-   
+      user_info:{
+        firstname: 'Yami',
+        lastname: 'Yami'
+      },
+      delivery_info:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: 'Let me Know',
+        status: 'No Longer Accepting Requests'
+      },
+      user_info1:{
+        firstname: 'Jane',
+        lastname: 'Doe'
+      },
+      delivery_info1:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: "Hi! If there's anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!",
+        status: 'No Longer Accepting Requests'
+      },
       activeDeliveries:{
         transNo: '61913174',
         address: 'Ligao',
@@ -742,8 +730,6 @@ export default {
       { items: 'powdered sugar' },
       { items: 'cocoa powder' },
     ],
-    sendOfferOrRequestpost:null,
-    sendOfferOrRequestpostNum:null
     }
   },
   components: {
@@ -755,8 +741,7 @@ export default {
     createShopList,
     ShoppingList,
     editShopListModal,
-    SendOffer
-    // EditOrderRequest,
+    EditOrderRequest,
     
   },
   methods:{
@@ -809,89 +794,66 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
-    share(postNumber){
-      var shareData = {postNum: postNumber}
-      console.log(shareData)
-      api.post('/api/share',shareData).then((res)=>{
-        VueSimpleAlert.alert(res.data.message,"Success","success")
-        console.log(res.data)
-        this.share1 = false;
-      }).catch((error) => {
-        VueSimpleAlert.alert('An error occured',"Error","error")
-        console.log(error)
-      })
+    showOfferShareModal(){
+      ////without 3 dot menu when share post modal is open
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+      
+      ////with 3 dot menu when share post modal is open
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share1 = !this.share1
     },
-    toEncrypt(val){
-      return btoa(val)
+    showOrderShareModal(){
+      //without 3 dot menu when share post modal is open
+      var container = $('#shopOrder-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.appendTo('.modal-body')
+      //with 3 dot menu when share post modal is open
+      //$('#shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
+      $('#modal-background').css({display: 'flex'});
+      $(".target").hide();
+      this.share2 = !this.share2
     },
-    getNearby(){
-      this.post_filter = "nearby"
-      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
-        console.log('nearby', res.data)
-      })
+    hideShareModal(){
+      $('#modal-background').css({display: 'none'});
+      $('#modal-background').find('.modal-body').empty();
     },
-    getFollowing(){
-      this.post_filter = "following"
-      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
-        console.log('following', res.data)
-      })
+    showShareDisplay(){
+      //without 3dot menu when shared
+      var container = $('#shopOffer-UserPost');
+      var clonedContainer = container.clone().css({padding: '0', float: 'none'});
+      clonedContainer.find('#3dotmenu').remove();
+      clonedContainer.find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"});
+      $('display-header').find('#closeButton').remove();
+      $('#display-footer').css({padding: '0'}).remove();
+      clonedContainer.appendTo('.display-body')
+      $('#display-sharedPost').css({display: 'flex'});
+      //with 3dot menu when shared
+      //$('#shopOffer-UserPost').find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"})
+      //$('#shopOffer-UserPost').find('#3dotmenu').remove()
+      //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.display-body');
+      //$('display-header').find('#closeButton').empty();
+      //$('#display-footer').css({padding: '0'}).empty();
+      $(".target").hide();
+      this.share1 = !this.share1
+      
     },
-    getAll(){
-      this.post_type = "all"
-      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
-        console.log('all', res.data)
-      })
-    },
-    getOffers(){
-      this.post_type = "offers"
-      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
-        console.log('offers', res.data)
-      })
-    },
-     getRequests(){
-      this.post_type = "requests"
-      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
-        console.log('req', res.data)
-      })
-    },
-    timestamp(datetime){
-      var postedDate = new Date(datetime)
-      var dateToday = new Date()
-      var dateDiff = dateToday.getTime() - postedDate.getTime()
-      dateDiff = dateDiff/(1000 * 3600 * 24)
-      if(dateDiff<1)
-        return moment(datetime).format("[Today at] h:mm a");
-      else if(dateDiff>=1 &&  dateDiff <2)
-        return moment(datetime).format("[Yesterday at] h:mm a");
-      else
-        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
-    },
-    timestampSched(datetime){
-      var schedDate = new Date(datetime)
-      var dateToday = new Date()
-      var dateDiff = schedDate.getTime() - dateToday.getTime()
-      dateDiff = dateDiff/(1000 * 3600 * 24)
-      console.log(dateDiff)
-      if(dateDiff<1 && dateDiff>0)
-        return moment(datetime).format("[Today at] h:mm a");
-      else if(dateDiff>=1 &&  dateDiff <2)
-        return moment(datetime).format("[Tommorow at] h:mm a");
-      else
-        return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
-    }
   },
   computed:{
-    user(){
-      return store.getters.getUser
-    },
     userPersonal(){
       return store.getters.getPersonal
     },
     posts(){
       return store.getters.getPosts
     },
-    
   },
+  
 }
 </script>
 

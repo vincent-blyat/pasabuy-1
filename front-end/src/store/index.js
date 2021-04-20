@@ -17,7 +17,10 @@ const store =  new Vuex.Store({
         userAddress:[],
         userChatRooms:[],
         userLang:[],
-        userTransactions:[]
+        userTransactions:[],
+        userShippingAddress:[],
+        transportModes:[],
+        shoppingPlaces:[]
   
         // userEducation:[],
 
@@ -26,7 +29,6 @@ const store =  new Vuex.Store({
         //syncrhonous
         setCurrentAuthUser(state,payload){
             state.authUser = payload;
-           
         },
         setCurrentPersonal(state,payload){
             state.authUserPersonal = payload;
@@ -58,6 +60,15 @@ const store =  new Vuex.Store({
         setUserTransactions(state,trans){
             state.userTransactions = []
             state.userTransactions = trans
+        },
+        setUserShippingAddress(state,trans){
+            state.userShippingAddress = trans
+        },
+        setTransportModes(state,trans){
+            state.transportModes = trans
+        },
+        setShoppingPlaces(state,trans){
+            state.shoppingPlaces = trans
         },
     },
     actions:{
@@ -188,6 +199,40 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getUserShippingAddress(state){
+            return api
+            .get('api/getShippingAddress')
+            .then((res)=>{
+                let addr = res.data
+                console.log('your addressese', addr)
+                state.commit('setUserShippingAddress',addr)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
+        async getTransportModes(state){
+            return api
+            .get('api/getTransportModes')
+            .then((res)=>{
+                let tra = res.data
+                state.commit('setTransportModes',tra)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
+        async getShoppingPlaces(state){
+            return api
+            .get('api/getShoppingPlaces')
+            .then((res)=>{
+                let data = res.data
+                state.commit('setShoppingPlaces',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -200,6 +245,9 @@ const store =  new Vuex.Store({
         getRooms:(state) => state.userChatRooms,
         getUserLang:(state) => state.userLang,
         getUserTransactions:(state) => state.userTransactions,
+        getUserShippingAddress:(state) => state.userShippingAddress,
+        getTransportModes:(state) => state.transportModes,
+        getShoppingPlaces:(state) => state.shoppingPlaces,
     }
 })
 

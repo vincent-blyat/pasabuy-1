@@ -62,6 +62,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getTransaction', [transactionController::class, 'getTransaction']);
     Route::post('/cancelRequest', [transactionController::class, 'cancelRequest']);
     Route::post('/declineRequest', [transactionController::class, 'declineRequest']);
+    Route::get('/getShippingAddress', [addressController::class, 'getShippingAddress']);
+    Route::get('/getTransportModes', [addressController::class, 'getTransportModes']);
+    Route::get('/getShoppingPlaces', [addressController::class, 'getShoppingPlaces']);
+
  
  
     
