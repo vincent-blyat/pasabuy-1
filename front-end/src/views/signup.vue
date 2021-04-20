@@ -135,7 +135,7 @@ export default {
                  else e.preventDefault(); // If not match, don't add to input text
         },
         nextPage(){
-          api.get('/sanctum/csrf-cookie').then(() => {
+            api.get('/sanctum/csrf-cookie').then(() => {
             api.post('/api/postPersonal',this.PersonalInfo).then((res)=>{
                 if(res!=null){
                     localStorage.setItem("personal", JSON.stringify(res.data.personalInfo));

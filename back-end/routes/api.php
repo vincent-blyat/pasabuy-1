@@ -10,6 +10,10 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\resetPasswordController;
 use App\Http\Controllers\transactionController;
+use App\Http\Controllers\shoppingOffersController;
+use App\Http\Controllers\shoppingOrdersController;
+use App\Http\Controllers\reviewsController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -88,3 +92,10 @@ Route::post('/password/reset',[resetPasswordController::class, 'reset'] );
 
 Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);
 Route::get('user/feed', [PostController::class, 'getFeeds']);
+Route::get("shoppingoffers",[shoppingOffersController::class, 'listShoppingOffers']);
+//Route::post("shoppingoffers",[shoppingOffersController::class, 'addShoppingOffers']);
+Route::post("/editshoppingoffers",[shoppingOffersController::class, 'editshoppingoffers']);
+Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrders']);
+//Route::put("editShoppingOffers",[shoppingOffersController::class, 'update']);
+Route::get("reviews",[reviewsController::class, 'listReviews']);
+Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);

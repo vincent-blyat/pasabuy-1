@@ -108,7 +108,7 @@ export default {
                 isLoggedIn: true,
                 email: store.getters.getUser.email,
                 postIdentity: 'offer_post',
-                postStatus: 'foo bar'     
+                postStatus: 'Accepting Request'     
             },
             errors: null
         }
