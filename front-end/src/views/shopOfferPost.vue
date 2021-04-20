@@ -1,30 +1,12 @@
 <template>
-    <!--User Profile-->
-    <div class="inline-flex space-x-2 items-center justify-start p-4 mt-2">
-        <img class="w-14 h-full border rounded-full border-gray-200" src="img/yami.jpg" />
-        <p class="text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
-    </div>
-    <!--end-->
-    <!--Accepting Request Button
-         <div class="inline-flex flex-col items-start justify-start pl-5 mt-2">
-            <div class="inline-flex space-x-2 items-center justify-start px-2 py-1 border rounded-full border-gray-500">
-                <img class="w-6 h-full rounded-full" src="img/checkcircle.svg"/>
-                <p class="text-sm font-bold leading-none text-indigo-900">Accepting Requests</p>
-                <button @click="isOpen=!isOpen" >
-                    <img class="w-6 h-full rounded-full" src="img/arrowdown (1).svg"/>
-                </button>
-                
-                <div class="w-full">
-                      <div v-if="isOpen" class="shadow-xl fixed bg-white rounded-lg py-2 pl-2 pr-4 pt-2 ">
-                        <router-link to="#"  class="flex flex-row gap-x-2 "><span class="material-icons text-gray-500">mode</span>Accepting Request</router-link>
-                        <router-link to="#" class="flex flex-row gap-x-2"> <span class="material-icons text-gray-500">delete</span>Accepting Offers</router-link>
-                    </div>
-                    </div>
-                    
-            </div>
-        </div>-->
-    <!--end-->
-    <form @submit.prevent='createOfferPost'>
+    
+         <!--User Profile-->
+         <div class="inline-flex space-x-2 items-center justify-start p-4 ssm:mt-0 vs:mt-1">
+           <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" src="img/yami.jpg"/>
+           <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">Yami Sukehiro</p>
+         </div>
+         <!--end-->
+
         <!--Delivery information list-->
          <div class="flex flex-col mt-1 vs:mt-1 ssm:px-2 vs:px-2 sm:px-2 justify-center items-center">
              <div class="flex flex-row ssm:flex-col ssm:space-x-0 ssm:space-y-2 space-x-4 w-full justify-center">
@@ -201,25 +183,24 @@
                  </div>
              </div>
             </div>
-        
-        <!--end-->
-        <!--Comment section-->
-        <div class="justify-center flex mt-6">
-            <textarea id="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm sm:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 vs:w-26.5" placeholder="Enter your post message here..." name="caption" v-model='form_data.caption'></textarea>
-        </div>
-        <!--end-->
-        <!--Post button-->
-        <div class="justify-center flex mt-6 pb-6">
-            <button class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 vs:w-26.5 h-10">
-                <p class="text-base font-bold leading-normal text-center text-white">Post</p>
-            </button>
-        </div>
-        <!--end-->
-    </form>
-</template>
-<script>
+            <!--end-->
 
-import api from '../api'
+            <!--Comment section-->
+           <div class="justify-center flex mt-3 px-2">
+            <textarea id="postMessage" name="postMessage" rows="3" class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 vs:w-full" placeholder = "Enter your post message here..."></textarea>
+           </div>
+           <!--end-->
+
+           <!--Post button-->
+           <div class="justify-center flex mt-3 pb-3 px-2">
+            <button class="inline-flex items-center justify-center focus:outline-none px-4 vs:py-2 bg-red-700 rounded-full w-31.75 ssm:w-full vs:w-full h-10">
+                <p class="text-base ssm:text-sm vs:text-sm sm:text-sm font-bold leading-normal text-center text-white">Post</p>
+            </button>
+           </div>
+           <!--end-->
+</template>
+
+<script>
 export default {
     data (){
         return{
@@ -237,7 +218,6 @@ export default {
         }
     },
     methods:{
-
         openAddModal(){
             this.addAddress = !this.addAddress
         },
@@ -245,7 +225,6 @@ export default {
         getAddressValue(){
           this.deliveryAddress = this.address1 
         },
-
         myFunction() {
             var input, filter, ul, li, a, i, txtValue;
             input = document.getElementById("myInput");
@@ -288,24 +267,20 @@ export default {
     padding:0;
     margin:0;
 }
-
 #myUL {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
 #myUL li a {
   margin-top: -1px; /* Prevent double borders */
   text-decoration: none;
   color: black;
   display: block
 }
-
 #myUL li a:hover:not(.header) {
   background-color: #eee;
 }
-
 #myInput {
   background-image: url('/img/search.svg');
   background-position: 8px 4px;
@@ -316,7 +291,6 @@ export default {
   border: 1px solid #ddd;
   margin-bottom: 6px;
 }
-
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
  --tw-text-opacity: 1;
 color: rgba(107, 114, 128, var(--tw-text-opacity));

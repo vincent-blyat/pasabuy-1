@@ -1,5 +1,5 @@
 <template class="bg-gray-bgcolor">
-    <Navbar  />
+    <Navbar/>
 
     <div class="flex pb-24 flex-wrap pt-8 overflow-hidden llg:justify-center llg:px-10 mv:pt-5 vs:pt-9 bg-gray-bgcolor vs:flex-col sm:flex-col font-nunito md:flex-col">
         <div class="w-3/5 overflow-hidden llg:w-65 vs:w-full xsm:w-full sm:w-full md:w-full ssm:w-full">
@@ -30,25 +30,21 @@
                   arrow_drop_down
                 </span>
               </button>
-
               <!---------OPTIONS----------->
               <div class="absolute z-20 font-bold origin-top-right bg-white rounded-lg shadow-lg top-15 w-44 focus:outline-none x-v:leading-tight" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
                 <div class="py-1" role="none" v-if="filter">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST TYPE</label>
                 </a>
-
                   <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
                  <label for="" class="cursor-pointer"> All Posts</label>
                 </a>
-
                   <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
-
                   <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
@@ -86,7 +82,8 @@
       </div>
     </div>
      </div>
-     
+  
+
   <!--user post-->
   <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right ">
     <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
@@ -95,10 +92,10 @@
         <!--section 1-->
         <div class="flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{post_info.user.firstName}} {{post_info.user.lastName}}
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info.firstname}} {{user_info.lastname}}
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
@@ -106,7 +103,7 @@
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.dateCreated}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted}}</span>
               </div>
             </div>
           </div>
@@ -144,31 +141,30 @@
               remove_circle_outline
               </span>
           <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
-              {{post_info.postStatus}}</p>
+              {{delivery_info.status}}</p>
         </div>
         <!--end-->
 
         <!--section 3-->
-        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
-          v-if="post_info.offer_post != null">
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
           <div class="flex-col items-start w-full">
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               delivery_dining  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.deliveryArea}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.delivery_area}}</p>
             </div>
             <div class="flex py-2 space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.schedule}}</p>
             </div>
             <div class="flex space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_bag  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.capacity}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.capacity}}</p>
             </div>
           </div>
           <div class="flex-col w-full ssm:py-2 vs:py-3">
@@ -176,19 +172,19 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_cart  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.shoppingPlace}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.shopping_place}}</p>
             </div>
             <div class="flex py-2 space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               directions_car  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.transportMode}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.public_transit}}</p>
             </div>
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               payments  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.paymentMethod}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.payment_method}}</p>
             </div>
           </div>
         </div>
@@ -310,20 +306,19 @@
         <!--end-->
 
         <!--section 3-->
-        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
-          v-if="post_info.request_post != null">
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
           <div class="flex-col items-start w-full">
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               delivery_dining  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliveryAddress}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.delivery_area}}</p>
             </div>
             <div class="flex py-2 space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliverySchedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.schedule}}</p>
             </div>
           </div>
           <div class="flex-col w-full ">
@@ -331,53 +326,55 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_cart  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.shoppingPlace}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.shopping_place}}</p>
             </div>
             <div class="flex py-2 space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               payments  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.paymentMethod}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.payment_method}}</p>
             </div>
           </div>
         </div>
         <!--end-->
 
         <!--section 4-->
-        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0" v-if="post_info.request_post != null">
+        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
           <div class="flex-col items-start w-full">
           <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
-            <label class="pl-3 text-gray-500">{{post_info.request_post.shoppingList.split(',').length}} items</label>
+            <label class="pl-3 text-gray-500">8 items</label>
           </span>
           <div class="flex-col">
             <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
-              <li v-for="(shoppingList,index ) in post_info.request_post.shoppingList.split(',')" :key="index" >{{ shoppingList }}</li>
+              <li v-for="shopListRequest1 in shopListRequest1" :key="shopListRequest1.items" >{{ shopListRequest1.items }}</li>
             </ul>
           </div>
           </div>
+          <div class="flex-col items-start w-full xl:pt-6 2xl:pt-6 lg:pt-6">
+          <div class="flex-col">
+            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
+              <li v-for="shopListRequest2 in shopListRequest2" :key="shopListRequest2.items" >{{ shopListRequest2.items }}</li>
+            </ul>
+          </div>
         </div>
-        <!--section 4-->
-        <!--section 4-->
-        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.offer_post != null">
-          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.offer_post.caption}}</p>
-        </div>
-        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.request_post != null">
-          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.request_post.caption}}</p>
         </div>
 
-        
+        <p class="px-5 py-5 text-sm font-medium leading-loose vs:font-medium ssm:pb-0 vs:text-xs sm:font-semibold sm:text-xs vvs:px-0">
+                {{ delivery_info1.comment }}
+              </p>
+              <hr>
         <!--section 4-->
-    
+
         <!--section 5-->
         <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
           <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
           <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
           </button>
-          <router-link :to="'/messages/?postnum='+post_info.postNumber">
+          <router-link to="/messages">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
@@ -386,8 +383,8 @@
           </button>
           </router-link>
           <div>
-          <button @click="share1=!share1; share2=post_info.postNumber" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-           <span class="pr-2 x-v:pr-1 ssm:pr-0 material-icons md-24 x-v:md-16">
+          <button @click="share2=!share2" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            share
            </span>
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
@@ -400,8 +397,8 @@
                </span>
                 Share on Feed
               </button>
-              <button class="flex flex-row py-2 text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
-               <span class="font-normal text-gray-500 material-icons x-v:md-16 x-v:inline-block x-v:align-top">
+              <button class="flex flex-row py-2 text-base font-normal x-v:inline-block focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons x-v:text-sm">
                 link
                </span>
                 Copy link to this post
@@ -645,7 +642,6 @@ import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import EditOrderRequest from "./EditOrderRequest"
 import $ from 'jquery'
-
 export default {
     el:'#shop-list',
   data() {
@@ -660,41 +656,41 @@ export default {
       edit2: false,
       share1: false,
       share2: false,
-      shares:[],
       filter: false,
       filter2: false,
-      isOpen:false,
-      isOpen1:false,
-      isOpen2:false,
-      isOpen3:false,
-      isOpen4:false,
-      user: null,
-      list:false,
-      editShoppingOffer:false,
-      editOrderRequest:false,
-      updateOrderStatus:false,
-      createShopList:false,
-      updateOfferStatus:false,
-      sendrequest:false,
-      filterAddress: "Bonot, Legazpi City",
+    createShopList:false,
+    editOrderRequest:false,
       datePosted: '3 hours ago',
       datePosted1: '13 hours ago',
       postStatus: 'posted',
-      user_info:[],
-      profilePicture:null,
-
-      // delivery_info:{
-      //   delivery_area: 'Naga City',
-      //   shopping_place: 'SM City Legazpi',
-      //   schedule: '2021-04-28 13:12:01',
-      //   public_transit: 'Public Transit',
-      //   capacity: '2 Big Plastic Bag',
-      //   payment_method: 'Cash on Delivery',
-      //   comment: 'Let me Know',
-      //   status: 'No Longer Accepting Requests'
-      // },
-      delivery_info:[],
-   
+      user_info:{
+        firstname: 'Yami',
+        lastname: 'Yami'
+      },
+      delivery_info:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: 'Let me Know',
+        status: 'No Longer Accepting Requests'
+      },
+      user_info1:{
+        firstname: 'Jane',
+        lastname: 'Doe'
+      },
+      delivery_info1:{
+        delivery_area: 'Naga City',
+        shopping_place: 'SM City Legazpi',
+        schedule: '2021-04-28 13:12:01',
+        public_transit: 'Public Transit',
+        capacity: '2 Big Plastic Bag',
+        payment_method: 'Cash on Delivery',
+        comment: "Hi! If there's anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!",
+        status: 'No Longer Accepting Requests'
+      },
       activeDeliveries:{
         transNo: '61913174',
         address: 'Ligao',
@@ -703,15 +699,16 @@ export default {
         rate: '4.9',
         stats: "Confirmed"
       },
-      activeOrders: {
-        transactNo: "1267643764",
-        address: "Legazpi",
-        first_name: "Go Eun",
-        last_name: "Na",
-        rating: "4.9",
-        stat: "Confirmed",
+      activeOrders:{
+        transactNo: '1267643764',
+        address: 'Legazpi',
+        first_name:'Go Eun',
+        last_name: 'Na',
+        rating: '4.9',
+        stat:"Confirmed"
+        
       },
-
+      
       shopList: [
       { items: 'Pork' },
       { items: 'Beef' },
@@ -720,14 +717,12 @@ export default {
       { items: 'Pork' },
       { items: 'Beef' },
     ],
-
     shopListRequest1: [
       { items: 'Flour (1kg)' },
       { items: 'Vanilla extract (50ml)' },
       { items: 'brown sugar' },
       { items: 'cocoa powder' },
     ],
-
     shopListRequest2: [
       { items: 'baking soda' },
       { items: 'Chocolate syrup' },
@@ -745,12 +740,12 @@ export default {
     createShopList,
     ShoppingList,
     editShopListModal,
-    // EditOrderRequest,
+    EditOrderRequest,
     
   },
-  methods: {
-    togglePostModal() {
-      this.postModalVisible = !this.postModalVisible;
+  methods:{
+    togglePostModal(){
+      this.postModalVisible = !this.postModalVisible
     },
     togglePostModal1(){
       this.postModalVisible1 = !this.postModalVisible1
@@ -786,10 +781,10 @@ export default {
     editlistener(){
       this.editVisible = false;
     },
-    togglecreateShopList() {
-      this.createShopList = !this.createShopList;
+    togglecreateShopList(){
+      this.createShopList = !this.createShopList
     },
-    listener6() {
+    listener6(){
       this.createShopList = false;
     },
      toggleEditOrderRequest(){
@@ -818,10 +813,8 @@ export default {
       var clonedContainer = container.clone().css({padding: '0', float: 'none'});
       clonedContainer.find('#3dotmenu').remove();
       clonedContainer.appendTo('.modal-body')
-
       //with 3 dot menu when share post modal is open
       //$('#shopOrder-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.modal-body');
-
       $('#modal-background').css({display: 'flex'});
       $(".target").hide();
       this.share2 = !this.share2
@@ -840,19 +833,18 @@ export default {
       $('#display-footer').css({padding: '0'}).remove();
       clonedContainer.appendTo('.display-body')
       $('#display-sharedPost').css({display: 'flex'});
-
       //with 3dot menu when shared
       //$('#shopOffer-UserPost').find('#changeBoxRadius').css({"border-top-left-radius": "0px","border-top-right-radius": "0px"})
       //$('#shopOffer-UserPost').find('#3dotmenu').remove()
       //$('#shopOffer-UserPost').clone().css({padding: '0', float: 'none'}).appendTo('.display-body');
       //$('display-header').find('#closeButton').empty();
       //$('#display-footer').css({padding: '0'}).empty();
-
       $(".target").hide();
       this.share1 = !this.share1
       
     },
   }
+  
 }
 </script>
 
@@ -860,7 +852,6 @@ export default {
 #fkmouse{
   pointer-events: none;
 }
-
 #modal-background{
   display:none;
   position:fixed;
@@ -872,7 +863,6 @@ export default {
     right: 0;
     left: 0;
 }
-
 #display-sharedPost{
   display:none;
 }

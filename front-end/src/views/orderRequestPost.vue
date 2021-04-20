@@ -191,7 +191,6 @@ export default {
             address4: "Maski Sain City"
         }
     },
-
     methods:{
     openAddModal(){
             this.addAddress = !this.addAddress
@@ -200,7 +199,6 @@ export default {
         getAddressValue(){
             this.deliveryAddress = this.address1 
         },
-
         myFunction() {
             var input, filter, ul, li, a, i, txtValue;
             input = document.getElementById("myInput");
@@ -244,24 +242,20 @@ export default {
     padding:0;
     margin:0;
 }
-
 #myUL {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
 #myUL li a {
   margin-top: -1px; /* Prevent double borders */
   text-decoration: none;
   color: black;
   display: block
 }
-
 #myUL li a:hover:not(.header) {
   background-color: #eee;
 }
-
 #myInput {
   background-image: url('/img/search.svg');
   background-position: 8px 4px;
@@ -272,7 +266,6 @@ export default {
   border: 1px solid #ddd;
   margin-bottom: 6px;
 }
-
 ::placeholder {
  --tw-text-opacity: 1;
 color: rgba(107, 114, 128, var(--tw-text-opacity));
