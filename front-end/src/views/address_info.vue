@@ -143,7 +143,7 @@
                  </div>
 
                  <div class="flex flex-col">
-                   <span class="ml-2 uppercase">House Number</span> <input   type="number"  id="h_number" :value="address_info.house_number" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                   <span class="ml-2 uppercase">House Number</span> <input   type="text"  id="h_number" :value="address_info.house_number" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                  </div>
                   <div class="flex flex-col">
                  <span class="ml-2 uppercase">Province</span> <input type="text" id="province" :value="address_info.province"  class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
@@ -194,7 +194,7 @@
                  </div>
 
                  <div class="flex flex-col">
-                   <span class="ml-2 uppercase">House Number</span> <input   type="number"  id="H_number" :value="House_number" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                   <span class="ml-2 uppercase">House Number</span> <input   type="text"  id="H_number" :value="House_number" class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                  </div>
                   <div class="flex flex-col">
                  <span class="ml-2 uppercase">Province</span> <input type="text" id="Province" :value="Province"  class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
@@ -246,7 +246,7 @@
                  </div>
 
                  <div class="flex flex-col">
-                   <span class="ml-2 uppercase">House Number</span> <input  required type="number"  id="H_number_add"  class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
+                   <span class="ml-2 uppercase">House Number</span> <input  required type="text"  id="H_number_add"  class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
                  </div>
                   <div class="flex flex-col">
                  <span class="ml-2 uppercase">Province</span> <input type="text" id="Province_add" required   class="focus:outline-none rounded-xl h-10 pl-2 bg-transparent bg-gray-200"/>
