@@ -156,20 +156,7 @@ class PostController extends Controller
 
 		$user = Auth::user();
 		// $data = PasabuyUser::has('post')->with('post','post.offer_post','post.request_post')->get();
-		$data = Post::with('offer_post','request_post','user','request_post.shoppingList')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
-
-		return response()->json($data);
-	}
-
-	public function getAllShares(Request $request)
-	{
-		# code...
-		$data = share::with('post','post.offer_post','post.request_post','user')->orderBy('dateCreated','desc')->get();
-		
-		foreach ($data as $convertingImage){ 
-			
-			$convertingImage->user->profilePicture = utf8_encode($convertingImage->user->profilePicture);
-		}
+		$data = Post::with('offer_post','request_post','user','request_post.shoppingList','share','share.user')->where('tbl_post.postDeleteStatus','=',0)->orderBy('tbl_post.dateCreated','desc')->get();
 
 		return response()->json($data);
 	}
