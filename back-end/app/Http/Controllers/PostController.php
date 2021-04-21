@@ -100,7 +100,7 @@ class PostController extends Controller
 
 		// post model
 		$post = new Post;
-		$post->email = $request->email;
+		$post->email = $user;
 		$post->postIdentity = $request->postIdentity;
 		$post->postStatus = $request->postStatus;
 

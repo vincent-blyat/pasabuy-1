@@ -26,7 +26,7 @@
         </span>
         <div class="sm:w-full">
           <button
-            @click="dropdown1 = !dropdown1"
+             @click="dropdown1 = !dropdown1, dropdown2=false, dropdown3=false,dropdown4=false"
             class="focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs ssm:pr-0 vs:w-full w-52 h-11 py-2.5 px-4 items-center bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
           >
             {{ deliveryAddress }}
@@ -49,7 +49,7 @@
                       Home Address
                     </p>
                     <div class="flex-1 w-full px-2">
-                      <p
+                      <p   id="homeAdd"
                         class="text-sm tracking-wide leading-none text-gray-900"
                       >
                         {{ userHomeAddress.province }}, {{ userHomeAddress.cityMunicipality }}, {{ userHomeAddress.barangay }}, {{ userHomeAddress.houseNumber }}
@@ -199,6 +199,7 @@
         type="datetime-local"
           class="focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs flex vs:w-full w-52 h-11 py-2.5 px-4 items-center vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
           placeholder="Schedule"
+          v-model="sched"
         />
       </div>
 
@@ -265,6 +266,7 @@
       rows="3"
       class="p-4 bg-gray-100 shadow-sm text-sm ssm:text-xs vs:text-xs lvs:text-sm rounded-2xl rounded-md outline-none h-auto w-31.75 ssm:w-full vs:w-full"
       placeholder="Enter your post message here..."
+      v-model="caption"
     ></textarea>
   </div>
   <!--end-->
@@ -316,9 +318,10 @@ export default {
             shoppingPlace: this.shoppingPlace,
             deliverySchedule: this.sched,
             paymentMethod: this.payment,
-            caption:this.caption
+            caption:this.caption,
+            shoppingList: '1' 
         }
-        console.log(form)
+      
         store.dispatch('createPostRequest',form).then(()=>{
             store.dispatch('getPosts')
             VueSimpleAlert.alert("Request post created successfully", "Sucess","success")

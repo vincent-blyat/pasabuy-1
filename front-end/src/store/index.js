@@ -82,9 +82,8 @@ const store =  new Vuex.Store({
         async createPostRequest(state,post){
             return api
             .post('api/post/request',post)
-            .then(()=>{
-              
-                 
+            .then(( )=>{
+             
             })
             .catch((error)=>{
                 console.log(error)
