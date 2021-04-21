@@ -16,10 +16,10 @@
             </span>
            </p>
           </div>
-          <div class="inline-flex vs:mt-1 ssm:justify-start ssm:items-start vs:items-start vs:justify-start sm:mt-0 items-center justify-end">
+          <div v-if="account_infos.email === authUser.email" class="inline-flex vs:mt-1 ssm:justify-start ssm:items-start vs:items-start vs:justify-start sm:mt-0 items-center justify-end">
            <div class="flex items-center justify-center ssm:pl-2 ssm:pr-2 vs:pl-6 vs:pr-6 pl-5 pr-4 bg-white bg-opacity-50 border-2 rounded-full border-gray-900">
             <button class="flex-1 text-base ssm:text-sm font-bold focus:outline-none tracking-wider leading-loose text-center text-gray-900">
-            <router-link to="/account-settings" > Edit Profile </router-link></button>
+              <router-link to="/account-settings" > Edit Profile </router-link></button>
            </div>
           </div>
           </div>
@@ -89,7 +89,7 @@
     </div>
    </div>
    </div>
-  <component :is="component" />
+  <component :is="component" :userID="userID"/>
 </template>
 
 <script>
@@ -115,15 +115,22 @@ export default {
            countFollowing: '37',
            countFollowers: '29'
           },
+          userID:null
         }
+  },
+  mounted(){
+    this.userID =  atob(this.$route.query.ID)
   },
   computed:{
     account_infos(){
-      return store.getters.getPersonal
+      return store.getters.getUserInfo
     },
     accountaddress(){
-      return store.getters.getAddress
+      return store.getters.getNotAuthUserAddress
     },
+    authUser(){
+      return store.getters.getUser
+    }
   },
   
   components: {

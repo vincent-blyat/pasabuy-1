@@ -20,8 +20,12 @@ const store =  new Vuex.Store({
         userTransactions:[],
         userShippingAddress:[],
         transportModes:[],
-        shoppingPlaces:[]
-  
+        shoppingPlaces:[],  
+        userInfo:[],
+        notAuthUserAddress:[]
+
+
+
         // userEducation:[],
 
     },
@@ -66,6 +70,12 @@ const store =  new Vuex.Store({
         },
         setShoppingPlaces(state,trans){
             state.shoppingPlaces = trans
+        },
+        setUserInfo(state,data){
+            state.userInfo = data
+        },
+        setNotAuthUserAddress(state,data){
+            state.notAuthUserAddress = data
         },
     },
     actions:{
@@ -217,12 +227,39 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getUserInfo(state,ID){
+            return api
+            .get('api/getUserInfo',{params:{email:ID}})
+            .then((res)=>{
+                res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
+                let data = res.data
+                console.log('not auth user',ID)
+                console.log('not auth user',data)
+                state.commit('setUserInfo',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
         async getShoppingPlaces(state){
             return api
             .get('api/getShoppingPlaces')
             .then((res)=>{
                 let data = res.data
                 state.commit('setShoppingPlaces',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
+        async getNotAuthUserAddress(state,ID){
+            return api
+            .get('api/getNotAuthUserAddress',{params:{email:ID}})
+            .then((res)=>{
+                let data = res.data
+                console.log('not auth address',ID)
+                console.log('not auth address',data)
+                state.commit('setNotAuthUserAddress',data)
             })
             .catch((error)=>{
                 console.log(error)
@@ -243,6 +280,9 @@ const store =  new Vuex.Store({
         getUserShippingAddress:(state) => state.userShippingAddress,
         getTransportModes:(state) => state.transportModes,
         getShoppingPlaces:(state) => state.shoppingPlaces,
+        getUserInfo:(state) => state.userInfo,
+        getNotAuthUserAddress:(state) => state.notAuthUserAddress,
+
     }
 })
 

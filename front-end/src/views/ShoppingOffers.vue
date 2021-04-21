@@ -3,6 +3,7 @@
     <div class="bg-gray-100 pt-6 font-nunito">
    <div class="h-screen ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 w-full min-w-0 px-2">
    <!--Modal-->
+   <div v-if="userID === user.email">
    <PostModal v-if="postModalVisible" @closeModal="listener"/>
    <!--end--> 
    <div class="flex items-center justify-center">
@@ -12,6 +13,7 @@
         Post a shopping offer</button>
     </div>
   </div>
+   </div>
   <!--end-->
 
   <!--user post-->
@@ -221,7 +223,9 @@ import UpdateOfferStatus from './updateOfferStatus'
 import SendRequest from "./sendRequest"
 import moment from 'moment'
 export default {
+  props:['userID'],
   data() {
+    
     return {
       postModalVisible: false,
       postModalVisible1: false,
@@ -333,7 +337,7 @@ export default {
       return store.getters.getPosts
     },
     shoppingOffer_infos(){
-      return this.posts.filter((post) => {return (post.email == this.user.email) && (post.offer_post != null)})//filtering only the offer posts opf the current user
+      return this.posts.filter((post) => {return (post.email ==  this.userID) && (post.offer_post != null)})//filtering only the offer posts opf the current user
     }
   },
   

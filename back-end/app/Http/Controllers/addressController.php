@@ -87,6 +87,15 @@ class addressController extends Controller
     {
         # code...
         return DB::select('SELECT * FROM tbl_shoppingplace WHERE 1 ');
+    }
+    public function getNotAuthUserAddress(Request $request)
+    {
+        # code...
+        $data = DB::select('SELECT * FROM tbl_userAddress WHERE email = \''.$request->email.'\'');
+    
+        if($data == null)
+            return response()->json('');
+        return response()->json($data[0]);
 
     }
 }
