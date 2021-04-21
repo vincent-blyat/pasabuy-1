@@ -15,8 +15,8 @@
 
   <!--User Profile-->
   <div class="inline-flex space-x-2 items-center justify-start p-4 ">
-    <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" src="img/yami.jpg"/>
-    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{user_info.firstname}} {{user_info.lastname}}</p>
+    <img class="w-14 h-full vs:w-12 ssm:w-10 border rounded-full border-gray-200" :src="post.user.profilePicture"/>
+    <p class="text-base ssm:text-sm vs:text-sm lvs:text-base font-bold leading-none text-gray-900">{{post.user.firstName}} {{post.user.lastName}}</p>
   </div>
   <!--end-->
 
@@ -95,39 +95,9 @@
             </div>
             <div class="flex w-full justify-between se:items-start se:overflow-y-scroll se:flex-col ssm:overflow-y-scroll ssm:flex-col ssm:justify-start ssm:items-start items-center flex-row  space-x-4 se:space-x-0 ssm:space-x-0 vs:space-x-1 py-2 ssm:py-0  se:px-2   px-5 ssm:px-2 vs:px-2">
                 <div class="flex flex-col ssm:w-full">
-                  <span class="flex ">
+                  <span class="flex " v-for="(item, index) in shopping_info.items" :key="index">
                     <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item1" class="ssm:w-full bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm text-gray-900">        
-                   </span>
-                  <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item2" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                  <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item3" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                  <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item4" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item5" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                    <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item6" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                    <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item7" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
-                   </span>
-                    <span class="inline-flex">
-                    <span class="pr-2">•</span> 
-                    <input type="text" id="input_name" v-model="shopping_info.item8" class="bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm leading-normal text-gray-900">            
+                    <input type="text" id="input_name" :value="item" class="ssm:w-full bg-gray-100 focus:outline-none text-sm ssm:text-xs vs:text-xs lvs:text-sm text-gray-900">        
                    </span>
                 </div>
             </div>
@@ -156,6 +126,7 @@
 
 <script>
 export default {
+  props:['post'],
     data(){
         return {
         isVisible: true,
@@ -166,23 +137,16 @@ export default {
         lastname: 'Sukehiro'
       },
         delivery_info:{
-        delivery_area: 'Banquerohan',
-        shopping_place: 'SM City Legazpi',
-        schedule: 'Tomorrow at 2 PM',
-        payment_method: 'Payment First',
-        comment: 'Hi! If there’s anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you’re willing. Thanks!',
-        status: 'No Longer Accepting Requests'
+        delivery_area: this.post.request_post.deliveryAddress,
+        shopping_place:  this.post.request_post.shoppingPlace,
+        schedule:  this.post.request_post.deliverySchedule,
+        payment_method:  this.post.request_post.paymentMethod,
+        comment:  this.post.request_post.caption,
+        status:  this.post.request_post.postStatus
       },
        shopping_info:{
-        shoppingID: '1',
-        item1: 'flour (1 kg)',
-        item2: 'vanilla extract (50 mL)',
-        item3: 'brown sugar',
-        item4: 'cocoa powder',
-        item5: 'baking soda',
-        item6: 'chocolate syrup',
-        item7: 'powdered sugar',
-        item8: 'cocoa powder',       
+        shoppingID: this.post.request_post.shopping_list.indexShoppingList,
+        items: this.post.request_post.shopping_list.text.split(", ")      
       },
         }
     },

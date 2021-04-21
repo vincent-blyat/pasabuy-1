@@ -361,7 +361,7 @@
                           <EditOrderRequest
                             v-if="postModalVisible1"
                             @closeModal1="listener1"
-                             
+                            :post="post_info"
                           />
                           <button
                             @click="togglePostModal1"
@@ -1566,9 +1566,12 @@ export default {
     },
     listener1() {
       this.postModalVisible1 = false;
+      this.edit1= !this.edit1
     },
     listener2() {
       this.postModalVisible2 = false;
+      this.edit1= !this.edit1
+
     },
     listener3() {
       this.postSendModal = false;
