@@ -160,6 +160,18 @@ class PostController extends Controller
 
 		return response()->json($data);
 	}
+
+	public function getAllShares(Request $request)
+	{
+		# code...
+		// $data = Post::has('share')->with('offer_post','request_post','user','request_post.shoppingList','share.user')->whereHas('share', function($query){
+        //     $query->where('shareDeleteStatus', 0)
+		// 	->orderBy('dateCreated', 'desc');
+        // })->get();
+		$data = share::with('post','post.offer_post','post.request_post','post.user','post.request_post.shoppingList','user')->where('shareDeleteStatus','=',0)->orderBy('dateCreated','desc')->get();
+
+		return response()->json($data);
+	}
 	
 	public function sharePost(Request $request)
 	{

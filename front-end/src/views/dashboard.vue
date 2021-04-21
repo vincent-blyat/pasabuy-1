@@ -12,7 +12,7 @@
           class="w-full min-w-0 px-2 ssm:h-auto ssm:pb-6 vs:h-auto vs:pb-6 sm:pb-6 rounded-xl"
         >
           <!--Modal-->
-          <PostModal v-if="postModalVisible" @closeModal="listener" />
+          <PostModal v-if="postModalVisible" @closeModal="listener"  @getSortPosts="sortPosts" />
           <!--end-->
           <div class="flex items-center justify-center pt-16 dv:float-right">
             <div
@@ -200,7 +200,8 @@
           </div>
 
           <!--user post-->
-          <div v-for="(post_info, index) in posts" :key="index">
+          <div v-for="(post_info, index) in sortedAllPosts" :key="index">
+            <div v-if="post_info.indexShare == null">
             <div
               id="shopOffer-UserPost"
               class="flex items-center justify-center pt-6 x-v:pt-2 dv:float-right"
@@ -779,10 +780,10 @@
                   <!--end-->
                 </div>
               </div>
-              <!--Display Shared Post-->
             </div>
-            <div v-if="post_info.share != null">
-              <div v-for="share in post_info.share" :key="share.indexShare">
+            </div>
+              <!--Display Shared Post-->
+            <div v-else>
                 <div
                   class="pt-6 flex-col dv:float-right justify-center items-center"
                 >
@@ -795,14 +796,14 @@
                       >
                         <router-link
                           :to="
-                            'profile-edit/?ID=' + toEncrypt(share.sharerEmail)
+                            'profile-edit/?ID=' + toEncrypt(post_info.sharerEmail)
                           "
                           ><p
                             class="text-base italic leading-none text-gray-900"
                           >
                             <span class="font-bold"
-                              >{{ share.user.firstName }}
-                              {{ share.user.lastName }}</span
+                              >{{ post_info.user.firstName }}
+                              {{ post_info.user.lastName }}</span
                             >
                             shared this post
                           </p></router-link
@@ -821,7 +822,7 @@
                           <div class="inline-flex">
                             <img
                               class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10"
-                              :src="post_info.user.profilePicture"
+                              :src="post_info.post.user.profilePicture"
                             />
                             <div
                               class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2"
@@ -833,15 +834,15 @@
                                   class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"
                                 >
                                   <button
-                                    @click="setDispatches(post_info.user.email)"
+                                    @click="setDispatches(post_info.post.user.email)"
                                   >
                                     <router-link
                                       :to="
                                         '/edit-profile/?ID=' +
-                                        toEncrypt(post_info.user.email)
+                                        toEncrypt(post_info.post.user.email)
                                       "
-                                      >{{ post_info.user.firstName }}
-                                      {{ post_info.user.lastName }}</router-link
+                                      >{{ post_info.post.user.firstName }}
+                                      {{ post_info.post.user.lastName }}</router-link
                                     >
                                   </button>
                                   <span
@@ -850,12 +851,12 @@
                                     verified
                                   </span>
                                   <label
-                                    v-if="post_info.offer_post != null"
+                                    v-if="post_info.post.offer_post != null"
                                     class="pl-1 font-normal text-gray-500 align-top vs:font-light"
                                     >posted a shopping offer</label
                                   >
                                   <label
-                                    v-if="post_info.request_post != null"
+                                    v-if="post_info.post.request_post != null"
                                     class="pl-1 font-normal text-gray-500 align-top vs:font-light"
                                     >posted an order request</label
                                   >
@@ -866,7 +867,7 @@
                               >
                                 <span
                                   class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm"
-                                  >{{ timestamp(post_info.dateCreated) }}</span
+                                  >{{ timestamp(post_info.post.dateCreated) }}</span
                                 >
                               </div>
                             </div>
@@ -886,7 +887,7 @@
                           <p
                             class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm"
                           >
-                            {{ post_info.postStatus }}
+                            {{ post_info.post.postStatus }}
                           </p>
                         </div>
                         <!--end-->
@@ -894,7 +895,7 @@
                         <!--section 3-->
                         <div
                           class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
-                          v-if="post_info.offer_post != null"
+                          v-if="post_info.post.offer_post != null"
                         >
                           <div class="flex-col items-start w-full">
                             <div class="flex space-x-2">
@@ -906,7 +907,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.offer_post.deliveryArea }}
+                                {{ post_info.post.offer_post.deliveryArea }}
                               </p>
                             </div>
                             <div class="flex py-2 space-x-2">
@@ -920,7 +921,7 @@
                               >
                                 {{
                                   timestampSched(
-                                    post_info.offer_post.deliverySchedule
+                                    post_info.post.offer_post.deliverySchedule
                                   )
                                 }}
                               </p>
@@ -934,7 +935,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.offer_post.capacity }}
+                                {{ post_info.post.offer_post.capacity }}
                               </p>
                             </div>
                           </div>
@@ -948,7 +949,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.offer_post.shoppingPlace }}
+                                {{ post_info.post.offer_post.shoppingPlace }}
                               </p>
                             </div>
                             <div class="flex py-2 space-x-2">
@@ -960,7 +961,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.offer_post.transportMode }}
+                                {{ post_info.post.offer_post.transportMode }}
                               </p>
                             </div>
                             <div class="flex space-x-2">
@@ -972,7 +973,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.offer_post.paymentMethod }}
+                                {{ post_info.post.offer_post.paymentMethod }}
                               </p>
                             </div>
                           </div>
@@ -982,7 +983,7 @@
                         <!--section 3-->
                         <div
                           class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
-                          v-if="post_info.request_post != null"
+                          v-if="post_info.post.request_post != null"
                         >
                           <div class="flex-col items-start w-full">
                             <div class="flex space-x-2">
@@ -994,7 +995,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.request_post.deliveryAddress }}
+                                {{ post_info.post.request_post.deliveryAddress }}
                               </p>
                             </div>
                             <div class="flex py-2 space-x-2">
@@ -1008,7 +1009,7 @@
                               >
                                 {{
                                   timestampSched(
-                                    post_info.request_post.deliverySchedule
+                                    post_info.post.request_post.deliverySchedule
                                   )
                                 }}
                               </p>
@@ -1024,7 +1025,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.request_post.shoppingPlace }}
+                                {{ post_info.post.request_post.shoppingPlace }}
                               </p>
                             </div>
                             <div class="flex py-2 space-x-2">
@@ -1036,7 +1037,7 @@
                               <p
                                 class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm"
                               >
-                                {{ post_info.request_post.paymentMethod }}
+                                {{ post_info.post.request_post.paymentMethod }}
                               </p>
                             </div>
                           </div>
@@ -1046,7 +1047,7 @@
                         <!--section 4-->
                         <div
                           class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
-                          v-if="post_info.request_post != null"
+                          v-if="post_info.post.request_post != null"
                         >
                           <div class="flex-col items-start w-full">
                             <span
@@ -1054,7 +1055,7 @@
                               >Shopping List
                               <label class="pl-3 text-gray-500"
                                 >{{
-                                  post_info.request_post.shopping_list.text.split(
+                                  post_info.post.request_post.shopping_list.text.split(
                                     ","
                                   ).length
                                 }}
@@ -1069,7 +1070,7 @@
                                 <li
                                   v-for="(
                                     shoppingList, index
-                                  ) in post_info.request_post.shopping_list.text.split(
+                                  ) in post_info.post.request_post.shopping_list.text.split(
                                     ','
                                   )"
                                   :key="index"
@@ -1084,29 +1085,28 @@
                         <!--section 4-->
                         <div
                           class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl"
-                          v-if="post_info.offer_post != null"
+                          v-if="post_info.post.offer_post != null"
                         >
                           <p
                             class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2"
                           >
-                            {{ post_info.offer_post.caption }}
+                            {{ post_info.post.offer_post.caption }}
                           </p>
                         </div>
                         <div
                           class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl"
-                          v-if="post_info.request_post != null"
+                          v-if="post_info.post.request_post != null"
                         >
                           <p
                             class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2"
                           >
-                            {{ post_info.request_post.caption }}
+                            {{ post_info.post.request_post.caption }}
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
             <!--end-->
           </div>
@@ -1527,6 +1527,7 @@ export default {
       ],
       sendOfferOrRequestpost: null,
       sendOfferOrRequestpostNum: null,
+      sortedAllPosts:[]
     };
   },
   components: {
@@ -1596,6 +1597,10 @@ export default {
           VueSimpleAlert.alert(res.data.message, "Success", "success");
           console.log(res.data);
           this.share1 = false;
+          store.dispatch('getAllShares').then(()=>{
+            this.sortPosts()
+          })
+
         })
         .catch((error) => {
           VueSimpleAlert.alert("An error occured", "Error", "error");
@@ -1743,6 +1748,26 @@ export default {
       await store.dispatch("getNotAuthUserAddress", email);
       return;
     },
+    selectionSort(arr){
+      var minldx,temp,len = arr.length;
+        for(var i=0;i<len;i++){
+          minldx = i
+          for(var j=i+1;j<len;j++){
+            if(arr[j].dateCreated>arr[minldx].dateCreated){
+              minldx=j
+            }
+          }
+          temp = arr[i]
+          arr[i] = arr[minldx]
+          arr[minldx] = temp
+        }
+        return arr
+    },
+    sortPosts(){
+      var allPosts = this.posts.concat(this.allShares)
+      this.sortedAllPosts = this.selectionSort(allPosts)
+      console.log('sorted', this.sortedAllPosts)
+    }
   },
   computed: {
     user() {
@@ -1754,7 +1779,13 @@ export default {
     posts() {
       return store.getters.getPosts;
     },
+     allShares() {
+      return store.getters.getAllShares;
+    },
   },
+  mounted(){
+    this.sortPosts()
+  }
 };
 </script>
 

@@ -22,7 +22,9 @@ const store =  new Vuex.Store({
         transportModes:[],
         shoppingPlaces:[],  
         userInfo:[],
-        notAuthUserAddress:[]
+        notAuthUserAddress:[],
+        allShares:[]
+
 
 
 
@@ -76,6 +78,9 @@ const store =  new Vuex.Store({
         },
         setNotAuthUserAddress(state,data){
             state.notAuthUserAddress = data
+        },
+        setAllShares(state,data){
+            state.allShares = data
         },
     },
     actions:{
@@ -265,6 +270,20 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getAllShares(state){
+            return api
+            .get('api/getShares')
+            .then((res)=>{
+                for(var i=0;i<res.data.length;i++){
+                    res.data[i].post.user.profilePicture ='http://localhost:8000/storage/images/'+ res.data[i].post.user.profilePicture
+                }
+                let data = res.data
+                state.commit('setAllShares',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -282,6 +301,7 @@ const store =  new Vuex.Store({
         getShoppingPlaces:(state) => state.shoppingPlaces,
         getUserInfo:(state) => state.userInfo,
         getNotAuthUserAddress:(state) => state.notAuthUserAddress,
+        getAllShares:(state) => state.allShares,
 
     }
 })

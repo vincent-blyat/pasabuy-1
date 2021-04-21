@@ -365,7 +365,9 @@ export default {
         }
         console.log(form)
         store.dispatch('createPostOffer',form).then(()=>{
-            store.dispatch('getPosts')
+            store.dispatch('getPosts').then(()=>{
+              this.$parent.$emit('getSortPosts')
+            })
             VueSimpleAlert.alert("Offer post created successfully", "Sucess","success")
             this.$parent.$emit('closeModal')
         })
