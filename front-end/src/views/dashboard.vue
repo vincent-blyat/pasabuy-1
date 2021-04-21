@@ -36,16 +36,18 @@
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST TYPE</label>
                 </a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
+                  <a @click="getAll" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem" >
                     <span class="pr-3 x-v:mt-0 mt-0.5 align-bottom material-icons-round text-gray-600">
                   view_stream
                 </span>
                  <label for="" class="cursor-pointer"> All Posts</label>
                 </a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+
+                  <a  @click="getOffer" href="#" class="block px-4 py-2 text-sm text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   delivery_dining
                 </span>Shopping Offer</a>
-                  <a href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
+
+                  <a  @click="getRequests" href="#" class="block px-4 py-2 text-sm hover:text-gray-900" role="menuitem"> <span class="pr-3 mt-0.5 align-bottom material-icons text-gray-600">
                   shopping_bag
                 </span>Order Requests</a>
                 </div>
@@ -66,11 +68,11 @@
                 <div class="py-1" role="none" v-if="filter2">
                   <a href="#" class="block px-4 py-2 text-xs font-light tracking-wider text-gray-500 font-raleway" aria-disabled role="menuitem">
                  <label for=""> POST FROM</label></a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                  <a @click="getFollowing" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   people_alt
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Following Only</label></a>
-                 <a href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
+                 <a @click="getNearby" href="#" class="block px-4 py-2 text-sm text-gray-600" role="menuitem"><span class="pr-2 align-bottom material-icons">
                   near_me
                 </span>
                  <label for="" class="pt-1 text-gray-900 cursor-pointer"> Nearby</label></a>
@@ -85,35 +87,63 @@
   
 
   <!--user post-->
-  <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right ">
+  <div id="shopOffer-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right "
+    v-for="(post_info, index) in posts"
+    :key="index">
     <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
       <div class="flex flex-col items-start justify-start">
 
         <!--section 1-->
         <div class="flex flex-row justify-between flex-grow w-full">
           <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
+            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info.firstname}} {{user_info.lastname}}
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"><button @click="setDispatches(post_info.user.email)"><router-link :to="'/edit-profile/?ID='+toEncrypt(post_info.user.email)" >{{post_info.user.firstName}} {{post_info.user.lastName}}</router-link></button>
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
-                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                   <label v-if="post_info.offer_post != null" class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted a shopping offer</label>
+                  <label v-if="post_info.request_post != null"  class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
                 </h5>
               </div>
               <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted}}</span>
+                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{timestamp(post_info.dateCreated)}}</span>
               </div>
             </div>
           </div>
-          <div id="3dotmenu" class="vs:mt-1">
-            <button @click="edit1=!edit1" class="focus:outline-none ">
+          <div id="3dotmenu" class="vs:mt-1" v-if="post_info.email == user.email && post_info.offer_post != null">
+            <button @click="edit1=!edit1; edit2=post_info.postNumber" class="focus:outline-none ">
               <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
             </button>
             <div class="flex w-full ">
-            <div v-if="edit1" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
+            <div  v-if="edit1 && edit2==post_info.postNumber"  class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
              <EditShoppingOfferPostVue v-if="postModalVisible1" @closeModal1="listener1"/>
+              <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
+               <span class="font-medium text-gray-500 material-icons vs:md-14">
+                mode
+               </span>
+                Edit post
+              </button>
+             <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
+              <button  @click="togglePostModal2" class="flex flex-row text-base font-normal vs:text-sm focus:outline-none gap-x-2">
+               <span class="font-normal text-gray-500 material-icons vs:md-14">
+                autorenew
+               </span>
+                Update Status
+              </button>
+              <button class="flex flex-row text-base gap-x-2 vs:text-sm vs:md-14"> 
+                <span class="text-gray-500 material-icons">delete</span>Delete</button>
+              </div>
+              </div>
+          </div>
+          <div id="3dotmenu" class="vs:mt-1" v-if="post_info.email == user.email && post_info.request_post != null">
+            <button @click="edit1=!edit1; edit2=post_info.postNumber" class="focus:outline-none ">
+              <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
+            </button>
+            <div class="flex w-full ">
+            <div  v-if="edit1 && edit2==post_info.postNumber"  class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
+             <EditOrderRequest v-if="postModalVisible1" @closeModal1="listener1"/>
               <button  @click="togglePostModal1" class="flex flex-row text-base vs:text-sm gap-x-2 focus:outline-none">
                <span class="font-medium text-gray-500 material-icons vs:md-14">
                 mode
@@ -141,30 +171,30 @@
               remove_circle_outline
               </span>
           <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
-              {{delivery_info.status}}</p>
+              {{post_info.postStatus}}</p>
         </div>
         <!--end-->
 
         <!--section 3-->
-        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"  v-if="post_info.offer_post != null">
           <div class="flex-col items-start w-full">
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               delivery_dining  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.delivery_area}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.deliveryArea}}</p>
             </div>
             <div class="flex py-2 space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               alarm  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.schedule}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.offer_post.deliverySchedule)}}</p>
             </div>
             <div class="flex space-x-2 ">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_bag  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.capacity}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.capacity}}</p>
             </div>
           </div>
           <div class="flex-col w-full ssm:py-2 vs:py-3">
@@ -172,40 +202,104 @@
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               shopping_cart  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.shopping_place}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.shoppingPlace}}</p>
             </div>
             <div class="flex py-2 space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               directions_car  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.public_transit}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.transportMode}}</p>
             </div>
             <div class="flex space-x-2">
               <span class="w-6 h-6 text-red-600 rounded-full material-icons">
               payments  
               </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info.payment_method}}</p>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.offer_post.paymentMethod}}</p>
+            </div>
+          </div>
+        </div>
+        <!--end-->
+
+           <!--section 3-->
+        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0"
+          v-if="post_info.request_post != null">
+          <div class="flex-col items-start w-full">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              delivery_dining  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.deliveryAddress}}</p>
+            </div>
+            <div class="flex py-2 space-x-2 ">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              alarm  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{timestampSched(post_info.request_post.deliverySchedule)}}</p>
+            </div>
+          </div>
+          <div class="flex-col w-full ">
+            <div class="flex space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              shopping_cart  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.shoppingPlace}}</p>
+            </div>
+            <div class="flex py-2 space-x-2">
+              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
+              payments  
+              </span>
+              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{post_info.request_post.paymentMethod}}</p>
             </div>
           </div>
         </div>
         <!--end-->
 
         <!--section 4-->
-        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl">
-          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{delivery_info.comment}}</p>
+        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0" v-if="post_info.request_post != null">
+          <div class="flex-col items-start w-full">
+          <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
+            <label class="pl-3 text-gray-500">{{post_info.request_post.shopping_list.text.split(',').length}} items</label>
+          </span>
+          <div class="flex-col">
+            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
+              <li v-for="(shoppingList,index ) in post_info.request_post.shopping_list.text.split(',')" :key="index" >{{ shoppingList }}</li>
+            </ul>
+          </div>
+          </div>
         </div>
         <!--section 4-->
+        <!--section 4-->
+        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.offer_post != null">
+          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.offer_post.caption}}</p>
+        </div>
+        <div class="flex items-start justify-start flex-grow-0 w-full p-4 mt-4 bg-gray-100 ssm:mt-2 vs:mt-2 rounded-xl" v-if="post_info.request_post != null">
+          <p class="w-full h-auto text-sm leading-loose text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm vs:min-w-0 vs:px-2">{{post_info.request_post.caption}}</p>
+        </div>
 
-        <!--section 5-->
-        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
-          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
-          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+        
+        <!--section 4-->
+
+           <!--section 5-->
+        <div class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
+          <div v-if="post_info.email != user.email && post_info.offer_post != null"  >
+            <SendRequest v-if="postSendModal && sendOfferOrRequestpostNum== post_info.offer_post.indexShoppingOfferPost" @closeSendRequest="listener3" :post="post_info"/>
+          </div>
+          <div v-if="post_info.email != user.email && post_info.request_post != null" >
+            <SendOffer v-if="postSendModal && sendOfferOrRequestpostNum== post_info.request_post.indexOrderRequestPost" @closeSendOffer="listener3" :post="post_info"/>
+          </div>
+          <button v-if="post_info.email != user.email && post_info.offer_post != null" @click="toggleSendModal();sendOfferOrRequestpost = post_info.postIdentity;sendOfferOrRequestpostNum=post_info.offer_post.indexShoppingOfferPost " class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
             <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
             send
             </span>
             <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
           </button>
-          <router-link to="/messages">
+          <button v-if="post_info.email != user.email && post_info.request_post != null" @click="toggleSendModal(); sendOfferOrRequestpost = post_info.postIdentity; sendOfferOrRequestpostNum=post_info.request_post.indexOrderRequestPost" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+            <span class="pr-2 ssm:pr-0 material-icons md-24 ssm:md-18 xsm:md-18 vs:md-18">
+            send
+            </span>
+            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Offer</p>
+          </button>
+          <router-link v-if="post_info.email != user.email" :to="'/messages/?ID='+toEncrypt(post_info.user.email)">
           <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
            forum
@@ -214,15 +308,15 @@
           </button>
           </router-link>
           <div>
-          <button @click="share1=!share1" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
+          <button @click="share1=!share1; share2=post_info.postNumber" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
            <span class="pr-2 x-v:pr-1 ssm:pr-0 material-icons md-24 x-v:md-16">
            share
            </span>
             <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
           </button>
           <div class="flex w-full">
-            <div v-if="share1" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
-              <button @click="showShareDisplay" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
+            <div v-show="share2==post_info.postNumber && share1" class="absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-2 md:right-24 xl:right-91 h-min w-30">
+              <button @click="share(post_info.postNumber)" class="flex flex-row text-base gap-x-2 vs:text-sm ssm:text-sm xsm:text-sm focus:outline-none">
                <span class="font-medium text-gray-500 material-icons x-v:md-16">
                 share
                </span>
@@ -243,174 +337,6 @@
     </div>
   </div>
   <!--end of user post-->
-
-  <!--user post-->
-  <div id="shopOrder-UserPost" class=" flex items-center justify-center pt-6 x-v:pt-2 dv:float-right">
-    <div id="changeBoxRadius" class="h-auto p-6 space-x-4 bg-white shadow vs:p-4 mv:w-full ssm:p-2 ssm:w-full vs:w-full sm:w-full w-608 rounded-xl">
-      <div class="flex flex-col items-start justify-start">
-
-        <!--section 1-->
-       <div class="flex flex-row justify-between flex-grow w-full">
-          <div class="inline-flex">
-            <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" src="img/yami.jpg"/>
-            <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
-              <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm">{{user_info1.firstname}} {{user_info1.lastname}}
-                  <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
-                    verified
-                  </span>
-                  <label class="pl-1 font-normal text-gray-500 align-top vs:font-light">posted an order request</label>
-                </h5>
-              </div>
-              <div class="vs:flex vs:w-full ssm:w-full ssm:flex vs:pb-2 x-v:ml-10">
-                <span class="text-sm leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">{{datePosted1}}</span>
-              </div>
-            </div>
-          </div>
-          <div id="3dotmenu" class="vs:mt-1">
-            <button @click="edit2=!edit2" class="focus:outline-none ">
-              <img class="w-6 h-auto vs:w-4 lvs:w-5 ssm:w-4" src="img/3dot.svg"/>
-            </button>
-            <div class="flex w-full ">
-            <div v-if="edit2" class="absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl absolute py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30 ">
-            <EditOrderRequest v-if="editOrderRequest" @closeModal2="listener5"/>
-              <button  @click="toggleEditOrderRequest" class="flex flex-row text-base x-v:text-sm gap-x-2 focus:outline-none">
-               <span class="font-medium text-gray-500 material-icons x-v:md-16">
-                mode
-               </span>
-                Edit Post
-              </button>
-             <UpdateOfferStatus v-if="postModalVisible2" @closeModal2="listener2"/>
-              <button  @click="togglePostModal2" class="flex flex-row text-base font-normal x-v:text-sm focus:outline-none gap-x-2">
-               <span class="font-normal text-gray-500 material-icons x-v:md-16">
-                autorenew
-               </span>
-                Update Status
-              </button>
-              <button class="flex flex-row text-base gap-x-2 x-v:text-sm"> 
-                <span class="text-gray-500 material-icons x-v:md-16">delete</span>Delete</button>
-              </div>
-              </div>
-          </div>
-        </div>
-        <!--end-->
-
-        <!--section 2-->
-        <div class="inline-flex items-center justify-start px-2 py-1 mt-4 space-x-2 bg-gray-100 rounded-full">
-          <span class="text-red-600 rounded-full material-icons">
-              remove_circle_outline
-              </span>
-          <p class="items-center text-sm font-bold leading-none text-red-600 vs:text-xs ssm:text-xs lvs:text-sm">
-              {{delivery_info1.status}}</p>
-        </div>
-        <!--end-->
-
-        <!--section 3-->
-        <div class="flex items-center justify-start w-full mt-4 space-x-4 ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
-          <div class="flex-col items-start w-full">
-            <div class="flex space-x-2">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              delivery_dining  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.delivery_area}}</p>
-            </div>
-            <div class="flex py-2 space-x-2 ">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              alarm  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.schedule}}</p>
-            </div>
-          </div>
-          <div class="flex-col w-full ">
-            <div class="flex space-x-2">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              shopping_cart  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.shopping_place}}</p>
-            </div>
-            <div class="flex py-2 space-x-2">
-              <span class="w-6 h-6 text-red-600 rounded-full material-icons">
-              payments  
-              </span>
-              <p class="py-1 text-sm leading-none text-gray-900 ssm:text-xs vs:text-xs lvs:text-sm">{{delivery_info1.payment_method}}</p>
-            </div>
-          </div>
-        </div>
-        <!--end-->
-
-        <!--section 4-->
-        <div class="flex items-center justify-start w-full p-2 mt-4 space-x-4 rounded-lg bg-gray-bgcolor ssm:flex-col ssm:items-start ssm:space-x-0 vs:flex-col vs:items-start vs:space-x-0">
-          <div class="flex-col items-start w-full">
-          <span class="pb-2 text-base vs:text-sm vs:font-bold sm:text-sm sm:font-bold">Shopping List
-            <label class="pl-3 text-gray-500">8 items</label>
-          </span>
-          <div class="flex-col">
-            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
-              <li v-for="shopListRequest1 in shopListRequest1" :key="shopListRequest1.items" >{{ shopListRequest1.items }}</li>
-            </ul>
-          </div>
-          </div>
-          <div class="flex-col items-start w-full xl:pt-6 2xl:pt-6 lg:pt-6">
-          <div class="flex-col">
-            <ul id="shop-list" class="pl-3 text-sm leading-loose list-disc list-inside vs:text-xs vs:leading-relaxed vs:font-semibold sm:text-xs sm:leading-relaxed sm:font-semibold">
-              <li v-for="shopListRequest2 in shopListRequest2" :key="shopListRequest2.items" >{{ shopListRequest2.items }}</li>
-            </ul>
-          </div>
-        </div>
-        </div>
-
-        <p class="px-5 py-5 text-sm font-medium leading-loose vs:font-medium ssm:pb-0 vs:text-xs sm:font-semibold sm:text-xs vvs:px-0">
-                {{ delivery_info1.comment }}
-              </p>
-              <hr>
-        <!--section 4-->
-
-        <!--section 5-->
-        <div class="flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0">
-          <SendRequest v-if="postSendModal" @closeSendRequest="listener3"/>
-          <button @click="toggleSendModal" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-            <span class="pr-2 ssm:pr-0 material-icons md-24 ">
-            send
-            </span>
-            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Send Request</p>
-          </button>
-          <router-link to="/messages">
-          <button class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
-           forum
-           </span>
-            <p class="text-base font-bold leading-none text-gray-600 ssm:text-xs vs:text-xs lvs:text-sm">Chat</p>
-          </button>
-          </router-link>
-          <div>
-          <button @click="share2=!share2" class="flex items-center space-x-2 focus:outline-none ssm:space-x-1">
-           <span class="pr-2 ssm:pr-0 material-icons md-24 ">
-           share
-           </span>
-            <p class="text-base font-bold leading-none text-gray-500 ssm:text-xs vs:text-xs lvs:text-sm">Share</p>
-          </button>
-          <div class="flex w-full">
-            <div v-if="share2" class="target absolute z-30 py-2 pt-2 pl-2 pr-4 leading-loose bg-white rounded-lg shadow-xl ssm:right-5 vs:right-5 sm:right-5 lg:right-95 md:right-5 xl:right-99.1 h-min w-30">
-              <button @click="showOrderShareModal" class="flex flex-row text-base gap-x-2 focus:outline-none">
-               <span class="font-medium text-gray-500 material-icons x-v:text-sm">
-                share
-               </span>
-                Share on Feed
-              </button>
-              <button class="flex flex-row py-2 text-base font-normal x-v:inline-block focus:outline-none gap-x-2">
-               <span class="font-normal text-gray-500 material-icons x-v:text-sm">
-                link
-               </span>
-                Copy link to this post
-              </button>
-              </div>
-              </div>
-          </div>
-        </div>
-        <!--end-->
-      </div>
-    </div>
-  </div>
 
    <!--Share Modal-->
     <div @click.self="hideShareModal" id="modal-background" class="bg-opacity-25 z-50">
@@ -642,7 +568,12 @@ import ShoppingList from "./ShoppingList"
 import createShopList from "./createShopList"
 import EditOrderRequest from "./EditOrderRequest"
 import $ from 'jquery'
-import store from "../store/index"
+import VueSimpleAlert from 'vue-simple-alert'
+import store from '../store/index'
+import moment from "moment"
+// import EditOrderRequest from "./EditOrderRequest"
+import api from '../api'
+import SendOffer from './sendOffer.vue'
 export default {
     el:'#shop-list',
   data() {
@@ -657,6 +588,7 @@ export default {
       edit2: false,
       share1: false,
       share2: false,
+      shares:[],
       filter: false,
       filter2: false,
     createShopList:false,
@@ -664,34 +596,9 @@ export default {
       datePosted: '3 hours ago',
       datePosted1: '13 hours ago',
       postStatus: 'posted',
-      user_info:{
-        firstname: 'Yami',
-        lastname: 'Yami'
-      },
-      delivery_info:{
-        delivery_area: 'Naga City',
-        shopping_place: 'SM City Legazpi',
-        schedule: '2021-04-28 13:12:01',
-        public_transit: 'Public Transit',
-        capacity: '2 Big Plastic Bag',
-        payment_method: 'Cash on Delivery',
-        comment: 'Let me Know',
-        status: 'No Longer Accepting Requests'
-      },
-      user_info1:{
-        firstname: 'Jane',
-        lastname: 'Doe'
-      },
-      delivery_info1:{
-        delivery_area: 'Naga City',
-        shopping_place: 'SM City Legazpi',
-        schedule: '2021-04-28 13:12:01',
-        public_transit: 'Public Transit',
-        capacity: '2 Big Plastic Bag',
-        payment_method: 'Cash on Delivery',
-        comment: "Hi! If there's anyone who can help me and sabuy my groceries, I would greatly appreciate it. Send me an offer if you are willing. Thanks!",
-        status: 'No Longer Accepting Requests'
-      },
+      user_info:[],
+      post_filter:"nearby",
+      post_type:"all",
       activeDeliveries:{
         transNo: '61913174',
         address: 'Ligao',
@@ -730,6 +637,8 @@ export default {
       { items: 'powdered sugar' },
       { items: 'cocoa powder' },
     ],
+    sendOfferOrRequestpost:null,
+    sendOfferOrRequestpostNum:null
     }
   },
   components: {
@@ -742,6 +651,7 @@ export default {
     ShoppingList,
     editShopListModal,
     EditOrderRequest,
+    SendOffer
     
   },
   methods:{
@@ -794,6 +704,21 @@ export default {
     listener5(){
       this.editOrderRequest = false;
     },
+      share(postNumber){
+      var shareData = {postNum: postNumber}
+      console.log(shareData)
+      api.post('/api/share',shareData).then((res)=>{
+        VueSimpleAlert.alert(res.data.message,"Success","success")
+        console.log(res.data)
+        this.share1 = false;
+      }).catch((error) => {
+        VueSimpleAlert.alert('An error occured',"Error","error")
+        console.log(error)
+      })
+    },
+    toEncrypt(val){
+      return btoa(val)
+    },
     showOfferShareModal(){
       ////without 3 dot menu when share post modal is open
       var container = $('#shopOffer-UserPost');
@@ -844,8 +769,72 @@ export default {
       this.share1 = !this.share1
       
     },
+    getNearby(){
+      this.post_filter = "nearby"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('nearby', res.data)
+      })
+    },
+    getFollowing(){
+      this.post_filter = "following"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('following', res.data)
+      })
+    },
+    getAll(){
+      this.post_type = "all"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('all', res.data)
+      })
+    },
+    getOffers(){
+      this.post_type = "offers"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('offers', res.data)
+      })
+    },
+     getRequests(){
+      this.post_type = "requests"
+      api.get('api/user/feed',{params:{post_filter:this.post_filter, post_type:this.post_type}}).then((res)=>{
+        console.log('req', res.data)
+      })
+    },
+    timestamp(datetime){
+      var postedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = dateToday.getTime() - postedDate.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      if(dateDiff<1)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Yesterday at] h:mm a");
+      else
+        return moment(datetime).format("MMM DD, YYYY [at] h:mm a");
+    },
+    timestampSched(datetime){
+      var schedDate = new Date(datetime)
+      var dateToday = new Date()
+      var dateDiff = schedDate.getTime() - dateToday.getTime()
+      dateDiff = dateDiff/(1000 * 3600 * 24)
+      console.log(dateDiff)
+      if(dateDiff<1 && dateDiff>0)
+        return moment(datetime).format("[Today at] h:mm a");
+      else if(dateDiff>=1 &&  dateDiff <2)
+        return moment(datetime).format("[Tommorow at] h:mm a");
+      else
+        return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
+    },
+    async setDispatches(email){
+      console.log('dispatch this', email)
+      await store.dispatch('getUserInfo',email)
+      await store.dispatch('getNotAuthUserAddress',email)
+      return
+    }
   },
   computed:{
+    user(){
+      return store.getters.getUser
+    },
     userPersonal(){
       return store.getters.getPersonal
     },
