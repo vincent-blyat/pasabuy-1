@@ -17,8 +17,12 @@ const store =  new Vuex.Store({
         userAddress:[],
         userChatRooms:[],
         userLang:[],
-        userTransactions:[]
-  
+        userTransactions:[],
+        userInfo:[],
+        notAuthUserAddress:[]
+
+
+
         // userEducation:[],
 
     },
@@ -58,6 +62,12 @@ const store =  new Vuex.Store({
         setUserTransactions(state,trans){
             state.userTransactions = []
             state.userTransactions = trans
+        },
+        setUserInfo(state,data){
+            state.userInfo = data
+        },
+        setNotAuthUserAddress(state,data){
+            state.notAuthUserAddress = data
         },
     },
     actions:{
@@ -188,6 +198,33 @@ const store =  new Vuex.Store({
                 console.log(error)
             })
         },
+        async getUserInfo(state,ID){
+            return api
+            .get('api/getUserInfo',{params:{email:ID}})
+            .then((res)=>{
+                res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
+                let data = res.data
+                console.log('not auth user',ID)
+                console.log('not auth user',data)
+                state.commit('setUserInfo',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
+        async getNotAuthUserAddress(state,ID){
+            return api
+            .get('api/getNotAuthUserAddress',{params:{email:ID}})
+            .then((res)=>{
+                let data = res.data
+                console.log('not auth address',ID)
+                console.log('not auth address',data)
+                state.commit('setNotAuthUserAddress',data)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+        },
     },
     modules:{},
     getters:{
@@ -200,6 +237,9 @@ const store =  new Vuex.Store({
         getRooms:(state) => state.userChatRooms,
         getUserLang:(state) => state.userLang,
         getUserTransactions:(state) => state.userTransactions,
+        getUserInfo:(state) => state.userInfo,
+        getNotAuthUserAddress:(state) => state.notAuthUserAddress,
+
     }
 })
 

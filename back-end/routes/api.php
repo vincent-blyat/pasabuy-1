@@ -62,6 +62,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getTransaction', [transactionController::class, 'getTransaction']);
     Route::post('/cancelRequest', [transactionController::class, 'cancelRequest']);
     Route::post('/declineRequest', [transactionController::class, 'declineRequest']);
+    Route::get('/getUserInfo', [userInformationController::class, 'getUserInfo']);
+    Route::get('/getNotAuthUserAddress', [addressController::class, 'getNotAuthUserAddress']);
+
  
  
     

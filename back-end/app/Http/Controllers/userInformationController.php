@@ -222,6 +222,13 @@ class userInformationController extends Controller
         }
 
     }
+    public function getUserInfo(Request $request)
+    {
+        # code...
+        $data = DB::select('SELECT * FROM tbl_userInformation WHERE  email = \''.$request->email.'\'');
+        // $data[0]->profilePicture= Storage::url($data[0]->profilePicture);
+        return response()->json($data[0]);
+    }
   
 
 }

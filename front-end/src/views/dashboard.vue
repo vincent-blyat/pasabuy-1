@@ -102,7 +102,7 @@
             <img class="rounded-full x-v:absolute w-14 h-14 vs:w-10 vs:h-10 ssm:w-10 ssm:h-10" :src="post_info.user.profilePicture"/>
             <div class="flex flex-col items-start w-full px-4 vs:px-1 se:px-2 ssm:px-2">
               <div class="flex mt-1 space-x-4 ssm:space-x-0 se:space-x-0 vs:space-x-1 sm:space-x-2">
-                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"><router-link to="/edit-profile" >{{post_info.user.firstName}} {{post_info.user.lastName}}</router-link>
+                <h5 class="text-base font-bold leading-none text-gray-900 x-v:pl-10 vsv:text-xs ssm:text-sm vs:text-sm lvs:text-sm"><button @click="setDispatches(post_info.user.email)"><router-link :to="'/edit-profile/?ID='+toEncrypt(post_info.user.email)" >{{post_info.user.firstName}} {{post_info.user.lastName}}</router-link></button>
                   <span class="inline-block text-blue-900 align-middle material-icons-round md-18">
                     verified
                   </span>
@@ -728,6 +728,12 @@ export default {
         return moment(datetime).format("[Tommorow at] h:mm a");
       else
         return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
+    },
+    async setDispatches(email){
+      console.log('dispatch this', email)
+      await store.dispatch('getUserInfo',email)
+      await store.dispatch('getNotAuthUserAddress',email)
+      return
     }
   },
   computed:{

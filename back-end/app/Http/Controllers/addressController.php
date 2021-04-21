@@ -66,4 +66,14 @@ class addressController extends Controller
             return response()->json(['error'=>'An error occured'],422);
         }
     }
+    public function getNotAuthUserAddress(Request $request)
+    {
+        # code...
+        $data = DB::select('SELECT * FROM tbl_userAddress WHERE email = \''.$request->email.'\'');
+    
+        if($data == null)
+            return response()->json('');
+        return response()->json($data[0]);
+
+    }
 }
