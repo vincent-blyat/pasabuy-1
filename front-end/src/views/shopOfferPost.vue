@@ -428,7 +428,7 @@ export default {
         this.payment = document.getElementById('pm'+index).innerHTML
     }
   },
-  mounted() {},
+ 
   computed: {
     userPersonal() {
       return store.getters.getPersonal;

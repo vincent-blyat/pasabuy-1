@@ -86,7 +86,6 @@ class PostController extends Controller
 
 		// validate data
 		$request->validate([
-			'email' => 'required|email',
 			'postIdentity' => 'required|string|max:100',
 			'postStatus' => 'required|string|max:50',
 			'deliveryArea' => 'required|string|max:500',
@@ -116,6 +115,12 @@ class PostController extends Controller
 		$request_post->caption = $request->caption;
 
 			// save to database
+		
+		//check if shopping place already exist in tbl_shoppingPlace
+		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE shoppingPlace = \''.$request->shoppingPlace.'\'');
+		if($shoppingPlace == null){
+			//save shopping place to tbl_shopping place
+		}
 		DB::transaction(function() use ($post, $request_post) {
 			$post->save();
 			$post->request_post()->save($request_post);

@@ -39,7 +39,7 @@
               <div id="scroll1" class="flex-auto overflow-y-scroll h-28">
                 <div class="flex flex-col items-start space-y-1.5">
                   <div
-                    @click="getAddressValue"
+                    @click="getHomeAddressValue(); dropdown1=!dropdown1"
                     class="flex flex-col w-full space-y-1 px-2"
                     style="cursor: pointer"
                   >
@@ -52,68 +52,37 @@
                       <p
                         class="text-sm tracking-wide leading-none text-gray-900"
                       >
-                        {{ address1 }}
+                        {{ userHomeAddress.province }}, {{ userHomeAddress.cityMunicipality }}, {{ userHomeAddress.barangay }}, {{ userHomeAddress.houseNumber }}
                       </p>
                     </div>
                   </div>
                   <hr class="flex w-full px-2" />
-                  <div
-                    @click="getAddressValue"
-                    class="flex flex-col w-full space-y-1 px-2"
-                    style="cursor: pointer"
+                    <div
+                    v-for="(shipAdd, index) in userShippingAddress"
+                    :key="index"
                   >
-                    <p
-                      class="text-sm font-bold tracking-wide leading-none text-gray-900"
+                    <div
+                      @click="getShipAddressValue(index);dropdown1=!dropdown1"
+                      class="flex flex-col w-full space-y-1 px-2"
+                      style="cursor: pointer"
                     >
-                      Shipping Address 1
-                    </p>
-                    <div class="flex-1 w-full px-2">
                       <p
-                        class="text-sm tracking-wide leading-none text-gray-900"
+                        class="text-sm font-bold tracking-wide leading-none text-gray-900"
                       >
-                        {{ address2 }}
+                        Shipping Address {{ index + 1 }}
                       </p>
+                      <div class="flex-1 w-full px-2">
+                        <p
+                          :id="'shipAdd' + index"
+                          class="text-sm tracking-wide leading-none text-gray-900"
+                        >
+                          {{ shipAdd.province }},
+                          {{ shipAdd.cityMunicipality }},
+                          {{ shipAdd.barangay }}, {{ shipAdd.houseNumber }}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <hr class="flex w-full px-2" />
-                  <div
-                    @click="getAddressValue"
-                    class="flex flex-col w-full space-y-1 px-2"
-                    style="cursor: pointer"
-                  >
-                    <p
-                      class="text-sm font-bold tracking-wide leading-none text-gray-900"
-                    >
-                      Shipping Address 2
-                    </p>
-                    <div class="flex-1 w-full px-2">
-                      <p
-                        class="text-sm tracking-wide leading-none text-gray-900"
-                      >
-                        {{ address3 }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr class="flex w-full px-2" />
-                  <div
-                    @click="getAddressValue"
-                    class="flex flex-col w-full space-y-1 px-2"
-                    style="cursor: pointer"
-                  >
-                    <p
-                      class="text-sm font-bold tracking-wide leading-none text-gray-900"
-                    >
-                      Shipping Address 3
-                    </p>
-                    <div class="flex-1 w-full px-2">
-                      <p
-                        class="text-sm tracking-wide leading-none text-gray-900"
-                      >
-                        {{ address4 }}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
                 </div>
               </div>
               <div
@@ -184,38 +153,32 @@
         <span class="mt-1.5 rounded-full material-icons text-red-600">
           shopping_cart
         </span>
-        <div class="sm:w-full">
-          <button
-            @click="dropdown4 = !dropdown4"
-            class="focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 px-4 items-center bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
-          >
-            Shopping Place
-          </button>
+          <div class="sm:w-full">
+          <input
+            @click="dropdown4 = !dropdown4, dropdown2=false, dropdown3=false,dropdown1=false"
+            type="text"
+            id="myInput"
+            v-on:keyup="myFunction()"
+            placeholder="Search for place"
+            title="Shopping Place"
+            class="focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 px-4 items-center py-2.5 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
+            v-model="shoppingPlace"
+          />
+            <!-- {{shoppingPlace}} -->
+          <!-- </button> -->
           <div class="relative">
             <div
               v-if="dropdown4"
               class="absolute py-3 bg-white rounded-lg shadow-xl right-0 h-35.1 sm:w-full w-52"
             >
               <div class="flex flex-col w-full px-2 justify-start items-start">
-                <input
-                  type="text"
-                  id="myInput"
-                  v-on:keyup="myFunction()"
-                  placeholder="Search for place"
-                  title="Shopping Place"
-                />
+           
                 <div
                   id="scroll1"
                   class="flex px-2 flex-col overflow-y-scroll w-full h-24"
                 >
-                  <ul id="myUL" class="space-y-1">
-                    <li><a href="#">Ayala</a></li>
-                    <li><a href="#">Disney Land</a></li>
-                    <li><a href="#">Dotcom Infinity</a></li>
-                    <li><a href="#">Hepa</a></li>
-                    <li><a href="#">LCC Malls</a></li>
-                    <li><a href="#">Sampaguita</a></li>
-                    <li><a href="#">BUCS Building 4</a></li>
+                  <ul id="myUL" class="space-y-1" >
+                    <li v-for="(sp, index) in shoppingPlaces" :key="index" @click="setShoppingPlace(index);dropdown4=!dropdown4"><a href="#" :id="'sp'+index">{{sp.shoppingPlace}}</a></li>
                   </ul>
                 </div>
               </div>
@@ -233,6 +196,7 @@
           alarm
         </span>
         <input
+        type="datetime-local"
           class="focus:outline-none sm:w-full ssm:w-full ssm:h-auto ssm:text-xs flex vs:w-full w-52 h-11 py-2.5 px-4 items-center vs:pr-0 bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
           placeholder="Schedule"
         />
@@ -242,12 +206,12 @@
         <span class="mt-1.5 rounded-full material-icons text-red-600">
           payments
         </span>
-        <div class="sm:w-full">
+          <div class="sm:w-full">
           <button
-            @click="dropdown2 = !dropdown2"
+            @click="dropdown2 = !dropdown2, dropdown1=false, dropdown3=false,dropdown4=false"
             class="focus:outline-none flex sm:w-full ssm:w-full ssm:h-auto ssm:text-xs vs:w-full w-52 h-11 py-2.5 px-4 items-center bg-gray-100 rounded-xl text-sm vs:text-xs lvs:text-sm leading-none text-gray-500"
           >
-            Payment Method
+            {{payment}}
           </button>
           <div class="relative">
             <div
@@ -255,39 +219,18 @@
               class="absolute py-3 bg-white rounded-lg shadow-xl right-0 h-35.1 sm:w-full w-52"
             >
               <div
+                v-for="(pm,index) in Payments" :key="index"
                 class="flex flex-col w-full space-y-3 px-2 justify-start items-start"
               >
                 <button
+                  @click="setPayment(index); dropdown2=!dropdown2"
                   class="flex w-full focus:outline-none justify-start items-start px-2"
                 >
-                  <p class="text-sm tracking-wide leading-none text-gray-900">
-                    Cash on Delivery
+                  <p :id="'pm'+index" class="text-sm tracking-wide leading-none text-gray-900">
+                    {{pm}}
                   </p>
                 </button>
                 <hr class="flex w-full" />
-                <button
-                  class="flex w-full focus:outline-none justify-start items-start px-2"
-                >
-                  <p class="text-sm tracking-wide leading-none text-gray-900">
-                    GCash
-                  </p>
-                </button>
-                <hr class="flex w-full" />
-                <button
-                  class="flex w-full focus:outline-none justify-start items-start px-2"
-                >
-                  <p class="text-sm tracking-wide leading-none text-gray-900">
-                    PayMaya
-                  </p>
-                </button>
-                <hr class="flex w-full" />
-                <button
-                  class="flex w-full focus:outline-none justify-start items-start px-2"
-                >
-                  <p class="text-sm tracking-wide leading-none text-gray-900">
-                    Online Banking
-                  </p>
-                </button>
               </div>
             </div>
           </div>
@@ -328,7 +271,7 @@
 
   <!--Post button-->
   <div class="justify-center flex mt-3 pb-3 ssm:px-2 vs:px-2 sm:px-2">
-    <button
+    <button @click="submit"
       class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 ssm:w-full vs:w-full h-10"
     >
       <p
@@ -343,6 +286,7 @@
 
 <script>
 import store from "../store/index";
+import VueSimpleAlert from 'vue-simple-alert'
 export default {
   data() {
     return {
@@ -353,19 +297,47 @@ export default {
       dropdown3: false,
       dropdown4: false,
       deliveryAddress: "Delivery Address",
-      address1: "Banquerohan,Legazpi City",
-      address2: "Buraguis Legazpi City",
-      address3: "United State of Bicol",
-      address4: "Maski Sain City",
+      shoppingPlace: '',
+      transport: '',
+      payment: "Payment Method",
+      Payments:['Cash on Delivery','Gcash','PayMaya','Online Banking'],
+      caption:null,
+      capacity:null,
+      sched:null
+
     };
   },
   methods: {
+    submit(){
+        var form ={
+            postIdentity: 'request_post',
+            postStatus: 'Acccepting Orders',
+            deliveryArea: this.deliveryAddress,
+            shoppingPlace: this.shoppingPlace,
+            deliverySchedule: this.sched,
+            paymentMethod: this.payment,
+            caption:this.caption
+        }
+        console.log(form)
+        store.dispatch('createPostRequest',form).then(()=>{
+            store.dispatch('getPosts')
+            VueSimpleAlert.alert("Request post created successfully", "Sucess","success")
+            this.$parent.$emit('closeModal')
+        })
+    },
     openAddModal() {
       this.addAddress = !this.addAddress;
     },
 
-    getAddressValue() {
-      this.deliveryAddress = this.address1;
+   getHomeAddressValue() {
+      this.deliveryAddress = document.getElementById("homeAdd").innerHTML;
+      console.log(document.getElementById("homeAdd").innerHTML);
+    },
+      getShipAddressValue(index) {
+      this.deliveryAddress = document.getElementById(
+        "shipAdd" + index
+      ).innerHTML;
+      console.log(document.getElementById("shipAdd" + index).innerHTML);
     },
     myFunction() {
       var input, filter, ul, li, a, i, txtValue;
@@ -383,10 +355,28 @@ export default {
         }
       }
     },
+    setShoppingPlace(index){
+        this.shoppingPlace = document.getElementById('sp'+index).innerHTML
+    },
+    setPayment(index){
+        this.payment = document.getElementById('pm'+index).innerHTML
+    }
   },
   computed: {
     userPersonal() {
       return store.getters.getPersonal;
+    },
+    userHomeAddress() {
+      return store.getters.getAddress;
+    },
+    userShippingAddress() {
+      return store.getters.getUserShippingAddress;
+    },
+    transportModes() {
+      return store.getters.getTransportModes;
+    },
+    shoppingPlaces() {
+      return store.getters.getShoppingPlaces;
     },
   },
 };
@@ -420,16 +410,6 @@ export default {
 }
 #myUL li a:hover:not(.header) {
   background-color: #eee;
-}
-#myInput {
-  background-image: url("/img/search.svg");
-  background-position: 8px 4px;
-  background-repeat: no-repeat;
-  background-size: 24px;
-  width: 100%;
-  padding: 4px 0px 4px 35px;
-  border: 1px solid #ddd;
-  margin-bottom: 6px;
 }
 ::placeholder {
   --tw-text-opacity: 1;
