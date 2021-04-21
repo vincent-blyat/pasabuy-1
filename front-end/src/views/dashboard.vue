@@ -294,6 +294,7 @@
                           <EditShoppingOfferPostVue
                             v-if="postModalVisible1"
                             @closeModal1="listener1"
+                            :btnText="post_info"
                           />
                           <button
                             @click="togglePostModal1"
@@ -309,6 +310,7 @@
                           <UpdateOfferStatus
                             v-if="postModalVisible2"
                             @closeModal2="listener2"
+                            
                           />
                           <button
                             @click="togglePostModal2"
@@ -359,6 +361,7 @@
                           <EditOrderRequest
                             v-if="postModalVisible1"
                             @closeModal1="listener1"
+                             
                           />
                           <button
                             @click="togglePostModal1"

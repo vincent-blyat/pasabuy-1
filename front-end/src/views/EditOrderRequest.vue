@@ -188,7 +188,7 @@ export default {
     },
     methods: {
         close2(){
-            this.$emit('closeModal2')
+            this.$emit('closeModal1')
         },
         Edit(pars) {
       let x=document.getElementById(pars).innerHTML;
