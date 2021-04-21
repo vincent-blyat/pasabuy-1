@@ -56,6 +56,16 @@ class PostController extends Controller
 		$offer_post->paymentMethod = $request->paymentMethod;
 		$offer_post->caption = $request->caption;
 
+		//check if shopping place already exist in tbl_shoppingPlace
+		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE shoppingPlace = \''.$request->shoppingPlace.'\'');
+		if($shoppingPlace == null){
+			//save shopping place to tbl_shopping place
+		}
+		//check if transport mode already exist in tbl_transportMOde
+		$transport = DB::select('SELECT * from tbl_transportMode WHERE transportMode = \''.$request->transportMode.'\'');
+		if($transport == null){
+			//save transport mode to tbl_transportMode
+		}
 		// save to database
 		DB::transaction(function() use ($post, $offer_post) {
 

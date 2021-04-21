@@ -42,9 +42,6 @@ const store =  new Vuex.Store({
         setUserAddress(state,payload){
             state.userAddress = payload;
          },
-        CREATE_POSTS(state,post){
-            state.posts.unshift(post)
-        },
         FETCH_POSTS(state,post){
             state.posts = post
         },
@@ -75,9 +72,8 @@ const store =  new Vuex.Store({
         async createPostOffer(state,post){
             return api
             .post('api/post/offer',post)
-            .then((res)=>{
-                let post = res.data
-                state.commit('CREATE_POSTS',post)
+            .then(()=>{
+              
             })
             .catch((error)=>{
                 console.log(error)
@@ -86,9 +82,9 @@ const store =  new Vuex.Store({
         async createPostRequest(state,post){
             return api
             .post('api/post/request',post)
-            .then((res)=>{
-                let post = res.data
-                state.commit('CREATE_POSTS',post)
+            .then(()=>{
+              
+                 
             })
             .catch((error)=>{
                 console.log(error)
