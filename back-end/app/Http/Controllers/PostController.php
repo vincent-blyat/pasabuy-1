@@ -60,11 +60,17 @@ class PostController extends Controller
 		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE shoppingPlace = \''.$request->shoppingPlace.'\'');
 		if($shoppingPlace == null){
 			//save shopping place to tbl_shopping place
+			DB::table('tbl_shoppingPlace')->insert([
+				'shoppingPlace' => $request->shoppingPlace
+			]);
 		}
 		//check if transport mode already exist in tbl_transportMOde
 		$transport = DB::select('SELECT * from tbl_transportMode WHERE transportMode = \''.$request->transportMode.'\'');
 		if($transport == null){
 			//save transport mode to tbl_transportMode
+			DB::table('tbl_transportMode')->insert([
+				'transportMode' => $request->transportMode
+			]);
 		}
 		// save to database
 		DB::transaction(function() use ($post, $offer_post) {
@@ -117,9 +123,12 @@ class PostController extends Controller
 			// save to database
 		
 		//check if shopping place already exist in tbl_shoppingPlace
-		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE shoppingPlace = \''.$request->shoppingPlace.'\'');
+		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE  = \''.$request->shoppingPlace.'\'');
 		if($shoppingPlace == null){
 			//save shopping place to tbl_shopping place
+			DB::table('tbl_shoppingPlace')->insert([
+				'shoppingPlace' => $request->shoppingPlace,
+			]);
 		}
 		DB::transaction(function() use ($post, $request_post) {
 			$post->save();

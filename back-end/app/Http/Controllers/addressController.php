@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\userAddress;
+use App\Models\userInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\Builder;
@@ -45,7 +46,8 @@ class addressController extends Controller
              'house_number' => ['required'],
              'province' => ['required'],
              'city' => ['required'],
-             'barangay' => ['required']
+             'barangay' => ['required'],
+             'landmark' => ['required']
         ]);
         //updating userinfo table
         $userEmail = Auth::User()->email;
@@ -54,12 +56,82 @@ class addressController extends Controller
             $user = new userAddress();
             $user->email = $userEmail;
         }
+        if($request->province === "Choose Province" || $request->city === "Choose City/Municipality" || $request->barangay === "Brgy"){
+            return response()->json(['error'=>'Please select a province, City/Municipality and Baranggay'],422);
+        }
         $user->houseNumber = $request->house_number;
         $user->province = $request->province;
         $user->cityMunicipality = $request->city;
         $user->barangay = $request->barangay;
+        $user->landMark = $request->landmark;
        
         if($user->save()){
+            return response()->json(['message'=>'Success, Information saved'],200);
+        }
+        else{
+            return response()->json(['error'=>'An error occured'],422);
+        }
+    }
+    public function addNewShipping(Request $request)
+    {
+        # code...
+      
+        $request->validate([
+             'house_number' => ['required'],
+             'province' => ['required'],
+             'city' => ['required'],
+             'barangay' => ['required'],
+             'landmark' => ['required'],
+             
+        ]);
+        //updating userinfo table
+        $userEmail = Auth::User()->email;
+       
+        if($request->province === "Choose Province" || $request->city === "Choose City/Municipality" || $request->barangay === "Brgy"){
+            return response()->json(['error'=>'Please select a province, City/Municipality and Baranggay'],422);
+        }
+        $count = DB::table('tbl_userShippingAddress')->count();
+        $user = userInformation::where('email', Auth::user()->email)->first();
+        if(DB::table('tbl_userShippingAddress')->insert([
+            'shippingAddressNumber'=> '115-'.str_pad($user->indexUserInformation,4,'0',STR_PAD_LEFT).'-'.str_pad($count+1,5,'0',STR_PAD_LEFT),
+            'email' => $userEmail,
+            'landMark' => $request->landmark,
+            'houseNumber' => $request->house_number,
+            'province' => $request->province,
+            'cityMunicipality' => $request->city,
+            'barangay' => $request->barangay
+        ])){
+            return response()->json(['message'=>'Success, Information saved'],200);
+        }
+        else{
+            return response()->json(['error'=>'An error occured'],422);
+        }
+    }
+    public function editShipping(Request $request)
+    {
+        # code...
+      
+        $request->validate([
+             'house_number' => ['required'],
+             'province' => ['required'],
+             'city' => ['required'],
+             'barangay' => ['required'],
+             'landmark' => ['required'],
+
+        ]);
+        //updating userinfo table
+        if($request->province === "Choose Province" || $request->city === "Choose City/Municipality" || $request->barangay === "Brgy"){
+            return response()->json(['error'=>'Please select a province, City/Municipality and Baranggay'],422);
+        }
+        if(DB::table('tbl_userShippingAddress')
+        ->where('shippingAddressNumber', $request->shippingAddnum)
+        ->update([
+            'landMark' => $request->landmark,
+            'houseNumber' => $request->house_number,
+            'province' => $request->province,
+            'cityMunicipality' => $request->city,
+            'barangay' => $request->barangay
+        ])){
             return response()->json(['message'=>'Success, Information saved'],200);
         }
         else{

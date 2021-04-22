@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/getShoppingPlaces', [addressController::class, 'getShoppingPlaces']);
     Route::get('/getUserInfo', [userInformationController::class, 'getUserInfo']);
     Route::get('/getNotAuthUserAddress', [addressController::class, 'getNotAuthUserAddress']);
+    Route::post('/addNewShipping', [addressController::class, 'addNewShipping']);
+    Route::post('/editShipping', [addressController::class, 'editShipping']);
 
  
  
