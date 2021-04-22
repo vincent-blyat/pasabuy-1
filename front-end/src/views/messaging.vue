@@ -1611,6 +1611,8 @@ export default {
               };
               console.log(dataMessage);
             } else {
+              foundPost.request_post.unshift(requestData.message)
+              console.log('foundpost',foundPost.request_post)
               dataMessage = {
                 roomID: responseArr[1].data.messageRoomNumber,
                 message: JSON.stringify(foundPost.request_post),
