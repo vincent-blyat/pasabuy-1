@@ -170,7 +170,7 @@ class userInformationController extends Controller
         
         // save new image $file_name to database
         //$user->update(['image' => $file_name]);
-        $user->profilePicture = $file_name;
+        $user->profilePicture = Storage::url('/images/'.$file_name);
         if($user->save()){
             return response()->json(['message'=>'Profilce Picture successfully changed.'],200);
         }else{

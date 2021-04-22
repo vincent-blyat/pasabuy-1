@@ -169,7 +169,6 @@ export default {
       await store.dispatch("getTransportModes");
       await store.dispatch("getShoppingPlaces");
       await store.dispatch("getAllShares");
-      await store.dispatch("sortPosts");
 
     },
   },

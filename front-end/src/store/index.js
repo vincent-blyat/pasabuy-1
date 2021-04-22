@@ -119,7 +119,7 @@ const store =  new Vuex.Store({
             return api
             .get('api/getPersonal')
             .then((res)=>{
-                res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
+                
                 let user = res.data
                 state.commit('setCurrentPersonal',user)
             })
@@ -131,10 +131,6 @@ const store =  new Vuex.Store({
             return api
             .get('api/getPosts')
             .then((res)=>{
-                var i;
-                for(i=0;i<res.data.length;i++){
-                  res.data[i].user.profilePicture ='http://localhost:8000/storage/images/'+ res.data[i].user.profilePicture
-                }
                 let posts = res.data
                 state.commit('FETCH_POSTS',posts)
             })
@@ -236,7 +232,6 @@ const store =  new Vuex.Store({
             return api
             .get('api/getUserInfo',{params:{email:ID}})
             .then((res)=>{
-                res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
                 let data = res.data
                 state.commit('setUserInfo',data)
             })
@@ -270,9 +265,6 @@ const store =  new Vuex.Store({
             return api
             .get('api/getShares')
             .then((res)=>{
-                for(var i=0;i<res.data.length;i++){
-                    res.data[i].post.user.profilePicture ='http://localhost:8000/storage/images/'+ res.data[i].post.user.profilePicture
-                }
                 let data = res.data
                 state.commit('setAllShares',data)
             })
