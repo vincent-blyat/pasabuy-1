@@ -43,14 +43,15 @@ api.interceptors.response.use(
             VueSimpleAlert.alert("Session expired, Please Log in again","Session Expired","warning")
             api.post('api/logout').then(()=>{
                 sessionStorage.clear();
-                this.$router.push({name:"Login"});
+                window.location.reload();
+
             })
             break;
         case 419: // Session expired
             VueSimpleAlert.alert("Session expired, Please Log in again","Session Expired","warning")
             api.post('api/logout').then(()=>{
                 sessionStorage.clear();
-                this.$router.push({name:"Login"});
+                window.location.reload();
             })
             break;
         case 429:
@@ -61,9 +62,9 @@ api.interceptors.response.use(
             VueSimpleAlert.alert("We're sorry, our site is down for maintenance, Thank you","Down for maintenance","info")
             api.post('api/logout').then(()=>{
                 sessionStorage.clear();
-                this.$router.push({name:"Login"});
+                window.location.reload();
             })
-            //window.location.reload();
+            window.location.reload();
             break;
         case 500:
             VueSimpleAlert.alert('Oops, something went wrong!  The team have been notified.','Error', 'error')
