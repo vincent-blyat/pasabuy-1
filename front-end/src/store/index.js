@@ -238,8 +238,6 @@ const store =  new Vuex.Store({
             .then((res)=>{
                 res.data.profilePicture = 'http://localhost:8000/storage/images/'+res.data.profilePicture
                 let data = res.data
-                console.log('not auth user',ID)
-                console.log('not auth user',data)
                 state.commit('setUserInfo',data)
             })
             .catch((error)=>{
@@ -262,8 +260,6 @@ const store =  new Vuex.Store({
             .get('api/getNotAuthUserAddress',{params:{email:ID}})
             .then((res)=>{
                 let data = res.data
-                console.log('not auth address',ID)
-                console.log('not auth address',data)
                 state.commit('setNotAuthUserAddress',data)
             })
             .catch((error)=>{

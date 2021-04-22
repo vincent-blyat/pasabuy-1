@@ -40,7 +40,7 @@
 
         <!--Post button-->
         <div class="flex justify-center pb-6 mt-6">
-          <router-link :to="'/messages/?postNum='+toEncrypt(post.postNumber)+'/?p='+toEncrypt(post.user.email)+'/?p='+toEncrypt(this.message)">
+          <router-link :to="'/messages/?postNum='+toEncrypt(post.postNumber)+'/?p='+toEncrypt(post.user.email)+'/?p='+toEncryptData()">
           <button
             class="inline-flex items-center justify-center focus:outline-none px-4 py-2 bg-red-700 rounded-full w-31.75 vs:w-26.5 h-8"
           >
@@ -59,7 +59,6 @@
   <!--end-->
 </template>
 <script>
-import moment from "moment"
 export default {
   props: ["post"],
   data() {
@@ -69,23 +68,19 @@ export default {
     };
   },
   methods: {
+    toEncryptData(){
+      return btoa(JSON.stringify({
+        message:this.message,
+        param: 'this_is_a_parameter_post_message'
+        // shoppingListNumber: '1',
+      }))
+      // console.log('this is the requested data',this.requestData)
+    },
     closeSendOffer() {
       this.$emit("closeSendOffer");
     },
     toEncrypt(val){
       return btoa(val)
-    },
-    timestampSched(datetime) {
-      var schedDate = new Date(datetime);
-      var dateToday = new Date();
-      var dateDiff = schedDate.getTime() - dateToday.getTime();
-      dateDiff = dateDiff / (1000 * 3600 * 24);
-      console.log(dateDiff);
-      if (dateDiff < 1 && dateDiff > 0)
-        return moment(datetime).format("[Today at] h:mm a");
-      else if (dateDiff >= 1 && dateDiff < 2)
-        return moment(datetime).format("[Tommorow at] h:mm a");
-      else return moment(datetime).format("[From] MMM DD, YYYY [at] h:mm a");
     },
   },
 };

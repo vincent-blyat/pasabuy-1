@@ -634,6 +634,7 @@
                   <div
                     class="relative flex w-full pr-8 mt-4 space-x-6 justify-evenly vs:space-x-3 vs:min-w-0 vs:px-2 ssm:space-x-1 ssm:px-0 ssm:pr-0 vs:pr-0"
                   >
+                
                     <div
                       v-if="
                         post_info.email != user.email &&
@@ -644,12 +645,14 @@
                         v-if="
                           postSendModal &&
                           sendOfferOrRequestpostNum ==
-                            post_info.offer_post.indexShoppingOfferPost
+                            post_info.offer_post.postNumber
                         "
                         @closeSendRequest="listener3"
                         :post="post_info"
                       />
+                         
                     </div>
+                   
                     <div
                       v-if="
                         post_info.email != user.email &&
@@ -660,11 +663,12 @@
                         v-if="
                           postSendModal &&
                           sendOfferOrRequestpostNum ==
-                            post_info.request_post.indexOrderRequestPost
+                            post_info.request_post.postNumber
                         "
                         @closeSendOffer="listener3"
                         :post="post_info"
                       />
+                     
                     </div>
                     <button
                       v-if="
@@ -675,7 +679,7 @@
                         toggleSendModal();
                         sendOfferOrRequestpost = post_info.postIdentity;
                         sendOfferOrRequestpostNum =
-                          post_info.offer_post.indexShoppingOfferPost;
+                          post_info.offer_post.postNumber;
                       "
                       class="flex items-center space-x-2 focus:outline-none ssm:space-x-1"
                     >
@@ -699,7 +703,7 @@
                         toggleSendModal();
                         sendOfferOrRequestpost = post_info.postIdentity;
                         sendOfferOrRequestpostNum =
-                          post_info.request_post.indexOrderRequestPost;
+                          post_info.request_post.postNumber;
                       "
                       class="flex items-center space-x-2 focus:outline-none ssm:space-x-1"
                     >
