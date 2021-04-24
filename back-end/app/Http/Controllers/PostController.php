@@ -123,7 +123,7 @@ class PostController extends Controller
 			// save to database
 		
 		//check if shopping place already exist in tbl_shoppingPlace
-		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE  = \''.$request->shoppingPlace.'\'');
+		$shoppingPlace = DB::select('SELECT * from tbl_shoppingPlace WHERE shoppingPlace = \''.$request->shoppingPlace.'\'');
 		if($shoppingPlace == null){
 			//save shopping place to tbl_shopping place
 			DB::table('tbl_shoppingPlace')->insert([

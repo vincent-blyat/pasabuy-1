@@ -337,7 +337,7 @@
               '/?p=' +
               toEncrypt(post.user.email) +
               '/?p=' +
-              toEncrypt(post.user.email)
+              toEncryptData()
             "
           >
           <button
@@ -384,7 +384,7 @@ export default {
       return btoa(JSON.stringify({
         deliveryAddress:this.deliveryAddress,
         shoppingPlace:this.shoppingPlace,
-        payment:this.payment,
+        paymentMethod:this.payment,
         message:this.message,
         deliverySchedule:this.sched,
         param: 'this_is_a_parameter_post_message'

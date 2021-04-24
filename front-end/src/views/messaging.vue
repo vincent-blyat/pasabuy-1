@@ -1425,19 +1425,19 @@ export default {
         store.dispatch("getChatRoom").then(() => {
           vm.getChatRooms();
         });
-        // window.Echo.private("chat." + this.activeRoom).listen(
-        //   ".message.new",
-        //   () => {
-        //     //optimize check if what is the return value, if itcontains transaction then get transaction and get chat rooms, otherwise get only chatroom
-        //     console.log("listening...");
+        window.Echo.private("chat." + this.activeRoom).listen(
+          ".message.new",
+          (res) => {
+            //optimize check if what is the return value, if itcontains transaction then get transaction and get chat rooms, otherwise get only chatroom
+            console.log(res);
             Axios.all([
               api.get('api/getTransaction'),
               api.get('api/getChatroom')
             ]).then(()=>{
               vm.getChatRooms();
             }) 
-        //   }
-        // );
+          }
+        );
       }
     },
     disconnect(oldval) {
@@ -1611,7 +1611,11 @@ export default {
               };
               console.log(dataMessage);
             } else {
-              foundPost.request_post.unshift(requestData.message)
+              console.log(requestData.message.message)
+              console.log(requestData.message.param)
+              console.log(foundPost.request_post)
+              foundPost.request_post['message'] = requestData.message.message
+              foundPost.request_post['param'] = requestData.message.param
               console.log('foundpost',foundPost.request_post)
               dataMessage = {
                 roomID: responseArr[1].data.messageRoomNumber,
@@ -1627,9 +1631,10 @@ export default {
                 api.get("/api/getChatroom")
 
              ]).then(responseArr=>{
-                console.log('transactions', responseArr[3].data)
-                store.commit('setUserTransactions',responseArr[3].data)
-                store.commit('FETCH_ROOMS',responseArr[4].data)
+                console.log('transactions', responseArr[2].data)
+                store.commit('setUserTransactions',responseArr[2].data)
+                store.commit('FETCH_ROOMS',responseArr[3].data)
+                this.getChatRooms()
                 var box = document.getElementById("journal-scroll");
                 box.scrollIntoView();
              })
@@ -1722,7 +1727,9 @@ export default {
       return store.getters.getPosts;
     },
     transactions() {
-      return store.getters.getUserTransactions;
+      return store.getters.getUserTransactions.filter((x)=>{
+        return x.transactionStatus == "pending"
+      });
     },
   },
 }; //end export default

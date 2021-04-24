@@ -5,15 +5,19 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^0.20.0-0",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "jquery": "^3.6.0",
     "js-cookie": "^2.2.1",
     "luxon": "^1.26.0",
     "moment": "^2.29.1",
+    "serve": "^11.3.2",
+    "static": "^2.0.0",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
     "vue-cryptojs": "^2.1.5",

@@ -42,8 +42,7 @@ class transactionController extends Controller
             ->where(function($query) {
                 $query->where('emailCustomerShopper', Auth::user()->email)
                 ->orWhere('transactionReceiver', Auth::user()->email);
-            })->where('transactionStatus','pending')
-              ->orderBy('dateCreated','desc')
+            })->orderBy('dateCreated','desc')
               ->get();
         // $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')->orWhere([['emailCustomerShopper','\''.Auth::user()->email.'\''],['transactionReceiversss','\''.Auth::user()->email.'\'']])->where('transactionStatus','\'pending\'')->orderBy('dateCreated','desc')->get();
         // $transaction = transaction::with('post','post.offer_post','post.request_post','transactionSender')->where('emailCustomerShoppeasr',Auth::user()->email)->orWhere('transactionReceiver',Auth::user()->email)->where('transactionStatus','=','pending')->orderBy('dateCreated','desc')->get();

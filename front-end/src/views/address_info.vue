@@ -617,11 +617,13 @@ export default {
       this.userShippingAddresses
     );
 
-    this.Landmark = this.shippingAdd[0].landMark;
-    this.House_number = this.shippingAdd[0].houseNumber;
-    this.Province = this.shippingAdd[0].province;
-    this.City = this.shippingAdd[0].cityMunicipality;
-    this.Barangay = this.shippingAdd[0].barangay;
+    if( this.shippingAdd[0]!=null){
+      this.Landmark = this.shippingAdd[0].landMark;
+      this.House_number = this.shippingAdd[0].houseNumber;
+      this.Province = this.shippingAdd[0].province;
+      this.City = this.shippingAdd[0].cityMunicipality;
+      this.Barangay = this.shippingAdd[0].barangay;
+    }
   },
   methods: {
     save_data() {
@@ -793,6 +795,8 @@ export default {
             VueSimpleAlert.alert(res.data.message, "Success", "success");
             this.toggle_add = false;
             this.shippingAdd = this.userShippingAddresses;
+            console.log('shipping add',this.shippingAdd)
+            this.AddShippingAdd()
           });
         })
         .catch((errors) => {
