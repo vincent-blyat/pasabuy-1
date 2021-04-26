@@ -107,3 +107,7 @@ Route::get("shoppingorders",[shoppingOrdersController::class, 'listShoppingOrder
 //Route::put("editShoppingOffers",[shoppingOffersController::class, 'update']);
 Route::get("reviews",[reviewsController::class, 'listReviews']);
 Route::post('/confirmVerificationCode', [RegisterController::class, 'confirmCode']);
+
+Route::get('user/feed', [PostController::class, 'getFeeds']);
+Route::put('post/{post_id}/edit', [PostController::class, 'editPost']);
+Route::delete('post/(post_id}/delete', [PostController::class, 'deletePost']);
